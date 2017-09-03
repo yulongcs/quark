@@ -13,6 +13,7 @@
   "homepage": "https://github.com/WatermelonFruit/react_redux_demo#readme",
   "dependencies": {
     "autoprefixer": "7.1.2",
+    "axios": "^0.16.2",
     "babel-core": "6.25.0",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
@@ -40,8 +41,13 @@
     "postcss-loader": "2.0.6",
     "promise": "8.0.1",
     "react": "^15.6.1",
+    "react-addons-perf": "^15.4.2",
     "react-dev-utils": "^4.0.0",
     "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-immutable-state-invariant": "^2.0.0",
+    "redux-thunk": "^2.2.0",
     "style-loader": "0.18.2",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.5.9",
@@ -110,6 +116,10 @@
         }
       ],
       "semi": [
+        "error",
+        "never"
+      ],
+      "comma-dangle": [
         "error",
         "never"
       ]
