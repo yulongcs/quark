@@ -1,16 +1,16 @@
 {
-  "name": "react_redux_demo",
+  "name": "react_cli",
   "version": "0.1.0",
   "author": "WatermelonFruit",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/WatermelonFruit/react_redux_demo.git"
+    "url": "https://github.com/WatermelonFruit/react_cli.git"
   },
   "bugs": {
-    "url": "https://github.com/WatermelonFruit/react_redux_demo/issues"
+    "url": "https://github.com/WatermelonFruit/react_cli/issues"
   },
-  "homepage": "https://github.com/WatermelonFruit/react_redux_demo#readme",
+  "homepage": "https://github.com/WatermelonFruit/react_cli#readme",
   "dependencies": {
     "autoprefixer": "7.1.2",
     "axios": "^0.16.2",
