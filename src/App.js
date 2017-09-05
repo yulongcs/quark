@@ -1,18 +1,31 @@
 import React from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { Router, Route, Switch } from 'react-router-dom'
+import createHistory from 'history/createBrowserHistory'
+import asyncComponent from './components/AsyncComponent'
+// import { injectAsyncReducer } from './store/createStore'
+// import xreducer from './routes/Home/reducers'
 
-function App() {
+const history = createHistory()
+
+/* eslint-disable */
+function App(props) {
+  // console.log(props.store) func
+  const AsyncHome = asyncComponent(() => import('./routes/Home/containers/Home'), props.store, ['about', require('./routes/Home/reducers').default])
+  const AsyncAbout = asyncComponent(() => import('./routes/About/About'))
+  const AsyncNotFound = asyncComponent(() => import('./routes/NotFound/NotFound'))
+
   return (
-    <div className="App">
-      <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>Welcome to React</h2>
+    <Router history={history}>
+      <div>
+        <div>
+          <Switch>
+            <Route exact path='/' component={AsyncHome} />
+            <Route exact path='/about' component={AsyncAbout} />
+            <Route path='*' component={AsyncNotFound} />
+          </Switch>
+        </div>
       </div>
-      <p className="App-intro">
-        To get started, edit <code>src/App.js</code> and save to reload.
-      </p>
-    </div>
+    </Router>
   )
 }
 

@@ -1,37 +1,30 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import axios from 'axios'
-import Perf from 'react-addons-perf'
-import version from './reducer'
-// import projectsReducer from './Projects/reducers'
+import createReducer from './createReducer'
 
-window.Perf = Perf
-
-const reducer = combineReducers({
-  version
-})
-
-const middlewares = []
-if (process.env.NODE_ENV !== 'production') {
-  /* eslint-disable global-require */
-  middlewares.push(require('redux-immutable-state-invariant').default())
-  /* eslint-disable global-require */
+export function configureStore() {
+  const store = createStore(createReducer(), {}, compose(
+    applyMiddleware(
+      thunk.withExtraArgument({ axios })
+    ),
+    process.env.NODE_ENV === 'development' &&
+    typeof window === 'object' &&
+    typeof window.devToolsExtension !== 'undefined'
+      ? window.devToolsExtension()
+      : f => f
+  ))
+  store.asyncReducers = {}
+  if (process.env.NODE_ENV === 'development') {
+    if (module.hot) {
+      module.hot.accept('./createReducer', () => store.replaceReducer(createReducer))
+    }
+  }
+  return store
 }
 
-const storeEnhancers = compose(
-  applyMiddleware(...middlewares),
-  (window && window.devToolsExtension && process.env.NODE_ENV !== 'production') ? window.devToolsExtension() : f => f
-)
-
-export default createStore(
-  reducer,
-  {},
-  compose(
-    applyMiddleware(
-      thunk.withExtraArgument(
-        { axios }
-      )
-    ),
-    storeEnhancers
-  )
-)
+export function injectAsyncReducer(store, name, asyncReducer) {
+  // const store = configureStore()
+  store.asyncReducers[name] = asyncReducer
+  store.replaceReducer(createReducer(store.asyncReducers))
+}

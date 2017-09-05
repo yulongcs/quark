@@ -52,7 +52,7 @@ process.env.NODE_PATH = (process.env.NODE_PATH || '')
   .filter(folder => folder && !path.isAbsolute(folder))
   .map(folder => path.resolve(appDirectory, folder))
   .join(path.delimiter);
-process.env.PORT = 8081
+// process.env.PORT = 8081
 // Grab NODE_ENV and REACT_APP_* environment variables and prepare them to be
 // injected into the application via DefinePlugin in Webpack configuration.
 const REACT_APP = /^REACT_APP_/i;
