@@ -1,8 +1,8 @@
-# react_cli
+# react_sail
 
 ## Introduce
-+ A cli for react
-+ react + redux + webpak
++ based on create-react-app
++ react + redux + webpack
 
 ## Start
 ```bash
@@ -12,4 +12,4 @@ npm start
 
 ## ESLint rules
 + use [eslint-config-airbnb](https://github.com/airbnb/javascript)
-+ exclude -- refer to eslintConfig.rules in [package.json](./package.json)
++ exclude -- refer to [.eslintrc.json](./.eslintrc.json)
