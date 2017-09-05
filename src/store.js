@@ -24,7 +24,6 @@ export function configureStore() {
 }
 
 export function injectAsyncReducer(store, name, asyncReducer) {
-  // const store = configureStore()
   store.asyncReducers[name] = asyncReducer
   store.replaceReducer(createReducer(store.asyncReducers))
 }

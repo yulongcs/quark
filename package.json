@@ -102,40 +102,5 @@
     "presets": [
       "react-app"
     ]
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "airbnb"
-    ],
-    "env": {
-      "browser": true,
-      "node": true
-    },
-    "rules": {
-      "react/jsx-filename-extension": [
-        1,
-        {
-          "extensions": [
-            ".js",
-            ".jsx"
-          ]
-        }
-      ],
-      "semi": [
-        "error",
-        "never"
-      ],
-      "comma-dangle": [
-        "error",
-        "never"
-      ],
-      "jsx-quotes": [
-        "error",
-        "prefer-single"
-      ],
-      "react/no-did-mount-set-state": 0,
-      "no-param-reassign": 0
-    }
   }
 }

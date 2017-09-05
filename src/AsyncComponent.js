@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
-import { injectAsyncReducer } from '../store/createStore'
-/* eslint-disable */
+import { injectAsyncReducer } from './store'
+
 export default function asyncComponent(importComponent, store, reducer) {
-  if (store) {
-    injectAsyncReducer(store, reducer[0], reducer[1])
-  }
   class AsyncComponent extends Component {
     constructor(props) {
       super(props)
@@ -20,6 +17,9 @@ export default function asyncComponent(importComponent, store, reducer) {
       this.setState({
         component
       })
+      if (store) {
+        injectAsyncReducer(store, reducer[0], reducer[1])
+      }
     }
 
     render() {

@@ -1,0 +1,40 @@
+{
+    "extends": [
+        "react-app",
+        "airbnb"
+    ],
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "node": true
+    },
+    "rules": {
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ],
+        "semi": [
+            "error",
+            "never"
+        ],
+        "comma-dangle": [
+            "error",
+            "never"
+        ],
+        "jsx-quotes": [
+            "error",
+            "prefer-single"
+        ],
+        "react/no-did-mount-set-state": 0,
+        "no-param-reassign": 0,
+        "react/require-default-props": 0,
+        "global-require": 0,
+        "react/forbid-prop-types": 0
+    }
+}

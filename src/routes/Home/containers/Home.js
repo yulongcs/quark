@@ -9,10 +9,8 @@ class Projects extends Component {
     this.props.loadProjects()
   }
   render() {
-    // console.log(this.props)
-    // const { loading, changeProjects } = this.props
     return (
-      <div>123</div>
+      <div>Home Page</div>
     )
   }
 }
