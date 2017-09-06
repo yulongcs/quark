@@ -1,16 +1,16 @@
 {
-  "name": "react_cli",
+  "name": "react_sail",
   "version": "0.1.0",
   "author": "WatermelonFruit",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/WatermelonFruit/react_cli.git"
+    "url": "https://github.com/WatermelonFruit/react_sail.git"
   },
   "bugs": {
-    "url": "https://github.com/WatermelonFruit/react_cli/issues"
+    "url": "https://github.com/WatermelonFruit/react_sail/issues"
   },
-  "homepage": "https://github.com/WatermelonFruit/react_cli#readme",
+  "homepage": "https://github.com/WatermelonFruit/react_sail#readme",
   "dependencies": {
     "autoprefixer": "7.1.2",
     "axios": "^0.16.2",
