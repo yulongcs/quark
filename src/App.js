@@ -3,6 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import createHistory from 'history/createBrowserHistory'
 import asyncComponent from './AsyncComponent'
+import Header from './routes/Header/Header'
 
 const history = createHistory()
 
@@ -13,6 +14,7 @@ function App(props) {
   return (
     <Router history={history}>
       <div>
+        <Header />
         <div>
           <Switch>
             <Route exact path='/' component={AsyncHome} />

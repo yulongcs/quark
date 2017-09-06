@@ -10,7 +10,7 @@ class Projects extends Component {
   }
   render() {
     return (
-      <div>Home Page</div>
+      <h2>Home Page</h2>
     )
   }
 }
