@@ -149,7 +149,8 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
+              // 动态引入
+              // plugins: [['import', { libraryName: 'antd-mobile', 'style': 'css' }]],
               compact: true,
             },
           },
