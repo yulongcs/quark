@@ -1,0 +1,4 @@
+// projects
+export const LOAD_TEST_REQUEST = 'LOAD_TEST_REQUEST'
+export const LOAD_TEST_SUCCESS = 'LOAD_TEST_SUCCESS'
+export const LOAD_TEST_FAILURE = 'LOAD_TEST_FAILURE'

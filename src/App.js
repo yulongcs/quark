@@ -9,6 +9,7 @@ const history = createHistory()
 
 function App(props) {
   const AsyncHome = asyncComponent(() => import('./routes/Home/containers/Home'), props.store, ['home', require('./routes/Home/reducers').default])
+  const AsyncTest = asyncComponent(() => import('./routes/Test/containers/Test'), props.store, ['test', require('./routes/Test/reducers').default])
   const AsyncAbout = asyncComponent(() => import('./routes/About/About'))
   const AsyncNotFound = asyncComponent(() => import('./routes/NotFound/NotFound'))
   return (
@@ -18,6 +19,7 @@ function App(props) {
         <div>
           <Switch>
             <Route exact path='/' component={AsyncHome} />
+            <Route exact path='/test' component={AsyncTest} />
             <Route exact path='/about' component={AsyncAbout} />
             <Route path='*' component={AsyncNotFound} />
           </Switch>
