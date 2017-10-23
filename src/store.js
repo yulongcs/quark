@@ -5,9 +5,7 @@ import createReducer from './createReducer'
 
 export function configureStore() {
   const store = createStore(createReducer(), {}, compose(
-    applyMiddleware(
-      thunk.withExtraArgument({ axios })
-    ),
+    applyMiddleware(thunk.withExtraArgument({ axios })),
     process.env.NODE_ENV === 'development' &&
     typeof window === 'object' &&
     typeof window.devToolsExtension !== 'undefined'
