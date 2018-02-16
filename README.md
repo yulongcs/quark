@@ -1,8 +1,8 @@
-# react_sail
+# react-sail
 
 ## Introduce
 + based on create-react-app
-+ react + redux + webpack
++ antd-mobile
 
 ## Start
 ```bash
