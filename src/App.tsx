@@ -1,24 +1,32 @@
 import * as React from 'react';
-import { Button } from 'antd';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import asyncComponent from './AsyncComponent';
+import Header from './Header';
 
-const logo = require('./logo.svg');
+const App = () => {
+  const AsyncHome = asyncComponent(() => import('./Home/Home'));
+  const AsyncNotFound = asyncComponent(() => import('./NotFound'));
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <Button type="primary">OK</Button>
+  return (
+    <Router>
+      <div>
+        <Header />
+        <div>
+          <Switch>
+            <Route exact={true} path="/">
+              <Redirect
+                to={{
+                  pathname: '/home'
+                }}
+              />
+            </Route>
+            <Route path="/home" component={AsyncHome} />
+            <Route path="*" component={AsyncNotFound} />
+          </Switch>
+        </div>
       </div>
-    );
-  }
-}
+    </Router>
+  );
+};
 
 export default App;
