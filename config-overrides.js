@@ -29,12 +29,12 @@ module.exports = function override(config, env) {
     modifyVars: { "@primary-color": "#1DA57A" },
   })(config, env);
 
-  // less-modules
+  // css-modules
   config.module.rules[1].oneOf.unshift(
     {
       test: /\.less$/,
-      // exclude: /node_modules|antd-mobile\.less/,
-      exclude: /node_modules|antd\.less/,
+      // exclude: /node_modules|antd-mobile\.css/,
+      exclude: /node_modules|antd\.css/,
       use: [
         require.resolve('style-loader'),
         {

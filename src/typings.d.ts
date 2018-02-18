@@ -1,5 +1,5 @@
 // typings.d.ts
-declare module '*.less' {
+declare module '*.css' {
   const content: any;
   export default content;
 }
