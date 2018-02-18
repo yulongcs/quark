@@ -1,8 +1,10 @@
 # react-sail
 
 ## Introduce
-+ based on create-react-app(--scripts-version=react-scripts-ts)
-+ antd
++ based on [create-react-app-typescript](https://github.com/wmonk/create-react-app-typescript)
++ [react-router](https://github.com/ReactTraining/react-router)
++ [mobx](https://github.com/mobxjs/mobx)
++ [antd](https://ant.design)
 
 ## Start
 ```bash
@@ -11,4 +13,4 @@ npm start
 ```
 
 ## Tips
-+ antd-mobile(2.x)需要在 tsconfig.json 的 compilerOptions 中配置 "allowSyntheticDefaultImports": true | "noImplicitAny": false
++ if antd-mobile(2.x), you need setting `allowSyntheticDefaultImports` to `true` and `noImplicitAny` to `false` in tsconfig.json

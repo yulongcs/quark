@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import store from './Store';
+import styles from './style.less';
 
 @observer
 class Home extends React.Component<{}, {}> {
@@ -18,7 +19,7 @@ class Home extends React.Component<{}, {}> {
     const { title } = store;
 
     return (
-      <div>{title}</div>
+      <div className={styles.title}>{title}</div>
     );
   }
 
