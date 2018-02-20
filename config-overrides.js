@@ -32,7 +32,7 @@ module.exports = function override(config, env) {
   // css-modules
   config.module.rules[1].oneOf.unshift(
     {
-      test: /\.less$/,
+      test: /\.css$/,
       // exclude: /node_modules|antd-mobile\.css/,
       exclude: /node_modules|antd\.css/,
       use: [
