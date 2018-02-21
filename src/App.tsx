@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import asyncComponent from './AsyncComponent';
+import asyncComponent from './common/AsyncComponent';
 import Header from './Header';
 
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
   const AsyncNotFound = asyncComponent(() => import('./NotFound'));
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLICURL}>
       <div>
         <Header />
         <div>
