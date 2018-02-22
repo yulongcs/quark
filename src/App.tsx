@@ -7,10 +7,13 @@ const App = () => {
   const AsyncHome = asyncComponent(() => import('./Home/Home'));
   const AsyncNotFound = asyncComponent(() => import('./NotFound'));
 
+  // defaultSelectedKeys
+  const defaultSelectedKey = location.pathname.replace(eval(`\/\\${process.env.PUBLIC_URL}/g`), '').replace(/\//g, '') || 'products';
+
   return (
     <Router basename={process.env.PUBLICURL}>
       <div>
-        <Header />
+        <Header defaultSelectedKey={defaultSelectedKey} />
         <div>
           <Switch>
             <Route exact={true} path="/">
