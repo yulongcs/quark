@@ -9,8 +9,8 @@ const App = () => {
 
   // defaultSelectedKeys
   const defaultSelectedKey = (!process.env.PUBLIC_URL && !location.pathname) ? 'home' :
-    (location.pathname.replace(new RegExp(`\/\\${process.env.PUBLIC_URL}/g`.replace(/^\/|\/$/g, '')), '').replace(/\//g, '') || 'home');
-  console.log(defaultSelectedKey);
+    (location.pathname.replace(new RegExp(`${process.env.PUBLIC_URL}`, 'g'), '').replace(/\//g, '') || 'home');
+
   return (
     <Router basename={process.env.PUBLICURL}>
       <div>
