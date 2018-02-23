@@ -8,8 +8,9 @@ const App = () => {
   const AsyncNotFound = asyncComponent(() => import('./NotFound'));
 
   // defaultSelectedKeys
-  const defaultSelectedKey = location.pathname.replace(eval(`\/\\${process.env.PUBLIC_URL}/g`), '').replace(/\//g, '') || 'products';
-
+  const defaultSelectedKey = (!process.env.PUBLIC_URL && !location.pathname) ? 'home' :
+    (location.pathname.replace(new RegExp(`\/\\${process.env.PUBLIC_URL}/g`.replace(/^\/|\/$/g, '')), '').replace(/\//g, '') || 'home');
+  console.log(defaultSelectedKey);
   return (
     <Router basename={process.env.PUBLICURL}>
       <div>
