@@ -1,11 +1,19 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import asyncComponent from './common/AsyncComponent';
-import Header from './Header';
+import * as Loadable from 'react-loadable';
+import HeaderComponent from './Header';
+import LoadingComponent from './Loading';
 
 const App = () => {
-  const AsyncHome = asyncComponent(() => import('./Home/Home'));
-  const AsyncNotFound = asyncComponent(() => import('./NotFound'));
+  
+  const AsyncHome = Loadable({
+    loader: () => import('./Home/Home'),
+    loading: LoadingComponent
+  });
+  const AsyncNotFound = Loadable({
+    loader: () => import('./NotFound'),
+    loading: LoadingComponent
+  });
 
   // defaultSelectedKeys
   const defaultSelectedKey = (!process.env.PUBLIC_URL && !location.pathname) ? 'home' :
@@ -14,7 +22,7 @@ const App = () => {
   return (
     <Router basename={process.env.PUBLICURL}>
       <div>
-        <Header defaultSelectedKey={defaultSelectedKey} />
+        <HeaderComponent defaultSelectedKey={defaultSelectedKey} />
         <div>
           <Switch>
             <Route exact={true} path="/">
