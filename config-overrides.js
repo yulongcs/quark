@@ -32,9 +32,9 @@ module.exports = function override(config, env) {
   // css-modules
   config.module.rules[1].oneOf.unshift(
     {
-      test: /\.css$/,
+      test: /\.less$/,
       // exclude: /node_modules|antd-mobile\.css/,
-      exclude: /node_modules|antd\.css/,
+      exclude: /node_modules|antd\.less/,
       use: [
         require.resolve('style-loader'),
         {
@@ -43,7 +43,7 @@ module.exports = function override(config, env) {
             modules: true,
             importLoaders: 1,
             localIdentName: '[local]___[hash:base64:5]'
-          },
+          }
         },
         {
           loader: require.resolve('postcss-loader'),
@@ -61,10 +61,13 @@ module.exports = function override(config, env) {
                   'not ie < 9', // React doesn't support IE8 anyway
                 ],
                 flexbox: 'no-2009',
-              }),
-            ],
-          },
+              })
+            ]
+          }
         },
+        {
+          loader: require.resolve('less-loader')
+        }
       ]
     }
   );
