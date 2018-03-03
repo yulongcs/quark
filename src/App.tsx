@@ -8,11 +8,15 @@ const App = () => {
   
   const AsyncHome = Loadable({
     loader: () => import('./Home/Home'),
-    loading: LoadingComponent
+    loading: LoadingComponent,
+    delay: 200, // 200ms
+    timeout: 10000 // 10s
   });
   const AsyncNotFound = Loadable({
     loader: () => import('./NotFound'),
-    loading: LoadingComponent
+    loading: LoadingComponent,
+    delay: 200, // 200ms
+    timeout: 10000 // 10s
   });
 
   // defaultSelectedKeys
