@@ -33,100 +33,101 @@ module.exports = {
         loader: require.resolve('source-map-loader'),
         enforce: 'pre'
       },
-      // {
-      //   oneOf: [
-      // {
-      //   test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-      //   loader: require.resolve('url-loader'),
-      //   options: {
-      //     limit: 10000,
-      //     name: 'static/media/[name].[hash:8].[ext]',
-      //   },
-      // },
-      // Compile .tsx?
       {
-        test: /\.(ts|tsx)$/,
-        exclude: /node_modulss/,
-        // include: paths.appSrc,
-        use: [
+        oneOf: [
+          // {
+          //   test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+          //   loader: require.resolve('url-loader'),
+          //   options: {
+          //     limit: 10000,
+          //     name: 'static/media/[name].[hash:8].[ext]',
+          //   },
+          // },
+          // Compile .tsx?
           {
-            loader: 'awesome-typescript-loader',
-            options: {
-              // disable type checker - we will use it in fork plugin
-              transpileOnly: true
-            }
-          }
-        ]
-      },
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract(
-          {
+            test: /\.(ts|tsx)$/,
+            exclude: /node_modulss/,
+            // include: paths.appSrc,
             use: [
               {
-                loader: 'css-loader',
+                loader: 'awesome-typescript-loader',
                 options: {
-                  importLoaders: 1,
-                  minimize: true,
-                  sourceMap: true,
-                  modules: true,
-                  localIdentName: '[local]___[hash:base64:5]'
-                },
+                  // disable type checker - we will use it in fork plugin
+                  transpileOnly: true
+                }
               }
             ]
-          }
-        )
-      },
-      // {
-      //   test: /\.css$/,
-      //   use: [
-      //     require.resolve('style-loader'),
-      //     {
-      //       loader: require.resolve('css-loader'),
-      //       options: {
-      //         importLoaders: 1,
-      //       },
-      //     },
-      //     {
-      //       loader: require.resolve('postcss-loader'),
-      //       options: {
-      //         // Necessary for external CSS imports to work
-      //         // https://github.com/facebookincubator/create-react-app/issues/2677
-      //         ident: 'postcss',
-      //         plugins: () => [
-      //           require('postcss-flexbugs-fixes'),
-      //           autoprefixer({
-      //             browsers: [
-      //               '>1%',
-      //               'last 4 versions',
-      //               'Firefox ESR',
-      //               'not ie < 9', // React doesn't support IE8 anyway
-      //             ],
-      //             flexbox: 'no-2009',
-      //           }),
-      //         ],
-      //       },
-      //     },
-      //   ],
-      // },
-      // "file" loader makes sure those assets get served by WebpackDevServer.
-      // When you `import` an asset, you get its (virtual) filename.
-      // In production, they would get copied to the `build` folder.
-      // This loader doesn't use a "test" so it will catch all modules
-      // that fall through the other loaders.
-      // {
-      //   // Exclude `js` files to keep "css" loader working as it injects
-      //   // it's runtime that would otherwise processed through "file" loader.
-      //   // Also exclude `html` and `json` extensions so they get processed
-      //   // by webpacks internal loaders.
-      //   exclude: [/\.js$/, /\.html$/, /\.json$/],
-      //   loader: require.resolve('file-loader'),
-      //   options: {
-      //     name: 'static/media/[name].[hash:8].[ext]',
-      //   },
-      // },
-      //   ]
-      // }
+          },
+          {
+            test: /\.less$/,
+            exclude: /node_modules|antd\.less/,
+            loader: ExtractTextPlugin.extract(
+              {
+                use: [
+                  {
+                    loader: 'css-loader/locals',
+                    options: {
+                      importLoaders: 1,
+                      minimize: true,
+                      sourceMap: true,
+                      modules: true,
+                      localIdentName: '[local]___[hash:base64:5]'
+                    },
+                  }
+                ]
+              }
+            )
+          },
+          // {
+          //   test: /\.css$/,
+          //   use: [
+          //     require.resolve('style-loader'),
+          //     {
+          //       loader: require.resolve('css-loader'),
+          //       options: {
+          //         importLoaders: 1,
+          //       },
+          //     },
+          //     {
+          //       loader: require.resolve('postcss-loader'),
+          //       options: {
+          //         // Necessary for external CSS imports to work
+          //         // https://github.com/facebookincubator/create-react-app/issues/2677
+          //         ident: 'postcss',
+          //         plugins: () => [
+          //           require('postcss-flexbugs-fixes'),
+          //           autoprefixer({
+          //             browsers: [
+          //               '>1%',
+          //               'last 4 versions',
+          //               'Firefox ESR',
+          //               'not ie < 9', // React doesn't support IE8 anyway
+          //             ],
+          //             flexbox: 'no-2009',
+          //           }),
+          //         ],
+          //       },
+          //     },
+          //   ],
+          // },
+          // "file" loader makes sure those assets get served by WebpackDevServer.
+          // When you `import` an asset, you get its (virtual) filename.
+          // In production, they would get copied to the `build` folder.
+          // This loader doesn't use a "test" so it will catch all modules
+          // that fall through the other loaders.
+          // {
+          //   // Exclude `js` files to keep "css" loader working as it injects
+          //   // it's runtime that would otherwise processed through "file" loader.
+          //   // Also exclude `html` and `json` extensions so they get processed
+          //   // by webpacks internal loaders.
+          //   exclude: [/\.js$/, /\.html$/, /\.json$/],
+          //   loader: require.resolve('file-loader'),
+          //   options: {
+          //     name: 'static/media/[name].[hash:8].[ext]',
+          //   },
+          // },
+        ]
+      }
       // ** STOP ** Are you adding a new loader?
       // Make sure to add the new loader(s) before the "file" loader.
     ]

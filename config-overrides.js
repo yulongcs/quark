@@ -39,9 +39,9 @@ module.exports = function override(config, env) {
   // less-modules
   config.module.rules[1].oneOf.unshift(
     {
-      test: /\.css$/,
+      test: /\.less$/,
       // exclude: /node_modules|antd-mobile\.css/,
-      exclude: /node_modules|antd\.css/,
+      exclude: /node_modules|antd\.less/,
       use: [
         require.resolve('style-loader'),
         {

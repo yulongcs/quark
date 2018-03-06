@@ -64,7 +64,6 @@ app.use(users.routes());
 
 // render
 app.use(router.get('*', async (ctx) => {
-  console.log(renderPage(ctx));
   ctx.body = await renderPage(ctx);
 })
   .middleware());

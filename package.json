@@ -45,7 +45,7 @@
     "build:ssr": "npm run clean && mkdir -p dist/server && npm run build:client && mv build dist/client && npm run build:server && mv server/build dist/server/build && cp -r server/config dist/server",
     "build:client": "cross-env PUBLIC_URL=/ SSR=on react-app-rewired build --scripts-version react-scripts-ts",
     "build:server": "webpack --config ./server/webpack.config.js --progress --color",
-    "server:dev": "cross-env NODE_ENV=development node ./dist/server/build/index.js",
+    "start:ssr": "cross-env NODE_ENV=development node ./dist/server/build/index.js",
     "prod": "NODE_ENV=production pm2 start --name react-sail ./dist/server/build/index.js",
     "clean": "rm -rf dist/",
     "test": "react-app-rewired test --env=jsdom --scripts-version react-scripts-ts",

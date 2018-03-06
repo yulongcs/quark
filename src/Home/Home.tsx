@@ -1,7 +1,7 @@
 import * as React from 'react';
 // import { observer } from 'mobx-react';
 // import Store from './Store';
-import styles from './style.css';
+import styles from './style.less';
 
 // @observer
 class Home extends React.Component<{}, {}> {
