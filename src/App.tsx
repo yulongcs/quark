@@ -1,10 +1,26 @@
 import * as React from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import * as Loadable from 'react-loadable';
 import HeaderComponent from './Header';
 import LoadingComponent from './Loading';
 
-const App = () => {
+const AsyncHome = Loadable({
+  loader: () => import(/* webpackChunkName: "homeChunk" */'./Home/Home'),
+  loading: LoadingComponent,
+  modules: ['homeChunk'],
+  delay: 200, // 200ms
+  timeout: 10000 // 10s
+});
+
+const AsyncNotFound = Loadable({
+  loader: () => import(/* webpackChunkName: "notFoundChunk" */'./NotFound'),
+  loading: LoadingComponent,
+  modules: ['notFoundChunk'],
+  delay: 200, // 200ms
+  timeout: 10000 // 10s
+});
+
+const App = (props: {}) => {
 
   const AsyncHome = Loadable({
     loader: () => import('./Home/Home'),
@@ -25,13 +41,8 @@ const App = () => {
     timeout: 10000 // 10s
   });
 
-  // // defaultSelectedKeys
-  // const defaultSelectedKey = (!process.env.PUBLIC_URL && !location.pathname) ? 'home' :
-  //   (location.pathname.replace(new RegExp(`${process.env.PUBLIC_URL}`, 'g'), '').replace(/\//g, '') || 'home');
-
   return (
-    <Router basename={process.env.PUBLICURL}>
-      <div>
+    <div>
         <HeaderComponent />
         <div>
           <Switch>
@@ -47,8 +58,7 @@ const App = () => {
             <Route path="*" component={AsyncNotFound} />
           </Switch>
         </div>
-      </div>
-    </Router>
+    </div>
   );
 };
 

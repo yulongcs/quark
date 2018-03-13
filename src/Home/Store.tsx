@@ -4,10 +4,14 @@ class Store {
   @observable title: string = '';
 
   @action loadTitle = () => {
-    this.title = 'Home Page';
+    this.title = 'Welcome to home page !';
+  }
+
+  static init() {
+    return new Store();
   }
 }
 
-const store = new Store();
+// const store = new Store();
 
-export default store;
+export default Store;

@@ -2,8 +2,15 @@
 const tsImportPluginFactory = require('ts-import-plugin')
 const { getLoader } = require("react-app-rewired");
 const rewireLess = require('react-app-rewire-less');
+// const isomorphic-style-loader = require('isomorphic-style-loader');
+const fs = require('fs');
+const path = require('path');
 
 module.exports = function override(config, env) {
+
+  // rewrite index.tsx
+  fs.writeFileSync(path.join(__dirname, './src/index.tsx'), `require(${process.env.SSR === 'on' ? "'./Server.tsx'" : "'./Client.tsx'"});`);
+
   const tsLoader = getLoader(
     config.module.rules,
     rule =>
@@ -29,7 +36,7 @@ module.exports = function override(config, env) {
     modifyVars: { "@primary-color": "#1DA57A" },
   })(config, env);
 
-  // css-modules
+  // less-modules
   config.module.rules[1].oneOf.unshift(
     {
       test: /\.less$/,
@@ -40,8 +47,10 @@ module.exports = function override(config, env) {
         {
           loader: require.resolve('css-loader'),
           options: {
-            modules: true,
             importLoaders: 1,
+            minimize: true,
+            // sourceMap: true,
+            modules: true,
             localIdentName: '[local]___[hash:base64:5]'
           }
         },
