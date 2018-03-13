@@ -9,7 +9,7 @@ const path = require('path');
 module.exports = function override(config, env) {
 
   // rewrite index.tsx
-  fs.writeFileSync(path.join(__dirname, './src/index.tsx'), `require(${process.env.SSR === 'on' ? "'./Server.tsx'" : "'./Client.tsx'"});`);
+  fs.writeFileSync(path.join(__dirname, './src/index.tsx'), `require(${process.env.REACT_APP_SSR === 'on' ? "'./Server.tsx'" : "'./Client.tsx'"});`);
 
   const tsLoader = getLoader(
     config.module.rules,

@@ -10,7 +10,7 @@ window.onload = () => {
   Loadable.preloadReady().then(() => {
     ReactDOM.hydrate(
       <Router>
-        <App pathname={location.pathname}/>
+        <App />
       </Router>,
       document.getElementById('root') as HTMLElement
     );

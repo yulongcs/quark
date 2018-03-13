@@ -40,11 +40,11 @@
     "react-scripts-ts": "2.13.0"
   },
   "scripts": {
-    "start": "cross-env PORT=8182 SSR=off react-app-rewired start --scripts-version react-scripts-ts",
-    "build": "npm run clean && cross-env PUBLIC_URL=/ SSR=off react-app-rewired build --scripts-version react-scripts-ts && mv build dist",
+    "start": "cross-env PORT=8182 REACT_APP_SSR=off react-app-rewired start --scripts-version react-scripts-ts",
+    "build": "npm run clean && cross-env PUBLIC_URL=/ REACT_APP_SSR=off react-app-rewired build --scripts-version react-scripts-ts && mv build dist",
     "start:server": "cross-env NODE_ENV=development nodemon --exec ts-node --project ./server/tsconfig.json ./server/src/bootstrap.ts",
     "build:ssr": "npm run clean && mkdir -p dist/server && npm run build:client && mv build dist/client && npm run build:server && mv server/build dist/server/build && cp -r server/config dist/server",
-    "build:client": "cross-env PUBLIC_URL=/ SSR=on react-app-rewired build --scripts-version react-scripts-ts",
+    "build:client": "cross-env PUBLIC_URL=/ REACT_APP_SSR=on react-app-rewired build --scripts-version react-scripts-ts",
     "build:server": "webpack --config ./server/webpack.config.js --progress --color",
     "start:ssr": "cross-env NODE_ENV=development node ./dist/server/build/index.js",
     "prod": "NODE_ENV=production pm2 start --name react-sail ./dist/server/build/index.js",

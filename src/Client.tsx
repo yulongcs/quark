@@ -7,7 +7,7 @@ import './index.css';
 
 ReactDOM.render(
   <Router>
-    <App pathname={location.pathname} />
+    <App />
   </Router>,
   document.getElementById('root') as HTMLElement
 );
