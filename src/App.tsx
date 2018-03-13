@@ -4,10 +4,6 @@ import * as Loadable from 'react-loadable';
 import HeaderComponent from './Header';
 import LoadingComponent from './Loading';
 
-interface Props {
-  pathname: string;
-}
-
 const AsyncHome = Loadable({
   loader: () => import(/* webpackChunkName: "homeChunk" */'./Home/Home'),
   loading: LoadingComponent,
@@ -24,29 +20,44 @@ const AsyncNotFound = Loadable({
   timeout: 10000 // 10s
 });
 
-const App = (props: Props) => {
+const App = (props: {}) => {
 
-  const { pathname } = props;
-  // defaultSelectedKeys
-  const defaultSelectedKey = (!process.env.PUBLIC_URL && !pathname) ? 'home' :
-    (pathname.replace(new RegExp(`${process.env.PUBLIC_URL}`, 'g'), '').replace(/\//g, '') || 'home');
+  const AsyncHome = Loadable({
+    loader: () => import('./Home/Home'),
+    loading: LoadingComponent,
+    delay: 200, // 200ms
+    timeout: 10000 // 10s
+  });
+  const AsyncWelcome = Loadable({
+    loader: () => import('./Welcome/Welcome'),
+    loading: LoadingComponent,
+    delay: 200, // 200ms
+    timeout: 10000 // 10s
+  });
+  const AsyncNotFound = Loadable({
+    loader: () => import('./NotFound'),
+    loading: LoadingComponent,
+    delay: 200, // 200ms
+    timeout: 10000 // 10s
+  });
 
   return (
     <div>
-      <HeaderComponent defaultSelectedKey={defaultSelectedKey} />
-      <div>
-        <Switch>
-          <Route exact={true} path="/">
-            <Redirect
-              to={{
-                pathname: '/home'
-              }}
-            />
-          </Route>
-          <Route path="/home" component={AsyncHome} />
-          <Route path="*" component={AsyncNotFound} />
-        </Switch>
-      </div>
+        <HeaderComponent />
+        <div>
+          <Switch>
+            <Route exact={true} path="/">
+              <Redirect
+                to={{
+                  pathname: '/home'
+                }}
+              />
+            </Route>
+            <Route path="/home" component={AsyncHome} />
+            <Route path="/welcome" component={AsyncWelcome} />
+            <Route path="*" component={AsyncNotFound} />
+          </Switch>
+        </div>
     </div>
   );
 };
