@@ -1,72 +1,118 @@
 import * as React from 'react';
 import { Route, Redirect, Switch, Link } from 'react-router-dom';
-import { Menu } from 'antd';
+import { Layout, Menu, Icon, Button } from 'antd';
 import * as Loadable from 'react-loadable';
 import LoadingComponent from './Loading';
+import styles from './App.less';
 
-interface Props {
-  pathname?: string;
-}
+const { Header, Content, Footer, Sider } = Layout;
 
-const AsyncHome = Loadable({
-  loader: () => import('./Home/Home'),
-  loading: LoadingComponent,
-  delay: 200, // 200ms
-  timeout: 10000 // 10s
-});
-// const AsyncWelcome = Loadable({
-//   loader: () => import('./Welcome/Welcome'),
-//   loading: LoadingComponent,
-//   delay: 200, // 200ms
-//   timeout: 10000 // 10s
-// });
-const AsyncNotFound = Loadable({
-  loader: () => import('./NotFound'),
-  loading: LoadingComponent,
-  delay: 200, // 200ms
-  timeout: 10000 // 10s
-});
+const getAsyncComponent = (entry: any) => {
+  return Loadable({
+    loader: entry,
+    loading: LoadingComponent,
+    delay: 200, // 200ms
+    timeout: 10000 // 10s
+  });
+};
 
-const App = (props: Props) => {
+// config routes
+const routes = [
+  {
+    name: 'home',
+    component: getAsyncComponent(() => import('./Home/Home'))
+  }, {
+    name: 'login',
+    component: getAsyncComponent(() => import('./Login/Login'))
+  }, {
+    name: '*',
+    component: getAsyncComponent(() => import('./NotFound'))
+  }
+];
 
-  const pathname = window ? location.pathname : (props.pathname || '/');
+const route = (
+  <Switch>
+    <Route exact={true} path="/">
+      <Redirect
+        to={{
+          pathname: '/home'
+        }}
+      />
+    </Route>
+    {routes.map(i => (
+      <Route
+        key={i.name}
+        path={`/${i.name}`}
+        component={i.component}
+      />
+    ))}
+  </Switch>
+);
 
-  const currentPage = (!process.env.PUBLIC_URL && !pathname) ? 'home' :
-    (pathname.replace(new RegExp(`${process.env.PUBLIC_URL}`, 'g'), '').replace(/\//g, '') || 'home');
+class App extends React.Component<{}, {}> {
 
-  return (
-    <div>
-        {
-          currentPage !== 'welcome' ? (
-            <Menu
-              mode="horizontal"
-              defaultSelectedKeys={[currentPage]}
-            >
+  state = {
+    collapsed: false,
+  };
+
+  toggle = () => {
+    this.setState({
+      collapsed: !this.state.collapsed,
+    });
+  }
+
+  render() {
+
+    const pathname = location.pathname;
+    const currentPage = (!process.env.PUBLIC_URL && !pathname) ? 'home' :
+      (pathname.replace(new RegExp(`${process.env.PUBLIC_URL}`, 'g'), '').replace(/\//g, '') || 'home');
+
+    return currentPage !== 'login' ?
+      (
+        <Layout>
+          <Sider
+            trigger={null}
+            collapsible={true}
+            collapsed={this.state.collapsed}
+            style={{ height: '100vh' }}
+          >
+            <div className={styles.logo} />
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={[currentPage]}>
               <Menu.Item key="home">
-                <Link to="/home">Home</Link>
+                <Link to="/home">
+                  <Icon type="home" />
+                  <span>Home</span>
+                </Link>
               </Menu.Item>
-              <Menu.Item key="help">
-                <Link to="/help">Help</Link>
+              <Menu.Item key="info">
+                <Link to="/login">
+                  <Icon type="info" />
+                  <span>Info</span>
+                </Link>
               </Menu.Item>
             </Menu>
-          ) : null
-        }
-        <div>
-          <Switch>
-            <Route exact={true} path="/">
-              <Redirect
-                to={{
-                  pathname: '/home'
-                }}
+          </Sider>
+          <Layout>
+            <Header style={{ background: '#fff', padding: 0 }}>
+              <Icon
+                className={styles.trigger}
+                type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                onClick={this.toggle}
               />
-            </Route>
-            <Route path="/home" component={AsyncHome} />
-            {/* <Route path="/welcome" component={AsyncWelcome} /> */}
-            <Route path="*" component={AsyncNotFound} />
-          </Switch>
-        </div>
-    </div>
-  );
-};
+              <div className={styles.headerNavRight}>
+                <Button type="primary"><Link to="/login">登录或注册</Link></Button>
+              </div>
+            </Header>
+            <Content style={{ margin: '24px 16px 0', padding: 24, background: '#fff' }}>
+              {route}
+            </Content>
+            <Footer style={{ textAlign: 'center' }}>
+              react-sail ©2017-present Created by vdfor
+          </Footer>
+          </Layout>
+        </Layout>
+      ) : <div>{route}</div>;
+  }
+}
 
 export default App;

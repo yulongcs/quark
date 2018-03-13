@@ -10,9 +10,6 @@ coverage
 dist
 build
 
-# index.tsx
-/src/index.tsx
-
 # misc
 .DS_Store
 .env.local

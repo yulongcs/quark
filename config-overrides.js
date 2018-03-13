@@ -2,14 +2,8 @@
 const tsImportPluginFactory = require('ts-import-plugin')
 const { getLoader } = require("react-app-rewired");
 const rewireLess = require('react-app-rewire-less');
-// const isomorphic-style-loader = require('isomorphic-style-loader');
-const fs = require('fs');
-const path = require('path');
 
 module.exports = function override(config, env) {
-
-  // rewrite index.tsx
-  fs.writeFileSync(path.join(__dirname, './src/index.tsx'), `require(${process.env.REACT_APP_SSR === 'on' ? "'./Server.tsx'" : "'./Client.tsx'"});`);
 
   const tsLoader = getLoader(
     config.module.rules,

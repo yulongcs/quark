@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { option as particleOption } from './particles';
 import styles from './style.less';
-// if (window) {
-//   require('particles.js');
-// }
+import 'particles.js';
 
 // @observer
 class Welcome extends React.Component<{}, {}> {
@@ -14,9 +12,7 @@ class Welcome extends React.Component<{}, {}> {
 
   componentDidMount() {
     // particle init
-    if (window) {
-      (window as any).particlesJS('particles-js', particleOption);
-    }
+    (window as any).particlesJS('particles-js', particleOption);
   }
 
   render() {
