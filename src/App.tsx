@@ -25,6 +25,9 @@ const routes = [
     name: 'login',
     component: getAsyncComponent(() => import('./Login/Login'))
   }, {
+    name: 'welcome',
+    component: getAsyncComponent(() => import('./Welcome/Welcome'))
+  }, {
     name: '*',
     component: getAsyncComponent(() => import('./NotFound'))
   }
@@ -49,15 +52,15 @@ const route = (
   </Switch>
 );
 
-class App extends React.Component<{}, {}> {
+class App extends React.Component<{}, { collapsed: boolean; }> {
 
   state = {
-    collapsed: false,
+    collapsed: false
   };
 
   toggle = () => {
     this.setState({
-      collapsed: !this.state.collapsed,
+      collapsed: !this.state.collapsed
     });
   }
 
@@ -67,7 +70,7 @@ class App extends React.Component<{}, {}> {
     const currentPage = (!process.env.PUBLIC_URL && !pathname) ? 'home' :
       (pathname.replace(new RegExp(`${process.env.PUBLIC_URL}`, 'g'), '').replace(/\//g, '') || 'home');
 
-    return currentPage !== 'login' ?
+    return currentPage !== 'login' && currentPage !== 'welcome' ?
       (
         <Layout>
           <Sider
@@ -108,7 +111,7 @@ class App extends React.Component<{}, {}> {
             </Content>
             <Footer style={{ textAlign: 'center' }}>
               react-sail ©2017-present Created by vdfor
-          </Footer>
+            </Footer>
           </Layout>
         </Layout>
       ) : <div>{route}</div>;
