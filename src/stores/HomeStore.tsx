@@ -1,15 +1,24 @@
 import { observable, action } from 'mobx';
+import axios from 'axios';
+// import client from '../common/client';
 
-class HomeStore {
-  @observable title: string = '';
+export class HomeStore {
+  @observable title: string;
 
-  @action loadTitle = () => {
-    this.title = 'Welcome to home page !';
+  @action loadTitle = async () => {
+    try {
+      const result = await axios.get('/api/v0/test');
+      this.title = result.data.title;
+    } catch (error) {
+      console.error(error);
+      this.title = 'Error';
+    }
   }
 
-  // static init() {
-  //   return new Store();
-  // }
+  constructor() {
+    this.title = 'Hello, react-sail';
+  }
+
 }
 
-export default HomeStore;
+export default new HomeStore();

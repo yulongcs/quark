@@ -4,14 +4,21 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import HomeStore from './stores/HomeStore';
+/* stores start */
+import rootStore from './stores/RootStore';
+import homeStore from './stores/HomeStore';
+/* stores end */
 import './index.css';
+import './common/axiosConfig';
 
-const stores = { homeStore: new HomeStore() };
+const stores = {
+  rootStore,
+  homeStore
+};
 
 ReactDOM.render(
   <Provider {...stores}>
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <App />
     </Router>
   </Provider>,

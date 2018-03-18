@@ -3,6 +3,8 @@ import { Route, Redirect, Switch, Link } from 'react-router-dom';
 import { Layout, Menu, Icon, Button } from 'antd';
 import * as Loadable from 'react-loadable';
 import LoadingComponent from './Loading';
+// import requireAuth from './common/Auth';
+import PrivateRoute from './common/PrivateRoute';
 import styles from './App.less';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -33,24 +35,34 @@ const routes = [
   }
 ];
 
-const route = (
-  <Switch>
-    <Route exact={true} path="/">
-      <Redirect
-        to={{
-          pathname: '/home'
-        }}
-      />
-    </Route>
-    {routes.map(i => (
-      <Route
-        key={i.name}
-        path={`/${i.name}`}
-        component={i.component}
-      />
-    ))}
-  </Switch>
-);
+const RouteComponent = () => {
+  return (
+    <Switch>
+      <Route exact={true} path="/">
+        <Redirect
+          to={{
+            pathname: '/home'
+          }}
+        />
+      </Route>
+      {routes.map(i => {
+        return i.name === 'login' || i.name === '*' ? (
+          <Route
+            key={i.name}
+            path={`/${i.name}`}
+            component={i.component}
+          />
+        ) : (
+            <PrivateRoute
+              key={i.name}
+              path={`/${i.name}`}
+              component={i.component}
+            />
+          );
+      })}
+    </Switch>
+  );
+};
 
 class App extends React.Component<{}, { collapsed: boolean; }> {
 
@@ -88,7 +100,7 @@ class App extends React.Component<{}, { collapsed: boolean; }> {
                 </Link>
               </Menu.Item>
               <Menu.Item key="info">
-                <Link to="/login">
+                <Link to="/info">
                   <Icon type="info" />
                   <span>Info</span>
                 </Link>
@@ -107,14 +119,14 @@ class App extends React.Component<{}, { collapsed: boolean; }> {
               </div>
             </Header>
             <Content style={{ margin: '24px 16px 0', padding: 24, background: '#fff' }}>
-              {route}
+              <RouteComponent />
             </Content>
             <Footer style={{ textAlign: 'center' }}>
               react-sail ©2017-present Created by vdfor
             </Footer>
           </Layout>
         </Layout>
-      ) : <div>{route}</div>;
+      ) : <div><RouteComponent /></div>;
   }
 }
 
