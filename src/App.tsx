@@ -20,13 +20,13 @@ const getAsyncComponent = (entry: any) => {
 const routes = [
   {
     name: 'home',
-    component: getAsyncComponent(() => import('./Home/Home'))
+    component: getAsyncComponent(() => import('./Home/index'))
   }, {
     name: 'login',
-    component: getAsyncComponent(() => import('./Login/Login'))
+    component: getAsyncComponent(() => import('./Login/index'))
   }, {
     name: 'welcome',
-    component: getAsyncComponent(() => import('./Welcome/Welcome'))
+    component: getAsyncComponent(() => import('./Welcome/index'))
   }, {
     name: '*',
     component: getAsyncComponent(() => import('./NotFound'))
