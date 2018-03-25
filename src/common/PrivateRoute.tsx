@@ -3,16 +3,13 @@ import { Route, Redirect } from 'react-router-dom';
 import { observer, inject } from 'mobx-react';
 
 const PrivateRoute = inject('rootStore')(observer(({ component: Component, exact = false, path, rootStore }) => {
-  // const { authed } = rootStore;
-  // console.log(authed);
+  const { authed } = rootStore;
 
-  // // storage access_token
-  // const storageCredential = localStorage.getItem('credentials');
-  // const credentials = storageCredential ? JSON.parse(storageCredential) : null;
+  // storage access_token
+  const storageCredential = localStorage.getItem('credentials');
+  const credentials = storageCredential ? JSON.parse(storageCredential) : null;
 
-  // const isAuthenticated =  credentials && credentials.access_token && authed;
-
-  const isAuthenticated  = true;
+  const isAuthenticated =  credentials && credentials.access_token && authed;
 
   return (
     <Route

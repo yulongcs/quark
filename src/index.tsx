@@ -9,7 +9,7 @@ import rootStore from './stores/RootStore';
 import homeStore from './stores/HomeStore';
 /* stores end */
 import './index.css';
-import './common/axiosConfig';
+import './common/interceptors';
 
 const stores = {
   rootStore,

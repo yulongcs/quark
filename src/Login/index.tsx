@@ -1,6 +1,8 @@
 import * as React from 'react';
+import { observer, inject } from 'mobx-react';
 import { Card, Form, Icon, Input, Button, Checkbox } from 'antd';
 import { option as particleOption } from './particles';
+import { RootStore } from '../stores/RootStore';
 import styles from './style.less';
 import 'particles.js';
 
@@ -12,8 +14,14 @@ interface States {
   remember: boolean;
 }
 
-// @observer
-class LoginComponent extends React.Component<{}, States> {
+interface Props {
+  rootStore: RootStore;
+  history: { [key: string]: string | any };
+}
+
+@inject('rootStore')
+@observer
+class LoginComponent extends React.Component<Props, States> {
 
   // field is not touched at the beginning
   userNameFieldTouched = false;
@@ -47,6 +55,16 @@ class LoginComponent extends React.Component<{}, States> {
       password,
       remember
     });
+    // set credentials if respond ok from server
+    localStorage.setItem('credentials', JSON.stringify({
+      user: {
+        id: 1,
+        name: userName
+      },
+      access_token: '123456789'
+    }));
+    this.props.rootStore.setAuthed(true);
+    this.props.history.push('/');
   }
 
   componentDidMount() {
@@ -55,6 +73,7 @@ class LoginComponent extends React.Component<{}, States> {
   }
 
   render() {
+
     const { userNameFieldTouched, passwordFieldTouched, state } = this;
     const { userName, password, remember } = state;
 

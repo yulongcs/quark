@@ -1,9 +1,6 @@
 import axios from 'axios';
 import rootStore from '../stores/RootStore';
 
-// // baseURL
-// axios.defaults.baseURL = 'http://api.example.com';
-
 // request interceptors
 axios.interceptors.request.use(
   (config) => {
@@ -22,17 +19,12 @@ axios.interceptors.request.use(
 // response interceptors
 axios.interceptors.response.use(
   (response) => {
-    rootStore.setAuthed(false);
-    // console.log('hello');
-    // history.push('/host');
-    // location.href = '/host';
-    // axios(response.config);
-    return response;
+    return response.data;
   },
   (error) => {
     if (error && error.response && error.response.status === 401) {
-      // localStorage.removeItem('credentials');
-      return;
+      localStorage.removeItem('credentials');
+      rootStore.setAuthed(false);
     }
     return Promise.reject(error);
   });
