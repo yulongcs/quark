@@ -1,6 +1,5 @@
 import { observable, action } from 'mobx';
 import axios from 'axios';
-// import client from '../common/client';
 
 export class HomeStore {
   @observable title: string;
