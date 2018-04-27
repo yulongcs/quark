@@ -1,6 +1,6 @@
 {
   "name": "react-sail",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "author": "vdfor",
   "license": "MIT",
   "repository": {
@@ -19,11 +19,10 @@
   },
   "private": true,
   "dependencies": {
-    "antd": "^3.2.1",
+    "antd": "^3.4.2",
     "axios": "^0.18.0",
     "mobx": "^4.1.0",
     "mobx-react": "^5.0.0",
-    "particles.js": "^2.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-loadable": "^5.3.1",

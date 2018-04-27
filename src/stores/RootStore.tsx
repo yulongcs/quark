@@ -1,7 +1,13 @@
 import { observable, action } from 'mobx';
 
+interface Indicator {
+  text?: string;
+  icon?: string;
+  show: boolean;
+}
+
 export class RootStore {
-  @observable version: string = '0.2.0';
+  @observable indicator: Indicator;
 
   @observable authed: boolean;
 
@@ -9,8 +15,17 @@ export class RootStore {
     this.authed = authed;
   }
 
+  @action updateIndicator = (indicator: Indicator) => {
+    if (!indicator.show) {
+      this.indicator = { text: '', icon: '', show: false };
+      return;
+    }
+    this.indicator = { ...this.indicator, ...indicator };
+  }
+
   constructor() {
     this.authed = true;
+    this.indicator = { text: '', icon: '', show: false };
   }
 
   // @action loadTitle = () => {

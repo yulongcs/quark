@@ -1,48 +1,31 @@
 import * as React from 'react';
-import { observer, inject } from 'mobx-react';
-import { HomeStore } from '../stores/HomeStore';
-// import { RootStore } from '../stores/RootStore';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
+import { Button } from 'antd';
+import fetchUser from './api';
 import styles from './style.less';
 
-interface Props {
-  homeStore: HomeStore;
-  // rootStore: RootStore;
+interface User {
+  id: string | number;
+  name: string;
 }
 
-// @inject('rootStore')
-@inject('homeStore')
 @observer
-class HomeComponent extends React.Component<Props, {}> {
+class HomeComponent extends React.Component<{}, {}> {
 
-  constructor(props: Props) {
-    super(props);
-    // console.log(props);
-    // console.log(props.rootStore.history);
-    // if (props.rootStore.history === 'login') {
-    //   console.log(1111);
-    // }
+  @observable user: User;
+
+  queryUser = async () => {
+    this.user = await fetchUser.query();
   }
-
-  async componentDidMount() {
-    // console.log(this.props);
-    await this.props.homeStore.loadTitle();
-    // this.props.rootStore.setAuthed(true);
-  }
-
-  // componentDidUpdate() {
-  //   // console.log(this.props.rootStore.history);
-  //   if (this.props.rootStore.history === 'login') {
-  //     this.props.history.push('/login');
-  //   }
-  // }
 
   render() {
-    // console.log(this.props.rootStore.history);
+    const name = this.user && this.user.name || 'no user';
 
     return (
       <div>
-        <h1 className={styles.title}>{this.props.homeStore.title}</h1>
-        {/* <p>{this.props.rootStore.history}</p> */}
+        <h1 className={styles.title}>{name}</h1>
+        <Button type="primary" onClick={this.queryUser}>获取user</Button>
       </div>
     );
   }

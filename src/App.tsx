@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { Route, Redirect, Switch, Link } from 'react-router-dom';
-import { Layout, Menu, Icon, Button } from 'antd';
+import { observer } from 'mobx-react';
+import { Route, Redirect, Switch, Link, withRouter, RouteComponentProps } from 'react-router-dom';
+import { Layout, Menu, Icon, Row, Col, Button } from 'antd';
 import * as Loadable from 'react-loadable';
 import LoadingComponent from './Loading';
+import { RootStore } from './stores/RootStore';
 // import requireAuth from './common/Auth';
 import PrivateRoute from './common/PrivateRoute';
 import styles from './App.less';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 
 const getAsyncComponent = (entry: any) => {
   return Loadable({
@@ -18,116 +20,133 @@ const getAsyncComponent = (entry: any) => {
   });
 };
 
-// config routes
-const routes = [
+// config menus
+const menus = [
   {
-    name: 'home',
-    component: getAsyncComponent(() => import('./Home/index'))
-  }, {
-    name: 'login',
-    component: getAsyncComponent(() => import('./Login/index'))
-  }, {
-    name: 'welcome',
-    component: getAsyncComponent(() => import('./Welcome/index'))
-  }, {
-    name: '*',
-    component: getAsyncComponent(() => import('./NotFound'))
+    id: '/home',
+    label: 'Home',
+    icon: 'home',
+    path: '/home'
+  },
+  {
+    id: 'users',
+    label: '用户管理',
+    icon: 'user',
+    path: '/users',
+    sub: [
+      { id: '/users/customer', label: '前台用户', path: '/users/customer' },
+      { id: '/users/admin', label: '后台用户', path: '/users/admin' }
+    ]
   }
 ];
 
-const RouteComponent = () => {
-  return (
-    <Switch>
-      <Route exact={true} path="/">
-        <Redirect
-          to={{
-            pathname: '/home'
-          }}
-        />
-      </Route>
-      {routes.map(i => {
-        return i.name === 'login' || i.name === '*' ? (
-          <Route
-            key={i.name}
-            path={`/${i.name}`}
-            component={i.component}
-          />
-        ) : (
-            <PrivateRoute
-              key={i.name}
-              path={`/${i.name}`}
-              component={i.component}
-            />
-          );
-      })}
-    </Switch>
-  );
+const getDefaultSelected = (location: { [key: string]: string | any }) => {
+  const initStr = '/home';
+
+  const pathname = location.pathname;
+  const arr = pathname.split('/');
+  if (arr.length > 1) {
+    const k = arr[1];
+    return k ? pathname : initStr;
+  }
+  return pathname;
 };
 
-class App extends React.Component<{}, { collapsed: boolean; }> {
-
-  state = {
-    collapsed: false
-  };
-
-  toggle = () => {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
+const getDefaultOpen = (s: string) => {
+  let str = '';
+  const k = s.split('/')[1] || null;
+  if (k) {
+    try {
+      menus.forEach(m => {
+        if (m.id === k && m.sub) {
+          str = m.id;
+          throw new Error('exit-forEach');
+        }
+      });
+    } catch (e) {
+      if (e.message !== 'exit-forEach') {
+        throw e;
+      }
+    }
   }
+  return str;
+};
 
-  render() {
+const routes = (
+  <Switch>
+    <Route exact={true} path="/"><Redirect to={{ pathname: '/home' }} /></Route>
+    <Route key="home" path="/home" component={getAsyncComponent(() => import('./Home'))} />
+    <PrivateRoute key="welcome" path="/welcome" component={getAsyncComponent(() => import('./Welcome'))} />
+    <Route key="not-found" path="*" component={getAsyncComponent(() => import('./NotFound'))} />
+  </Switch>
+);
 
-    const pathname = location.pathname;
-    const currentPage = (!process.env.PUBLIC_URL && !pathname) ? 'home' :
-      (pathname.replace(new RegExp(`${process.env.PUBLIC_URL}`, 'g'), '').replace(/\//g, '') || 'home');
-
-    return currentPage !== 'login' && currentPage !== 'welcome' ?
-      (
-        <Layout>
-          <Sider
-            trigger={null}
-            collapsible={true}
-            collapsed={this.state.collapsed}
-            style={{ height: '100vh' }}
-          >
-            <div className={styles.logo} />
-            <Menu theme="dark" mode="inline" defaultSelectedKeys={[currentPage]}>
-              <Menu.Item key="home">
-                <Link to="/home">
-                  <Icon type="home" />
-                  <span>Home</span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="info">
-                <Link to="/info">
-                  <Icon type="info" />
-                  <span>Info</span>
-                </Link>
-              </Menu.Item>
-            </Menu>
-          </Sider>
-          <Layout>
-            <Header style={{ background: '#fff', padding: 0 }}>
-              <Icon
-                className={styles.trigger}
-                type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-                onClick={this.toggle}
-              />
-              <div className={styles.headerNavRight}>
-                <Button type="primary"><Link to="/login">登录或注册</Link></Button>
-              </div>
-            </Header>
-            <Content style={{ margin: '24px 16px 0', padding: 24, background: '#fff' }}>
-              <RouteComponent />
-            </Content>
-            <Footer style={{ textAlign: 'center' }}>
-              react-sail ©2017-present Created by vdfor
-            </Footer>
-          </Layout>
-        </Layout>
-      ) : <div><RouteComponent /></div>;
-  }
+interface Props extends RouteComponentProps<any>, React.Props<any> {
+  rootStore: RootStore;
 }
 
-export default App;
+const App: React.SFC<Props> = observer((props) => {
+
+  const { rootStore, location, history } = props;
+  const defaultSelected = getDefaultSelected(location);
+  const defaultOpen = getDefaultOpen(defaultSelected);
+  const { indicator } = rootStore;
+
+  return (
+    <Layout >
+      <Sider
+        breakpoint="lg"
+        collapsedWidth="0"
+        style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}
+        width="256"
+      >
+        <div className={styles.logo} />
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={[defaultSelected]} defaultOpenKeys={[defaultOpen]}>
+          {menus.map(i => (
+            i.sub ?
+              <Menu.SubMenu
+                key={i.id}
+                title={<span><Icon type={i.icon} /><span>{i.label}</span></span>}
+              >
+                {i.sub.map(sub => (
+                  <Menu.Item key={sub.id}>
+                    <Link to={sub.path}>
+                      {sub.label}
+                    </Link>
+                  </Menu.Item>
+                ))}
+              </Menu.SubMenu>
+              :
+              <Menu.Item key={i.id}>
+                <Link to={i.path}>
+                  <Icon type={i.icon} />
+                  <span>{i.label}</span>
+                </Link>
+              </Menu.Item>))}
+        </Menu>
+      </Sider>
+      <Layout style={{ marginLeft: 256 }}>
+        <Header style={{ background: '#fff', padding: 0 }}>
+          <Row gutter={16}>
+            {indicator.show ?
+              <Col span={6}>
+                <Button
+                  onClick={history.goBack}
+                  style={{ border: 'none', margin: '0 15px 0 20px', fontSize: '18px', fontWeight: 'bold' }}
+                  type="default"
+                  shape="circle"
+                  icon={indicator.icon}
+                />
+                <h2 style={{ margin: 0, fontSize: '18px', display: 'inline-block' }}>{indicator.text}</h2>
+              </Col> : null}
+          </Row>
+        </Header>
+        <Content style={{ margin: '24px 16px 0', padding: 0, minHeight: 'calc(100vh - 88px)' }}>
+          {routes}
+        </Content>
+      </Layout>
+    </Layout>
+  );
+});
+
+export default withRouter(App);

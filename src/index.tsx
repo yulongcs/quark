@@ -6,20 +6,17 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 /* stores start */
 import rootStore from './stores/RootStore';
-import homeStore from './stores/HomeStore';
 /* stores end */
 import './index.css';
-import './common/interceptors';
 
 const stores = {
-  rootStore,
-  homeStore
+  rootStore
 };
 
 ReactDOM.render(
   <Provider {...stores}>
     <Router basename={process.env.PUBLIC_URL}>
-      <App />
+      <App rootStore={rootStore} />
     </Router>
   </Provider>,
   document.getElementById('root') as HTMLElement
