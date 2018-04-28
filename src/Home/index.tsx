@@ -10,6 +10,7 @@ interface User {
   name: string;
 }
 
+// const App: React.SFC<Props> = observer((props) 
 @observer
 class HomeComponent extends React.Component<{}, {}> {
 
