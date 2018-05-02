@@ -7,7 +7,6 @@ import registerServiceWorker from './registerServiceWorker';
 /* stores start */
 import rootStore from './stores/RootStore';
 /* stores end */
-import './index.css';
 
 const stores = {
   rootStore

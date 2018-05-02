@@ -1,6 +1,6 @@
 {
   "name": "react-sail",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "author": "vdfor",
   "license": "MIT",
   "repository": {
@@ -21,6 +21,7 @@
   "dependencies": {
     "antd": "^3.4.2",
     "axios": "^0.18.0",
+    "enquire-js": "^0.2.1",
     "mobx": "^4.1.0",
     "mobx-react": "^5.0.0",
     "react": "^16.2.0",
