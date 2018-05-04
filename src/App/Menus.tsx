@@ -4,6 +4,7 @@ import { Menu, Icon } from 'antd';
 
 interface Props {
   isMobile: boolean;
+  pathname: string;
   onMenuClick?: Function;
 }
 
@@ -27,6 +28,37 @@ const menuItems = [
   }
 ];
 
+const getDefaultSelectedKey = (pathname: string) => {
+  const initStr = '/home';
+
+  const arr = pathname.split('/');
+  if (arr.length > 1) {
+    const k = arr[1];
+    return k ? pathname : initStr;
+  }
+  return pathname;
+};
+
+const getDefaultOpenedKey = (s: string) => {
+  let str = '';
+  const k = s.split('/')[1] || null;
+  if (k) {
+    try {
+      menuItems.forEach(m => {
+        if (m.id === k && m.sub) {
+          str = m.id;
+          throw new Error('exit-forEach');
+        }
+      });
+    } catch (e) {
+      if (e.message !== 'exit-forEach') {
+        throw e;
+      }
+    }
+  }
+  return str;
+};
+
 class MenusComponent extends React.Component<Props, {}> {
 
   handleMenuClick = () => {
@@ -35,41 +67,18 @@ class MenusComponent extends React.Component<Props, {}> {
       onMenuClick();
     }
   }
-  // <Menu theme="dark" mode="inline">
-  // {menus.map(i => (
-  //   i.sub ?
-  //     <Menu.SubMenu
-  //       key={i.id}
-  //       title={<span><Icon type={i.icon} /><span>{i.label}</span></span>}
-  //     >
-  //       {i.sub.map(sub => (
-  //         <Menu.Item key={sub.id}>
-  //           <Link to={sub.path}>
-  //             {sub.label}
-  //           </Link>
-  //         </Menu.Item>
-  //       ))}
-  //     </Menu.SubMenu>
-  //     :
-  //     <Menu.Item key={i.id}>
-  //       <Link to={i.path}>
-  //         <Icon type={i.icon} />
-  //         <span>{i.label}</span>
-  //       </Link>
-  //     </Menu.Item>))}
-  // </Menu>
+
   render() {
     const { isMobile } = this.props;
-    // const menuChild = getMenuChild(isMobile);
+    const defaultSelectKey = getDefaultSelectedKey(this.props.pathname);
+    const defaultOpenKey = getDefaultOpenedKey(defaultSelectKey);
 
     return (
       <Menu
         theme={isMobile ? 'light' : 'dark'}
         mode="inline"
-      // style={{ minHeight: 'calc(100vh - 64px)' }}
-      // openKeys={this.state.openKeys}
-      // selectedKeys={[activeMenuItem]}
-      // onOpenChange={this.handleMenuOpenChange}
+        defaultOpenKeys={[defaultOpenKey]}
+        selectedKeys={[defaultSelectKey]}
       >
         {menuItems.map(i => (
           i.sub ?

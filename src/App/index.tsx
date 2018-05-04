@@ -17,43 +17,6 @@ interface Props extends RouteComponentProps<any>, React.Props<any> {
   rootStore: RootStore;
 }
 
-// interface ResponsiveData {
-//   siderStyle: { [key: string]: string | any };
-//   mLayoutStyle: { marginLeft: number; };
-// }
-
-// const getDefaultSelected = (location: { [key: string]: string | any }) => {
-//   const initStr = '/home';
-
-//   const pathname = location.pathname;
-//   const arr = pathname.split('/');
-//   if (arr.length > 1) {
-//     const k = arr[1];
-//     return k ? pathname : initStr;
-//   }
-//   return pathname;
-// };
-
-// const getDefaultOpen = (s: string) => {
-//   let str = '';
-//   const k = s.split('/')[1] || null;
-//   if (k) {
-//     try {
-//       menus.forEach(m => {
-//         if (m.id === k && m.sub) {
-//           str = m.id;
-//           throw new Error('exit-forEach');
-//         }
-//       });
-//     } catch (e) {
-//       if (e.message !== 'exit-forEach') {
-//         throw e;
-//       }
-//     }
-//   }
-//   return str;
-// };
-
 @observer
 class App extends React.Component<Props, {}> {
 
@@ -72,13 +35,6 @@ class App extends React.Component<Props, {}> {
 
   render() {
 
-    // const { rootStore, history } = this.props;
-    // const defaultSelected = getDefaultSelected(location);
-    // const defaultOpen = getDefaultOpen(defaultSelected);
-    // const { indicator } = rootStore;
-    // const { mLayoutStyle } = this.responsiveData;
-    // console.log({ siderStyle, menuTheme, mLayoutStyle });
-
     const headerStyle = !this.isMobile ? { height: '64px', lineHeight: '64px' } : { height: '64px', lineHeight: '64px' };
 
     return (
@@ -92,6 +48,7 @@ class App extends React.Component<Props, {}> {
             <div style={{ height: '32px', background: 'rgba(255,255,255,.2)', margin: '16px' }} />
             <MenusComponent
               isMobile={false}
+              pathname={this.props.location.pathname}
             />
           </Sider>) : (
             <Drawer
@@ -100,6 +57,7 @@ class App extends React.Component<Props, {}> {
             >
               <MenusComponent
                 isMobile={true}
+                pathname={this.props.location.pathname}
                 onMenuClick={this.toggleDrawer(false)}
               />
             </Drawer>)
