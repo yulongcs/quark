@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
 
 interface Props {
-  isMobile: boolean;
   pathname: string;
+  style?: React.CSSProperties;
   onMenuClick?: Function;
 }
 
@@ -39,26 +39,6 @@ const getDefaultSelectedKey = (pathname: string) => {
   return pathname;
 };
 
-const getDefaultOpenedKey = (s: string) => {
-  let str = '';
-  const k = s.split('/')[1] || null;
-  if (k) {
-    try {
-      menuItems.forEach(m => {
-        if (m.id === k && m.sub) {
-          str = m.id;
-          throw new Error('exit-forEach');
-        }
-      });
-    } catch (e) {
-      if (e.message !== 'exit-forEach') {
-        throw e;
-      }
-    }
-  }
-  return str;
-};
-
 class MenusComponent extends React.Component<Props, {}> {
 
   handleMenuClick = () => {
@@ -69,16 +49,14 @@ class MenusComponent extends React.Component<Props, {}> {
   }
 
   render() {
-    const { isMobile } = this.props;
     const defaultSelectKey = getDefaultSelectedKey(this.props.pathname);
-    const defaultOpenKey = getDefaultOpenedKey(defaultSelectKey);
 
     return (
       <Menu
-        theme={isMobile ? 'light' : 'dark'}
-        mode="inline"
-        defaultOpenKeys={[defaultOpenKey]}
+        theme="light"
+        mode="horizontal"
         selectedKeys={[defaultSelectKey]}
+        style={{ ...this.props.style }}
       >
         {menuItems.map(i => (
           i.sub ?
