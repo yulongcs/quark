@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, Icon } from 'antd';
+import { Menu } from 'antd';
 
 interface Props {
   pathname: string;
@@ -13,18 +13,31 @@ const menuItems = [
   {
     id: '/home',
     label: 'Home',
-    icon: 'home',
     path: '/home'
   },
   {
     id: 'users',
     label: '用户管理',
-    icon: 'user',
     path: '/users',
     sub: [
       { id: '/users/customer', label: '前台用户', path: '/users/customer' },
       { id: '/users/admin', label: '后台用户', path: '/users/admin' }
     ]
+  },
+  {
+    id: '/about',
+    label: 'About',
+    path: '/about'
+  },
+  {
+    id: '/echarts',
+    label: 'Echarts',
+    path: '/echarts'
+  },
+  {
+    id: '/404',
+    label: '404',
+    path: '/404'
   }
 ];
 
@@ -62,7 +75,7 @@ class MenusComponent extends React.Component<Props, {}> {
           i.sub ?
             <Menu.SubMenu
               key={i.id}
-              title={<span><Icon type={i.icon} /><span>{i.label}</span></span>}
+              title={<span>{i.label}</span>}
             >
               {i.sub.map(sub => (
                 <Menu.Item key={sub.id}>
@@ -75,7 +88,6 @@ class MenusComponent extends React.Component<Props, {}> {
             :
             <Menu.Item key={i.id}>
               <Link to={i.path} onClick={this.handleMenuClick}>
-                <Icon type={i.icon} />
                 <span>{i.label}</span>
               </Link>
             </Menu.Item>))}

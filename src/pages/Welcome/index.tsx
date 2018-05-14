@@ -1,32 +1,40 @@
 import * as React from 'react';
-// import { Layout } from 'antd';
-import styles from './style.less';
+import { Button } from 'antd';
+import Author from './Author';
 
-// const { Header } = Layout;
+interface State {
+  title: string;
+  author: string;
+}
 
-// @observer
-class WelcomeComponent extends React.Component<{}, {}> {
+class WelcomeComponent extends React.Component<{}, State> {
 
-  constructor(props: {}) {
-    super(props);
+  state = {
+    title: 'Welcome',
+    author: 'Tome'
+  };
+
+  changeTitle = () => {
+    this.setState({ title: 'Hello, Welcome!' });
   }
 
-  componentDidMount() {
-    console.log('');
+  changeAuthor = () => {
+    this.setState({ author: 'John' });
   }
 
   render() {
+
+    const { title, author } = this.state;
+  
     return (
-      <section>
-        <header>
-          <div className={styles.bgScene} />
-          <div className={styles.intro}>
-            <p className={styles.introText}>
-              欢迎使用 react-sail
-            </p>
-          </div>
-        </header>
-      </section>
+      <div>
+        <h1>{title}</h1>
+        <Author name={author} />
+        <Button type="primary" onClick={this.changeTitle}>state change</Button>
+        <br />
+        <br />
+        <Button type="primary" onClick={this.changeAuthor}>props change</Button>
+      </div>
     );
   }
 

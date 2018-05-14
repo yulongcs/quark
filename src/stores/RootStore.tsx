@@ -25,16 +25,8 @@ export class RootStore {
 
   constructor() {
     this.authed = true;
-    this.indicator = { text: '', icon: '', show: false };
+    this.indicator = { text: '全局指示提示', icon: '', show: false };
   }
-
-  // @action loadTitle = () => {
-  //   this.title = 'Welcome to home page !';
-  // }
-
-  // static init() {
-  //   return new Store();
-  // }
 }
 
 export default new RootStore();
