@@ -1,13 +1,13 @@
-import * as React from 'react';
+// 引入柱状图
+import 'echarts/lib/chart/bar';
+// 引入标题组件
+import 'echarts/lib/component/title';
+// 引入提示框组件
+import 'echarts/lib/component/tooltip';
 /* echarts start */
 // 引入主模块
 import * as echarts from 'echarts/lib/echarts';
-// 引入柱状图
-import 'echarts/lib/chart/bar';
-// 引入提示框组件
-import 'echarts/lib/component/tooltip';
-// 引入标题组件
-import 'echarts/lib/component/title';
+import * as React from 'react';
 /* echarts end */
 
 class EchartsComponent extends React.Component<{}, {}> {
@@ -23,6 +23,11 @@ class EchartsComponent extends React.Component<{}, {}> {
   chartRender = () => {
     if (this.chart) {
       this.chart.setOption({
+        series: [{
+          data: [5, 20, 36, 10, 10, 20],
+          name: '销量',
+          type: 'bar'
+        }],
         title: {
           text: 'ECharts 入门示例'
         },
@@ -30,12 +35,7 @@ class EchartsComponent extends React.Component<{}, {}> {
         xAxis: {
           data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
         },
-        yAxis: {},
-        series: [{
-          name: '销量',
-          type: 'bar',
-          data: [5, 20, 36, 10, 10, 20]
-        }]
+        yAxis: {}
       });
     }
   }

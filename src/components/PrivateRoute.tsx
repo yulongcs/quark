@@ -1,8 +1,8 @@
+import { observer } from 'mobx-react';
 import * as React from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import { observer, inject } from 'mobx-react';
+import { Redirect, Route } from 'react-router-dom';
 
-const PrivateRoute = inject('rootStore')(observer(({ component: Component, exact = false, path, rootStore }) => {
+const PrivateRoute = observer(({ component: Component, exact = false, path }) => {
   // const { authed } = rootStore;
 
   // storage access_token
@@ -13,6 +13,7 @@ const PrivateRoute = inject('rootStore')(observer(({ component: Component, exact
 
   const isAuthenticated = true;
 
+/* tslint:disable */ 
   return (
     <Route
       exact={exact}
@@ -34,8 +35,7 @@ const PrivateRoute = inject('rootStore')(observer(({ component: Component, exact
       }}
     />
   );
-}));
+});
 
-// const { object, bool, string, func } = PropTypes;
-
+/* tslint:enable */ 
 export default PrivateRoute;

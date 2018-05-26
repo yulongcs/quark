@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { observer } from 'mobx-react';
 import { Button } from 'antd';
+import { observer } from 'mobx-react';
+import * as React from 'react';
 import store from './store';
 
 const NotFound = observer(() => (

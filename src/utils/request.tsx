@@ -1,9 +1,11 @@
 /**
  * reference to   https://github.com/ant-design/ant-design-pro/blob/master/src/utils/request.js
  */
-import axios, { AxiosRequestConfig } from 'axios';
 import { notification } from 'antd';
+import axios, { AxiosRequestConfig } from 'axios';
+import { getCredentials } from './helper';
 // import rootStore from '../stores/RootStore';
+
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -29,23 +31,22 @@ const codeMessage = {
  * @return {any}           An object containing either "data" or "err"
  */
 const request = async (url: string, options: AxiosRequestConfig = {}): Promise<any> => {
-  const storageCredential = localStorage.getItem('credentials');
-  const credentials = storageCredential ? JSON.parse(storageCredential) : null;
+  const token = getCredentials('token');
 
   const newOptions = {
-    headers: { Authorization: `Bearer ${(credentials && credentials.access_token) || ''}` },
+    headers: { Authorization: `Bearer ${token || ''}` },
     ...options
   };
 
   try {
-    const res = await axios({ ...newOptions, ...{url} });
+    const res = await axios({ ...newOptions, ...{ url } });
     return res.data;
   } catch (error) {
     const { status, statusText, data: errorText } = error.response;
 
     notification.error({
-      message: `http请求错误 ${status} ${url}`,
-      description: codeMessage[status] || statusText
+      description: codeMessage[status] || statusText,
+      message: `http请求错误 ${status} ${url}`
     });
 
     if (status === 401 && errorText === 'Unauthorized') {

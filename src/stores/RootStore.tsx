@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx';
+import { action, observable } from 'mobx';
 
 interface Indicator {
   text?: string;
@@ -7,15 +7,15 @@ interface Indicator {
 }
 
 export class RootStore {
-  @observable indicator: Indicator;
+  @observable public indicator: Indicator = { text: '全局指示提示', icon: '', show: false };
 
-  @observable authed: boolean;
+  @observable public authed: boolean = true;
 
-  @action setAuthed = (authed: boolean) => {
+  @action public setAuthed = (authed: boolean) => {
     this.authed = authed;
   }
 
-  @action updateIndicator = (indicator: Indicator) => {
+  @action public updateIndicator = (indicator: Indicator) => {
     if (!indicator.show) {
       this.indicator = { text: '', icon: '', show: false };
       return;
@@ -23,10 +23,6 @@ export class RootStore {
     this.indicator = { ...this.indicator, ...indicator };
   }
 
-  constructor() {
-    this.authed = true;
-    this.indicator = { text: '全局指示提示', icon: '', show: false };
-  }
 }
 
 export default new RootStore();

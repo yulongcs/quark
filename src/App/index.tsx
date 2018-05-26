@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { observer } from 'mobx-react';
-import { observable, action } from 'mobx';
-import { withRouter, RouteComponentProps, BrowserRouter as Router } from 'react-router-dom';
 import { Layout } from 'antd';
 import { enquireScreen } from 'enquire-js';
+import { action, observable } from 'mobx';
+import { observer } from 'mobx-react';
+import * as React from 'react';
+import { BrowserRouter as Router, RouteComponentProps, withRouter } from 'react-router-dom';
 // import { RootStore } from '../../stores/RootStore';
 import MenusComponent from './Menus';
 // import Drawer from '../../components/Drawer';
@@ -13,12 +13,12 @@ import RoutesComponent from './Routes';
 
 const { Header, Content } = Layout;
 
-interface Props extends RouteComponentProps<any>, React.Props<any> {
+interface Iprops extends RouteComponentProps<any>, React.Props<any> {
   // rootStore: RootStore;
 }
 
 @observer
-class AppComponent extends React.Component<Props, {}> {
+class AppComponent extends React.Component<Iprops, {}> {
 
   @observable isMobile: boolean = false;
   @observable drawerVisible: boolean = false;
@@ -42,7 +42,7 @@ class AppComponent extends React.Component<Props, {}> {
         <Header style={{ padding: 0, background: '#fff', boxShadow: '0 2px 8px #f0f1f2', zIndex: 1, ...headerStyle }}>
           <MenusComponent
             pathname={this.props.location.pathname}
-            style={{...headerStyle}}
+            style={{ ...headerStyle }}
           />
         </Header>
         <Content style={{ background: '#fff', padding: '24px' }}>
@@ -56,7 +56,7 @@ class AppComponent extends React.Component<Props, {}> {
 const WithRouterApp = withRouter(AppComponent);
 
 const App = () => (
-  <Router basename={process.env.PUBLIC_URL}><WithRouterApp /></Router>
+  <Router basename={process.env._URL}><WithRouterApp /></Router>
 );
 
 export default App;

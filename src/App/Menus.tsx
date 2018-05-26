@@ -1,11 +1,11 @@
+import { Menu } from 'antd';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu } from 'antd';
 
-interface Props {
+interface Iprops {
   pathname: string;
   style?: React.CSSProperties;
-  onMenuClick?: Function;
+  onMenuClick?: () => void;
 }
 
 // config menus
@@ -52,7 +52,7 @@ const getDefaultSelectedKey = (pathname: string) => {
   return pathname;
 };
 
-class MenusComponent extends React.Component<Props, {}> {
+class MenusComponent extends React.Component<Iprops, {}> {
 
   handleMenuClick = () => {
     const { onMenuClick } = this.props;
