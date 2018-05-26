@@ -8,7 +8,7 @@ export class HomeAction {
     this.home = home;
   }
 
-  @action changeTitle = () => {
+  @action public changeTitle = () => {
     this.home.title = 'Hello, world!';
   }
 }

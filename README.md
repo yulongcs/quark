@@ -1,19 +1,31 @@
 # react-sail
 
-## Introduce
-+ based on [create-react-app-typescript](https://github.com/wmonk/create-react-app-typescript)
-+ [react-router](https://github.com/ReactTraining/react-router)
-+ [mobx](https://github.com/mobxjs/mobx)
-+ [antd](https://ant.design)
-
-## Start
+## 准备工作
+### 安装依赖
 ```bash
-npm i
-npm start
+npm i react-router-dom antd axios mobx mobx-react react-loadable -S
+npm i @types/react-loadable @types/react-router-dom cross-env ts-import-plugin less less-loader -D
 ```
 
-## server side render
-[https://github.com/vdfor/react-sail/tree/dev-ssr](https://github.com/vdfor/react-sail/tree/dev-ssr)
+### 设置tsconfig.json
+在`tsconfig.json`的 compilerOptions 中配置 "experimentalDecorators": true 和 "noUnusedParameters": true
 
-## Tips
-+ if antd-mobile(2.x), you need setting `allowSyntheticDefaultImports` to `true` and `noImplicitAny` to `false` in tsconfig.json
+### 配置tslint.json
+rules增加以下规则:
+
+```json
+{
+  "eofline": true,
+  "member-access": false,
+  "no-console": [
+    false,
+    "log",
+    "error",
+    "debug",
+    "info",
+    "time",
+    "timeEnd",
+    "trace"
+  ]
+}
+```

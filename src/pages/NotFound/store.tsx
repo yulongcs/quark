@@ -1,9 +1,9 @@
-import { observable, action } from 'mobx';
+import { action, observable } from 'mobx';
 
 class Store {
-  @observable title = '404';
+  @observable public title = '404';
 
-  @action changeTitle = () => {
+  @action public changeTitle = () => {
     this.title = 'Not Found Page';
   }
 }

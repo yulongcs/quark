@@ -1,21 +1,21 @@
-import * as React from 'react';
+import { Button } from 'antd';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Button } from 'antd';
+import * as React from 'react';
 import fetchUser from './api';
+import { actions, states } from './store/index';
 import styles from './style.less';
-import { states, actions } from './store/index';
 
-interface User {
+interface IUser {
   id: string | number;
   name: string;
 }
 
-// const App: React.SFC<Props> = observer((props) 
+// const App: React.SFC<Iprops> = observer((Iprops) 
 @observer
 class HomeComponent extends React.Component<{}, {}> {
 
-  @observable user: User;
+  @observable user: IUser;
 
   queryUser = async () => {
     actions.home.changeTitle();
