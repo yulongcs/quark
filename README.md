@@ -1,31 +1,11 @@
 # react-sail
 
-## 准备工作
-### 安装依赖
-```bash
-npm i react-router-dom antd axios mobx mobx-react react-loadable -S
-npm i @types/react-loadable @types/react-router-dom cross-env ts-import-plugin less less-loader -D
-```
+react + antd + mobx的种子工程, 采用typescript编写。基于create-react-app(react-scripts-ts)生成的应用而深度定制。
 
-### 设置tsconfig.json
-在`tsconfig.json`的 compilerOptions 中配置 "experimentalDecorators": true 和 "noUnusedParameters": true
-
-### 配置tslint.json
-rules增加以下规则:
-
-```json
-{
-  "eofline": true,
-  "member-access": false,
-  "no-console": [
-    false,
-    "log",
-    "error",
-    "debug",
-    "info",
-    "time",
-    "timeEnd",
-    "trace"
-  ]
-}
-```
+## 特性
++ antd按需加载
++ 支持less module
++ 路由按需加载
++ 采用axios并进行封装作为前后端数据交互
++ 支持多页
++ ...

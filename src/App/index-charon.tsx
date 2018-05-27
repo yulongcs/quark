@@ -1,8 +1,8 @@
 import { Icon, Layout, Menu } from 'antd';
 import * as React from 'react';
 import { HashRouter as Router, Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { getDefaultOpen, getDefaultSelected, menus } from './helper';
 import styles from './index-charon.less';
-import menus from './menus.config';
 import RoutesComponent from './Routes';
 
 const { Header, Sider, Content } = Layout;
@@ -29,6 +29,10 @@ class AppComponent extends React.Component<IProps, IState> {
 
   render() {
 
+    const { location } = this.props;
+    const defaultSelected = getDefaultSelected(location);
+    const defaultOpen = getDefaultOpen(defaultSelected, menus);
+
     return (
       <Layout>
         <Sider
@@ -39,7 +43,7 @@ class AppComponent extends React.Component<IProps, IState> {
           width={256}
         >
           <div className={styles.logo} />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={[defaultSelected]} defaultOpenKeys={[defaultOpen]}>
             {menus.map(i => (
               i.sub ?
                 <Menu.SubMenu
