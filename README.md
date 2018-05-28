@@ -31,6 +31,11 @@ npm i @types/react-router-dom @types/react-loadable @types/echarts @types/lodash
 ## 风格
 如前所述，react-sail支持多页配置。目前内置的多页分别为多套风格的布局：默认风格采用antd的light主题、顶部导航布局；charon(冥卫一)风格采用antd的dark主题、侧边导航布局。
 
+## 主题设置
+[themes]('./themes')目录下配置主题，其中：
++ antd-theme -- antd自定义主题设置
++ sail-theme -- 非UI库自定义主题设置(开发中...)
+
 ## 计划
 + 响应式布局
 + 路由守卫

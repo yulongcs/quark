@@ -1,14 +1,19 @@
-/* config-overrides.js */
-
 /* tslint:disable */
+
+const fs = require('fs');
+const path = require('path');
 const tsImportPluginFactory = require('ts-import-plugin')
 const { getLoader, paths } = require("react-app-rewired");
 const rewireLess = require('react-app-rewire-less');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const lessToJs = require('less-vars-to-js');
 const _ = require('lodash');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // 多页应用入口文件数组
 const pages = ['index', 'index-charon'];
+
+// 获取antd自定义主题设置
+const antdThemer = lessToJs(fs.readFileSync(path.join(__dirname, './src/themes/antd-theme/index.less'), 'utf8'));
 
 module.exports = (config, env) => {
 
@@ -50,14 +55,14 @@ module.exports = (config, env) => {
   })(config.entry);
 
   // 多页应用output配置
-  if (env === 'development') {
+  if (env === 'development') { // 生产环境下默认已修改带hash的bundle.js
     config.output.filename = 'static/js/[name].bundle.js';
   }
 
   // customize theme
   config = rewireLess.withLoaderOptions({
     // brand-primary if antd-mobile
-    modifyVars: { "@primary-color": "#1DA57A" },
+    modifyVars: antdThemer,
   })(config, env);
 
   // less-modules
@@ -82,8 +87,6 @@ module.exports = (config, env) => {
         {
           loader: require.resolve('postcss-loader'),
           options: {
-            // Necessary for external CSS imports to work
-            // https://github.com/facebookincubator/create-react-app/issues/2677
             ident: 'postcss',
             plugins: () => [
               require('postcss-flexbugs-fixes'),
