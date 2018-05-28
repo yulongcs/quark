@@ -24,7 +24,7 @@ npm i @types/react-router-dom @types/react-loadable @types/echarts @types/lodash
 + mobx作为状态管理工具，store按功能组织
 + react-loadable实现组件级别(包含路由)的按需加载
 + axios并进行封装用于前后端数据交互
-+ 支持less module
++ 支持less module(文件名称限定为 [name].module.less)
 + 支持多页
 + ...
 

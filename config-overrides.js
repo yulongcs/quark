@@ -64,7 +64,8 @@ module.exports = (config, env) => {
   config.module.rules[1].oneOf.unshift(
     {
       test: /\.less$/,
-      // exclude: /node_modules|antd-mobile\.css/,
+      // 需开启的less-module以.module结尾
+      include: /\.module\.less/,
       exclude: /node_modules|antd\.less/,
       use: [
         require.resolve('style-loader'),

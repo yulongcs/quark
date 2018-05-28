@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import * as React from 'react';
 import fetchUser from './api';
 import { actions, states } from './store/index';
-import styles from './style.less';
+import styles from './style.module.less';
 
 interface IUser {
   id: string | number;

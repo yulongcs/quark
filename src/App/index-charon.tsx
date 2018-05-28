@@ -2,7 +2,7 @@ import { Icon, Layout, Menu } from 'antd';
 import * as React from 'react';
 import { HashRouter as Router, Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { getDefaultOpen, getDefaultSelected, menus } from './helper';
-import styles from './index-charon.less';
+import styles from './index-charon.module.less';
 import RoutesComponent from './Routes';
 
 const { Header, Sider, Content } = Layout;
