@@ -1,6 +1,8 @@
-import { Icon, Layout, Menu } from 'antd';
+import { Avatar, Icon, Layout, Menu } from 'antd';
 import * as React from 'react';
 import { HashRouter as Router, Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import rootStore from '../stores/rootStore';
+import { getCredentials, storage } from '../utils/helper';
 import { getDefaultOpen, getDefaultSelected, menus } from './helper';
 import styles from './index-charon.module.less';
 import RoutesComponent from './Routes';
@@ -27,11 +29,18 @@ class AppComponent extends React.Component<IProps, IState> {
     });
   }
 
+  handleLogout = () => {
+    storage.removeItem('credentials');
+    rootStore.setAuthed(false);
+  }
+
   render() {
 
     const { location } = this.props;
     const defaultSelected = getDefaultSelected(location);
     const defaultOpen = getDefaultOpen(defaultSelected, menus);
+
+    const loggedInUser = getCredentials('user');
 
     return defaultSelected !== '/login' ?
       (
@@ -76,16 +85,32 @@ class AppComponent extends React.Component<IProps, IState> {
                 onClick={this.toggle}
               />
               <div className={styles.right}>
-                <a target="_blank" href="https://github.com/vdfor/react-sail" className={styles.action}>
-                  <Icon className={styles.icon} type={'github'} />
-                </a>
+                <Menu mode="horizontal" selectedKeys={['']}>
+                  <Menu.Item key={0}><a target="_blank" href="https://github.com/vdfor/react-sail"><Icon className={styles.icon} type={'github'} /></a></Menu.Item>
+                  <Menu.SubMenu
+                    key={1}
+                    style={{ lineHeight: '64px' }}
+                    title={[
+                      <Avatar key={1.1} style={{ background: '#f56a00' }}>
+                        {loggedInUser && loggedInUser.username ? loggedInUser.username.substring(0, 1).toUpperCase() : ''}
+                      </Avatar>,
+                      <span key={1.2} style={{ paddingLeft: '5px' }}>{loggedInUser && loggedInUser.username || ''}</span>
+                    ]}
+                  >
+                    <Menu.Item key={2}>个人中心</Menu.Item>
+                    <Menu.Divider />
+                    <Menu.Item key={3} onClick={this.handleLogout}>
+                      退出登录
+                    </Menu.Item>
+                  </Menu.SubMenu>
+                </Menu>
               </div>
             </Header>
             <Content style={{ margin: '24px 16px 0' }}>
               <RoutesComponent />
             </Content>
           </Layout>
-        </Layout>
+        </Layout >
       ) : <Layout><RoutesComponent /></Layout>;
   }
 }

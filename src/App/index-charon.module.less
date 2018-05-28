@@ -4,13 +4,6 @@
   background: #fff;
   padding: 0;
 
-  .action {
-    color: @text-color;
-  }
-  .action:hover {
-    color: @text-color;
-  }
-
   .icon {
     font-size: 18px;
     line-height: 64px;
@@ -27,6 +20,13 @@
 .right {
   float: right;
   height: 100%;
+  margin-right: 20px;
+  
+  :global {
+    .ant-menu-item, .ant-menu-submenu, .ant-menu-submenu-title {
+      padding: 0;
+    }
+  }
 }
 
 .logo {
