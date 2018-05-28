@@ -1,19 +1,17 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import { Redirect, Route } from 'react-router-dom';
+import rootStore from '../stores/rootStore';
+import { getCredentials } from '../utils/helper';
 
 const PrivateRoute = observer(({ component: Component, exact = false, path }) => {
-  // const { authed } = rootStore;
+  const { authed } = rootStore;
+  // storage credentials
+  const credentials = getCredentials();
 
-  // storage access_token
-  // const storageCredential = localStorage.getItem('credentials');
-  // const credentials = storageCredential ? JSON.parse(storageCredential) : null;
+  const isAuthenticated =  credentials && credentials.user && credentials.access_token && authed;
 
-  // const isAuthenticated =  credentials && credentials.access_token && authed;
-
-  const isAuthenticated = true;
-
-/* tslint:disable */ 
+  /* tslint:disable */
   return (
     <Route
       exact={exact}
@@ -37,5 +35,5 @@ const PrivateRoute = observer(({ component: Component, exact = false, path }) =>
   );
 });
 
-/* tslint:enable */ 
+/* tslint:enable */
 export default PrivateRoute;

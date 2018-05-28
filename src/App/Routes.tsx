@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as Loadable from 'react-loadable';
 import { Redirect, Route, Switch } from 'react-router-dom';
-// import PrivateRoute from '../common/PrivateRoute';
+import PrivateRoute from '../components/PrivateRoute';
 import LoadingComponent from '../pages/Loading';
 
 const getAsyncComponent = (entry: any) => {
@@ -16,8 +16,9 @@ const getAsyncComponent = (entry: any) => {
 const RoutesComponent = () => (
   <Switch>
     <Route key="default" exact={true} path="/"><Redirect to={{ pathname: '/home' }} /></Route>
-    <Route key="home" path="/home" component={getAsyncComponent(() => import('../pages/Home/index'))} />
-    <Route key="echarts" path="/echarts" component={getAsyncComponent(() => import('../pages/Echarts/index'))} />
+    <PrivateRoute key="home" path="/home" component={getAsyncComponent(() => import('../pages/Home/index'))} />
+    <PrivateRoute key="echarts" path="/echarts" component={getAsyncComponent(() => import('../pages/Echarts/index'))} />
+    <Route key="login" path="/login" component={getAsyncComponent(() => import('../pages/Login/index'))} />
     {/* <PrivateRoute key="welcome" path="/welcome" component={getAsyncComponent(() => import('../pages/Welcome/index'))} /> */}
     <Route key="not-found" path="*" component={getAsyncComponent(() => import('../pages/NotFound/index'))} />
   </Switch>

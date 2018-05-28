@@ -3,8 +3,8 @@
  */
 import { notification } from 'antd';
 import axios, { AxiosRequestConfig } from 'axios';
-import { getCredentials } from './helper';
-// import rootStore from '../stores/RootStore';
+import rootStore from '../stores/rootStore';
+import { getCredentials, storage } from './helper';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -42,16 +42,16 @@ const request = async (url: string, options: AxiosRequestConfig = {}): Promise<a
     const res = await axios({ ...newOptions, ...{ url } });
     return res.data;
   } catch (error) {
-    const { status, statusText, data: errorText } = error.response;
+    const { status, statusText } = error.response;
 
     notification.error({
       description: codeMessage[status] || statusText,
       message: `http请求错误 ${status} ${url}`
     });
 
-    if (status === 401 && errorText === 'Unauthorized') {
-      localStorage.removeItem('credentials');
-      // rootStore.setAuthed(false);
+    if (status === 401) {
+      storage.removeItem('credentials');
+      rootStore.setAuthed(false);
     }
 
     throw error;

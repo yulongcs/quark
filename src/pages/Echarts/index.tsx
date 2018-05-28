@@ -1,14 +1,12 @@
-// 引入柱状图
+// 引入echarts柱状图
 import 'echarts/lib/chart/bar';
-// 引入标题组件
+// 引入echarts标题组件
 import 'echarts/lib/component/title';
-// 引入提示框组件
+// 引入echarts提示框组件
 import 'echarts/lib/component/tooltip';
-/* echarts start */
-// 引入主模块
+// echarts引入主模块
 import * as echarts from 'echarts/lib/echarts';
 import * as React from 'react';
-/* echarts end */
 
 class EchartsComponent extends React.Component<{}, {}> {
 

@@ -41,7 +41,7 @@ module.exports = (config, env) => {
     // 确认入口tsx在entry数组的位置
     const entryIndex = entry.indexOf(paths.appIndexJs);
 
-    pages.forEach(i => {
+    _.forEach(pages, i => {
       if (i === 'index') {
         entryPages[i] = entry;
       } else {
@@ -63,7 +63,7 @@ module.exports = (config, env) => {
   config.module.rules[1].oneOf = ((rules) => {
     const addArr = ['less-module', 'customize-antd-theme' ];
     const newRules = _.cloneDeep(rules);
-    addArr.forEach(i => {
+    _.forEach(addArr, i => {
       const opts = {
         test: /\.less$/,
         use: [
@@ -131,7 +131,7 @@ module.exports = (config, env) => {
 
     const newPlugins = _.cloneDeep(plugins);
     newPlugins.splice(htmlIndex, 1);
-    pages.forEach((i, index) => {
+    _.forEach(pages, (i, index) => {
       const htmlOpts = _.cloneDeep(plugins[htmlIndex].options);
       htmlOpts.chunks = [i];
       htmlOpts.filename = `${i}.html`;

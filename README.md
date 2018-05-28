@@ -26,6 +26,7 @@ npm i @types/react-router-dom @types/react-loadable @types/echarts @types/lodash
 + axios并进行封装用于前后端数据交互
 + 支持less module(文件名称限定为 [name].module.less)
 + 支持多页
++ 权限控制与路由守卫
 + ...
 
 ## 风格
@@ -38,7 +39,6 @@ npm i @types/react-router-dom @types/react-loadable @types/echarts @types/lodash
 
 ## 计划
 + 响应式布局
-+ 路由守卫
 + PWA
 + 在线主题切换
 + 支持服务端渲染
