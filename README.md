@@ -9,7 +9,7 @@ create-react-app react-sail --scripts-version=react-scripts-ts
 cd react-sail
 # 安装依赖
 npm i react-router-dom react-loadable antd axios echarts mobx mobx-react lodash enquire-js -S
-npm i @types/react-router-dom @types/react-loadable @types/echarts @types/lodash react-app-rewired react-app-rewire-less cross-env ts-import-plugin -D
+npm i @types/react-router-dom @types/react-loadable @types/echarts @types/lodash react-app-rewired less-vars-to-js less less-loader cross-env ts-import-plugin -D
 ```
 
 ### 配置

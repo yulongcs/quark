@@ -4,7 +4,6 @@ const fs = require('fs');
 const path = require('path');
 const tsImportPluginFactory = require('ts-import-plugin')
 const { getLoader, paths } = require("react-app-rewired");
-const rewireLess = require('react-app-rewire-less');
 const lessToJs = require('less-vars-to-js');
 const _ = require('lodash');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -51,6 +50,7 @@ module.exports = (config, env) => {
         entryPages[i] = defaultEntry;
       }
     });
+
     return entryPages;
   })(config.entry);
 
@@ -59,55 +59,63 @@ module.exports = (config, env) => {
     config.output.filename = 'static/js/[name].bundle.js';
   }
 
-  // customize theme
-  config = rewireLess.withLoaderOptions({
-    // brand-primary if antd-mobile
-    modifyVars: antdThemer,
-  })(config, env);
+  // less-module and customize-antd-theme
+  config.module.rules[1].oneOf = ((rules) => {
+    const addArr = ['less-module', 'customize-antd-theme' ];
+    const newRules = _.cloneDeep(rules);
+    addArr.forEach(i => {
+      const opts = {
+        test: /\.less$/,
+        use: [
+          require.resolve('style-loader'),
+          {
+            loader: require.resolve('css-loader'),
+            options: {
+              importLoaders: 1,
+              minimize: true,
+              // sourceMap: true,
+            }
+          },
+          {
+            loader: require.resolve('postcss-loader'),
+            options: {
+              ident: 'postcss',
+              plugins: () => [
+                require('postcss-flexbugs-fixes'),
+                autoprefixer({
+                  browsers: [
+                    '>1%',
+                    'last 4 versions',
+                    'Firefox ESR',
+                    'not ie < 9', // React doesn't support IE8 anyway
+                  ],
+                  flexbox: 'no-2009',
+                })
+              ]
+            }
+          },
+          {
+            loader: require.resolve('less-loader'),
+            options: {
+              javascriptEnabled: true
+            }
+          }
+        ]
+      };
+      if (i === 'less-module') {
+        opts.include = /\.module\.less/; // 需开启的less-module以.module结尾
+        opts.exclude = /node_modules/;
+        opts.use[1].options.modules = true;
+        opts.use[1].options.localIdentName = '[local]__[hash:base64:5]';
+      } else { // 'customize-antd-theme'
+        opts.exclude = /\.module\.less/;
+        opts.use[3].options.modifyVars = antdThemer;
+      }
+      newRules.unshift(opts);
+    });
 
-  // less-modules
-  config.module.rules[1].oneOf.unshift(
-    {
-      test: /\.less$/,
-      // 需开启的less-module以.module结尾
-      include: /\.module\.less/,
-      exclude: /node_modules|antd\.less/,
-      use: [
-        require.resolve('style-loader'),
-        {
-          loader: require.resolve('css-loader'),
-          options: {
-            importLoaders: 1,
-            minimize: true,
-            // sourceMap: true,
-            modules: true,
-            localIdentName: '[local]__[hash:base64:5]'
-          }
-        },
-        {
-          loader: require.resolve('postcss-loader'),
-          options: {
-            ident: 'postcss',
-            plugins: () => [
-              require('postcss-flexbugs-fixes'),
-              autoprefixer({
-                browsers: [
-                  '>1%',
-                  'last 4 versions',
-                  'Firefox ESR',
-                  'not ie < 9', // React doesn't support IE8 anyway
-                ],
-                flexbox: 'no-2009',
-              })
-            ]
-          }
-        },
-        {
-          loader: require.resolve('less-loader')
-        }
-      ]
-    }
-  );
+    return newRules;
+  })(config.module.rules[1].oneOf);
 
   // 多页应用plugins配置
   config.plugins = ((plugins) => {
@@ -129,7 +137,7 @@ module.exports = (config, env) => {
       htmlOpts.filename = `${i}.html`;
       newPlugins.splice(index + htmlIndex, 0, new HtmlWebpackPlugin(htmlOpts));
     });
-  
+
     return newPlugins;
   })(config.plugins);
 

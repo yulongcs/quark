@@ -48,6 +48,8 @@
     "@types/react-loadable": "^5.4.0",
     "@types/react-router-dom": "^4.2.6",
     "cross-env": "^5.1.6",
+    "less": "^3.0.4",
+    "less-loader": "^4.1.0",
     "less-vars-to-js": "^1.2.1",
     "react-app-rewire-less": "^2.1.1",
     "react-app-rewired": "^1.5.2",
