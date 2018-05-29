@@ -3,7 +3,7 @@
  */
 import { notification } from 'antd';
 import axios, { AxiosRequestConfig } from 'axios';
-import rootStore from '../stores/rootStore';
+import rootStore from '../rootStore';
 import { getCredentials, storage } from './helper';
 
 const codeMessage = {

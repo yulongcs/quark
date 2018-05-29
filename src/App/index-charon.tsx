@@ -1,7 +1,7 @@
 import { Avatar, Icon, Layout, Menu } from 'antd';
 import * as React from 'react';
 import { HashRouter as Router, Link, RouteComponentProps, withRouter } from 'react-router-dom';
-import rootStore from '../stores/rootStore';
+import rootStore from '../rootStore';
 import { getCredentials, storage } from '../utils/helper';
 import { getDefaultOpen, getDefaultSelected, menus } from './helper';
 import styles from './index-charon.module.less';

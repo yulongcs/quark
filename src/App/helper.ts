@@ -1,3 +1,6 @@
+import * as Loadable from 'react-loadable';
+import LoadingComponent from '../pages/Loading';
+
 export const menus = [
   {
     icon: 'home',
@@ -53,4 +56,13 @@ export const getDefaultOpen = (s: string, menuArr: any[]) => {
     }
   }
   return str;
+};
+
+export const getAsyncComponent = (entry: any) => {
+  return Loadable({
+    delay: 200, // 200ms
+    loader: entry,
+    loading: LoadingComponent,
+    timeout: 10000 // 10s
+  });
 };

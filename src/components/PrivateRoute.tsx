@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import rootStore from '../stores/rootStore';
+import rootStore from '../rootStore';
 import { getCredentials } from '../utils/helper';
 
 const PrivateRoute = observer(({ component: Component, exact = false, path }) => {

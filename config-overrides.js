@@ -9,7 +9,7 @@ const _ = require('lodash');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // 多页应用入口文件数组
-const pages = ['index', 'index-charon'];
+const pages = ['index', 'index-charon', 'index-venus'];
 
 // 获取antd自定义主题设置
 const antdThemer = lessToJs(fs.readFileSync(path.join(__dirname, './src/themes/antd-theme/index.less'), 'utf8'));

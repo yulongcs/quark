@@ -1,6 +1,6 @@
 import { Button, Checkbox, Form, Icon, Input, message } from 'antd';
 import * as React from 'react';
-import rootStore from '../../stores/rootStore';
+import rootStore from '../../rootStore';
 import { storage } from '../../utils/helper';
 import styles from './style.module.less';
 
