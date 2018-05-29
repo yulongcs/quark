@@ -5,6 +5,8 @@ import * as ReactDOM from 'react-dom';
 import App from './App/index';
 import registerServiceWorker from './registerServiceWorker';
 
+console.log(process.env);
+
 ReactDOM.render(
   <LocaleProvider locale={zhCN}>
     <App />
