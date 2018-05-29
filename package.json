@@ -23,6 +23,7 @@
     "axios": "^0.18.0",
     "echarts": "^4.1.0",
     "enquire-js": "^0.2.1",
+    "express": "^4.16.3",
     "lodash": "^4.17.10",
     "mobx": "^4.3.0",
     "mobx-react": "^5.1.2",
@@ -35,11 +36,13 @@
   "scripts": {
     "start": "cross-env PORT=8182 react-app-rewired start --scripts-version react-scripts-ts",
     "build": "cross-env PUBLIC_URL=/ react-app-rewired build --scripts-version react-scripts-ts",
+    "start:server": "cross-env ts-node --project ./server/tsconfig.json ./server/src/index.ts",
     "test": "react-app-rewired test --env=jsdom --scripts-version react-scripts-ts",
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
     "@types/echarts": "0.0.13",
+    "@types/express": "^4.11.1",
     "@types/jest": "^22.2.3",
     "@types/lodash": "^4.14.109",
     "@types/node": "^10.1.2",
@@ -54,6 +57,7 @@
     "react-app-rewire-less": "^2.1.1",
     "react-app-rewired": "^1.5.2",
     "ts-import-plugin": "^1.4.5",
+    "ts-node": "^6.0.5",
     "typescript": "^2.8.3"
   }
 }
