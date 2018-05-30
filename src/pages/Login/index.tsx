@@ -2,6 +2,7 @@ import { Button, Checkbox, Form, Icon, Input, message } from 'antd';
 import * as React from 'react';
 import rootStore from '../../rootStore';
 import { storage } from '../../utils/helper';
+import logo from './logo.svg';
 import styles from './style.module.less';
 
 const FormItem = Form.Item;
@@ -69,6 +70,7 @@ class LoginComponent extends React.Component<IProps, IStates> {
     return (
       <div className={styles.container}>
         <div className={styles.top}>
+          <img src={logo} className={styles.logo} alt="logo" />
           <span className={styles.title}>react sail</span>
         </div>
         <div className={styles.login}>
