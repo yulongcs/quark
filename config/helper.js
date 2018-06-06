@@ -84,6 +84,8 @@ const getExtra = (nodeEnv) => {
                     'last 4 versions',
                     'Firefox ESR',
                     'not ie < 9', // React doesn't support IE8 anyway
+                    // 'iOS >= 7',
+                    // 'Android >= 4'
                   ],
                   flexbox: 'no-2009',
                 }),
