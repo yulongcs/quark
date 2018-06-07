@@ -3,8 +3,8 @@ import { History } from 'history';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import { Link, Router } from 'react-router-dom';
-import { authStore } from '../stores';
-import { getCredentials, storage } from '../utils/helper';
+import { authStore, setUnauthenticated } from '../stores';
+import { getCredentials } from '../utils/helper';
 import { getDefaultOpen, getDefaultSelected, menus } from './helper';
 import styles from './index-charon.module.less';
 import Routes from './Routes';
@@ -37,8 +37,7 @@ class App extends React.Component<IProps, IState> {
   }
 
   handleLogout = () => {
-    storage.removeItem('credentials');
-    // rootStore.setAuthed(false);
+    setUnauthenticated();
   }
 
   render() {

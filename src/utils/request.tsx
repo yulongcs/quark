@@ -3,8 +3,8 @@
  */
 import { notification } from 'antd';
 import axios, { AxiosRequestConfig } from 'axios';
-import { routeStore } from '../stores';
-import { getCredentials, storage } from './helper';
+import { setUnauthenticated } from '../stores';
+import { getCredentials } from './helper';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -50,9 +50,7 @@ const request = async (url: string, options: AxiosRequestConfig = {}): Promise<a
     });
 
     if (status === 401) {
-      storage.removeItem('credentials');
-      // rootStore.setAuthed(false);
-      routeStore.goPage('/login');
+      setUnauthenticated();
     }
 
     throw error;

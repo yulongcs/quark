@@ -1,5 +1,5 @@
 import { action, observable } from 'mobx';
-// import { getCredentials } from '../utils/helper';
+// import { storage } from '../utils/helper';
 
 class AuthStore {
 
