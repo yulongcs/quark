@@ -6,9 +6,8 @@ import * as React from 'react';
 import { BrowserRouter as Router, RouteComponentProps, withRouter } from 'react-router-dom';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { getAsyncComponent } from './helper';
-import MenusComponent from './Menus';
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
 interface Iprops extends RouteComponentProps<any>, React.Props<any> {
   // rootStore: RootStore;
@@ -32,16 +31,8 @@ class AppComponent extends React.Component<Iprops, {}> {
 
   render() {
 
-    const headerStyle = !this.isMobile ? { height: '64px', lineHeight: '64px' } : { height: '48px', lineHeight: '48px' };
-
     return (
       <Layout>
-        <Header style={{ padding: 0, background: '#fff', boxShadow: '0 2px 8px #f0f1f2', zIndex: 1, ...headerStyle }}>
-          <MenusComponent
-            pathname={this.props.location.pathname}
-            style={{ ...headerStyle }}
-          />
-        </Header>
         <Content style={{ background: '#fff', padding: '24px' }}>
           <Switch>
             <Route key="default" exact={true} path="/"><Redirect to={{ pathname: '/home' }} /></Route>

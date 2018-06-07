@@ -1,68 +1,22 @@
-import { Button, Checkbox, Form, Icon, Input, message } from 'antd';
+import { Form } from 'antd';
+import { observer } from 'mobx-react';
 import * as React from 'react';
-import rootStore from '../../rootStore';
-import { storage } from '../../utils/helper';
+import { FormExtra, FormInput, FormSubmit } from './components';
 import logo from './logo.svg';
+import Store from './Store';
 import styles from './style.module.less';
 
-const FormItem = Form.Item;
+@observer
+class Login extends React.Component<{}> {
+  store: Store;
 
-interface IProps {
-  history: { [key: string]: string | any };
-}
-
-interface IStates {
-  username: string;
-  password: string;
-  remember: boolean;
-}
-
-// @observer
-class LoginComponent extends React.Component<IProps, IStates> {
-
-  // field is not touched at the beginning
-  usernameFieldTouched = false;
-  passwordFieldTouched = false;
-
-  state = {
-    password: '',
-    remember: true,
-    username: ''
-  };
-
-  handleInputChange = (id: 'username' | 'password' | 'remember') => (e: any) => {
-    if (id === 'remember') {
-      this.setState({ remember: e.target.checked });
-      return;
-    }
-
-    if (!this[`${id}FieldTouched`]) {
-      this[`${id}FieldTouched`] = true;
-    }
-    const updateObj = {};
-    updateObj[id] = e.target.value
-    this.setState(updateObj);
-  }
-
-  handleSubmit = (e: any) => {
-    e.preventDefault();
-    const { username, password, remember } = this.state;
-    if (username.trim() === 'admin' && password === 'admin') {
-      const credentials = JSON.stringify({
-        access_token: 'test-token',
-        user: { id: 1, username: username.trim() }
-      });
-      storage.setItem(remember ? 'local' : 'session', 'credentials', credentials);
-      rootStore.setAuthed(true);
-      this.props.history.push('/');
-      return;
-    }
-    message.error('用户名或密码错误');
+  constructor(props: {}) {
+    super(props);
+    this.store = new Store();
   }
 
   render() {
-    const { usernameFieldTouched, passwordFieldTouched, state } = this;
-    const { username, password, remember } = state;
+    const { usernameFieldTouched, passwordFieldTouched, username, password, remember, handleSubmit, handleInputChange } = this.store;
 
     const usernameError = !username.trim() && usernameFieldTouched;
     const passwordError = !password && passwordFieldTouched;
@@ -74,52 +28,31 @@ class LoginComponent extends React.Component<IProps, IStates> {
           <span className={styles.title}>react sail</span>
         </div>
         <div className={styles.login}>
-          <Form onSubmit={this.handleSubmit} className={styles.form}>
-            <FormItem
-              validateStatus={usernameError ? 'error' : 'success'}
-              help={usernameError ? 'Please input your username!' : ''}
-            >
-              <Input
-                id="username"
-                value={username}
-                onChange={this.handleInputChange('username')}
-                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder="admin"
-              />
-            </FormItem>
-            <FormItem
-              validateStatus={passwordError ? 'error' : 'success'}
-              help={passwordError ? 'Please input your password!' : ''}
-            >
-              <Input
-                id="password"
-                value={password}
-                onChange={this.handleInputChange('password')}
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="password"
-                placeholder="admin"
-              />
-            </FormItem>
-            <FormItem>
-              <Checkbox
-                checked={remember}
-                onChange={this.handleInputChange('remember')}
-              >
-                Remember me
-              </Checkbox>
-              <a className={styles.forgot}>Forgot password</a>
-            </FormItem>
-            <FormItem>
-              <Button
-                disabled={!username.trim() || !password}
-                type="primary"
-                size="large"
-                htmlType="submit"
-                className={styles.btn}
-              >
-                Log in
-              </Button>
-            </FormItem>
+          <Form onSubmit={handleSubmit} className={styles.form}>
+            <FormInput
+              id="username"
+              value={username}
+              validateError={usernameError}
+              validateTips="Please input your username!"
+              icon="user"
+              placeholder="admin"
+              handleInputChange={handleInputChange}
+            />
+            <FormInput
+              id="password"
+              value={password}
+              validateError={passwordError}
+              validateTips="Please input your password!"
+              icon="lock"
+              type="password"
+              placeholder="admin"
+              handleInputChange={handleInputChange}
+            />
+            <FormExtra
+              checked={remember}
+              handleInputChange={handleInputChange}
+            />
+            <FormSubmit disabled={!username.trim() || !password} />
           </Form>
         </div>
       </div>
@@ -128,4 +61,4 @@ class LoginComponent extends React.Component<IProps, IStates> {
 
 }
 
-export default LoginComponent;
+export default Login;

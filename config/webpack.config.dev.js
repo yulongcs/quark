@@ -100,7 +100,7 @@ module.exports = {
                       before: [tsImportPluginFactory({
                         libraryDirectory: 'es',
                         libraryName: 'antd',
-                        style: 'true',
+                        style: true,
                       })]
                     })
                   },

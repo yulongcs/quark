@@ -32,10 +32,9 @@ export const menus = [
   }
 ];
 
-export const getDefaultSelected = (location: { [key: string]: string | any }) => {
+export const getDefaultSelected = (str: string) => {
   const initStr = '/home';
-  const pathname = location.pathname;
-  return pathname === '/' ? initStr : pathname;
+  return str === '/' ? initStr : str;
 };
 
 export const getDefaultOpen = (s: string, menuArr: any[]) => {

@@ -4,10 +4,13 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import App from './App/index-charon';
 import registerServiceWorker from './registerServiceWorker';
+import history from './utils/history';
+
+// console.log(root);
 
 ReactDOM.render(
   <LocaleProvider locale={zhCN}>
-    <App />
+    <App history={history} />
   </LocaleProvider>,
   document.getElementById('root') as HTMLElement
 );

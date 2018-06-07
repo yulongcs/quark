@@ -3,7 +3,7 @@
  */
 import { notification } from 'antd';
 import axios, { AxiosRequestConfig } from 'axios';
-import rootStore from '../rootStore';
+import { routeStore } from '../stores';
 import { getCredentials, storage } from './helper';
 
 const codeMessage = {
@@ -51,7 +51,8 @@ const request = async (url: string, options: AxiosRequestConfig = {}): Promise<a
 
     if (status === 401) {
       storage.removeItem('credentials');
-      rootStore.setAuthed(false);
+      // rootStore.setAuthed(false);
+      routeStore.goPage('/login');
     }
 
     throw error;
