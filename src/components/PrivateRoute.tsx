@@ -41,6 +41,7 @@
 
 import * as React from 'react';
 import { Redirect, Route } from 'react-router-dom';
+import { authStore } from '../stores';
 import { getCredentials } from '../utils/helper';
 
 interface IProps {
@@ -53,8 +54,7 @@ const PrivateRoute: React.SFC<IProps> = ({ component: Component, exact = false, 
   // storage credentials
   const credentials = getCredentials();
 
-  const isAuthenticated =  credentials && credentials.user && credentials.access_token;
-  // const isAuthenticated = true;
+  const isAuthenticated = credentials && credentials.user && credentials.access_token && authStore.authed;
 
   /* tslint:disable */
   return (

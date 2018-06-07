@@ -42,7 +42,6 @@ class App extends React.Component<IProps, IState> {
   }
 
   render() {
-    console.log(authStore.authed);
     const hash = location.hash.replace(/\#/g, '');
     const defaultSelected = getDefaultSelected(hash);
     const defaultOpen = getDefaultOpen(defaultSelected, menus);
@@ -51,7 +50,7 @@ class App extends React.Component<IProps, IState> {
 
     return <Router history={this.props.history}>
       {
-        defaultSelected !== '/login' ?
+        authStore.authed ?
           (
             <Layout>
               <Sider

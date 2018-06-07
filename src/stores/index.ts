@@ -8,6 +8,8 @@ class RootStore {
   routeStore: RouteStore;
 
   init(h: History) {
+    // const credentials = getCredentials();
+    // const isAuthenticated = credentials && credentials.user && credentials.access_token;
     this.authStore = new AuthStore();
     this.routeStore = new RouteStore(h);
   }

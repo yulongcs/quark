@@ -17,4 +17,5 @@ ReactDOM.render(
   </LocaleProvider>,
   document.getElementById('root') as HTMLElement
 );
+
 registerServiceWorker();

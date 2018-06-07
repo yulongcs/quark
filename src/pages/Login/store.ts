@@ -1,6 +1,6 @@
 import { message } from 'antd';
 import { action, observable } from 'mobx';
-import { routeStore } from '../../stores';
+import { authStore, routeStore } from '../../stores';
 import { storage } from '../../utils/helper';
 
 class LoginStore {
@@ -43,6 +43,7 @@ class LoginStore {
         user: { id: 1, username: username.trim() }
       });
       storage.setItem(remember ? 'local' : 'session', 'credentials', credentials);
+      authStore.setAuthed(true);
       routeStore.goPage('/');
       return;
     }
