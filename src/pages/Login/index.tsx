@@ -2,8 +2,8 @@ import { Form } from 'antd';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import { FormExtra, FormInput, FormSubmit } from './components';
-import Store from './LoginStore';
 import logo from './logo.svg';
+import Store from './Store';
 import styles from './style.module.less';
 
 @observer
