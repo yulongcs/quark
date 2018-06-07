@@ -34,8 +34,8 @@ class LoginStore {
     this[id] = e.target.value;
   }
 
-  @action handleSubmit = (e: any) => {
-    e.preventDefault();
+  @action handleSubmit = () => {
+    // e.preventDefault();
     const { username, password, remember } = this;
     if (username.trim() === 'admin' && password === 'admin') {
       const credentials = JSON.stringify({

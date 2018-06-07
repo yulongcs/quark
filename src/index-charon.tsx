@@ -6,7 +6,10 @@ import App from './App/index-charon';
 import registerServiceWorker from './registerServiceWorker';
 import history from './utils/history';
 
-// console.log(root);
+// 防止表单提交导致页面刷新的统一处理
+document.addEventListener('submit', (e) => {
+  e.preventDefault();
+});
 
 ReactDOM.render(
   <LocaleProvider locale={zhCN}>
