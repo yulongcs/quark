@@ -1,4 +1,4 @@
-import { Avatar, Icon, Layout, Menu } from 'antd';
+import { Avatar, Dropdown, Icon, Layout, Menu } from 'antd';
 import { History } from 'history';
 import { observer } from 'mobx-react';
 import * as React from 'react';
@@ -92,25 +92,21 @@ class App extends React.Component<IProps, IState> {
                     onClick={this.toggle}
                   />
                   <div className={styles.right}>
-                    <Menu mode="horizontal" selectedKeys={['']}>
-                      <Menu.Item key={0}><a target="_blank" href="https://github.com/vdfor/react-sail"><Icon className={styles.icon} type={'github'} /></a></Menu.Item>
-                      <Menu.SubMenu
-                        key={1}
-                        style={{ lineHeight: '64px' }}
-                        title={[
-                          <Avatar key={1.1} style={{ background: '#f56a00' }}>
-                            {loggedInUser && loggedInUser.username ? loggedInUser.username.substring(0, 1).toUpperCase() : ''}
-                          </Avatar>,
-                          <span key={1.2} style={{ paddingLeft: '5px' }}>{loggedInUser && loggedInUser.username || ''}</span>
-                        ]}
-                      >
+                    <a className={styles.item} target="_blank" href="https://github.com/vdfor/react-sail"><Icon type={'github'} /></a>
+                    <Dropdown overlay={
+                      <Menu>
                         <Menu.Item key={2}>个人中心</Menu.Item>
                         <Menu.Divider />
-                        <Menu.Item key={3} onClick={this.handleLogout}>
-                          退出登录
-                    </Menu.Item>
-                      </Menu.SubMenu>
-                    </Menu>
+                        <Menu.Item key={3} onClick={this.handleLogout}>退出登录</Menu.Item>
+                      </Menu>
+                    }>
+                      <a className={styles.item}>
+                        <Avatar style={{ background: '#f56a00' }}>
+                          {loggedInUser && loggedInUser.username ? loggedInUser.username.substring(0, 1).toUpperCase() : ''}
+                        </Avatar>
+                        <span style={{ paddingLeft: '5px' }}>{loggedInUser && loggedInUser.username || ''}</span>
+                      </a>
+                    </Dropdown>
                   </div>
                 </Header>
                 <Content style={{ margin: '24px 16px 0' }}>

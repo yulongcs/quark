@@ -10,6 +10,7 @@
     padding: 0 24px;
     cursor: pointer;
     transition: color .3s;
+    color: @text-color;
   }
   
   .icon:hover {
@@ -21,12 +22,19 @@
   float: right;
   height: 100%;
   margin-right: 20px;
-  
-  :global {
-    .ant-menu-item, .ant-menu-submenu, .ant-menu-submenu-title {
-      padding: 0;
-    }
+
+  .item {
+    font-size: 18px;
+    margin: 0 24px 0 0;
+    line-height: 64px;
+    color: @text-color;
+    float: left;
   }
+
+  .item:hover {
+    color: @primary-color;
+  }
+  
 }
 
 .logo {
