@@ -1,51 +1,34 @@
-import { Avatar, Dropdown, Icon, Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 import { History } from 'history';
 import { observer } from 'mobx-react';
 import * as React from 'react';
-import { Link, Router } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { authStore, setUnauthenticated } from '../stores';
-import { getCredentials } from '../utils/helper';
-import { getDefaultOpen, getDefaultSelected, menus } from './helper';
+import AppHeader from './components/index-charon/AppHeader';
+import AppMenu from './components/index-charon/AppMenu';
+import Routes from './components/Routes';
 import styles from './index-charon.module.less';
-import Routes from './Routes';
+import Store from './Store';
 
-const { Header, Sider, Content } = Layout;
-
-// interface IProps extends RouteComponentProps<any>, React.Props<any> {
-//   // rootStore: RootStore;
-// }
+const { Sider, Content } = Layout;
 
 interface IProps {
   history: History;
 }
 
-interface IState {
-  collapsed: boolean;
-}
-
 @observer
-class App extends React.Component<IProps, IState> {
+class App extends React.Component<IProps> {
 
-  state = {
-    collapsed: false
-  };
+  store: Store;
 
-  toggle = () => {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
-  }
-
-  handleLogout = () => {
-    setUnauthenticated();
+  constructor(props: IProps) {
+    super(props);
+    this.store = new Store();
   }
 
   render() {
-    const hash = location.hash.replace(/\#/g, '');
-    const defaultSelected = getDefaultSelected(hash);
-    const defaultOpen = getDefaultOpen(defaultSelected, menus);
 
-    const loggedInUser = getCredentials('user');
+    const { collapsed, setCollapsed } = this.store;
 
     return <Router history={this.props.history}>
       {
@@ -55,60 +38,19 @@ class App extends React.Component<IProps, IState> {
               <Sider
                 trigger={null}
                 collapsible={true}
-                collapsed={this.state.collapsed}
+                collapsed={collapsed}
                 style={{ height: '100vh' }}
                 width={256}
               >
                 <div className={styles.logo} />
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={[defaultSelected]} defaultOpenKeys={[defaultOpen]}>
-                  {menus.map(i => (
-                    i.sub ?
-                      <Menu.SubMenu
-                        key={i.id}
-                        title={<span><Icon type={i.icon} /><span>{i.label}</span></span>}
-                      >
-                        {i.sub.map(sub => (
-                          <Menu.Item key={sub.id}>
-                            <Link to={sub.path}>
-                              {sub.label}
-                            </Link>
-                          </Menu.Item>
-                        ))}
-                      </Menu.SubMenu>
-                      :
-                      <Menu.Item key={i.id}>
-                        <Link to={i.path}>
-                          <Icon type={i.icon} />
-                          <span>{i.label}</span>
-                        </Link>
-                      </Menu.Item>))}
-                </Menu>
+                <AppMenu />
               </Sider>
               <Layout style={{ height: '100vh', overflow: 'auto' }}>
-                <Header className={styles.header}>
-                  <Icon
-                    className={styles.icon}
-                    type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-                    onClick={this.toggle}
-                  />
-                  <div className={styles.right}>
-                    <a className={styles.item} target="_blank" href="https://github.com/vdfor/react-sail"><Icon type={'github'} /></a>
-                    <Dropdown overlay={
-                      <Menu>
-                        <Menu.Item key={2}>个人中心</Menu.Item>
-                        <Menu.Divider />
-                        <Menu.Item key={3} onClick={this.handleLogout}>退出登录</Menu.Item>
-                      </Menu>
-                    }>
-                      <a className={styles.item}>
-                        <Avatar style={{ background: '#f56a00' }}>
-                          {loggedInUser && loggedInUser.username ? loggedInUser.username.substring(0, 1).toUpperCase() : ''}
-                        </Avatar>
-                        <span style={{ paddingLeft: '5px' }}>{loggedInUser && loggedInUser.username || ''}</span>
-                      </a>
-                    </Dropdown>
-                  </div>
-                </Header>
+                <AppHeader
+                  collapsed={collapsed}
+                  toggle={setCollapsed}
+                  logout={setUnauthenticated}
+                />
                 <Content style={{ margin: '24px 16px 0' }}>
                   <Routes />
                 </Content>
