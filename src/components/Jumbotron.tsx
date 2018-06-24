@@ -14,7 +14,7 @@ interface IProps {
   style?: React.CSSProperties;
 }
 
-const JumbotronComponent: React.SFC<IProps> = (props) => {
+const Jumbotron: React.SFC<IProps> = (props) => {
 
   const { style, title, description, buttonTitle, onButtonClick } = props;
 
@@ -25,10 +25,10 @@ const JumbotronComponent: React.SFC<IProps> = (props) => {
       <div style={{ padding: '0 60px' }}>
         <h1>{title}</h1>
         <p>{description}</p>
-        <Button type="primary" size="large" onClick={onButtonClick}>{buttonTitle || 'Learn more'}</Button>
+        <Button type='primary' size='large' onClick={onButtonClick}>{buttonTitle || 'Learn more'}</Button>
       </div>
     </div>
   )
 }
 
-export default JumbotronComponent;
+export default Jumbotron;

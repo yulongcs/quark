@@ -22,6 +22,10 @@
       "time",
       "timeEnd",
       "trace"
+    ],
+    "quotemark": [
+      true,
+      "single"
     ]
   }
 }

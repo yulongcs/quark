@@ -1,48 +1,48 @@
-# react-sail
+# brook-react
 
-`react`的种子工程, 采用`typescript`编写。基于[create-react-app-typescript](https://github.com/wmonk/create-react-app-typescript)生成的应用而深度定制。
-
-## 诞生记
-### 安装依赖
+## 安装nodejs -- 用于编译
+### nvm方式(适用于linux/mac, 推荐)
++ 安装nvm -- 参考[https://github.com/creationix/nvm](https://github.com/creationix/nvm)
++ 使用nvm安装nodejs
 ```bash
-create-react-app react-sail --scripts-version=react-scripts-ts
-cd react-sail
-npm run eject
-# 安装依赖
-npm i react-router-dom react-loadable antd axios echarts mobx mobx-react lodash history enquire-js -S
-npm i @types/react-router-dom @types/react-loadable @types/echarts @types/lodash less-vars-to-js less less-loader cross-env ts-import-plugin -D
+nvm install [version] # 如 nvm install 8.9.0, 建议安装8.x版本
 ```
 
-### 配置
-+ 修改/设置`package.json`的scripts、proxy等
-+ 设置`webpack.config.js`(配置多页、css module、antd按需加载及自定义主题)
-+ 设置`tsconfig.json`(在文件的 compilerOptions 中配置 "experimentalDecorators": true 和 "noUnusedParameters": true)
-+ 配置`tslint.json`(修改rules)
-+ 添加`typing.d.ts`
+### 其他方式
++ windows/mac下直接官网下载运行程序，点击安装
++ mac/linux可编译源码安装
 
-## 特性
-+ antd作为UI库，并配置按需加载、自定义主题等
-+ 整体结构按功能组织
-+ mobx作为状态管理工具
-+ react-loadable实现组件级别(包含路由)的按需加载
-+ axios并进行封装用于前后端数据交互
-+ 支持less module(文件名称限定为 [name].module.less)
-+ 支持多页
-+ 权限控制与路由守卫
-+ ...
+### 配置nodejs国内镜像源
+```bash
+npm config set registry=https://registry.npm.taobao.org
+npm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass
+```
 
-## 按功能组织
+## 快速开始(开发环境)
+```bash
+npm i
+npm start
+```
 
-## 权限控制
+## 构建
+```bash
+# 完成后会生成build目录,存放编译后的静态资源
+npm run build
+```
 
-## 主题设置
-[themes]('./themes')目录下配置主题，其中：
-+ antd-theme -- antd自定义主题设置
-+ sail-theme -- 非UI库自定义主题设置(开发中...)
+## 部署
+```bash
+# 该命令会自动安装依赖，并完成前端代码构建；然后将生成的build目录移至 ../brook-admin/src/main/resources 目录下，并重命名为 web-dist
+sh run.sh
+```
 
-## 计划
-+ 响应式布局
-+ PWA
-+ 在线主题切换
-+ 支持服务端渲染
-+ ...
+## 技术栈
++ react -- 框架
++ react-router -- 前端路由
++ mobx -- 状态管理
++ axios -- 前后端交互
++ antd -- UI库
++ typescript -- 开发语言
++ webpack -- 打包构建
+
+## 应用结构

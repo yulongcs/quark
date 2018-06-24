@@ -1,15 +1,36 @@
 import { LocaleProvider } from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
+import { Provider } from 'mobx-react';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import App from './App/index';
-import registerServiceWorker from './registerServiceWorker';
+import { Route, Router, Switch } from 'react-router-dom';
+// import App from './App/index';
+import './index.css';
+import { AppStore } from './stores';
+import history from './utils/history';
+import loadable from './utils/loadable';
+// import registerServiceWorker from './registerServiceWorker';
+
+// 防止表单提交导致页面刷新的统一处理
+document.addEventListener('submit', (e) => {
+  e.preventDefault();
+});
+
+const appStore = new AppStore();
+appStore.init(history);
 
 ReactDOM.render(
   <LocaleProvider locale={zhCN}>
-    <App />
+    <Provider app={appStore}>
+      <Router history={history}>
+        <Switch>
+          <Route path='/404' component={loadable(() => import('./pages/NotFound'))} />
+          <Route path='/' component={loadable(() => import('./App'))} />
+        </Switch>
+      </Router>
+    </Provider>
   </LocaleProvider>,
   document.getElementById('root') as HTMLElement
 );
-registerServiceWorker();
 
+// registerServiceWorker();

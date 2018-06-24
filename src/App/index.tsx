@@ -1,54 +1,65 @@
 import { Layout } from 'antd';
-import { enquireScreen } from 'enquire-js';
-import { action, observable } from 'mobx';
-import { observer } from 'mobx-react';
+import { History } from 'history';
+import { inject, observer } from 'mobx-react';
 import * as React from 'react';
-import { BrowserRouter as Router, RouteComponentProps, withRouter } from 'react-router-dom';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { getAsyncComponent } from './helper';
+import { AppStore } from '../stores';
+import loadable from '../utils/loadable';
+import styles from './index.module.less';
+import Store from './Store';
+import AppHeader from './views/AppHeader';
+import AppMenu from './views/AppMenu';
 
-const { Content } = Layout;
+const { Sider, Content } = Layout;
 
-interface Iprops extends RouteComponentProps<any>, React.Props<any> {
-  // rootStore: RootStore;
+interface IProps {
+  history: History;
+  app: AppStore;
 }
 
+@inject('app')
 @observer
-class AppComponent extends React.Component<Iprops, {}> {
+class App extends React.Component<IProps> {
 
-  @observable isMobile: boolean = false;
-  @observable drawerVisible: boolean = false;
+  store: Store;
 
-  @action toggleDrawer = (open: boolean) => () => {
-    this.drawerVisible = open;
-  }
-
-  componentDidMount() {
-    enquireScreen((b: boolean) => {
-      this.isMobile = !!b;
-    });
+  constructor(props: IProps) {
+    super(props);
+    this.store = new Store(props.app);
   }
 
   render() {
 
+    const { collapsed, setCollapsed, logout } = this.store;
+
     return (
       <Layout>
-        <Content style={{ background: '#fff', padding: '24px' }}>
-          <Switch>
-            <Route key="default" exact={true} path="/"><Redirect to={{ pathname: '/home' }} /></Route>
-            <Route key="home" path="/home" component={getAsyncComponent(() => import('../pages/Home/index'))} />
-            <Route key="not-found" path="*" component={getAsyncComponent(() => import('../pages/NotFound/index'))} />
-          </Switch>
-        </Content>
-      </Layout>
-    );
+        <Sider
+          trigger={null}
+          collapsible={true}
+          collapsed={collapsed}
+          style={{ height: '100vh' }}
+          width={256}
+        >
+          <div className={styles.logo} />
+          <AppMenu />
+        </Sider>
+        <Layout style={{ height: '100vh', overflow: 'auto' }}>
+          <AppHeader
+            collapsed={collapsed}
+            toggle={setCollapsed}
+            logout={logout}
+          />
+          <Content style={{ margin: '24px 16px 0' }}>
+            <Switch>
+              <Route key='default' exact={true} path='/'><Redirect to={{ pathname: '/home' }} /></Route>
+              <Route key='home' path='/home' component={loadable(() => import('../pages/Home'))} />
+            </Switch>
+          </Content>
+        </Layout>
+      </Layout >
+    )
   }
 }
-
-const WithRouterApp = withRouter(AppComponent);
-
-const App = () => (
-  <Router basename={process.env._URL}><WithRouterApp /></Router>
-);
 
 export default App;

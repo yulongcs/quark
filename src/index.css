@@ -1,0 +1,4 @@
+/* antd表单label后面不加 : */
+.ant-form-item-label label:after {
+  content: '' !important;
+}

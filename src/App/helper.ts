@@ -1,34 +1,19 @@
-import * as Loadable from 'react-loadable';
-import LoadingComponent from '../pages/Loading';
-
 export const menus = [
   {
     icon: 'home',
     id: '/home',
-    label: 'Home',
+    label: '首页',
     path: '/home'
   },
   {
-    icon: 'user',
-    id: 'users',
-    label: '用户管理',
-    path: '/users',
+    icon: 'profile',
+    id: 'account',
+    label: '账户管理',
+    path: '/account',
     sub: [
-      { id: '/users/customer', label: '前台用户', path: '/users/customer' },
-      { id: '/users/admin', label: '后台用户', path: '/users/admin' }
+      { id: '/account/info', label: '账户资料', path: '/account/info' },
+      { id: '/account/security', label: '账户安全', path: '/account/security' }
     ]
-  },
-  {
-    icon: 'area-chart',
-    id: '/echarts',
-    label: 'Echarts',
-    path: '/echarts'
-  },
-  {
-    icon: 'cloud-o',
-    id: '/404',
-    label: '404',
-    path: '/404'
   }
 ];
 
@@ -55,13 +40,4 @@ export const getDefaultOpen = (s: string, menuArr: any[]) => {
     }
   }
   return str;
-};
-
-export const getAsyncComponent = (entry: any) => {
-  return Loadable({
-    delay: 200, // 200ms
-    loader: entry,
-    loading: LoadingComponent,
-    timeout: 10000 // 10s
-  });
 };

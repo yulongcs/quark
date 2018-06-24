@@ -1,7 +1,7 @@
 import * as React from 'react';
-import JumbotronComponent from '../../components/Jumbotron';
+import Jumbotron from '../../components/Jumbotron';
 
-class HomeComponent extends React.Component<{}, {}> {
+class Home extends React.Component<{}, {}> {
 
   toCharon = () => {
     location.href = '/index-charon.html';
@@ -10,10 +10,10 @@ class HomeComponent extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-        <JumbotronComponent
-          title="charon is ready!"
-          description="charon，冥卫一。采用dark主题、侧边栏布局，定位于中后台管理应用。"
-          buttonTitle="了解更多"
+        <Jumbotron
+          title='charon is ready!'
+          description='charon，冥卫一。采用dark主题、侧边栏布局，定位于中后台管理应用。'
+          buttonTitle='了解更多'
           onButtonClick={this.toCharon}
         />
       </div>
@@ -21,4 +21,4 @@ class HomeComponent extends React.Component<{}, {}> {
   }
 }
 
-export default HomeComponent;
+export default Home;

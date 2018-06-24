@@ -1,7 +1,7 @@
 import { Icon, Menu } from 'antd';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { getDefaultOpen, getDefaultSelected, menus } from '../../helper';
+import { getDefaultOpen, getDefaultSelected, menus } from '../helper';
 
 const AppMenu = () => {
 
@@ -10,7 +10,7 @@ const AppMenu = () => {
   const openKey = getDefaultOpen(selectedKey, menus);
 
   return (
-    <Menu theme="dark" mode="inline" defaultSelectedKeys={[selectedKey]} defaultOpenKeys={[openKey]}>
+    <Menu theme='dark' mode='inline' defaultSelectedKeys={[selectedKey]} defaultOpenKeys={[openKey]}>
       {menus.map(i => (
         i.sub ?
           <Menu.SubMenu
