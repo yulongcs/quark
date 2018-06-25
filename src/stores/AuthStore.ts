@@ -3,13 +3,13 @@ import { action, observable } from 'mobx';
 
 class AuthStore {
 
-  @observable authed: boolean;
+  @observable public authed: boolean;
 
   constructor(authed: boolean = true) {
     this.authed = authed;
   }
 
-  @action setAuthed = (authed: boolean) => {
+  @action public setAuthed = (authed: boolean) => {
     this.authed = authed;
   }
 

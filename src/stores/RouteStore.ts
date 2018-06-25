@@ -1,17 +1,17 @@
 import { History } from 'history';
 
 export default class RouteStore {
-  history: History;
+  private history: History;
 
   constructor(history: History) {
     this.history = history;
   }
 
-  goPage = (url: string) => {
+  public goPage = (url: string) => {
     this.history.push(url);
   }
 
-  jumpExternalURL = (url: string) => {
+  public jumpExternalURL = (url: string) => {
     location.href = url;
   }
-};
+}

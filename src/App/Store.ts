@@ -2,20 +2,22 @@ import { action, observable } from 'mobx';
 import { AppStore } from '../stores';
 
 class Store {
-  app: AppStore;
-  @observable collapsed: boolean;
+
+  @observable public collapsed: boolean;
+
+  public app: AppStore;
 
   constructor(app: AppStore) {
     this.app = app;
     this.collapsed = false;
   }
 
-  @action setCollapsed = () => {
+  @action public setCollapsed = () => {
     this.collapsed = !this.collapsed;
   }
 
   // 退出登录
-  @action logout = () => {
+  @action public logout = () => {
     this.app.routeStore.jumpExternalURL('./index-user.html');
   }
 

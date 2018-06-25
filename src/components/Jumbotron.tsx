@@ -28,7 +28,7 @@ const Jumbotron: React.SFC<IProps> = (props) => {
         <Button type='primary' size='large' onClick={onButtonClick}>{buttonTitle || 'Learn more'}</Button>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Jumbotron;

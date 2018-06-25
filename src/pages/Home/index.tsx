@@ -3,11 +3,11 @@ import Jumbotron from '../../components/Jumbotron';
 
 class Home extends React.Component<{}, {}> {
 
-  toCharon = () => {
+  public toCharon = () => {
     location.href = '/index-charon.html';
   }
 
-  render() {
+  public render() {
     return (
       <div>
         <Jumbotron
@@ -17,7 +17,7 @@ class Home extends React.Component<{}, {}> {
           onButtonClick={this.toCharon}
         />
       </div>
-    )
+    );
   }
 }
 

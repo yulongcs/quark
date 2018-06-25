@@ -3,6 +3,7 @@
  */
 import { notification } from 'antd';
 import axios, { AxiosRequestConfig } from 'axios';
+import { appStore } from '../stores';
 import { getCredentials } from './helper';
 
 const codeMessage = {
@@ -49,10 +50,10 @@ const request = async (url: string, options: AxiosRequestConfig = {}): Promise<a
     });
 
     if (status === 401) {
-      // setUnauthenticated();
+      appStore.setUnauthenticated();
     }
-
-    throw error;
+    return false;
+    // throw error;
   }
 
 };

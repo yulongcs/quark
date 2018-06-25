@@ -38,7 +38,7 @@ const AppHeader: React.SFC<IProps> = ({ collapsed, toggle, logout }) => {
         </Dropdown>
       </div>
     </Layout.Header>
-  )
+  );
 };
 
 export default AppHeader; 

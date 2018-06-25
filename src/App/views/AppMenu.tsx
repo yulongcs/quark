@@ -33,7 +33,7 @@ const AppMenu = () => {
             </Link>
           </Menu.Item>))}
     </Menu>
-  )
+  );
 };
 
 export default AppMenu; 

@@ -12,7 +12,7 @@
   },
   "rules": {
     "eofline": true,
-    "member-access": false,
+    "member-access": true,
     "no-console": [
       false,
       "log",
@@ -26,6 +26,10 @@
     "quotemark": [
       true,
       "single"
+    ],
+    "semicolon": [
+      true,
+      "always"
     ]
   }
 }

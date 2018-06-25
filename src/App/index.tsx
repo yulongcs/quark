@@ -21,14 +21,14 @@ interface IProps {
 @observer
 class App extends React.Component<IProps> {
 
-  store: Store;
+  private store: Store;
 
   constructor(props: IProps) {
     super(props);
     this.store = new Store(props.app);
   }
 
-  render() {
+  public render() {
 
     const { collapsed, setCollapsed, logout } = this.store;
 
@@ -58,7 +58,7 @@ class App extends React.Component<IProps> {
           </Content>
         </Layout>
       </Layout >
-    )
+    );
   }
 }
 

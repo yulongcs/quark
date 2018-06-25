@@ -17,7 +17,7 @@ export const storage = {
     }
     sessionStorage.setItem(key, item);
   }
-}
+};
 
 export const getCredentials = (f: 'user' | 'token' | 'all' = 'all') => {
   const storageCredential = storage.getItem('credentials');
@@ -39,4 +39,4 @@ export const titleToLowerCase = (str: string) => {
   const f = str.substring(0, 1).toLocaleLowerCase();
   const t = str.substring(1, str.length);
   return f + t;
-}
+};

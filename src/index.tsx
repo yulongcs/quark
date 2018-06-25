@@ -6,7 +6,7 @@ import * as ReactDOM from 'react-dom';
 import { Route, Router, Switch } from 'react-router-dom';
 // import App from './App/index';
 import './index.css';
-import { AppStore } from './stores';
+import { appStore } from './stores';
 import history from './utils/history';
 import loadable from './utils/loadable';
 // import registerServiceWorker from './registerServiceWorker';
@@ -15,9 +15,6 @@ import loadable from './utils/loadable';
 document.addEventListener('submit', (e) => {
   e.preventDefault();
 });
-
-const appStore = new AppStore();
-appStore.init(history);
 
 ReactDOM.render(
   <LocaleProvider locale={zhCN}>

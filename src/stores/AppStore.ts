@@ -1,15 +1,16 @@
 import { History } from 'history';
 import { getCredentials, storage } from '../utils/helper';
+import history from '../utils/history';
 import AuthStore from './AuthStore';
 import RouteStore from './RouteStore';
 import UserRouteStore from './UserRouteStore';
 
-class AppStore {
-  authStore: AuthStore;
-  routeStore: RouteStore;
-  userRouteStore: UserRouteStore;
+export class AppStore {
+  public authStore: AuthStore;
+  public routeStore: RouteStore;
+  public userRouteStore: UserRouteStore;
 
-  init = (h: History) => {
+  public init = (h: History) => {
     const credentials = getCredentials();
     const isAuthenticated = credentials && credentials.user && credentials.access_token;
     this.authStore = new AuthStore(isAuthenticated);
@@ -17,7 +18,7 @@ class AppStore {
     this.userRouteStore = new UserRouteStore(location.hash.split('#')[1] || '/login');
   }
 
-  setUnauthenticated = () => {
+  public setUnauthenticated = () => {
     this.authStore.setAuthed(false);
     storage.removeItem('credentials');
     this.routeStore.goPage('/login');
@@ -25,4 +26,7 @@ class AppStore {
 
 }
 
-export default AppStore;
+const appStore = new AppStore();
+appStore.init(history);
+
+export default appStore;
