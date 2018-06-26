@@ -1,6 +1,5 @@
 import { History } from 'history';
-import { credentials, storage } from '../utils';
-import history from '../utils/history';
+import { credentials, history, storage } from '../utils';
 import AuthStore from './AuthStore';
 import RouteStore from './RouteStore';
 import UserRouteStore from './UserRouteStore';

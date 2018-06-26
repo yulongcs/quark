@@ -6,10 +6,9 @@ import * as ReactDOM from 'react-dom';
 import { Route, Router, Switch } from 'react-router-dom';
 // import App from './App/index';
 import './index.css';
+import registerServiceWorker from './registerServiceWorker';
 import { appStore } from './stores';
-import history from './utils/history';
-import loadable from './utils/loadable';
-// import registerServiceWorker from './registerServiceWorker';
+import { history, loadable } from './utils';
 
 // 防止表单提交导致页面刷新的统一处理
 document.addEventListener('submit', (e) => {
@@ -30,4 +29,4 @@ ReactDOM.render(
   document.getElementById('root') as HTMLElement
 );
 
-// registerServiceWorker();
+registerServiceWorker();
