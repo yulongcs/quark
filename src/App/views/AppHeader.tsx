@@ -1,6 +1,6 @@
 import { Avatar, Dropdown, Icon, Layout, Menu } from 'antd';
 import * as React from 'react';
-import { getCredentials } from '../../utils/helper';
+import { credentials } from '../../utils';
 import styles from './app-header.module.less';
 
 interface IProps {
@@ -11,7 +11,7 @@ interface IProps {
 
 const AppHeader: React.SFC<IProps> = ({ collapsed, toggle, logout }) => {
 
-  const loggedInUser = getCredentials('user');
+  const { user: loggedInUser } = credentials;
 
   return (
     <Layout.Header className={styles.header}>

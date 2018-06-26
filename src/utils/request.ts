@@ -4,7 +4,7 @@
 import { notification } from 'antd';
 import axios, { AxiosRequestConfig } from 'axios';
 import { appStore } from '../stores';
-import { getCredentials } from './helper';
+import credentials from './credentials';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -31,7 +31,7 @@ const codeMessage = {
  * @return {any}           An object containing either "data" or "err"
  */
 const request = async (url: string, options: AxiosRequestConfig = {}): Promise<any> => {
-  const token = getCredentials('token');
+  const { token } = credentials;
 
   const newOptions = {
     headers: { Authorization: `Bearer ${token || ''}` },
@@ -48,6 +48,8 @@ const request = async (url: string, options: AxiosRequestConfig = {}): Promise<a
       description: codeMessage[status] || statusText,
       message: `http请求错误 ${status} ${url}`
     });
+
+    console.error(error);
 
     if (status === 401) {
       appStore.setUnauthenticated();

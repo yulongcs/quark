@@ -1,1 +1,1 @@
-export const baseUrl = '/brook-smsplat';
+export const baseUrl = '/api/v0';
