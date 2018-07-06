@@ -1,4 +1,4 @@
-FROM nginx:1.15
+FROM nginx:1.15-alpine
 
 LABEL vdfor <jiakun.li@qq.com>
 
