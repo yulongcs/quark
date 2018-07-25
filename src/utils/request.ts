@@ -4,7 +4,7 @@
 import { notification } from 'antd';
 import axios, { AxiosRequestConfig } from 'axios';
 import { appStore } from '../stores';
-import credentials from './credentials';
+import { base, credentials } from './';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -24,6 +24,8 @@ const codeMessage = {
   504: '网关超时。',
 };
 
+axios.defaults.baseURL = base.baseUrl;
+
 /**
  * Requests a URL, returning a promise.
  * @param  {string} url       The URL we want to request
@@ -40,7 +42,15 @@ const request = async (url: string, options: AxiosRequestConfig = {}): Promise<a
 
   try {
     const res = await axios({ ...newOptions, ...{ url } });
-    return res.data;
+    const r = res.data;
+    if (+r.code !== 0) {
+      notification.error({
+        description: r.msg || '服务器发生了未知错误',
+        message: `错误码: ${r.code || 'unknown'} ${url}`
+      });
+      return false;
+    }
+    return r;
   } catch (error) {
     const { status, statusText } = error.response;
 

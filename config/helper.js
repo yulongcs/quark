@@ -11,7 +11,7 @@ const getExtra = (nodeEnv) => {
   // 多页应用入口文件数组
   const pages = ['index'];
   // 获取antd自定义主题设置
-  const antdThemer = lessToJs(fs.readFileSync(path.join(__dirname, '../src/themes/antd-theme/index.less'), 'utf8'));
+  const antdThemer = lessToJs(fs.readFileSync(path.join(__dirname, '../src/themes/index.less'), 'utf8'));
   // 入口文件
   const entry = {};
   // htmlWebpackPlugins

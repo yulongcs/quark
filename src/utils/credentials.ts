@@ -1,4 +1,4 @@
-import storage from './storage';
+import { storage } from './';
 
 const storageCredential = storage.getItem('credentials');
 const info = storageCredential ? JSON.parse(storageCredential) : null;

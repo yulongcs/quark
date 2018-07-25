@@ -1,8 +1,9 @@
-@import '../../themes/antd-theme/index.less';
+@import '../../../themes/index.less';
 
 .header {
   background: #fff;
   padding: 0;
+  box-shadow: 0 1px 4px rgba(0,21,41,.08);
 
   .icon {
     font-size: 18px;
@@ -11,6 +12,7 @@
     cursor: pointer;
     transition: color .3s;
     color: @text-color;
+    float: left;
   }
   
   .icon:hover {
@@ -18,17 +20,23 @@
   }
 }
 
+.welcome {
+  float: left;
+}
+
 .right {
   float: right;
   height: 100%;
-  margin-right: 20px;
+  margin-right: 24px;
 
   .item {
-    font-size: 18px;
-    margin: 0 24px 0 0;
-    line-height: 64px;
     color: @text-color;
     float: left;
+    cursor: pointer;
+  }
+
+  .item + .item {
+    margin-left: 32px;
   }
 
   .item:hover {

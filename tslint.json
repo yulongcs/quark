@@ -23,6 +23,7 @@
       "timeEnd",
       "trace"
     ],
+    "object-literal-sort-keys": false,
     "quotemark": [
       true,
       "single"
