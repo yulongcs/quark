@@ -9,7 +9,7 @@ create-react-app react-sail --scripts-version=react-scripts-ts
 cd react-sail
 npm run eject
 # 安装依赖
-npm i react-router-dom react-loadable antd axios echarts mobx mobx-react lodash history enquire-js -S
+npm i react-router-dom react-loadable antd axios echarts mobx mobx-react lodash history -S
 npm i @types/react-router-dom @types/react-loadable @types/echarts @types/lodash less-vars-to-js less less-loader cross-env ts-import-plugin -D
 ```
 
@@ -36,9 +36,7 @@ npm i @types/react-router-dom @types/react-loadable @types/echarts @types/lodash
 ## 权限控制
 
 ## 主题设置
-[themes]('./themes')目录下配置主题，其中：
-+ antd-theme -- antd自定义主题设置
-+ sail-theme -- 非UI库自定义主题设置(开发中...)
+[themes]('./themes')目录下配置antd主题
 
 ## 计划
 + 响应式布局
