@@ -1,5 +1,6 @@
 import { Layout } from 'antd';
 import { inject, observer } from 'mobx-react';
+import DevTools from 'mobx-react-devtools';
 import * as React from 'react';
 import { AppStore } from '../stores';
 import Store from './Store';
@@ -20,6 +21,10 @@ class App extends React.Component<{}> {
   constructor(props: IProps) {
     super(props);
     this.store = new Store(props.app as AppStore);
+
+    window.addEventListener('hashchange', () => { // 路由变化时同步菜单
+      this.store.app.customerStore.updateMenuTriggerKey();
+    });
   }
 
   public componentDidMount() {
@@ -36,15 +41,18 @@ class App extends React.Component<{}> {
     const { siderMenuProps, headerProps } = this.store;
 
     return (
-      <Layout>
-        <SiderMenu {...siderMenuProps} />
-        <Layout style={{ maxHeight: '100vh', overflowY: 'auto' }}>
-          <Header {...headerProps} />
-          <Content style={{ margin: '24px 16px 0' }}>
-            <Routes />
-          </Content>
+      <React.Fragment>
+        <Layout>
+          <SiderMenu {...siderMenuProps} />
+          <Layout style={{ maxHeight: '100vh', overflowY: 'auto' }}>
+            <Header {...headerProps} />
+            <Content style={{ margin: '24px 16px 0' }}>
+              <Routes />
+            </Content>
+          </Layout>
         </Layout>
-      </Layout>
+        <DevTools />
+      </React.Fragment>
     );
   }
 }

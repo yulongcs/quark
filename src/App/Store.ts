@@ -20,15 +20,13 @@ class Store {
     this.menus = [];
     this.menuCollapsed = false;
     this.selectedMenu = '';
+    this.openMenuKeys = [];
 
     this.disposer = autorun(() => {
-      if (this.menuCollapsed) {
-        this.setOpenMenuKeys([]);
-        return;
+      if (this.app.customerStore.menuTriggerKey) {
+        this.syncMenuStatus();
       }
-      this.setOpenMenuKeys(tools.urlToList(this.selectedMenu));
     });
-
   }
 
   // 获取菜单(实际开发中一般从服务端获取)
@@ -39,11 +37,11 @@ class Store {
   // 改变菜单收缩状态
   @action public toggleMenuCollapsed = () => {
     this.menuCollapsed = !this.menuCollapsed;
+    this.app.customerStore.updateMenuTriggerKey();
   }
 
   // 菜单项点击
   @action public handleMenuItemClick = (path: string) => () => {
-    this.setSelectedMenu(path);
     this.app.routeStore.goPage(path);
   }
 
@@ -59,12 +57,16 @@ class Store {
     this.app.routeStore.jumpExternalURL('./index-user.html');
   }
 
+  @action public syncMenuStatus = () => { // 同步菜单显示
+    const hashValue = location.hash.substring(1);
+    this.setSelectedMenu(hashValue && hashValue !== '/' ? hashValue : '/home');
+    this.setOpenMenuKeys(this.menuCollapsed ? [] : tools.urlToList(this.selectedMenu));
+  }
+
   // 初始化
   @action public init = () => {
     this.getMenus();
-    const hashValue = location.hash.substring(1);
-    this.setSelectedMenu(hashValue && hashValue !== '/' ? hashValue : '/home');
-    this.setOpenMenuKeys(tools.urlToList(this.selectedMenu));
+    this.app.customerStore.updateMenuTriggerKey(); // 触发菜单同步
   }
 
   // 设置 selected key
