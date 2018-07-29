@@ -26,6 +26,52 @@ const codeMessage = {
 
 axios.defaults.baseURL = base.baseUrl;
 
+
+/**
+ * Requests a URL, returning a promise.
+ * @param  {index} 重试次数
+ * @param  {object} [options] The options we want to pass to "fetch"
+ * @return {any}           An object containing either "data" or "err"
+ */
+const fetch = async (index: number, options: AxiosRequestConfig = {}): Promise<any> => {
+
+  try {
+    const res = await axios(options);
+    const r = res.data;
+    // if (+r.code !== 0) {
+    //   notification.error({
+    //     description: r.msg || '服务器发生了未知错误',
+    //     message: `错误码: ${r.code || 'unknown'} ${url}`
+    //   });
+    //   return false;
+    // }
+    return r;
+  } catch (error) {
+
+    index += 1;
+
+    if (index > 3) { // 超过3次不再重试连接
+      const { status, statusText } = error.response;
+      // 页面提示信息
+      notification.error({
+        description: codeMessage[status] || statusText || status,
+        message: `http请求错误 ${status} ${options.url}`
+      });
+
+      console.error(error);
+
+      if (status === 401) { // 401未授权
+        appStore.setUnauthenticated();
+      }
+      return false;
+      // throw error;
+    }
+
+    return setTimeout(() => fetch(index, options), 500);
+
+  }
+};
+
 /**
  * Requests a URL, returning a promise.
  * @param  {string} url       The URL we want to request
@@ -33,6 +79,7 @@ axios.defaults.baseURL = base.baseUrl;
  * @return {any}           An object containing either "data" or "err"
  */
 const request = async (url: string, options: AxiosRequestConfig = {}): Promise<any> => {
+
   const { token } = credentials;
 
   const newOptions = {
@@ -40,34 +87,7 @@ const request = async (url: string, options: AxiosRequestConfig = {}): Promise<a
     ...options
   };
 
-  try {
-    const res = await axios({ ...newOptions, ...{ url } });
-    const r = res.data;
-    if (+r.code !== 0) {
-      notification.error({
-        description: r.msg || '服务器发生了未知错误',
-        message: `错误码: ${r.code || 'unknown'} ${url}`
-      });
-      return false;
-    }
-    return r;
-  } catch (error) {
-    const { status, statusText } = error.response;
-
-    notification.error({
-      description: codeMessage[status] || statusText,
-      message: `http请求错误 ${status} ${url}`
-    });
-
-    console.error(error);
-
-    if (status === 401) {
-      appStore.setUnauthenticated();
-    }
-    return false;
-    // throw error;
-  }
-
+  return fetch(0, { ...newOptions, ...{ url } });
 };
 
 export default request;

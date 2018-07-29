@@ -2,24 +2,6 @@
 
 `react`的种子工程, 采用`typescript`编写。基于[create-react-app-typescript](https://github.com/wmonk/create-react-app-typescript)生成的应用而深度定制。
 
-## 诞生记
-### 安装依赖
-```bash
-create-react-app react-sail --scripts-version=react-scripts-ts
-cd react-sail
-npm run eject
-# 安装依赖
-npm i react-router-dom react-loadable antd axios echarts mobx mobx-react lodash history -S
-npm i @types/react-router-dom @types/react-loadable @types/echarts @types/lodash less-vars-to-js less less-loader cross-env ts-import-plugin -D
-```
-
-### 配置
-+ 修改/设置`package.json`的scripts、proxy等
-+ 设置`webpack.config.js`(配置多页、css module、antd按需加载及自定义主题)
-+ 设置`tsconfig.json`(在文件的 compilerOptions 中配置 "experimentalDecorators": true 和 "noUnusedParameters": true)
-+ 配置`tslint.json`(修改rules)
-+ 添加`typing.d.ts`
-
 ## 特性
 + antd作为UI库，并配置按需加载、自定义主题等
 + 整体结构按功能组织
@@ -39,7 +21,6 @@ npm i @types/react-router-dom @types/react-loadable @types/echarts @types/lodash
 [themes]('./themes')目录下配置antd主题
 
 ## 计划
-+ 响应式布局
 + PWA
 + 在线主题切换
 + 支持服务端渲染

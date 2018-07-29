@@ -14,10 +14,3 @@ export interface ISiderMenuProps {
   handleMenuItemClick: (url: string) => () => void;
   handleMenuOpenChange: () => (keys: string[]) => void;
 }
-
-export interface IHeaderProps {
-  menuCollapsed: boolean;
-  openResetPasswordModal: () => void;
-  logout: () => void;
-  toggleMenuCollapsed: () => void;
-}
