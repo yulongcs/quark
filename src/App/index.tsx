@@ -41,18 +41,16 @@ class App extends React.Component<{}> {
     const { siderMenuProps, headerProps } = this.store;
 
     return (
-      <React.Fragment>
-        <Layout>
-          <SiderMenu {...siderMenuProps} />
-          <Layout style={{ maxHeight: '100vh', overflowY: 'auto' }}>
-            <Header {...headerProps} />
-            <Content style={{ margin: '24px 16px 0' }}>
-              <Routes />
-            </Content>
-          </Layout>
+      <Layout>
+        <SiderMenu {...siderMenuProps} />
+        <Layout style={{ maxHeight: '100vh', overflowY: 'auto' }}>
+          <Header {...headerProps} />
+          <Content style={{ margin: '24px 16px 0' }}>
+            <Routes />
+          </Content>
         </Layout>
-        <DevTools />
-      </React.Fragment>
+        {process.env.NODE_ENV === 'development' ? <DevTools /> : null}
+      </Layout>
     );
   }
 }
