@@ -1,11 +1,11 @@
 import { LocaleProvider } from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import { Provider } from 'mobx-react';
-// import registerServiceWorker from './registerServiceWorker';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Route, Router, Switch } from 'react-router-dom';
 import './index.css';
+import registerServiceWorker from './registerServiceWorker';
 import { appStore } from './stores';
 import { history, loadable } from './utils';
 
@@ -28,4 +28,4 @@ ReactDOM.render(
   document.getElementById('root') as HTMLElement
 );
 
-// registerServiceWorker();
+registerServiceWorker();
