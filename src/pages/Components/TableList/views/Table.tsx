@@ -28,7 +28,7 @@ class TableComponent extends React.Component<ITableProps> {
       { title: '编号', dataIndex: 'code' },
       { title: '名字', dataIndex: 'name' },
       { title: '性别', dataIndex: 'sex' },
-      { title: '注册时间', dataIndex: 'ceateAt', render: (text: number) => text && moment(text).format('YYYY/MM/DD hh:mm') || '--' }
+      { title: '注册时间', dataIndex: 'createAt', render: (text: number) => text && moment(text).format('YYYY/MM/DD hh:mm') || '--' }
     ];
 
     const rowKey = (record: ITableDataItem) => record.id.toString();
