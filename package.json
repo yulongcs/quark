@@ -74,6 +74,7 @@
     "@types/react-dom": "^16.0.7",
     "@types/react-loadable": "^5.4.1",
     "@types/react-router-dom": "^4.3.0",
+    "cross-env": "^5.2.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
     "less-vars-to-js": "^1.2.1",
