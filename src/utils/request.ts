@@ -38,23 +38,17 @@ const fetch = async (index: number, options: AxiosRequestConfig = {}): Promise<a
   try {
     const res = await axios(options);
     const r = res.data;
-    // if (+r.code !== 0) {
-    //   notification.error({
-    //     description: r.msg || '服务器发生了未知错误',
-    //     message: `错误码: ${r.code || 'unknown'} ${url}`
-    //   });
-    //   return false;
-    // }
     return r;
   } catch (error) {
-
+    
     index += 1;
 
     if (index > 3) { // 超过3次不再重试连接
-      const { status, statusText } = error.response;
+      const { status, statusText } = error && error.response || ({} as any);
+      console.log(error.response);
       // 页面提示信息
       notification.error({
-        description: codeMessage[status] || statusText || status,
+        description: statusText || codeMessage[status] || status,
         message: `http请求错误 ${status} ${options.url}`
       });
 
@@ -63,11 +57,13 @@ const fetch = async (index: number, options: AxiosRequestConfig = {}): Promise<a
       if (status === 401) { // 401未授权
         appStore.setUnauthenticated();
       }
-      return false;
+      return undefined;
       // throw error;
     }
 
-    return setTimeout(() => fetch(index, options), 500);
+    setTimeout(() => {
+      return fetch(index, options);
+    }, 500);
 
   }
 };

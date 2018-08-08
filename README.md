@@ -2,6 +2,12 @@
 
 `react`的种子工程, 采用`typescript`编写。基于[create-react-app-typescript](https://github.com/wmonk/create-react-app-typescript)生成的应用而深度定制。
 
+# 快速开始
+```bash
+yarn
+yarn start
+```
+
 ## 特性
 + antd作为UI库，并配置按需加载、自定义主题等
 + 整体结构按功能组织

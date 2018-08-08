@@ -1,8 +1,3 @@
-/**
- * JumbotronComponent
- * Created by vdfor at 2018/05/29
- */
-
 import { Button } from 'antd';
 import * as React from 'react';
 
@@ -25,7 +20,7 @@ const Jumbotron: React.SFC<IProps> = (props) => {
       <div style={{ padding: '0 60px' }}>
         <h1>{title}</h1>
         <p>{description}</p>
-        <Button type='primary' size='large' onClick={onButtonClick}>{buttonTitle || 'Learn more'}</Button>
+        <Button htmlType='button' type='primary' size='large' onClick={onButtonClick}>{buttonTitle || 'Learn more'}</Button>
       </div>
     </div>
   );

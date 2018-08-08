@@ -2,11 +2,11 @@ const menus = [
   { id: '1', name: 'Home', path: '/home', icon: 'home' },
   {
     id: '2', 
-    name: '用户管理', 
-    path: '/user',  
-    icon: 'home',
+    name: '组件', 
+    path: '/components',  
+    icon: 'compass',
     children: [
-      { id: '2-1', name: '管理员用户', path: '/user/admin' }
+      { id: '2-1', name: '表格列表', path: '/components/table-list' }
     ]
   }
 ];

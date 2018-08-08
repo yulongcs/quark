@@ -1,1 +1,1 @@
-export const baseUrl = process.env.REACT_APP_PAGE === 'admin' ? '/brook-admin' : '/brook-smsplat';
+export const baseUrl = 'https://api.vdfor.top/v0/react-sail';
