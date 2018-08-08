@@ -3,8 +3,7 @@ echo 'start...'
 git fetch --all  
 git reset --hard origin/master
 rm -rf node_modules
-npm i yarn -g # 安装yarn
-yarn
+yarn install
 yarn run build
 docker stop react-sail
 docker rm react-sail
