@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Jumbotron from '../../components/Jumbotron';
+import { Jumbotron } from '../../components';
 import { fetchUser } from './api';
 
-class Home extends React.Component<{}, {}> {
+class Home extends React.Component<{}> {
 
   public toCharon = () => {
     location.href = 'https://github.com/vdfor/react-sail';

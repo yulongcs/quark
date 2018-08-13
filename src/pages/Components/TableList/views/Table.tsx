@@ -28,7 +28,7 @@ class TableComponent extends React.Component<ITableProps> {
       { title: '编号', dataIndex: 'code' },
       { title: '名字', dataIndex: 'name' },
       { title: '性别', dataIndex: 'sex' },
-      { title: '注册时间', dataIndex: 'ceateAt', render: (text: number) => text && moment(text).format('YYYY/MM/DD hh:mm') || '--' }
+      { title: '注册时间', dataIndex: 'createAt', render: (text: number) => text && moment(text).format('YYYY/MM/DD hh:mm') || '--' }
     ];
 
     const rowKey = (record: ITableDataItem) => record.id.toString();
@@ -42,7 +42,10 @@ class TableComponent extends React.Component<ITableProps> {
           current,
           showSizeChanger: true,
           pageSize,
-          showTotal: (count: number) => `共${count}条记录`,
+          showQuickJumper: true,
+          hideOnSinglePage: true,
+          pageSizeOptions: ['10', '20', '50'],
+          showTotal: count => `共${count}条记录`,
           total,
           onChange: handleTableChange(false),
           onShowSizeChange: handleTableChange(true)

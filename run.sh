@@ -3,8 +3,8 @@ echo 'start...'
 git fetch --all  
 git reset --hard origin/master
 rm -rf node_modules
-npm i
-npm run build
+yarn install
+yarn run build
 docker stop react-sail
 docker rm react-sail
 docker rmi react-sail:1.2 # 移除1.2版本
