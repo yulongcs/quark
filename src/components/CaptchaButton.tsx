@@ -41,7 +41,7 @@ class CaptchaButton extends React.Component<{}, IState> {
     const { disabled, text } = this.state;
 
     return (
-      <Button htmlType='button' disabled={disabled} onClick={this.refresh}>{text}</Button>
+      <Button disabled={disabled} onClick={this.refresh}>{text}</Button>
     );
   }
 }

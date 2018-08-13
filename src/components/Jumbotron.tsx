@@ -20,7 +20,7 @@ const Jumbotron: React.SFC<IProps> = (props) => {
       <div style={{ padding: '0 60px' }}>
         <h1>{title}</h1>
         <p>{description}</p>
-        <Button htmlType='button' type='primary' size='large' onClick={onButtonClick}>{buttonTitle || 'Learn more'}</Button>
+        <Button type='primary' size='large' onClick={onButtonClick}>{buttonTitle || 'Learn more'}</Button>
       </div>
     </div>
   );

@@ -220,9 +220,9 @@ ansi-styles@^3.2.0, ansi-styles@^3.2.1:
   dependencies:
     color-convert "^1.9.0"
 
-antd@^3.8.0:
-  version "3.8.0"
-  resolved "http://registry.npm.taobao.org/antd/download/antd-3.8.0.tgz#a4226a373fc301b9475b7d23e85433d203481858"
+antd@^3.8.1:
+  version "3.8.1"
+  resolved "http://registry.npm.taobao.org/antd/download/antd-3.8.1.tgz#1780acd5e9bc6c80dc23b042161418eb88f4d80e"
   dependencies:
     array-tree-filter "^2.0.0"
     babel-runtime "6.x"
@@ -4806,11 +4806,12 @@ mimic-fn@^1.0.0:
   resolved "http://registry.npm.taobao.org/mimic-fn/download/mimic-fn-1.2.0.tgz#820c86a39334640e99516928bd03fca88057d022"
 
 mini-store@^1.0.2, mini-store@^1.1.0:
-  version "1.1.0"
-  resolved "http://registry.npm.taobao.org/mini-store/download/mini-store-1.1.0.tgz#4d6b3fb5c89aa0303d9b39475efb3439cd42f04f"
+  version "1.1.1"
+  resolved "http://registry.npm.taobao.org/mini-store/download/mini-store-1.1.1.tgz#a6a7c27b59aa759ef2d7f61ebef474f7ca241523"
   dependencies:
     hoist-non-react-statics "^2.3.1"
     prop-types "^15.6.0"
+    react-lifecycles-compat "^3.0.4"
     shallowequal "^1.0.2"
 
 minimalistic-assert@^1.0.0, minimalistic-assert@^1.0.1:
@@ -6177,8 +6178,8 @@ rc-progress@~2.2.2:
     prop-types "^15.5.8"
 
 rc-rate@~2.4.0:
-  version "2.4.0"
-  resolved "http://registry.npm.taobao.org/rc-rate/download/rc-rate-2.4.0.tgz#97ebcc5876e2e498b9f5f65ced256d8ab54e5f06"
+  version "2.4.2"
+  resolved "http://registry.npm.taobao.org/rc-rate/download/rc-rate-2.4.2.tgz#c097bfdba7a5783cec287c928b1461cc1621f836"
   dependencies:
     babel-runtime "^6.26.0"
     classnames "^2.2.5"
@@ -6277,8 +6278,8 @@ rc-tooltip@^3.7.0, rc-tooltip@~3.7.0:
     rc-trigger "^2.2.2"
 
 rc-tree-select@~2.0.5:
-  version "2.0.12"
-  resolved "http://registry.npm.taobao.org/rc-tree-select/download/rc-tree-select-2.0.12.tgz#5c6396ad9b8d87b2b45fe8e8da45f10bb373e408"
+  version "2.0.13"
+  resolved "http://registry.npm.taobao.org/rc-tree-select/download/rc-tree-select-2.0.13.tgz#7bd1d5de61cb69d8048bf0d29dc3785aee6815db"
   dependencies:
     babel-runtime "^6.23.0"
     classnames "^2.2.1"
@@ -6304,8 +6305,8 @@ rc-tree@~1.12.2:
     warning "^3.0.0"
 
 rc-tree@~1.13.0:
-  version "1.13.1"
-  resolved "http://registry.npm.taobao.org/rc-tree/download/rc-tree-1.13.1.tgz#337ca0a85d25324bf52442f93c5e87d0225d504a"
+  version "1.13.2"
+  resolved "http://registry.npm.taobao.org/rc-tree/download/rc-tree-1.13.2.tgz#47cd31a51871f26f50e34167d9dcf36a68c44955"
   dependencies:
     babel-runtime "^6.23.0"
     classnames "2.x"

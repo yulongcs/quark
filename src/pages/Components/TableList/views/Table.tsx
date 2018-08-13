@@ -42,7 +42,7 @@ class TableComponent extends React.Component<ITableProps> {
           current,
           showSizeChanger: true,
           pageSize,
-          showTotal: count => `共${count}条记录`,
+          showTotal: (count: number) => `共${count}条记录`,
           total,
           onChange: handleTableChange(false),
           onShowSizeChange: handleTableChange(true)
