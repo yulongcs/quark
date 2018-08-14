@@ -7,4 +7,6 @@ interface IFetchUserParams {
   name?: string;
 }
 
-export const fetchUser = (params: IFetchUserParams) => request('/user', { params });
+export const fetchUsers = (params: IFetchUserParams) => request('/user', { params });
+
+export const fetchUser = (id: number) => request(`/user/${id}`);

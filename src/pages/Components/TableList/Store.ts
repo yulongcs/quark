@@ -1,7 +1,9 @@
 import { action, computed, observable, runInAction } from 'mobx';
 import { AppStore } from '../../../stores';
-import { fetchUser } from './api';
+import { fetchUser, fetchUsers } from './api';
 import {
+  IEditModalProps,
+  IEditModalValues,
   ITableDemand,
   ITableProps
 } from './types';
@@ -11,6 +13,8 @@ export default class Store {
   public app: AppStore;
 
   @observable public tableDemand: ITableDemand;
+  @observable public eitModalValues: IEditModalValues;
+  @observable public editModalVisible: boolean;
 
   constructor(app: AppStore) {
     this.app = app;
@@ -21,6 +25,19 @@ export default class Store {
       pageSize: 10,
       data: []
     };
+
+    this.eitModalValues = {
+      code: -1,
+      name: '',
+      sex: 'male',
+      website: '',
+      mobile: '',
+      email: '',
+      ipRules: '',
+      note: '',
+      arpu: -1,
+    };
+    this.editModalVisible = false;
   }
 
   // 获取表格数据
@@ -28,7 +45,7 @@ export default class Store {
     if (reset) {
       this.tableDemand.current = 1;
     }
-    const r = await fetchUser({ current: this.tableDemand.current, pageSize: this.tableDemand.pageSize });
+    const r = await fetchUsers({ current: this.tableDemand.current, pageSize: this.tableDemand.pageSize });
     if (r) {
       runInAction(() => {
         this.tableDemand.data = r.data;
@@ -49,18 +66,40 @@ export default class Store {
     this.loadTableData(reset);
   }
 
+  @action public openEditModal = (id?: number) => () => {
+    runInAction(async () => {
+      this.editModalVisible = true;
+      // if (id) { // 编辑
+      const r = await fetchUser(id || 0); // 获取user详细信息
+      if (!r) {
+        this.editModalVisible = false;
+        return;
+      }
+      this.eitModalValues = r;
+      // }
+    });
+  }
+
 
   @action public init = () => {
     this.loadTableData();
   }
 
   @computed get tableProps(): ITableProps {
-
-    const { tableDemand, handleTableChange } = this;
+    const { tableDemand, handleTableChange, openEditModal } = this;
 
     return {
       ...tableDemand,
+      openEditModal,
       handleTableChange
+    };
+  }
+
+  @computed get editModalProps(): IEditModalProps {
+    const { eitModalValues } = this;
+
+    return {
+      initData: eitModalValues
     };
   }
 

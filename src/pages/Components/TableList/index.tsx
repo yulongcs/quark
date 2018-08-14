@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import * as React from 'react';
 import { AppStore } from '../../../stores';
 import Store from './Store';
-import { Table } from './views';
+import { EditModal, Table } from './views';
 
 interface IProps {
   app: AppStore;
@@ -24,11 +24,14 @@ class Container extends React.Component<IProps> {
   }
 
   public render() {
-    const { tableProps } = this.store;
+    const { tableProps, editModalProps, editModalVisible } = this.store;
     return (
-      <Card bordered={false}>
-        <Table {...tableProps} />
-      </Card>
+      <React.Fragment>
+        <Card bordered={false}>
+          <Table {...tableProps} />
+        </Card>
+        {editModalVisible && <EditModal {...editModalProps} />}
+      </React.Fragment>
     );
   }
 }

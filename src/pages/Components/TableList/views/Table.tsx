@@ -1,4 +1,4 @@
-import { Modal, Table } from 'antd';
+import { Button, Modal, Table } from 'antd';
 import { observer } from 'mobx-react';
 import * as moment from 'moment';
 import * as React from 'react';
@@ -21,14 +21,23 @@ class TableComponent extends React.Component<ITableProps> {
 
   public render() {
 
-    const { data, current, pageSize, total, handleTableChange } = this.props;
+    const { data, current, pageSize, total, handleTableChange, openEditModal } = this.props;
 
     const columns = [
       { title: 'ID', dataIndex: 'id' },
       { title: '编号', dataIndex: 'code' },
       { title: '名字', dataIndex: 'name' },
       { title: '性别', dataIndex: 'sex' },
-      { title: '注册时间', dataIndex: 'createAt', render: (text: number) => text && moment(text).format('YYYY/MM/DD hh:mm') || '--' }
+      { title: '注册时间', dataIndex: 'createAt', render: (text: number) => text && moment(text).format('YYYY/MM/DD hh:mm') || '--' },
+      {
+        title: '操作',
+        dataIndex: 'action',
+        render: (text: number, record: ITableDataItem) => [
+          <Button type='primary' key={text + '0'} icon='search'>查看</Button>,
+          <Button onClick={openEditModal(record.id)} type='default' key={text + '1'} icon='edit' style={{ marginLeft: '8px' }}>编辑</Button>,
+          <Button type='danger' key={text + '2'} icon='delete' style={{ marginLeft: '8px' }}>删除</Button>
+        ]
+      }
     ];
 
     const rowKey = (record: ITableDataItem) => record.id.toString();
