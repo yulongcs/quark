@@ -2,6 +2,7 @@ import { action, computed, observable, runInAction } from 'mobx';
 import { AppStore } from '../../../stores';
 import { fetchUser, fetchUsers } from './api';
 import {
+  IEditModalDemand,
   IEditModalProps,
   IEditModalValues,
   ITableDemand,
@@ -14,7 +15,7 @@ export default class Store {
 
   @observable public tableDemand: ITableDemand;
   @observable public eitModalValues: IEditModalValues;
-  @observable public editModalVisible: boolean;
+  @observable public editModalDemand: IEditModalDemand;
 
   constructor(app: AppStore) {
     this.app = app;
@@ -26,7 +27,25 @@ export default class Store {
       data: []
     };
 
-    this.eitModalValues = {
+    // init editModal
+    this.toggleEditModalVisible(false);
+  }
+
+  @action public toggleEditModalVisible = (visible: boolean) => {
+    if (!visible) { // 关闭modal重置valus
+      this.editModalDemand = { visible };
+      this.resetEditModalValues();
+      return;
+    }
+    this.editModalDemand.visible = visible;
+  }
+
+  @action public setEditModalValues = (values: IEditModalValues) => {
+    this.eitModalValues = values;
+  }
+
+  @action public resetEditModalValues = () => {
+    this.setEditModalValues({
       name: '',
       sex: undefined,
       website: '',
@@ -35,16 +54,7 @@ export default class Store {
       ipRules: '',
       note: '',
       arpu: 1000 // default arpu is 1000
-    };
-    this.editModalVisible = false;
-  }
-
-  @action public toggleEditModalVisible = (visible: boolean) => {
-    this.editModalVisible = visible;
-  }
-
-  @action public setEditModalValues = (values: IEditModalValues) => {
-    this.eitModalValues = values;
+    });
   }
 
   // 获取表格数据
@@ -101,10 +111,12 @@ export default class Store {
   }
 
   @computed get editModalProps(): IEditModalProps {
-    const { eitModalValues } = this;
+    const { eitModalValues, toggleEditModalVisible, editModalDemand } = this;
 
     return {
-      initData: eitModalValues
+      ...editModalDemand,
+      initData: eitModalValues,
+      closeModal: () => toggleEditModalVisible(false)
     };
   }
 

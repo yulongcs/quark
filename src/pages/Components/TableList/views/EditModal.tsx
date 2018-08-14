@@ -27,11 +27,8 @@ interface IProps extends FormComponentProps, IEditModalProps {
 @observer
 class EditModal extends React.Component<IProps> {
 
-  // public componentDidMount() {
-  // }
-
   public render() {
-    const { form, initData } = this.props;
+    const { form, initData, closeModal, visible } = this.props;
     // debugger;
     const { getFieldDecorator } = form;
 
@@ -41,16 +38,17 @@ class EditModal extends React.Component<IProps> {
 
     return (
       <Modal
-        visible={true}
+        visible={visible}
         title={initData.id ? `编辑用户(${initData.name})` : '新建用户'}
         destroyOnClose={true}
         closable={false}
         maskClosable={false}
         keyboard={false}
+        afterClose={closeModal}
         width={700}
         bodyStyle={{ maxHeight: 'calc(100vh - 310px)', overflow: 'auto' }}
         footer={[
-          <Button key='cancel'>取消</Button>,
+          <Button key='cancel' onClick={closeModal}>取消</Button>,
           <Button key='submit' type='primary'>保存</Button>,
         ]}
       >
@@ -138,7 +136,7 @@ class EditModal extends React.Component<IProps> {
                   label='网址'
                   colon={false}
                 >
-                {getFieldDecorator('website', {
+                  {getFieldDecorator('website', {
                     rules: [{ required: false, type: 'url', message: '请输入正确的网址' }],
                     initialValue: initData.website
                   })(

@@ -32,10 +32,11 @@ export interface IEditModalValues {
   ceateAt?: number;
 }
 
-// export interface IEditModalDemand {
-//   visible: boolean;
-// }
+export interface IEditModalDemand {
+  visible: boolean;
+}
 
-export interface IEditModalProps {
+export interface IEditModalProps extends IEditModalDemand {
   initData: IEditModalValues;
+  closeModal: () => void;
 }
