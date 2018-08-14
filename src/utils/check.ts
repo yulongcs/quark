@@ -7,6 +7,12 @@ export const validENCNCharacterRegx = /^[a-zA-Z\u4e00-\u9fa5]+$/;
 // 英文字母
 export const validENCharacterRegx = /^[a-zA-Z]+$/;
 
+// 非负整数
+export const nonnegativeIntegerRegx = /^\d+$/;
+
+// url
+export const urlRegx = /(^#)|(^http(s*):\/\/[^\s]+\.[^\s]+)/;
+
 // 邮箱
 export const validEmailRegx = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 

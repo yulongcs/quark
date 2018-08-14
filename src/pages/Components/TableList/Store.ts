@@ -27,17 +27,24 @@ export default class Store {
     };
 
     this.eitModalValues = {
-      code: -1,
       name: '',
-      sex: 'male',
+      sex: undefined,
       website: '',
       mobile: '',
       email: '',
       ipRules: '',
       note: '',
-      arpu: -1,
+      arpu: 1000 // default arpu is 1000
     };
     this.editModalVisible = false;
+  }
+
+  @action public toggleEditModalVisible = (visible: boolean) => {
+    this.editModalVisible = visible;
+  }
+
+  @action public setEditModalValues = (values: IEditModalValues) => {
+    this.eitModalValues = values;
   }
 
   // 获取表格数据
@@ -66,18 +73,16 @@ export default class Store {
     this.loadTableData(reset);
   }
 
-  @action public openEditModal = (id?: number) => () => {
-    runInAction(async () => {
-      this.editModalVisible = true;
-      // if (id) { // 编辑
-      const r = await fetchUser(id || 0); // 获取user详细信息
+  @action public openEditModal = (id?: number) => async () => {
+    this.toggleEditModalVisible(true);
+    if (typeof id !== 'undefined') { // 编辑
+      const r = await fetchUser(id); // 获取user详细信息
       if (!r) {
-        this.editModalVisible = false;
+        this.toggleEditModalVisible(false);
         return;
       }
-      this.eitModalValues = r;
-      // }
-    });
+      this.setEditModalValues(r);
+    }
   }
 
 

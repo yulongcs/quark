@@ -1,10 +1,10 @@
-import { Button, Card, Col, Form, Input, Modal, Row, Select } from 'antd';
+import { Button, Card, Col, Form, Input, InputNumber, Modal, Row, Select } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 // import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import { constants } from '../../../../common';
-// import { tools } from '../../../../../utils';
+import { check } from '../../../../utils';
 import { IEditModalProps } from '../types';
 
 const FormItem = Form.Item;
@@ -12,11 +12,11 @@ const Option = Select.Option;
 
 const formItemLayout = {
   labelCol: {
-    sm: { span: 8 },
+    sm: { span: 7 },
     xs: { span: 24 }
   },
   wrapperCol: {
-    sm: { span: 16 },
+    sm: { span: 17 },
     xs: { span: 24 }
   },
 };
@@ -47,8 +47,8 @@ class EditModal extends React.Component<IProps> {
         closable={false}
         maskClosable={false}
         keyboard={false}
-        // width={800}
-        // bodyStyle={{ maxHeight: '320px', overflow: 'auto' }}
+        width={700}
+        bodyStyle={{ maxHeight: 'calc(100vh - 310px)', overflow: 'auto' }}
         footer={[
           <Button key='cancel'>取消</Button>,
           <Button key='submit' type='primary'>保存</Button>,
@@ -57,20 +57,7 @@ class EditModal extends React.Component<IProps> {
         <Card title='基本信息' bordered={false}>
           <Form hideRequiredMark={false}>
             <Row gutter={16}>
-              <Col sm={8}>
-                <FormItem
-                  {...formItemLayout}
-                  label='编号'
-                >
-                  {getFieldDecorator('code', {
-                    rules: [{ required: true, message: '请输入编号' }],
-                    initialValue: initData.code
-                  })(
-                    <Input placeholder='请输入编号' />
-                  )}
-                </FormItem>
-              </Col>
-              <Col sm={8}>
+              <Col sm={12}>
                 <FormItem
                   {...formItemLayout}
                   label='姓名'
@@ -83,7 +70,7 @@ class EditModal extends React.Component<IProps> {
                   )}
                 </FormItem>
               </Col>
-              <Col sm={8}>
+              <Col sm={12}>
                 <FormItem
                   {...formItemLayout}
                   label='性别'
@@ -98,49 +85,64 @@ class EditModal extends React.Component<IProps> {
                   )}
                 </FormItem>
               </Col>
+              <Col sm={12}>
+                <FormItem
+                  {...formItemLayout}
+                  label='ARPU'
+                >
+                  {getFieldDecorator('arpu', {
+                    rules: [
+                      { required: true, pattern: check.nonnegativeIntegerRegx, message: 'ARPU不可为空且必须为正整数' },
+                    ],
+                    initialValue: initData.arpu
+                  })(
+                    <InputNumber style={{ width: 'calc(100% - 50px)' }} step={100} min={0} placeholder='请输入ARPU' />
+                  )}
+                  <span className='ant-form-text' style={{ marginLeft: '8px' }}>元/月</span>
+                </FormItem>
+              </Col>
             </Row>
           </Form>
         </Card>
         <Card title='联系方式' bordered={false}>
           <Form>
             <Row gutter={16}>
-              <Col sm={8}>
-                <FormItem
-                  label='网址'
-                >
-                  {getFieldDecorator('website', {
-                    rules: [{ required: true, message: '请输入网址', }],
-                    initialValue: initData.website
-                  })(
-                    <Input placeholder='请输入网址' />
-                  )}
-                  {/* {this.passwordObj.disabled ?
-                <a className='ant-form-text' style={{ marginLeft: '8px' }} onClick={this.hanldeEditPasswd}>编辑密码</a>
-                :
-                <a className='ant-form-text' style={{ marginLeft: '8px' }} onClick={this.generatePasswd}>生成密码</a>} */}
-                </FormItem>
-              </Col>
-              <Col sm={8}>
+              <Col sm={12}>
                 <FormItem
                   label='手机'
+                  colon={false}
                 >
                   {getFieldDecorator('mobile', {
-                    rules: [{ required: false, message: '请输入手机号码', }],
+                    rules: [{ required: true, pattern: check.validPhoneRegx, message: '请输入正确的11位手机号码', }],
                     initialValue: initData.mobile
                   })(
-                    <Input placeholder='请输入手机号码' />
+                    <Input addonBefore='+086' placeholder='请输入手机号码' />
                   )}
                 </FormItem>
               </Col>
-              <Col sm={8}>
+              <Col sm={12}>
                 <FormItem
                   label='Email'
+                  colon={false}
                 >
                   {getFieldDecorator('email', {
-                    rules: [{ required: false, message: '请输入Email', }],
+                    rules: [{ required: true, type: 'email', message: '请输入正确的Email' }],
                     initialValue: initData.email
                   })(
                     <Input placeholder='请输入Email' />
+                  )}
+                </FormItem>
+              </Col>
+              <Col sm={24}>
+                <FormItem
+                  label='网址'
+                  colon={false}
+                >
+                {getFieldDecorator('website', {
+                    rules: [{ required: false, type: 'url', message: '请输入正确的网址' }],
+                    initialValue: initData.website
+                  })(
+                    <Input placeholder='请输入网址' />
                   )}
                 </FormItem>
               </Col>
@@ -150,7 +152,7 @@ class EditModal extends React.Component<IProps> {
         <Card title='其他' bordered={false}>
           <Form>
             <Row>
-              <Col sm={20}>
+              <Col sm={24}>
                 <FormItem
                   colon={false}
                   label='IP地址'
@@ -158,7 +160,7 @@ class EditModal extends React.Component<IProps> {
                   {getFieldDecorator('ipRules', {
                     rules: [{
                       required: true,
-                      message: '余额告警号码不合法',
+                      message: 'IP规则不合法',
                       // validator: (value: string, cb: (e?: any) => void) => {
                       //   if (!rule) {
                       //     cb();
