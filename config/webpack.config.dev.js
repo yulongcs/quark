@@ -148,11 +148,20 @@ module.exports = {
                   options: {
                     transpileOnly: true,
                     getCustomTransformers: () => ({
-                      before: [tsImportPluginFactory({
-                        libraryDirectory: 'es',
-                        libraryName: 'antd',
-                        style: true,
-                      })]
+                      before: [
+                        tsImportPluginFactory([
+                          {
+                            libraryDirectory: 'es',
+                            libraryName: 'antd',
+                            style: true,
+                          },
+                          {
+                            libraryDirectory: 'es',
+                            libraryName: 'antd-mobile',
+                            style: true,
+                          }
+                        ]),
+                      ]
                     })
                   },
                 },

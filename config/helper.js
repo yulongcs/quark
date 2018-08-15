@@ -9,9 +9,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const getExtra = (nodeEnv) => {
   // 多页应用入口文件数组
-  const pages = ['index'];
+  const pages = ['index', 'index-mobile'];
   // 获取antd自定义主题设置
-  const antdThemer = lessToJs(fs.readFileSync(path.join(__dirname, '../src/themes/index.less'), 'utf8'));
+  const antdThemer = lessToJs(paths.appSrc + '/themes/antd.less');
+  // 获取antd-mobile自定义主题设置
+  const antdMobileThemer = lessToJs(paths.appSrc + '/themes/antd-mobile.less');
+
   // 入口文件
   const entry = {};
   // htmlWebpackPlugins
@@ -23,10 +26,22 @@ const getExtra = (nodeEnv) => {
         require.resolve('react-dev-utils/webpackHotDevClient'),
         i === 'index' ? paths.appIndexJs : paths.appSrc + `/${i}.tsx`
       ];
-
       htmlWebpackPlugins.push(new HtmlWebpackPlugin({
         inject: true,
-        template: paths.appHtml,
+        template: (() => { // 获取html模板
+          if (i === 'index') {
+            return paths.appHtml;
+          }
+          try {
+           const stat = fs.statSync(paths.appPublic + `/${i}.html`);
+           if (stat && stat.isFile()) {
+             return paths.appPublic + `/${i}.html`; // 使用自定义模板
+           }
+           return paths.appHtml; // 使用默认模板
+          } catch (error) {
+            return paths.appHtml; // 使用默认模板
+          }
+        })(),
         chunks: [i],
         filename: `${i}.html`
       }));
@@ -59,7 +74,7 @@ const getExtra = (nodeEnv) => {
 
   // less loader
   const lessLoaders = (() => {
-    const arr = ['less-module', 'customize-antd-theme'];
+    const arr = ['less-module', 'customize-antd-theme', 'customize-antd-mobile-theme'];
     const resArr = [];
     arr.forEach(i => {
       const opts = {
@@ -84,8 +99,8 @@ const getExtra = (nodeEnv) => {
                     'last 4 versions',
                     'Firefox ESR',
                     'not ie < 9', // React doesn't support IE8 anyway
-                    // 'iOS >= 7',
-                    // 'Android >= 4'
+                    'iOS >= 7',
+                    'Android >= 4'
                   ],
                   flexbox: 'no-2009',
                 }),
@@ -105,9 +120,14 @@ const getExtra = (nodeEnv) => {
         opts.exclude = /node_modules/;
         opts.use[1].options.modules = true;
         opts.use[1].options.localIdentName = '[local]__[hash:base64:5]';
-      } else if (i === 'customize-antd-theme') {
+      } else if (i === 'customize-antd-theme') { // antd自定义主题
+        opts.include = /[\\/]node_modules[\\/].*antd[\\/]/;
         opts.exclude = /\.module\.less/;
         opts.use[3].options.modifyVars = antdThemer;
+      } else if (i === 'customize-antd-mobile-theme') { // antd-mobile自定义主题
+        opts.include = /[\\/]node_modules[\\/].*antd-mobile[\\/]/;
+        opts.exclude = /\.module\.less/;
+        opts.use[3].options.modifyVars = antdMobileThemer;
       }
       resArr.push(opts);
     })
