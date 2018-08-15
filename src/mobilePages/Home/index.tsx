@@ -16,7 +16,7 @@ class Home extends React.Component<{}> {
 
   public render() {
     return (
-     <Button>按钮</Button>
+     <Button type='primary'>按钮</Button>
     );
   }
 }
