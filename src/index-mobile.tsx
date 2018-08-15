@@ -2,7 +2,6 @@ import { Provider } from 'mobx-react';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Route, Router, Switch } from 'react-router-dom';
-import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import { appStore } from './stores';
 import { history, loadable } from './utils';
