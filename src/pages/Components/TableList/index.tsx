@@ -24,13 +24,13 @@ class Container extends React.Component<IProps> {
   }
 
   public render() {
-    const { tableProps, editModalProps, editModalVisible } = this.store;
+    const { tableProps, editModalProps } = this.store;
     return (
       <React.Fragment>
         <Card bordered={false}>
           <Table {...tableProps} />
         </Card>
-        {editModalVisible && <EditModal {...editModalProps} />}
+        <EditModal {...editModalProps} />
       </React.Fragment>
     );
   }

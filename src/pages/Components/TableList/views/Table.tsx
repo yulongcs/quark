@@ -25,7 +25,6 @@ class TableComponent extends React.Component<ITableProps> {
 
     const columns = [
       { title: 'ID', dataIndex: 'id' },
-      { title: '编号', dataIndex: 'code' },
       { title: '名字', dataIndex: 'name' },
       { title: '性别', dataIndex: 'sex' },
       { title: '注册时间', dataIndex: 'createAt', render: (text: number) => text && moment(text).format('YYYY/MM/DD hh:mm') || '--' },

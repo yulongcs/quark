@@ -2,7 +2,6 @@ import { ISex } from '../../../types';
 
 export interface ITableDataItem {
   id: number;
-  code: number;
   name: string;
   sex: ISex;
   ceateAt: number;
@@ -22,9 +21,8 @@ export interface ITableProps extends ITableDemand {
 
 export interface IEditModalValues {
   id?: number;
-  code: number;
   name: string;
-  sex: ISex;
+  sex: ISex | undefined;
   website: string;
   mobile: string;
   email: string;
@@ -34,10 +32,11 @@ export interface IEditModalValues {
   ceateAt?: number;
 }
 
-// export interface IEditModalDemand {
-//   visible: boolean;
-// }
+export interface IEditModalDemand {
+  visible: boolean;
+}
 
-export interface IEditModalProps {
+export interface IEditModalProps extends IEditModalDemand {
   initData: IEditModalValues;
+  closeModal: () => void;
 }

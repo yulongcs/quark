@@ -2,6 +2,7 @@ import { action, computed, observable, runInAction } from 'mobx';
 import { AppStore } from '../../../stores';
 import { fetchUser, fetchUsers } from './api';
 import {
+  IEditModalDemand,
   IEditModalProps,
   IEditModalValues,
   ITableDemand,
@@ -14,7 +15,7 @@ export default class Store {
 
   @observable public tableDemand: ITableDemand;
   @observable public eitModalValues: IEditModalValues;
-  @observable public editModalVisible: boolean;
+  @observable public editModalDemand: IEditModalDemand;
 
   constructor(app: AppStore) {
     this.app = app;
@@ -26,18 +27,34 @@ export default class Store {
       data: []
     };
 
-    this.eitModalValues = {
-      code: -1,
+    // init editModal
+    this.toggleEditModalVisible(false);
+  }
+
+  @action public toggleEditModalVisible = (visible: boolean) => {
+    if (!visible) { // 关闭modal重置valus
+      this.editModalDemand = { visible };
+      this.resetEditModalValues();
+      return;
+    }
+    this.editModalDemand.visible = visible;
+  }
+
+  @action public setEditModalValues = (values: IEditModalValues) => {
+    this.eitModalValues = values;
+  }
+
+  @action public resetEditModalValues = () => {
+    this.setEditModalValues({
       name: '',
-      sex: 'male',
+      sex: undefined,
       website: '',
       mobile: '',
       email: '',
       ipRules: '',
       note: '',
-      arpu: -1,
-    };
-    this.editModalVisible = false;
+      arpu: 1000 // default arpu is 1000
+    });
   }
 
   // 获取表格数据
@@ -66,18 +83,16 @@ export default class Store {
     this.loadTableData(reset);
   }
 
-  @action public openEditModal = (id?: number) => () => {
-    runInAction(async () => {
-      this.editModalVisible = true;
-      // if (id) { // 编辑
-      const r = await fetchUser(id || 0); // 获取user详细信息
+  @action public openEditModal = (id?: number) => async () => {
+    this.toggleEditModalVisible(true);
+    if (typeof id !== 'undefined') { // 编辑
+      const r = await fetchUser(id); // 获取user详细信息
       if (!r) {
-        this.editModalVisible = false;
+        this.toggleEditModalVisible(false);
         return;
       }
-      this.eitModalValues = r;
-      // }
-    });
+      this.setEditModalValues(r);
+    }
   }
 
 
@@ -96,10 +111,12 @@ export default class Store {
   }
 
   @computed get editModalProps(): IEditModalProps {
-    const { eitModalValues } = this;
+    const { eitModalValues, toggleEditModalVisible, editModalDemand } = this;
 
     return {
-      initData: eitModalValues
+      ...editModalDemand,
+      initData: eitModalValues,
+      closeModal: () => toggleEditModalVisible(false)
     };
   }
 
