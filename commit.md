@@ -1,1 +1,0 @@
-# 新增fetch作为新的request(测试)
