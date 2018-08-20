@@ -63,6 +63,7 @@ export default class Store {
       this.tableDemand.current = 1;
     }
     const r = await fetchUsers({ current: this.tableDemand.current, pageSize: this.tableDemand.pageSize });
+    console.log(r);
     if (r) {
       runInAction(() => {
         this.tableDemand.data = r.data;

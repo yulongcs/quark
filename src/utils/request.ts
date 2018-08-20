@@ -1,5 +1,5 @@
 /**
- * reference to   https://github.com/ant-design/ant-design-pro/blob/master/src/utils/request.js
+ * reference to https://github.com/ant-design/ant-design-pro/blob/master/src/utils/request.js
  */
 import { notification } from 'antd';
 import { Toast } from 'antd-mobile';
@@ -25,7 +25,13 @@ const codeMessage = {
   504: '网关超时。',
 };
 
+const config = {
+  timeout: 10000, // 指定请求超时的毫秒数(0 表示无超时时间)，如果请求花费了超过 `timeout` 的时间，请求将被中断
+  retryTimes: 2 // 请求失败时再次自动重试次数
+};
+
 axios.defaults.baseURL = base.baseUrl;
+axios.defaults.timeout = config.timeout;
 
 const fetch = async (index: number, options: AxiosRequestConfig = {}): Promise<any> => {
 
@@ -37,7 +43,7 @@ const fetch = async (index: number, options: AxiosRequestConfig = {}): Promise<a
 
     index += 1;
 
-    if (index > 3) { // 超过3次不再重试连接
+    if (index > config.retryTimes) { // 超过重试次数不再重连
       const { status, statusText } = error && error.response || ({} as any);
 
       const errorText = statusText || codeMessage[status] || status; // 错误提示信息文本内容
@@ -61,8 +67,8 @@ const fetch = async (index: number, options: AxiosRequestConfig = {}): Promise<a
       // throw error;
     }
 
-    return setTimeout(() => {
-      fetch(index, options);
+    setTimeout(() => {
+      return fetch(index, options);
     }, 500);
 
   }
