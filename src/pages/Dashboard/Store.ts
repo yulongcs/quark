@@ -1,4 +1,3 @@
-import { action } from 'mobx';
 import { AppStore } from '../../stores';
 
 class Store {
@@ -7,11 +6,6 @@ class Store {
 
   constructor(app: AppStore) {
     this.app = app;
-  }
-
-  // 退出登录
-  @action public logout = () => {
-    this.app.routeStore.jumpExternalURL('./index-user.html');
   }
 
 }

@@ -2,7 +2,7 @@
 'use strict';
 
 const fs = require('fs');
-const path = require('path');
+// const path = require('path');
 const paths = require('./paths');
 const lessToJs = require('less-vars-to-js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -11,9 +11,9 @@ const getExtra = (nodeEnv) => {
   // 多页应用入口文件数组
   const pages = ['index', 'index-mobile'];
   // 获取antd自定义主题设置
-  const antdThemer = lessToJs(paths.appSrc + '/themes/antd.less');
+  const antdThemer = lessToJs(fs.readFileSync(paths.appSrc + '/themes/antd.less', 'utf8'));
   // 获取antd-mobile自定义主题设置
-  const antdMobileThemer = lessToJs(paths.appSrc + '/themes/antd-mobile.less');
+  const antdMobileThemer = lessToJs(fs.readFileSync(paths.appSrc + '/themes/antd-mobile.less', 'utf8'));
 
   // 入口文件
   const entry = {};
@@ -33,11 +33,11 @@ const getExtra = (nodeEnv) => {
             return paths.appHtml;
           }
           try {
-           const stat = fs.statSync(paths.appPublic + `/${i}.html`);
-           if (stat && stat.isFile()) {
-             return paths.appPublic + `/${i}.html`; // 使用自定义模板
-           }
-           return paths.appHtml; // 使用默认模板
+            const stat = fs.statSync(paths.appPublic + `/${i}.html`);
+            if (stat && stat.isFile()) {
+              return paths.appPublic + `/${i}.html`; // 使用自定义模板
+            }
+            return paths.appHtml; // 使用默认模板
           } catch (error) {
             return paths.appHtml; // 使用默认模板
           }

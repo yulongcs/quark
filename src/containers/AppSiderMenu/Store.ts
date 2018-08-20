@@ -1,7 +1,7 @@
 import { action, observable } from 'mobx';
 import { menus as menusData } from '../../common';
 import { AppStore } from '../../stores';
-import { tools } from '../../utils';
+import { route, tools } from '../../utils';
 import { IMenu } from './types';
 
 class Store {
@@ -26,7 +26,7 @@ class Store {
 
   // 菜单项点击
   @action public handleMenuItemClick = (path: string) => () => {
-    this.app.routeStore.goPage(path);
+    route.goPage(path);
   }
 
   // 处理菜单目录展开/闭合事件

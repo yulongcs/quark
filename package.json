@@ -65,6 +65,7 @@
   "scripts": {
     "start": "cross-env PORT=8182 node scripts/start.js",
     "build": "cross-env PUBLIC_URL=/ node scripts/build.js",
+    "commit": "node scripts/commit.js",
     "test": "node scripts/test.js --env=jsdom"
   },
   "devDependencies": {

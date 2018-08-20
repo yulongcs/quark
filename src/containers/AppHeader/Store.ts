@@ -1,5 +1,6 @@
 import { action } from 'mobx';
 import { AppStore } from '../../stores';
+import { route } from '../../utils';
 
 class Store {
 
@@ -11,7 +12,7 @@ class Store {
 
   // 退出登录
   @action public logout = () => {
-    this.app.routeStore.jumpExternalURL('./index-user.html');
+    route.jumpExternalURL('./index-user.html');
   }
 
 }

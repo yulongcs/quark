@@ -2,9 +2,10 @@
  * reference to   https://github.com/ant-design/ant-design-pro/blob/master/src/utils/request.js
  */
 import { notification } from 'antd';
+import { Toast } from 'antd-mobile';
 import axios, { AxiosRequestConfig } from 'axios';
 import { appStore } from '../stores';
-import { base, credentials } from './';
+import { base, credentials, device } from './';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -26,31 +27,30 @@ const codeMessage = {
 
 axios.defaults.baseURL = base.baseUrl;
 
-
-/**
- * Requests a URL, returning a promise.
- * @param  {index} 重试次数
- * @param  {object} [options] The options we want to pass to "fetch"
- * @return {any}           An object containing either "data" or "err"
- */
 const fetch = async (index: number, options: AxiosRequestConfig = {}): Promise<any> => {
 
   try {
     const res = await axios(options);
     const r = res.data;
-    return r;
+    return typeof r === 'object' ? r : { data: r };
   } catch (error) {
-    
+
     index += 1;
 
     if (index > 3) { // 超过3次不再重试连接
       const { status, statusText } = error && error.response || ({} as any);
-      console.log(error.response);
+
+      const errorText = statusText || codeMessage[status] || status; // 错误提示信息文本内容
+
       // 页面提示信息
-      notification.error({
-        description: statusText || codeMessage[status] || status,
-        message: `http请求错误 ${status} ${options.url}`
-      });
+      if (device().mobile) { // 移动端
+        Toast.fail(errorText, 2, null as any, false);
+      } else { // PC端
+        notification.error({
+          description: errorText,
+          message: `http请求错误 ${status} ${options.url}`
+        });
+      }
 
       console.error(error);
 
@@ -61,8 +61,8 @@ const fetch = async (index: number, options: AxiosRequestConfig = {}): Promise<a
       // throw error;
     }
 
-    setTimeout(() => {
-      return fetch(index, options);
+    return setTimeout(() => {
+      fetch(index, options);
     }, 500);
 
   }
@@ -72,7 +72,7 @@ const fetch = async (index: number, options: AxiosRequestConfig = {}): Promise<a
  * Requests a URL, returning a promise.
  * @param  {string} url       The URL we want to request
  * @param  {object} [options] The options we want to pass to "fetch"
- * @return {any}           An object containing either "data" or "err"
+ * @return {Promise<any>}
  */
 const request = async (url: string, options: AxiosRequestConfig = {}): Promise<any> => {
 
