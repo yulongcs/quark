@@ -12,6 +12,12 @@ interface IRequestOptions {
   method?: string;
 }
 
+interface IFetchOptions {
+  headers?: { [key: string]: string | any };
+  body?: any;
+  method?: string;
+}
+
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -30,14 +36,84 @@ const codeMessage = {
   504: '网关超时。',
 };
 
+const config = {
+  timeout: 10000, // 指定请求超时的毫秒数(0 表示无超时时间)，如果请求花费了超过 `timeout` 的时间，请求将被中断
+  retryTimes: 2, // 请求失败时再次自动重试次数
+  retryInterval: 500 // 请求失败时再次自动重试间隔(ms)
+};
+
+// 错误提示信息
+const showErrorTip = (errorTitle: string, errorText: string) => {
+  if (device().mobile) { // 移动端
+    Toast.fail(errorText, 2, null as any, false);
+  } else { // PC端
+    notification.error({
+      message: errorTitle,
+      description: errorText
+    });
+  }
+};
+
+const request = async (retry: number, url: string, options: IFetchOptions = {}): Promise<any> => {
+
+  try {
+    let timer;
+    const timeoutPromise = new Promise((resolve, reject) => {
+      timer = setTimeout(() => {
+        if (!1) {
+          resolve({});
+          return;
+        }
+        reject({ statusText: '请求超时' });
+      }, config.timeout);
+    });
+
+    const fetchPromise = fetch(url, options);
+
+    const res = await Promise.race([timeoutPromise, fetchPromise]) as Response;
+
+    if (timer) { // 清除超时定时器
+      clearTimeout(timer);
+    }
+
+    if (res.ok) {
+      const r = res.json();
+      return typeof r === 'object' ? r : { data: r };
+    }
+
+    // 错误提示信息文本内容
+    const errorText = res.statusText || codeMessage[res.status] || res.status;
+    showErrorTip(`http请求错误 ${res.status}`, errorText);
+    console.error(res);
+
+    if (res.status === 401) { // 401未授权
+      // appStore.setUnauthenticated();
+    }
+
+    return undefined;
+  } catch (error) {
+    retry += 1;
+
+    if (retry > config.retryTimes) { // 异常自动重连
+      showErrorTip(`http请求错误 ${error && error.status || ''}`, error && error.statusText || '网络异常');
+      console.error(error);
+      return undefined;
+    }
+
+    setTimeout(() => {
+      return request(retry, url, options);
+    }, config.retryInterval);
+  }
+
+};
+
 /**
  * Requests a URL, returning a promise.
  * @param  {string} url       The URL we want to request
- * @param  {object} [options] The options we want to pass to "fetch"
+ * @param  {IRequestOptions} [options] The options we want to pass to "fetch"
  * @return {Promise<any>}
  */
-const request = async (url: string, options: IRequestOptions = {}): Promise<any> => {
-
+export default (url: string, options: IRequestOptions = {}): Promise<any> => {
   const { token } = credentials;
 
   let newUrl = base.baseUrl + url;
@@ -73,56 +149,5 @@ const request = async (url: string, options: IRequestOptions = {}): Promise<any>
     ...newOptions
   };
 
-  try {
-    let timer;
-    const timeoutPromise = new Promise((resolve, reject) => {
-      timer = setTimeout(() => {
-        if (!1) {
-          resolve({});
-          return;
-        }
-        reject('request timeout');
-      }, 10000);
-    });
-    const fetchPromise = fetch(newUrl, fetchOptions);
-
-    const res = await Promise.race([timeoutPromise, fetchPromise]) as Response;
-
-    if (timer) { // 清除超时定时器
-      clearTimeout(timer);
-    }
-
-    if (res.ok) {
-      const r = res.json();
-      return typeof r === 'object' ? r : { data: r };
-    }
-
-    // 错误提示信息文本内容
-    const errorText = res.statusText || codeMessage[res.status] || res.status;
-    // 页面提示信息
-    if (device().mobile) { // 移动端
-      Toast.fail(errorText, 2, null as any, false);
-    } else { // PC端
-      notification.error({
-        description: errorText,
-        message: `http请求错误 ${res.status}`
-      });
-    }
-
-    if (res.status === 401) { // 401未授权
-      // appStore.setUnauthenticated();
-    }
-
-    console.error(res);
-    return undefined;
-  } catch (error) {
-    console.error(error);
-    return undefined;
-  }
-
-
-
-  // return fetch(0, { ...newOptions, ...{ url } });
+  return request(0, newUrl, fetchOptions);
 };
-
-export default request;
