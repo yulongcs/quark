@@ -1,32 +1,49 @@
-import { RawDraftContentState } from 'draft-js';
-import { action, observable } from 'mobx';
+import { action, computed, observable, runInAction } from 'mobx';
+import * as MonacoEditor from 'monaco-editor';
 import { AppStore } from '../../../stores';
+import { IHeaderProps, IMonacoEditorProps, IPreviewProps } from './types';
 
 export default class Store {
 
   public app: AppStore;
 
-  @observable public content: RawDraftContentState;
+  @observable public language: string;
+  @observable public theme: MonacoEditor.editor.BuiltinTheme;
+
+  @observable public code: string;
 
   constructor(app: AppStore) {
     this.app = app;
 
+    this.theme = 'vs-dark';
+    this.language = 'html';
+
+    this.code = '<p>Hello, World!</p>';
   }
 
-  @action public handleRawChange = (raw: RawDraftContentState) => {
-    // debugger;
-    console.log(JSON.stringify(raw));
+  @action public handleSelectChange = (id: 'theme' | 'language') => (value: string) => {
+    runInAction(() => {
+      this[id] = value;
+    });
   }
 
-  @action public loadData = () => {
-    this.content = {
-      blocks: [{ 'key': '1vtai', 'text': '777888777777777', 'type': 'unstyled', 'depth': 0, 'inlineStyleRanges': [{ 'offset': 0, 'length': 15, 'style': 'FONTFAMILY-ARAIAL' }, { 'offset': 0, 'length': 15, 'style': 'BOLD' }, { 'offset': 0, 'length': 15, 'style': 'ITALIC' }, { 'offset': 0, 'length': 15, 'style': 'COLOR-003BA5' }], 'entityRanges': [], 'data': {} }],
-      entityMap: {}
-    } as any;
+  @action public handleCodeChange = (value: string) => {
+    this.code = value;
   }
 
-  @action public init = () => {
-    this.loadData();
+  @computed get headerProps(): IHeaderProps {
+    const { handleSelectChange, theme, language } = this;
+    return { handleSelectChange, theme, language };
+  }
+
+  @computed get monacoEditorProps(): IMonacoEditorProps {
+    const { handleCodeChange, code, theme } = this;
+    return { handleCodeChange, code, theme };
+  }
+
+  @computed get previewProps(): IPreviewProps {
+    const { code } = this;
+    return { code };
   }
 
 }

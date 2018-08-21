@@ -6,6 +6,7 @@ const fs = require('fs');
 const paths = require('./paths');
 const lessToJs = require('less-vars-to-js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 const getExtra = (nodeEnv) => {
   // 多页应用入口文件数组
@@ -134,7 +135,9 @@ const getExtra = (nodeEnv) => {
     return resArr;
   })();
 
-  return { entry, htmlWebpackPlugins, lessLoaders };
+  const customizePlugins = [...htmlWebpackPlugins, new MonacoWebpackPlugin()];
+
+  return { entry, customizePlugins, lessLoaders };
 }
 
 

@@ -39,7 +39,7 @@ if (env.stringified['process.env'].NODE_ENV !== '"production"') {
   throw new Error('Production builds must have NODE_ENV=production.');
 }
 
-const { entry, htmlWebpackPlugins, lessLoaders } = getExtra(env.stringified['process.env'].NODE_ENV);
+const { entry, customizePlugins, lessLoaders } = getExtra(env.stringified['process.env'].NODE_ENV);
 
 // Note: defined here because it will be used more than once.
 const cssFilename = 'static/css/[name].[contenthash:8].css';
@@ -274,7 +274,7 @@ module.exports = {
     ],
   },
   plugins: [
-    ...htmlWebpackPlugins,
+    ...customizePlugins,
     ...[
       // Makes some environment variables available in index.html.
       // The public URL is available as %PUBLIC_URL% in index.html, e.g.:

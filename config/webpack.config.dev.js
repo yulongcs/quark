@@ -26,7 +26,7 @@ const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
-const { entry, htmlWebpackPlugins, lessLoaders } = getExtra(env.stringified['process.env'].NODE_ENV);
+const { entry, customizePlugins, lessLoaders } = getExtra(env.stringified['process.env'].NODE_ENV);
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -228,7 +228,7 @@ module.exports = {
     ],
   },
   plugins: [
-    ...htmlWebpackPlugins,
+    ...customizePlugins,
     ...[
       // Makes some environment variables available in index.html.
       // The public URL is available as %PUBLIC_URL% in index.html, e.g.:

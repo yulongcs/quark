@@ -14,8 +14,9 @@ export default class Store {
   }
 
   @action public handleRawChange = (raw: RawDraftContentState) => {
+    console.table(raw);
     // debugger;
-    console.log(JSON.stringify(raw));
+    // console.log(JSON.stringify(raw));
   }
 
   @action public loadData = () => {

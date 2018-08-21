@@ -34,3 +34,9 @@ export const urlToList = (url: string) => {
   const urllist = url.split('/').filter(i => i);
   return urllist.map((urlItem, index) => urlItem && `/${urllist.slice(0, index + 1).join('/')}`);
 };
+
+// escape 防xss攻击
+export const escape = (str: string) => str.replace(/<\/script/g, '<\\/script').replace(/<!--/g, '<\\!--');
+// export const escape = (str: string) => String(str || '').replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
+//   .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+//   .replace(/'/g, '&#39;').replace(/"/g, '&quot;');

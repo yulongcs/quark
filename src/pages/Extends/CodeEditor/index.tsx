@@ -1,9 +1,9 @@
 import { Card } from 'antd';
 import { inject, observer } from 'mobx-react';
-import * as  monaco from 'monaco-editor';
 import * as React from 'react';
 import { AppStore } from '../../../stores';
 import Store from './Store';
+import {Header, MonacoEditor, Preview} from './views';
 
 interface IProps {
   app: AppStore;
@@ -19,25 +19,17 @@ class Container extends React.Component<IProps> {
     this.store = new Store(props.app);
   }
 
-  public toCharon = () => {
-    location.href = 'https://github.com/vdfor/react-sail';
-  }
-
-  public refIns = (e: any) => {
-    monaco.editor.create(e, {
-      // model: null,
-      value: '<p>Hello, World!</p>',
-      language: 'html',
-      theme: 'vs-dark'
-    });
-  }
-
   public render() {
+    const { headerProps, monacoEditorProps, previewProps } = this.store;
 
     return (
-      <Card bordered={false}>
-        <div style={{ width: '100%', height: 500, padding: '16px 0' }} ref={this.refIns} />
-      </Card>
+      <React.Fragment>
+        <Card bordered={false}>
+          <Header {...headerProps} />
+          <MonacoEditor {...monacoEditorProps} />
+        </Card>
+        <Preview {...previewProps} />
+      </React.Fragment>
     );
   }
 }
