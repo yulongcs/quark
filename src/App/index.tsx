@@ -14,6 +14,9 @@ const Routes = () => {
       <Route key='default' exact={true} path='/'><Redirect to={{ pathname: '/home' }} /></Route>
       <Route key='/home' path='/home' component={loadable(() => import('../pages/Home'))} />
       <Route key='/components/table-list' path='/components/table-list' component={loadable(() => import('../pages/Components/TableList'))} />
+      <Route key='/extends/rich-text-editor' path='/extends/rich-text-editor' component={loadable(() => import('../pages/Extends/RichTextEditor'))} />
+      <Route key='/extends/code-editor' path='/extends/code-editor' component={loadable(() => import('../pages/Extends/CodeEditor'))} />
+      <Route key='/self/jumbotron' path='/self/jumbotron' component={loadable(() => import('../pages/Self/Jumbotron'))} />
       {/* <Route key='/subframe' path='/subframe' render={subframe} /> */}
       {/* <Route key='not-found' path='*' component={loadable(() => import('../pages/common/NotFound'))} /> */}
     </Switch>
