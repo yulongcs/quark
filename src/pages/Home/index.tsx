@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Jumbotron } from '../../components';
-import { device } from '../../utils';
 import { fetchUser } from './api';
 
 class Home extends React.Component<{}> {
@@ -10,7 +9,6 @@ class Home extends React.Component<{}> {
   }
 
   public async componentDidMount() {
-    console.log(device());
     if (!1) {
       await fetchUser();
     }

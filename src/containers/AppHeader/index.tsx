@@ -18,6 +18,10 @@ class Header extends React.Component<IProps> {
   constructor(props: IProps) {
     super(props);
     this.store = new Store(props.app as AppStore);
+
+    window.addEventListener('message', (e) => {
+      console.log(e);
+    }, false);
   }
 
   public render() {
