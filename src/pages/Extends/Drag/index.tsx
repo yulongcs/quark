@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import * as React from 'react';
 import { AppStore } from '../../../stores';
 import Store from './Store';
-import { DragTag, TagPositionPrev } from './views';
+import { DragCard, DragTag, TagPositionPrev } from './views';
 
 interface IProps {
   app: AppStore;
@@ -20,13 +20,16 @@ class Container extends React.Component<IProps> {
   }
 
   public render() {
-    const { tagPosition, dragTagProps } = this.store;
+    const { tagPosition, dragTagProps, dragCardProps } = this.store;
 
     return (
       <React.Fragment>
         <Card title='可拖拽标签' bordered={false} bodyStyle={{ minHeight: 200 }}>
           <DragTag {...dragTagProps} />
           <TagPositionPrev {...tagPosition} />
+        </Card>
+        <Card title='可拖拽卡片' bordered={false} style={{ marginTop: '16px' }}>
+          <DragCard {...dragCardProps} />
         </Card>
       </React.Fragment>
     );

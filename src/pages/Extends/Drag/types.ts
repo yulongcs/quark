@@ -20,4 +20,5 @@ export interface IDragCardDataItem {
 
 export interface IDragCardProps {
   data: IDragCardDataItem[];
+  onHandler:(handlerName: string) => (e: MouseEvent, data: DraggableData) => void;
 }

@@ -1,7 +1,7 @@
 import { action, computed, observable } from 'mobx';
 import { DraggableData } from 'react-draggable';
 import { AppStore } from '../../../stores';
-import { IDragCardDataItem, IDragTagProps, ITagPositionProps } from './types';
+import { IDragCardDataItem, IDragCardProps, IDragTagProps, ITagPositionProps } from './types';
 
 export default class Store {
 
@@ -22,7 +22,7 @@ export default class Store {
     ];
   }
 
-  @action public handleDrag = (e: MouseEvent, data: DraggableData) => {
+  @action public handleTagDrag = (e: MouseEvent, data: DraggableData) => {
     this.tagPosition = {
       clientX: e.clientX,
       clientY: e.clientY,
@@ -33,9 +33,27 @@ export default class Store {
     };
   }
 
+  @action public onDragCardHandler = (handlerName: string) => (e: MouseEvent, data: DraggableData) => {
+    switch (handlerName) {
+      case 'onDragStart':
+        console.log(e, data);
+        break;
+      default:
+        throw new Error('onDragHandler called with unrecognized handlerName: ' + handlerName);
+    }
+  }
+
   @computed get dragTagProps(): IDragTagProps {
-    const { handleDrag } = this;
-    return { handleDrag };
+    const { handleTagDrag } = this;
+    return { handleDrag: handleTagDrag };
+  }
+
+  @computed get dragCardProps(): IDragCardProps {
+    const { dragCardData, onDragCardHandler } = this;
+    return {
+      data: dragCardData,
+      onHandler: onDragCardHandler
+    };
   }
 
 }
