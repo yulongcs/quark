@@ -3,8 +3,11 @@ import BraftEditor from 'braft-editor';
 import 'braft-editor/dist/braft.css';
 import { inject, observer } from 'mobx-react';
 import * as React from 'react';
+import { constants } from '../../../common';
 import { AppStore } from '../../../stores';
 import Store from './Store';
+
+const { RICH_TEXT_EDITOR_COLORS } = constants;
 
 interface IProps {
   app: AppStore;
@@ -33,7 +36,19 @@ class Container extends React.Component<IProps> {
       placeholder: 'Hello world!',
       initialContent: content as any,
       // onChange: this.handleChange,
-      onRawChange: handleRawChange
+      onRawChange: handleRawChange,
+      colors: RICH_TEXT_EDITOR_COLORS,
+      media: {
+        image: true, // 图片插入功能
+        video: true, // 视频插入功能
+        audio: true, // 音频插入功能
+        externalMedias: { // 可插入的外部网络媒体类型
+          image: true,
+          audio: true,
+          video: true,
+          embed: false
+        }
+      }
     };
 
     return (

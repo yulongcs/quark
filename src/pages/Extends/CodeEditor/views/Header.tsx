@@ -1,7 +1,7 @@
 import { Form, Select } from 'antd';
 import { observer } from 'mobx-react';
 import * as React from 'react';
-import { MonacoLanguages, MonacoThemes } from '../../../../common/constants';
+import { MONACO_LANGUAGES, MONACO_THEMES } from '../../../../common/constants';
 import { IHeaderProps } from '../types';
 
 const Header: React.SFC<IHeaderProps> = ({ handleSelectChange, theme, language }) => (
@@ -13,7 +13,7 @@ const Header: React.SFC<IHeaderProps> = ({ handleSelectChange, theme, language }
         value={language}
         onChange={handleSelectChange('language')}
       >
-        {MonacoLanguages.map(i => <Select.Option value={i.value} key={i.value}>{i.label}</Select.Option>)}
+        {MONACO_LANGUAGES.map(i => <Select.Option value={i.value} key={i.value}>{i.label}</Select.Option>)}
       </Select>
     </Form.Item>
     <Form.Item label='主题' colon={false}>
@@ -23,7 +23,7 @@ const Header: React.SFC<IHeaderProps> = ({ handleSelectChange, theme, language }
         value={theme}
         onChange={handleSelectChange('theme')}
       >
-        {MonacoThemes.map(i => <Select.Option value={i.value} key={i.value}>{i.label}</Select.Option>)}
+        {MONACO_THEMES.map(i => <Select.Option value={i.value} key={i.value}>{i.label}</Select.Option>)}
       </Select>
     </Form.Item>
   </Form>
