@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import * as React from 'react';
 import { AppStore } from '../../../stores';
 import Store from './Store';
-import {Header, MonacoEditor, Preview} from './views';
+import { Header, MonacoEditor, Preview } from './views';
 
 interface IProps {
   app: AppStore;
@@ -20,14 +20,17 @@ class Container extends React.Component<IProps> {
   }
 
   public render() {
-    const { headerProps, monacoEditorProps, previewProps } = this.store;
+    const { headerProps, monacoEditorProps, previewProps, isEditing } = this.store;
 
     return (
       <React.Fragment>
-        <Card bordered={false}>
-          <Header {...headerProps} />
-          <MonacoEditor {...monacoEditorProps} />
-        </Card>
+        {
+          isEditing &&
+          <Card bordered={false}>
+            <Header {...headerProps} />
+            <MonacoEditor {...monacoEditorProps} />
+          </Card>
+        }
         <Preview {...previewProps} />
       </React.Fragment>
     );

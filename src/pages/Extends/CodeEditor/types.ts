@@ -14,4 +14,7 @@ export interface IMonacoEditorProps {
 
 export interface IPreviewProps {
   code: string;
+  isEditing: boolean;
+  toggleEditing:  (status: boolean) => void;
+  setCodeValue: (value: string) => void;
 }

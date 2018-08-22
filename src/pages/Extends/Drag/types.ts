@@ -12,3 +12,12 @@ export interface ITagPositionProps {
   deltaX: number;
   deltaY: number;
 }
+
+export interface IDragCardDataItem {
+  id: string;
+  label: string;
+}
+
+export interface IDragCardProps {
+  data: IDragCardDataItem[];
+}

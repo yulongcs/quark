@@ -7,6 +7,8 @@ export default class Store {
 
   public app: AppStore;
 
+  @observable public isEditing: boolean;
+
   @observable public language: string;
   @observable public theme: MonacoEditor.editor.BuiltinTheme;
 
@@ -15,10 +17,12 @@ export default class Store {
   constructor(app: AppStore) {
     this.app = app;
 
+    this.isEditing = false;
+
     this.theme = 'vs-dark';
     this.language = 'html';
 
-    this.code = '<p>Hello, World!</p>';
+    this.code = '';
   }
 
   @action public handleSelectChange = (id: 'theme' | 'language') => (value: string) => {
@@ -29,6 +33,12 @@ export default class Store {
 
   @action public handleCodeChange = (value: string) => {
     this.code = value;
+  }
+
+  @action public toggleEditing = (status: boolean) => {
+    runInAction(() => {
+      this.isEditing = status;
+    });
   }
 
   @computed get headerProps(): IHeaderProps {
@@ -42,8 +52,13 @@ export default class Store {
   }
 
   @computed get previewProps(): IPreviewProps {
-    const { code } = this;
-    return { code };
+    const { code, isEditing, toggleEditing, handleCodeChange } = this;
+    return {
+      code,
+      isEditing,
+      toggleEditing,
+      setCodeValue: handleCodeChange
+    };
   }
 
 }
