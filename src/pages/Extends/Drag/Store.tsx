@@ -1,7 +1,7 @@
 import { action, computed, observable } from 'mobx';
 import { DraggableData } from 'react-draggable';
 import { AppStore } from '../../../stores';
-import { IDragCardDataItem, IDragCardProps, IDragTagProps, ITagPositionProps } from './types';
+import { IDragCardDataItem, IDragCardProps, IDragTagProps, ITagPositionProps, ITranslate } from './types';
 
 export default class Store {
 
@@ -14,11 +14,11 @@ export default class Store {
     this.app = app;
 
     this.dragCardData = [
-      { id: '1', label: '卡片一' },
-      { id: '2', label: '卡片二' },
-      { id: '3', label: '卡片三' },
-      { id: '4', label: '卡片四' },
-      { id: '5', label: '卡片五' }
+      { id: '1', label: '卡片一', translate: { x: 0, y: 0 } },
+      { id: '2', label: '卡片二', translate: { x: 0, y: 0 } },
+      { id: '3', label: '卡片三', translate: { x: 0, y: 0 } },
+      { id: '4', label: '卡片四', translate: { x: 0, y: 0 } },
+      { id: '5', label: '卡片五', translate: { x: 0, y: 0 } }
     ];
   }
 
@@ -33,10 +33,40 @@ export default class Store {
     };
   }
 
-  @action public onDragCardHandler = (handlerName: string) => (e: MouseEvent, data: DraggableData) => {
+  @action public updateDragCardDataItem = (id: string, translate: ITranslate) => {
+    for (const item of this.dragCardData) {
+      if (item.id === id) {
+        item.translate = translate;
+        break;
+      }
+    }
+  }
+
+  @action public onDragCardHandler = (handlerName: string, id: string) => (e: MouseEvent, { node, deltaX, deltaY }: DraggableData) => {
+    console.log(e);
+    const newPosition: ITranslate = { x: 0, y: 0 };
     switch (handlerName) {
-      case 'onDragStart':
-        console.log(e, data);
+      case 'onStart':
+        const { offsetParent } = node;
+        if (!offsetParent) {
+          return;
+        }
+        const parentRect = offsetParent.getBoundingClientRect();
+        const clientRect = node.getBoundingClientRect();
+        newPosition.x = clientRect.left - parentRect.left + offsetParent.scrollLeft;
+        newPosition.y = clientRect.top - parentRect.top + offsetParent.scrollTop;
+        this.updateDragCardDataItem(id, newPosition);
+        break;
+      case 'onDrag':
+        const currentItem = this.dragCardData.filter(i => i.id === id);
+        const currentTranslate = currentItem[0] && currentItem[0].translate;
+        if (!currentTranslate) {
+          throw new Error('onDrag item not exists');
+        }
+        newPosition.x = currentTranslate.x + deltaX;
+        newPosition.y = currentTranslate.y + deltaY;
+        this.updateDragCardDataItem(id, newPosition);
+        break;
         break;
       default:
         throw new Error('onDragHandler called with unrecognized handlerName: ' + handlerName);

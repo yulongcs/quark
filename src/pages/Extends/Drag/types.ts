@@ -13,12 +13,18 @@ export interface ITagPositionProps {
   deltaY: number;
 }
 
+export interface ITranslate {
+  x: number;
+  y: number;
+}
+
 export interface IDragCardDataItem {
   id: string;
   label: string;
+  translate: ITranslate;
 }
 
 export interface IDragCardProps {
   data: IDragCardDataItem[];
-  onHandler:(handlerName: string) => (e: MouseEvent, data: DraggableData) => void;
+  onHandler:(handlerName: string, id: string) => (e: MouseEvent, data: DraggableData) => void;
 }
