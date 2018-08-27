@@ -8,6 +8,21 @@ const lessToJs = require('less-vars-to-js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
+const getTemplate = (i) => { // 获取html模板
+  if (i === 'index') {
+    return paths.appHtml;
+  }
+  try {
+    const stat = fs.statSync(paths.appPublic + `/${i}.html`);
+    if (stat && stat.isFile()) {
+      return paths.appPublic + `/${i}.html`; // 使用自定义模板
+    }
+    return paths.appHtml; // 使用默认模板
+  } catch (error) {
+    return paths.appHtml; // 使用默认模板
+  }
+};
+
 const getExtra = (nodeEnv) => {
   // 多页应用入口文件数组
   const pages = ['index', 'index-mobile'];
@@ -29,20 +44,7 @@ const getExtra = (nodeEnv) => {
       ];
       htmlWebpackPlugins.push(new HtmlWebpackPlugin({
         inject: true,
-        template: (() => { // 获取html模板
-          if (i === 'index') {
-            return paths.appHtml;
-          }
-          try {
-            const stat = fs.statSync(paths.appPublic + `/${i}.html`);
-            if (stat && stat.isFile()) {
-              return paths.appPublic + `/${i}.html`; // 使用自定义模板
-            }
-            return paths.appHtml; // 使用默认模板
-          } catch (error) {
-            return paths.appHtml; // 使用默认模板
-          }
-        })(),
+        template: getTemplate(i),
         chunks: [i],
         filename: `${i}.html`
       }));
@@ -54,7 +56,7 @@ const getExtra = (nodeEnv) => {
 
       htmlWebpackPlugins.push(new HtmlWebpackPlugin({
         inject: true,
-        template: paths.appHtml,
+        template: getTemplate(i),
         chunks: [i],
         filename: `${i}.html`,
         minify: {
