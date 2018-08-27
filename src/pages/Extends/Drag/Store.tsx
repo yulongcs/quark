@@ -67,7 +67,6 @@ export default class Store {
         newPosition.y = currentTranslate.y + deltaY;
         this.updateDragCardDataItem(id, newPosition);
         break;
-        break;
       default:
         throw new Error('onDragHandler called with unrecognized handlerName: ' + handlerName);
     }

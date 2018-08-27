@@ -37,6 +37,9 @@ export const urlToList = (url: string) => {
 
 // escape 防xss攻击
 export const escape = (str: string) => str.replace(/<\/script/g, '<\\/script').replace(/<!--/g, '<\\!--');
-// export const escape = (str: string) => String(str || '').replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
-//   .replace(/</g, '&lt;').replace(/>/g, '&gt;')
-//   .replace(/'/g, '&#39;').replace(/"/g, '&quot;');
+
+// 数组对调位置
+export const transposeArr = (arr: any[], index1: number, index2: number) => {
+  arr.splice(index1 - 1, 1, ...arr.splice(index2 - 1, 1, arr[index1 - 1]));
+  return arr;
+};
