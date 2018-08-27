@@ -16,6 +16,7 @@ yarn start
 + axios并进行封装用于前后端数据交互
 + 支持less module(文件名称限定为 [name].module.less)
 + 支持多页
++ pwa
 + 权限控制与路由守卫
 + ...
 
@@ -27,7 +28,6 @@ yarn start
 [themes]('./themes')目录下配置antd主题
 
 ## 计划
-+ PWA
 + 在线主题切换
 + 支持服务端渲染
 + ...
