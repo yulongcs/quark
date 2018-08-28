@@ -6,7 +6,6 @@ const fs = require('fs');
 const paths = require('./paths');
 const lessToJs = require('less-vars-to-js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 const getTemplate = (i) => { // 获取html模板
   if (i === 'index') {
@@ -137,7 +136,7 @@ const getExtra = (nodeEnv) => {
     return resArr;
   })();
 
-  const customizePlugins = [...htmlWebpackPlugins, new MonacoWebpackPlugin()];
+  const customizePlugins = [...htmlWebpackPlugins];
 
   return { entry, customizePlugins, lessLoaders };
 }

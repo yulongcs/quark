@@ -15,7 +15,6 @@ const Routes = () => {
       <Route key='/home' path='/home' component={loadable(() => import('../pages/Home'))} />
       <Route key='/components/table-list' path='/components/table-list' component={loadable(() => import('../pages/Components/TableList'))} />
       <Route key='/extends/rich-text-editor' path='/extends/rich-text-editor' component={loadable(() => import('../pages/Extends/RichTextEditor'))} />
-      <Route key='/extends/code-editor' path='/extends/code-editor' component={loadable(() => import('../pages/Extends/CodeEditor'))} />
       <Route key='/extends/drag' path='/extends/drag' component={loadable(() => import('../pages/Extends/Drag'))} />
       <Route key='/self/jumbotron' path='/self/jumbotron' component={loadable(() => import('../pages/Self/Jumbotron'))} />
       {/* <Route key='/subframe' path='/subframe' render={subframe} /> */}

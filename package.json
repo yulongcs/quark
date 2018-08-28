@@ -47,7 +47,6 @@
     "react-dom": "^16.4.2",
     "react-draggable": "^3.0.5",
     "react-loadable": "^5.4.0",
-    "react-monaco-editor": "^0.18.0",
     "react-router-dom": "^4.3.1",
     "resolve": "1.6.0",
     "source-map-loader": "^0.2.1",
@@ -86,7 +85,6 @@
     "less-loader": "^4.1.0",
     "less-vars-to-js": "^1.2.1",
     "mobx-react-devtools": "^6.0.2",
-    "monaco-editor-webpack-plugin": "^1.5.1",
     "ts-import-plugin": "^1.5.4",
     "typescript": "^3.0.1"
   },
