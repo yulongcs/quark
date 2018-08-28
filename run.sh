@@ -1,7 +1,5 @@
 #!/bin/bash
 echo 'start...'
-git fetch --all  
-git reset --hard origin/master
 rm -rf node_modules
 yarn install
 yarn run build
