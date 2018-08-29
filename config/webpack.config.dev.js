@@ -26,7 +26,7 @@ const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
-const { entry, customizePlugins, lessLoaders } = getExtra(env.stringified['process.env'].NODE_ENV);
+const { entry, customizePlugins, cssExtensionLoaders } = getExtra(env.stringified['process.env'].NODE_ENV);
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -115,7 +115,7 @@ module.exports = {
         // match the requirements. When no loader matches it will fall
         // back to the "file" loader at the end of the loader list.
         oneOf: [
-          ...lessLoaders,
+          ...cssExtensionLoaders,
           ...[
             // "url" loader works like "file" loader except that it embeds assets
             // smaller than specified limit in bytes as data URLs to avoid requests.

@@ -27,7 +27,7 @@ yarn start
 ### 构建
 
 ```bash
-yarn run build
+yarn build
 ```
 
 ### CI command

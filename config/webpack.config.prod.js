@@ -39,7 +39,7 @@ if (env.stringified['process.env'].NODE_ENV !== '"production"') {
   throw new Error('Production builds must have NODE_ENV=production.');
 }
 
-const { entry, customizePlugins, lessLoaders } = getExtra(env.stringified['process.env'].NODE_ENV);
+const { entry, customizePlugins, cssExtensionLoaders } = getExtra(env.stringified['process.env'].NODE_ENV);
 
 // Note: defined here because it will be used more than once.
 const cssFilename = 'static/css/[name].[contenthash:8].css';
@@ -140,7 +140,7 @@ module.exports = {
         // match the requirements. When no loader matches it will fall
         // back to the "file" loader at the end of the loader list.
         oneOf: [
-          ...lessLoaders,
+          ...cssExtensionLoaders,
           ...[
             // "url" loader works just like "file" loader but it also embeds
             // assets smaller than specified size as data URLs to avoid requests.

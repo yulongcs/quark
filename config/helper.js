@@ -2,10 +2,10 @@
 'use strict';
 
 const fs = require('fs');
-// const path = require('path');
 const paths = require('./paths');
 const lessToJs = require('less-vars-to-js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 const getTemplate = (i) => { // 获取html模板
   if (i === 'index') {
@@ -136,9 +136,62 @@ const getExtra = (nodeEnv) => {
     return resArr;
   })();
 
+  // sass loader
+  const sassLoaders = (() => {
+    const arr = ['sass-module'];
+    const resArr = [];
+    arr.forEach(i => {
+      const opts = {
+        test: /\.scss$/,
+        use: [
+          require.resolve('style-loader'),
+          {
+            loader: require.resolve('css-loader'),
+            options: {
+              importLoaders: 1,
+            },
+          },
+          {
+            loader: require.resolve('postcss-loader'),
+            options: {
+              ident: 'postcss',
+              plugins: () => [
+                require('postcss-flexbugs-fixes'),
+                autoprefixer({
+                  browsers: [
+                    '>1%',
+                    'last 4 versions',
+                    'Firefox ESR',
+                    'not ie < 9', // React doesn't support IE8 anyway
+                    'iOS >= 7',
+                    'Android >= 4'
+                  ],
+                  flexbox: 'no-2009',
+                }),
+              ],
+            },
+          },
+          {
+            loader: require.resolve('sass-loader')
+          }
+        ]
+      };
+      if (i === 'sass-module') {
+        opts.include = /\.module\.scss/; // 需开启的scss-module以.module结尾
+        opts.exclude = /node_modules/;
+        opts.use[1].options.modules = true;
+        opts.use[1].options.localIdentName = '[local]__[hash:base64:5]';
+      }
+      resArr.push(opts);
+    })
+    return resArr;
+  })();
+
+  const cssExtensionLoaders = [...lessLoaders, ...sassLoaders];
+
   const customizePlugins = [...htmlWebpackPlugins];
 
-  return { entry, customizePlugins, lessLoaders };
+  return { entry, customizePlugins, cssExtensionLoaders };
 }
 
 
