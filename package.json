@@ -67,7 +67,7 @@
   },
   "scripts": {
     "start": "cross-env PORT=8182 node scripts/start.js",
-    "build": "cross-env GENERATE_SOURCEMAP=false PUBLIC_URL=/ node scripts/build.js",
+    "build": "rm -rf build && cross-env GENERATE_SOURCEMAP=false PUBLIC_URL=/ node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
   },
   "devDependencies": {
