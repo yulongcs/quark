@@ -13,8 +13,7 @@
   "homepage": "https://github.com/vdfor/react-sail#readme",
   "private": true,
   "dependencies": {
-    "antd": "^3.8.4",
-    "antd-mobile": "^2.2.3",
+    "antd": "^3.9.1",
     "autoprefixer": "7.1.6",
     "axios": "^0.18.0",
     "babel-jest": "^22.1.0",

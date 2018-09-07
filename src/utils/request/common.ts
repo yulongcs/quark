@@ -1,7 +1,6 @@
 import { notification } from 'antd';
-import { Toast } from 'antd-mobile';
 import * as _ from 'lodash';
-import { credentials, device } from '../';
+import { credentials } from '../';
 
 export const config = {
   timeout: 10000, // 指定请求超时的毫秒数(0 表示无超时时间)，如果请求花费了超过 `timeout` 的时间，请求将被中断
@@ -29,14 +28,10 @@ export const codeMessage = { // copy from https://github.com/ant-design/ant-desi
 
 // 错误提示信息
 export const showErrorTip = (errorTitle: string, errorText: string) => {
-  if (device().mobile) { // 移动端
-    Toast.fail(errorText, 2, null as any, false);
-  } else { // PC端
-    notification.error({
-      message: errorTitle,
-      description: errorText
-    });
-  }
+  notification.error({
+    message: errorTitle,
+    description: errorText
+  });
 };
 
 export const getAuthCertHeaders = () => {
