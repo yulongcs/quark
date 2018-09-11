@@ -29,7 +29,7 @@ class Header extends React.Component<IProps> {
     const { logout, app: { customerStore: { menuCollapsed, toggleMenuCollapsed, openResetPasswordModal } } } = this.store;
 
     return (
-      <Layout.Header className={styles.header}>\
+      <Layout.Header className={styles.header}>
         <div className={styles.icon}>
           <Icon
             type={menuCollapsed ? 'menu-unfold' : 'menu-fold'}
@@ -41,11 +41,11 @@ class Header extends React.Component<IProps> {
           <div className={styles.item} onClick={openResetPasswordModal}>
             <Icon type='lock' style={{ paddingRight: '8px' }} />
             修改密码
-        </div>
+          </div>
           <div onClick={logout} className={styles.item}>
             <Icon type='logout' style={{ paddingRight: '8px' }} />
             退出系统
-        </div>
+          </div>
           {/* <Dropdown overlay={
           <Menu>
             <Menu.Item key={3} onClick={logout}>退出登录</Menu.Item>

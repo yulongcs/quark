@@ -8,15 +8,19 @@ import { loadable } from '../utils';
 
 const { Content } = Layout;
 
+const HomeComponent = loadable(() => import('../pages/Home'));
+const TableListComponent = loadable(() => import('../pages/Components/TableList'));
+const DragComponent = loadable(() => import('../pages/Extends/Drag'));
+const JumbotronComponent = loadable(() => import('../pages/Self/Jumbotron'));
+
 const Routes = () => {
   return (
     <Switch>
       <Route key='default' exact={true} path='/'><Redirect to={{ pathname: '/home' }} /></Route>
-      <Route key='/home' path='/home' component={loadable(() => import('../pages/Home'))} />
-      <Route key='/components/table-list' path='/components/table-list' component={loadable(() => import('../pages/Components/TableList'))} />
-      <Route key='/extends/rich-text-editor' path='/extends/rich-text-editor' component={loadable(() => import('../pages/Extends/RichTextEditor'))} />
-      <Route key='/extends/drag' path='/extends/drag' component={loadable(() => import('../pages/Extends/Drag'))} />
-      <Route key='/self/jumbotron' path='/self/jumbotron' component={loadable(() => import('../pages/Self/Jumbotron'))} />
+      <Route key='/home' path='/home' component={HomeComponent} />
+      <Route key='/components/table-list' path='/components/table-list' component={TableListComponent} />
+      <Route key='/extends/drag' path='/extends/drag' component={DragComponent} />
+      <Route key='/self/jumbotron' path='/self/jumbotron' component={JumbotronComponent} />
       {/* <Route key='/subframe' path='/subframe' render={subframe} /> */}
       {/* <Route key='not-found' path='*' component={loadable(() => import('../pages/common/NotFound'))} /> */}
     </Switch>
@@ -32,7 +36,7 @@ const App = () => (
         <Routes />
       </Content>
     </Layout>
-    {process.env.NODE_ENV === 'development' ? <DevTools /> : null}
+    {process.env.NODE_ENV === 'development' && <DevTools />}
   </Layout>
 );
 

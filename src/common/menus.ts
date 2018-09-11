@@ -15,8 +15,7 @@ const menus = [
     path: '/extends',  
     icon: 'link',
     children: [
-      { id: '3-1', name: '富文本编辑器', path: '/extends/rich-text-editor' },
-      { id: '3-3', name: '拖拽', path: '/extends/drag' }
+      { id: '3-1', name: '拖拽', path: '/extends/drag' }
     ]
   },
   {
