@@ -19,7 +19,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true // only for antd-mobile
+    "allowSyntheticDefaultImports": true // set true for antd-mobile and draft-editor
   },
   "include": [
     "./src/**/*"

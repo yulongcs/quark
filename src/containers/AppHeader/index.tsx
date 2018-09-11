@@ -29,12 +29,13 @@ class Header extends React.Component<IProps> {
     const { logout, app: { customerStore: { menuCollapsed, toggleMenuCollapsed, openResetPasswordModal } } } = this.store;
 
     return (
-      <Layout.Header className={styles.header}>
-        <Icon
-          className={styles.icon}
-          type={menuCollapsed ? 'menu-unfold' : 'menu-fold'}
-          onClick={toggleMenuCollapsed}
-        />
+      <Layout.Header className={styles.header}>\
+        <div className={styles.icon}>
+          <Icon
+            type={menuCollapsed ? 'menu-unfold' : 'menu-fold'}
+            onClick={toggleMenuCollapsed}
+          />
+        </div>
         <div className={styles.welcome}>欢迎 Admin</div>
         <div className={styles.right}>
           <div className={styles.item} onClick={openResetPasswordModal}>
