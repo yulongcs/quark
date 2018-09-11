@@ -15,6 +15,27 @@ require('whatwg-fetch');
 // It will use the native implementation if it's present and isn't buggy.
 Object.assign = require('object-assign');
 
+// IE
+if (!!window.ActiveXObject || 'ActiveXObject' in window) {
+  /** IE9, IE10 and IE11 requires all of the following polyfills. */
+  require('core-js/es6/array');
+  require('core-js/es6/date');
+  require('core-js/es6/function');
+  require('core-js/es6/map');
+  require('core-js/es6/math');
+  require('core-js/es6/number');
+  require('core-js/es6/object');
+  require('core-js/es6/parse-float');
+  require('core-js/es6/parse-int');
+  require('core-js/es6/regexp');
+  require('core-js/es6/set');
+  require('core-js/es6/string');
+  require('core-js/es6/symbol');
+  require('core-js/es6/weak-map');
+  /** IE10 and IE11 requires the following for the Reflect API. */
+  require('core-js/es6/reflect');
+}
+
 // In tests, polyfill requestAnimationFrame since jsdom doesn't provide it yet.
 // We don't polyfill it in the browser--this is user's responsibility.
 if (process.env.NODE_ENV === 'test') {
