@@ -27,8 +27,6 @@ const getExtra = (nodeEnv) => {
   const pages = ['index'];
   // 获取antd自定义主题设置
   const antdThemer = lessToJs(fs.readFileSync(paths.appSrc + '/themes/antd.less', 'utf8'));
-  // // 获取antd-mobile自定义主题设置
-  // const antdMobileThemer = lessToJs(fs.readFileSync(paths.appSrc + '/themes/antd-mobile.less', 'utf8'));
 
   // 入口文件
   const entry = {};
