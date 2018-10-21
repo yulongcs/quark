@@ -11,14 +11,14 @@ yarn start
 
 ## 特性
 
-+ antd作为UI库，并配置按需加载、自定义主题等
++ `antd`作为UI库，并配置按需加载、自定义主题等
 + 整体结构按功能组织
-+ mobx作为状态管理工具
-+ react-loadable实现组件级别(包含路由)的按需加载
-+ axios并进行封装用于前后端数据交互
-+ 支持less module(文件名称限定为 [name].module.less)
++ `mobx`作为状态管理工具
++ `react-loadable`实现组件级别(包含路由)的按需加载
++ 封装`fetch`用于前后端数据交互
++ 支持`less module`(文件名称限定为 `[name].module.less`)
 + 支持多页
-+ pwa
++ `pwa`
 + 权限控制与路由守卫
 + ...
 
