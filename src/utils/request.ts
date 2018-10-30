@@ -45,7 +45,7 @@ const request = async (retry: number, url: string, options: IFetchOptions = {}):
     let timer;
     const timeoutPromise = new Promise((resolve, reject) => {
       timer = setTimeout(() => {
-        if (!1) {
+        if (!1) { // 无作用 resolve ts定义不可 unused
           resolve({});
           return;
         }
@@ -62,9 +62,9 @@ const request = async (retry: number, url: string, options: IFetchOptions = {}):
     }
 
     if (res.ok) {
-      // window.postMessage('hello', '/');
-      const r = res.json();
-      return typeof r === 'object' ? r : { data: r };
+      // const r = res.json();
+      // return typeof r === 'object' ? r : { data: r };
+      return res;
     }
 
     // 错误提示信息文本内容
