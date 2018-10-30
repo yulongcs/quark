@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { Jumbotron } from '../../components';
+import { AppContext } from '../../contexts';
 import { fetchUser } from './api';
 
 class Home extends React.PureComponent<{}> {
+  public static contextType = AppContext;
 
   public toCharon = () => {
     location.href = 'https://github.com/vdfor/react-sail';
@@ -15,6 +17,7 @@ class Home extends React.PureComponent<{}> {
   }
 
   public render() {
+    console.log(this.context);
     return (
       <Jumbotron
         title='react-sail is ready!'
