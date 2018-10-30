@@ -12,6 +12,8 @@ document.addEventListener('submit', (e) => {
   e.preventDefault();
 });
 
+console.log(React);
+
 ReactDOM.render(
   <LocaleProvider locale={zhCN}>
     <Router history={history}>
