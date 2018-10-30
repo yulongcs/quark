@@ -62,8 +62,7 @@ const request = async (retry: number, url: string, options: IFetchOptions = {}):
     }
 
     if (res.ok) {
-      // const r = res.json();
-      // return typeof r === 'object' ? r : { data: r };
+      console.log(res);
       return res;
     }
 
@@ -118,11 +117,7 @@ export default (url: string, options: IRequestOptions = {}): Promise<any> => {
   if (newOptions.params) {
     const urlQuery = (() => {
       const querys = newOptions.params || {};
-      const queryArr: string[] = [];
-      Object.keys(querys).forEach(key => {
-        queryArr.push(`${key}=${querys[key]}`);
-      });
-      return queryArr.join('&');
+      return Object.keys(querys).map(key => `${key}=${typeof querys[key] === 'string' || typeof querys[key] === 'number' ? querys[key] : ''}`).join('&');
     })();
     newUrl += '?' + urlQuery;
     newOptions = _.omit(newOptions, 'params');

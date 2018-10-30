@@ -9,7 +9,7 @@ class Home extends React.PureComponent<{}> {
   }
 
   public async componentDidMount() {
-    if (!!1) {
+    if (!1) {
       await fetchUser();
     }
   }
