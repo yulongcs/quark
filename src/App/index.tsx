@@ -1,14 +1,15 @@
 import { Icon, Layout, Menu } from 'antd';
+import { SiderTheme } from 'antd/lib/layout/Sider';
 import * as _ from 'lodash';
 import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { WaitingComponent } from '../components';
 import { MENUS } from '../constants';
-import { AppContext, IAppContextValue, initAppContentValues } from '../contexts';
+import AppContext, { IAppContextState, initAppContextValue } from './Context';
 import styles from './index.module.less';
 import { IMenu } from './types';
 
-interface IState extends IAppContextValue {
+interface IState extends IAppContextState {
   menusDom: any[];
 }
 
@@ -37,17 +38,31 @@ const generateMenu = (menu: IMenu) => {
 class App extends React.Component<{}, IState> {
 
   public state = {
-    ...initAppContentValues,
+    ...initAppContextValue.state,
     menusDom: []
   };
 
-  public render() {
+  public setTheme = (theme: SiderTheme) => {
+    this.setState(state => ({
+      ...state,
+      theme
+    }));
+  }
 
-    const { theme } = this.state;
+  public render() {
+    const { setTheme, state } = this;
+    const { theme } = state;
     const appContextValue = _.omit(this.state, 'menusDom');
 
     return (
-      <AppContext.Provider value={appContextValue}>
+      <AppContext.Provider
+        value={{
+          state: appContextValue,
+          action: {
+            setTheme
+          }
+        }}
+      >
         <Layout style={{ minHeight: '100vh' }}>
           <Layout.Sider width={256} className={styles.siderMenu + ' ' + styles.fixed}>
             <div style={{ height: '32px', background: 'rgba(255,255,255,.2)', margin: '16px' }} />

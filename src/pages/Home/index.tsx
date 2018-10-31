@@ -1,13 +1,13 @@
 import * as React from 'react';
+import AppContext from '../../App/Context';
 import { Jumbotron } from '../../components';
-import { AppContext } from '../../contexts';
 import { fetchUser } from './api';
 
 class Home extends React.PureComponent<{}> {
   public static contextType = AppContext;
 
-  public toCharon = () => {
-    location.href = 'https://github.com/vdfor/react-sail';
+  public setTheme = () => {
+    this.context.action.setTheme('light');
   }
 
   public async componentDidMount() {
@@ -17,13 +17,12 @@ class Home extends React.PureComponent<{}> {
   }
 
   public render() {
-    console.log(this.context);
     return (
       <Jumbotron
         title='react-sail is ready!'
         description='采用dark主题、侧边栏布局，定位于中后台管理应用。'
-        buttonTitle='了解更多'
-        onButtonClick={this.toCharon}
+        buttonTitle='更换主题'
+        onButtonClick={this.setTheme}
       />
     );
   }
