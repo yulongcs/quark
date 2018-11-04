@@ -6,7 +6,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { WaitingComponent } from '../components';
 import { MENUS } from '../constants';
 import AppContext, { IAppContextState, initAppContextValue } from './Context';
-import styles from './index.module.less';
+import styles from './index.module.scss';
 import { IMenu } from './types';
 
 interface IState extends IAppContextState {

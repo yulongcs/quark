@@ -5,7 +5,7 @@ import * as ReactDOM from 'react-dom';
 import { Route, Router, Switch } from 'react-router-dom';
 import { WaitingComponent } from './components';
 import './index.css';
-import registerServiceWorker from './registerServiceWorker';
+import * as serviceWorker from './serviceWorker';
 import { history } from './utils';
 
 // 防止表单提交导致页面刷新的统一处理
@@ -26,4 +26,4 @@ ReactDOM.render(
   document.getElementById('root') as HTMLElement
 );
 
-registerServiceWorker();
+serviceWorker.unregister();
