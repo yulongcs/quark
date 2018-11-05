@@ -1,6 +1,4 @@
-import { notification } from 'antd';
 import * as _ from 'lodash';
-import { base, credentials } from '.';
 
 interface IRequestOptions {
   headers?: { [key: string]: string | any };
@@ -49,7 +47,7 @@ const request = async (retry: number, url: string, options: IFetchOptions = {}):
           resolve({});
           return;
         }
-        reject({ statusText: '请求超时' });
+        reject({ status: 504, statusText: '请求超时' });
       }, config.timeout);
     });
 
@@ -62,36 +60,31 @@ const request = async (retry: number, url: string, options: IFetchOptions = {}):
     }
 
     if (res.ok) {
-      console.log(res);
       return res;
     }
 
-    // 错误提示信息文本内容
+    // error
     const errorText = res.statusText || codeMessage[res.status] || res.status;
-    notification.error({
-      message: `http请求错误 ${res.status}`,
-      description: errorText
-    });
-    console.error(res);
+    const error = new Error(errorText);
+    (error as any).status = res.status;
+    (error as any).response = res;
 
-    if (res.status === 401) { // 401未授权
+    throw error;
+
+  } catch (error) {
+    console.log(error);
+    if (error.status === 401) { // 401未授权
       // appStore.setUnauthenticated();
+      // return;
     }
 
-    return undefined;
-  } catch (error) {
     retry += 1;
 
-    if (retry > config.retryTimes) { // 异常自动重连
-      notification.error({
-        message: `http请求错误 ${error && error.status || ''}`,
-        description: error && error.statusText || '网络异常'
-      });
-      console.error(error);
-      return undefined;
+    if (retry > config.retryTimes) {
+      throw error;
     }
 
-    setTimeout(() => {
+    setTimeout(() => { // 异常自动重连
       return request(retry, url, options);
     }, config.retryInterval);
   }
@@ -105,12 +98,38 @@ const request = async (retry: number, url: string, options: IFetchOptions = {}):
  * @return {Promise<any>}
  */
 export default (url: string, options: IRequestOptions = {}): Promise<any> => {
-  let newUrl = base.baseUrl + url;
-  let newOptions = { ...options };
+  let newUrl = url;
+  let newOptions = {
+    // ...{
+    //   credentials: 'include'
+    // },
+    ...options 
+  };
+  const token = 'test-token';
+
+  if (
+    newOptions.method === 'POST' ||
+    newOptions.method === 'PUT' ||
+    newOptions.method === 'PATCH' ||
+    newOptions.method === 'DELETE'
+  ) {
+    if (!(newOptions.data instanceof FormData)) { // newOptions.data is not FormData
+      newOptions.headers = {
+        Accept: 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
+        ...newOptions.headers
+      };
+      newOptions.data = JSON.stringify(newOptions.data);
+    } else { // newOptions.data is FormData
+      newOptions.headers = {
+        Accept: 'application/json',
+        ...newOptions.headers
+      };
+    }
+  }
 
   newOptions.headers = {
-    Accept: 'application/json, text/plain, */*',
-    Authorization: `Bearer ${credentials.token || ''}`,
+    Authorization: `Bearer ${token || ''}`,
     ...newOptions.headers
   };
 
