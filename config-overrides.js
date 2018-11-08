@@ -6,6 +6,10 @@ const rewireLess = require('react-app-rewire-less');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
+const {
+  addDecoratorsLegacy,
+  disableEsLint
+} = require('customize-cra');
 
 // 获取html模板
 const getTemplate = (i) => {
@@ -135,6 +139,10 @@ module.exports = (config, env) => {
     },
     javascriptEnabled: true,
   })(config, env);
+
+  config = disableEsLint()(config);
+
+  config = addDecoratorsLegacy()(config);
 
   return config;
 };

@@ -280,7 +280,7 @@
     "@babel/helper-replace-supers" "^7.1.0"
     "@babel/plugin-syntax-class-properties" "^7.0.0"
 
-"@babel/plugin-proposal-decorators@7.1.2":
+"@babel/plugin-proposal-decorators@7.1.2", "@babel/plugin-proposal-decorators@^7.1.2":
   version "7.1.2"
   resolved "http://registry.npm.taobao.org/@babel/plugin-proposal-decorators/download/@babel/plugin-proposal-decorators-7.1.2.tgz#79829bd75fced6581ec6c7ab1930e8d738e892e7"
   integrity sha1-eYKb11/O1lgexserGTDo1zjokuc=
@@ -3135,6 +3135,14 @@ currently-unhandled@^0.4.1:
   integrity sha1-mI3zP+qxke95mmE2nddsF635V+o=
   dependencies:
     array-find-index "^1.0.1"
+
+customize-cra@^0.2.3:
+  version "0.2.3"
+  resolved "http://registry.npm.taobao.org/customize-cra/download/customize-cra-0.2.3.tgz#2399fd91c2e2d94d47014dc568e51630634c4189"
+  integrity sha1-I5n9kcLi2U1HAU3FaOUWMGNMQYk=
+  dependencies:
+    lodash.curry "^4.1.1"
+    lodash.flow "^3.5.0"
 
 cyclist@~0.2.2:
   version "0.2.2"
@@ -6696,10 +6704,20 @@ lodash.clonedeep@^4.3.2, lodash.clonedeep@~4.5.0:
   resolved "http://registry.npm.taobao.org/lodash.clonedeep/download/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
   integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
 
+lodash.curry@^4.1.1:
+  version "4.1.1"
+  resolved "http://registry.npm.taobao.org/lodash.curry/download/lodash.curry-4.1.1.tgz#248e36072ede906501d75966200a86dab8b23170"
+  integrity sha1-JI42By7ekGUB11lmIAqG2riyMXA=
+
 lodash.debounce@^4.0.0, lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "http://registry.npm.taobao.org/lodash.debounce/download/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
+
+lodash.flow@^3.5.0:
+  version "3.5.0"
+  resolved "http://registry.npm.taobao.org/lodash.flow/download/lodash.flow-3.5.0.tgz#87bf40292b8cf83e4e8ce1a3ae4209e20071675a"
+  integrity sha1-h79AKSuM+D5OjOGjrkIJ4gBxZ1o=
 
 lodash.isarguments@^3.0.0:
   version "3.1.0"
