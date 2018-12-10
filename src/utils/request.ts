@@ -1,17 +1,29 @@
 import * as _ from 'lodash';
 
-interface IRequestOptions {
-  headers?: { [key: string]: string | any };
-  params?: { [key: string]: string | any };
-  data?: any;
-  method?: string;
+enum ResponseBodyTypeEnum {
+  DEFAULT = 'default', // JSON and text
+  // TEXT = 'text',
+  ARRAYBUFFER = 'arrayBuffer',
+  BLOB = 'blob',
+  FORMDATA = 'formData'
 }
 
-interface IFetchOptions {
+interface IBasicOptions {
   headers?: { [key: string]: string | any };
-  body?: any;
   method?: string;
+  resBodyType?: ResponseBodyTypeEnum; // 定义返回数据的类型
 }
+
+interface IRequestOptions extends IBasicOptions {
+  params?: { [key: string]: string | any };
+  data?: any;
+}
+
+interface IFetchOptions extends IBasicOptions {
+  body?: any;
+}
+
+const INVALID_RES_BODY_TYPE = 'invalid-response-body-type';
 
 const config = {
   timeout: 10000, // 指定请求超时的毫秒数(0 表示无超时时间)，如果请求花费了超过 `timeout` 的时间，请求将被中断
@@ -37,7 +49,7 @@ const codeMessage = { // copy from https://github.com/ant-design/ant-design-pro/
   504: '网关超时。',
 };
 
-const request = async (retry: number, url: string, options: IFetchOptions = {}): Promise<any> => {
+const fetchGo = async (retry: number, url: string, options: IFetchOptions = {}): Promise<any> => {
 
   try {
     let timer;
@@ -58,9 +70,26 @@ const request = async (retry: number, url: string, options: IFetchOptions = {}):
     if (timer) { // 清除超时定时器
       clearTimeout(timer);
     }
-
     if (res.ok) {
-      return res;
+      switch (options.resBodyType) {
+        case ResponseBodyTypeEnum.DEFAULT:
+          try {
+            return res.json();
+          } catch (error) {
+            console.log('response-body type is text, not json. ', error);
+            return res.text();
+          }
+        // case ResponseBodyTypeEnum.TEXT:
+        //   return res.text();
+        case ResponseBodyTypeEnum.BLOB:
+          return res.blob();
+        case ResponseBodyTypeEnum.ARRAYBUFFER:
+          return res.arrayBuffer();
+        case ResponseBodyTypeEnum.FORMDATA:
+          return res.formData();
+        default:
+          throw new Error(INVALID_RES_BODY_TYPE);
+      }
     }
 
     // error
@@ -72,7 +101,13 @@ const request = async (retry: number, url: string, options: IFetchOptions = {}):
     throw error;
 
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    if (error.message === INVALID_RES_BODY_TYPE) {
+      throw error;
+    }
+    if (error.status === 404) { // 404 not found
+      throw error;
+    }
     if (error.status === 401) { // 401未授权
       // appStore.setUnauthenticated();
       // return;
@@ -84,9 +119,11 @@ const request = async (retry: number, url: string, options: IFetchOptions = {}):
       throw error;
     }
 
-    setTimeout(() => { // 异常自动重连
-      return request(retry, url, options);
-    }, config.retryInterval);
+    return new Promise(resolve => {
+      setTimeout(() => { // 异常自动重连
+        resolve(fetchGo(retry, url, options));
+      }, config.retryInterval);
+    });
   }
 
 };
@@ -103,7 +140,7 @@ export default (url: string, options: IRequestOptions = {}): Promise<any> => {
     // ...{
     //   credentials: 'include'
     // },
-    ...options 
+    ...options
   };
   const token = 'test-token';
 
@@ -149,8 +186,9 @@ export default (url: string, options: IRequestOptions = {}): Promise<any> => {
 
   const fetchOptions = {
     method: 'GET',
+    resBodyType: ResponseBodyTypeEnum.DEFAULT,
     ...newOptions
   };
 
-  return request(0, newUrl, fetchOptions);
+  return fetchGo(0, newUrl, fetchOptions);
 };

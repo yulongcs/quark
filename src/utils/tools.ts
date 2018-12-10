@@ -1,3 +1,5 @@
+import uuid from 'uuid/v5';
+
 export const titleToLowerCase = (str: string) => {
   if (!(str && str.trim())) {
     return str;
@@ -43,3 +45,16 @@ export const transposeArr = (arr: any[], index1: number, index2: number) => {
   arr.splice(index1 - 1, 1, ...arr.splice(index2 - 1, 1, arr[index1 - 1]));
   return arr;
 };
+
+export const getBase64 = (file: any) => new Promise(resolve => {
+  const fileReader = new FileReader();
+  fileReader.readAsDataURL(file);
+  fileReader.onload = function () {
+    resolve(this.result as any);
+  };
+});
+
+// 生成随机数字加字母(index - 最大长度)
+export const generateHash = (index = 10) => Math.random().toString(36).slice(2, index + 2);
+
+export const uuidGen = () => uuid(generateHash(), uuid.URL);

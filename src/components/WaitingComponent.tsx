@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const { Suspense } = React as any;
+const { Suspense } = React;
 
 const WaitingComponent = (Component: any) => (props: any) => (
   <Suspense fallback={<h1>Loading...</h1>}>

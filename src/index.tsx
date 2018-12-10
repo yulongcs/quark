@@ -1,28 +1,19 @@
-import { LocaleProvider } from 'antd';
-import zhCN from 'antd/lib/locale-provider/zh_CN';
+import { createHashHistory as createHistory } from 'history';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Route, Router, Switch } from 'react-router-dom';
-import { WaitingComponent } from './components';
-import './index.css';
+import { App } from './pages';
+import './resources/styles/index.scss';
 import * as serviceWorker from './serviceWorker';
-import { history } from './utils';
+
+const history = createHistory();
 
 // 防止表单提交导致页面刷新的统一处理
 document.addEventListener('submit', (e) => {
   e.preventDefault();
 });
 
-const App = (React as any).lazy(() => import('./App'));
-
 ReactDOM.render(
-  <LocaleProvider locale={zhCN}>
-    <Router history={history}>
-      <Switch>
-        <Route path='/' component={WaitingComponent(App)} />
-      </Switch>
-    </Router>
-  </LocaleProvider>,
+  <App history={history} />,
   document.getElementById('root') as HTMLElement
 );
 
