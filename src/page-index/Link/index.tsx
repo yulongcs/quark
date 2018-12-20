@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { RouteIndexBaseComponent } from '..';
+import { RouteIndexBaseComponent } from '../common';
 
 class Link extends RouteIndexBaseComponent<RouteComponentProps> {
 
