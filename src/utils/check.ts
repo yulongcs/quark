@@ -21,6 +21,3 @@ export const validIDCardNumRegx = /(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(1
 
 // get file stuffix
 export const fileSuffixMatchRegx = /\.[^\.]+$/;
-
-// ipv4 addresses
-export const vaildIPv4Regx = /^(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|[1-9])\.(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)(~(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d))?$/;

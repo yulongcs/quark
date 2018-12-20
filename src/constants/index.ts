@@ -1,4 +1,4 @@
-/** 当前构建的版本 */
+// current build version
 export enum BUILD_VERSION {
   PROD = 'prod',
   TEST = 'test',

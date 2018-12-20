@@ -1,11 +1,8 @@
-import { createHashHistory as createHistory } from 'history';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { App } from './pages';
+import { App } from './page-index';
 import './resources/styles/index.scss';
 import * as serviceWorker from './serviceWorker';
-
-const history = createHistory();
 
 // 防止表单提交导致页面刷新的统一处理
 document.addEventListener('submit', (e) => {
@@ -13,7 +10,7 @@ document.addEventListener('submit', (e) => {
 });
 
 ReactDOM.render(
-  <App history={history} />,
+  <App />,
   document.getElementById('root') as HTMLElement
 );
 
