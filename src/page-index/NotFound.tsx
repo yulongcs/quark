@@ -1,7 +1,15 @@
 import * as React from 'react';
 
-const NotFound = () => (
-  <h1>Not Found Page</h1>
-);
+class NotFound extends React.PureComponent<{}> {
+  constructor(props: {}) {
+    super(props);
+  }
+
+  public render() {
+    return (
+      <h1>NotFound page</h1>
+    );
+  }
+} 
 
 export default NotFound;

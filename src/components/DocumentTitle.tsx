@@ -1,8 +1,7 @@
 /**
- * DocumentTitle 动态设置html title
+ * DocumentTitle set html title
  * 
- *  create at 2018/08/10
- *  create by vdfor
+ *  create by vdfor at 2018/08/10
  */
 
 import * as React from 'react';
@@ -11,7 +10,7 @@ interface IProps {
   title: string;
 }
 
-class DocumentTitle extends React.Component<IProps> {
+class DocumentTitle extends React.PureComponent<IProps> {
 
   public setTitle = () => {
     document.title = this.props.title;

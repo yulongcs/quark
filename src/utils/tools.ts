@@ -1,8 +1,7 @@
 import uuid from 'uuid/v5';
 
-// 计算字节数
+// compute bytes
 export const getSizeOf = (str: string) => str.replace(/[^\x00-\xff]/g, 'xx').length;
-
 
 /**
  * copy from https://github.com/ant-design/ant-design-pro/blob/master/src/components/_utils/pathTools.js 
@@ -13,7 +12,7 @@ export const urlToList = (url: string) => {
   return urllist.map((urlItem, index) => urlItem && `/${urllist.slice(0, index + 1).join('/')}`);
 };
 
-// escape 防xss攻击
+// preventing XSS attacks
 export const escape = (str: string) => str.replace(/<\/script/g, '<\\/script').replace(/<!--/g, '<\\!--');
 
 export const getBase64 = (file: any) => new Promise(resolve => {

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { RouteIndexBaseComponent } from '..';
 
-class Home extends RouteIndexBaseComponent<RouteComponentProps> {
+class Link extends RouteIndexBaseComponent<RouteComponentProps> {
 
   constructor(props: RouteComponentProps) {
     super(props);
@@ -11,9 +11,9 @@ class Home extends RouteIndexBaseComponent<RouteComponentProps> {
 
   public render() {
     return (
-      <h1>Home page</h1>
+      <h1>Link page</h1>
     );
   }
 } 
 
-export default Home;
+export default Link;
