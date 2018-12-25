@@ -1,6 +1,4 @@
 const fs = require('fs');
-const { injectBabelPlugin } = require('react-app-rewired');
-const paths = require('react-scripts/config/paths');
 const { parse: sassParse } = require('sass-variable-parser');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
@@ -9,7 +7,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt')
  *  Get html template
  *  Created by vdfor at 2018/12/20
  *  */
-const getHtmlTemplate = (i) => {
+const getHtmlTemplate = (i, paths) => {
   if (i === 'index') {
     return paths.appHtml;
   }
@@ -27,7 +25,7 @@ const getHtmlTemplate = (i) => {
 /**
  *  Created by vdfor at 2018/12/20
  *  */
-const multiPageConfig = (config, env) => {
+const multiPageConfig = (config, env, paths) => {
   const entry = {};
   const htmlWebpackPlugins = [];
   const defaultHtmlPluginOpts = config.plugins.find(plugin => plugin instanceof HtmlWebpackPlugin).options;
@@ -47,7 +45,7 @@ const multiPageConfig = (config, env) => {
     }
     htmlWebpackPlugins.push(new HtmlWebpackPlugin({
       ...defaultHtmlPluginOpts,
-      template: getHtmlTemplate(i),
+      template: getHtmlTemplate(i, paths),
       chunks: [i],
       filename: `${i}.html`
     }));
@@ -85,7 +83,7 @@ const disableEsLint = config => {
  *  Based on https://github.com/arackaf/customize-cra
  *  Modified by vdfor at 2018/12/20
  *  */
-const addLessLoader = (config, env, loaderConfig) => {
+const addLessLoader = (config, env, paths, loaderConfig) => {
   const mode = env === 'development' ? 'dev' : 'prod';
   // Need these for production mode, which are copied from react-scripts
   const publicPath = paths.servedPath;
@@ -137,6 +135,36 @@ const addLessLoader = (config, env, loaderConfig) => {
 };
 
 /**
+ *  Copy from https://github.com/arackaf/customize-cra
+ *  */
+const getBabelLoader = config => {
+  const babelLoaderFilter = rule => rule.loader && rule.loader.includes('babel') && rule.options && rule.options.plugins;
+
+  // First, try to find the babel loader inside the oneOf array.
+  // This is where we can find it when working with react-scripts@2.0.3.
+  let loaders = config.module.rules.find(rule => Array.isArray(rule.oneOf)).oneOf;
+
+  let babelLoader = loaders.find(babelLoaderFilter);
+
+  // If the loader was not found, try to find it inside of the 'use' array, within the rules.
+  // This should work when dealing with react-scripts@2.0.0.next.* versions.
+  if (!babelLoader) {
+    loaders = loaders.reduce((ldrs, rule) => ldrs.concat(rule.use || []), []);
+    babelLoader = loaders.find(babelLoaderFilter);
+  }
+  return babelLoader;
+}
+
+/**
+ *  Based on https://github.com/arackaf/customize-cra
+ *  Modified by vdfor at 2018/12/25
+ *  */
+const addBabelPlugin = (config, plugin) => {
+  getBabelLoader(config).options.plugins.push(plugin);
+  return config;
+};
+
+/**
  *  Created by vdfor at 2018/12/20
  *  */
 const addSvgIconLoader = config => {
@@ -164,13 +192,12 @@ const setTsCheckerOpts = (config, options = {}) => {
 };
 
 // override
-module.exports = (config, env) => {
-  console.log(config.module);
+module.exports = (config, env, { paths }) => {
   config = disableEsLint(config);
-  config = injectBabelPlugin(['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }], config);
-  // config = injectBabelPlugin(['@babel/plugin-proposal-decorators', { legacy: true }], config);
-  config = addLessLoader(config, env, {
-    options: {
+  config = addBabelPlugin(config, ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]);
+  config = addBabelPlugin(config, ['@babel/plugin-proposal-decorators', { legacy: true }]);
+  config = addLessLoader(config, env, paths, {
+    options: { // custom antd themes
       modifyVars: sassParse(fs.readFileSync(paths.appSrc + '/themes/antd.scss').toString(), { camelCase: false, indented: false }),
       javascriptEnabled: true
     },
@@ -178,6 +205,6 @@ module.exports = (config, env) => {
   });
   config = addSvgIconLoader(config);
   config = setTsCheckerOpts(config, { tslint: paths.appPath + '/tslint.json' });
-  config = multiPageConfig(config, env);
+  config = multiPageConfig(config, env, paths);
   return config;
 };
