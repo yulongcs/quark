@@ -165,9 +165,10 @@ const setTsCheckerOpts = (config, options = {}) => {
 
 // override
 module.exports = (config, env) => {
+  console.log(config.module);
   config = disableEsLint(config);
   config = injectBabelPlugin(['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }], config);
-  config = injectBabelPlugin(['@babel/plugin-proposal-decorators', { legacy: true }], config);
+  // config = injectBabelPlugin(['@babel/plugin-proposal-decorators', { legacy: true }], config);
   config = addLessLoader(config, env, {
     options: {
       modifyVars: sassParse(fs.readFileSync(paths.appSrc + '/themes/antd.scss').toString(), { camelCase: false, indented: false }),
