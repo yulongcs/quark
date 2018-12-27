@@ -23,6 +23,37 @@ const getHtmlTemplate = (i, paths) => {
 };
 
 /**
+ *  Copy from https://github.com/arackaf/customize-cra
+ *  */
+const getBabelLoader = config => {
+  const babelLoaderFilter = rule => rule.loader && rule.loader.includes('babel') && rule.options && rule.options.plugins;
+
+  // First, try to find the babel loader inside the oneOf array.
+  // This is where we can find it when working with react-scripts@2.0.3.
+  let loaders = config.module.rules.find(rule => Array.isArray(rule.oneOf)).oneOf;
+
+  let babelLoader = loaders.find(babelLoaderFilter);
+
+  // If the loader was not found, try to find it inside of the 'use' array, within the rules.
+  // This should work when dealing with react-scripts@2.0.0.next.* versions.
+  if (!babelLoader) {
+    loaders = loaders.reduce((ldrs, rule) => ldrs.concat(rule.use || []), []);
+    babelLoader = loaders.find(babelLoaderFilter);
+  }
+  return babelLoader;
+}
+
+/**
+ *  Reference from https://github.com/arackaf/customize-cra
+ *  Created by vdfor at 2018/12/27
+ *  */
+const getOutsideBabelLoader = config => { // Process any JS outside of the app with Babel.
+  const outsideBabelLoaderFilter = rule => rule.loader && rule.loader.includes('babel') && rule.test && rule.test.toString() === '/\\.(js|mjs)$/';
+  let loaders = config.module.rules.find(rule => Array.isArray(rule.oneOf)).oneOf;
+  return loaders.find(outsideBabelLoaderFilter);
+}
+
+/**
  *  Created by vdfor at 2018/12/20
  *  */
 const multiPageConfig = (config, env, paths) => {
@@ -135,32 +166,27 @@ const addLessLoader = (config, env, paths, loaderConfig) => {
 };
 
 /**
- *  Copy from https://github.com/arackaf/customize-cra
- *  */
-const getBabelLoader = config => {
-  const babelLoaderFilter = rule => rule.loader && rule.loader.includes('babel') && rule.options && rule.options.plugins;
-
-  // First, try to find the babel loader inside the oneOf array.
-  // This is where we can find it when working with react-scripts@2.0.3.
-  let loaders = config.module.rules.find(rule => Array.isArray(rule.oneOf)).oneOf;
-
-  let babelLoader = loaders.find(babelLoaderFilter);
-
-  // If the loader was not found, try to find it inside of the 'use' array, within the rules.
-  // This should work when dealing with react-scripts@2.0.0.next.* versions.
-  if (!babelLoader) {
-    loaders = loaders.reduce((ldrs, rule) => ldrs.concat(rule.use || []), []);
-    babelLoader = loaders.find(babelLoaderFilter);
-  }
-  return babelLoader;
-}
-
-/**
  *  Based on https://github.com/arackaf/customize-cra
  *  Modified by vdfor at 2018/12/25
  *  */
 const addBabelPlugin = (config, plugin) => {
   getBabelLoader(config).options.plugins.push(plugin);
+  return config;
+};
+
+/**
+ *  Created by vdfor at 2018/12/27
+ *  */
+const addOutsideBabelExclude = (config, regExpArr) => {
+  let { exclude } = getOutsideBabelLoader(config);
+  if (!exclude) {
+    exclude = regExpArr;
+  } else if (exclude instanceof Array) {
+    exclude.push(...regExpArr);
+  } else {
+    exclude = [exclude, ...regExpArr];
+  }
+  getOutsideBabelLoader(config).exclude = exclude;
   return config;
 };
 
@@ -195,7 +221,7 @@ const setTsCheckerOpts = (config, options = {}) => {
 module.exports = (config, env, { paths }) => {
   config = disableEsLint(config);
   config = addBabelPlugin(config, ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]);
-  config = addBabelPlugin(config, ['@babel/plugin-proposal-decorators', { legacy: true }]);
+  config = addOutsideBabelExclude(config, [/@ckeditor.*/]); // support ckeditor5
   config = addLessLoader(config, env, paths, {
     options: { // custom antd themes
       modifyVars: sassParse(fs.readFileSync(paths.appSrc + '/themes/antd.scss').toString(), { camelCase: false, indented: false }),
