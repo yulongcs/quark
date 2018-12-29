@@ -1,19 +1,11 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
-import { RouteIndexBaseComponent } from '../common';
+import { useDocumentTitle } from '../../hooks';
 
-class Home extends RouteIndexBaseComponent<RouteComponentProps> {
-
-  constructor(props: RouteComponentProps) {
-    super(props);
-    // console.log(props);
-  }
-
-  public render() {
-    return (
-      <h1>Home page</h1>
-    );
-  }
-} 
+const Home = () => {
+  useDocumentTitle({ title: 'Home Page' });
+  return (
+    <h1>Home Page</h1>
+  );
+};
 
 export default Home;

@@ -1,19 +1,11 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
-import { RouteIndexBaseComponent } from '../common';
+import { useDocumentTitle } from '../../hooks';
 
-class Link extends RouteIndexBaseComponent<RouteComponentProps> {
-
-  constructor(props: RouteComponentProps) {
-    super(props);
-    // console.log(props);
-  }
-
-  public render() {
-    return (
-      <h1>Link page</h1>
-    );
-  }
-} 
+const Link = () => {
+  useDocumentTitle({ title: 'Link Page' });
+  return (
+    <h1>Link Page</h1>
+  );
+};
 
 export default Link;
