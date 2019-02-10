@@ -1,10 +1,11 @@
 import uuid from 'uuid/v5';
 
 // compute bytes
+// eslint-disable-next-line
 export const getSizeOf = (str: string) => str.replace(/[^\x00-\xff]/g, 'xx').length;
 
 /**
- * copy from https://github.com/ant-design/ant-design-pro/blob/master/src/components/_utils/pathTools.js 
+ * copy from https://github.com/ant-design/ant-design-pro/blob/master/src/components/_utils/pathTools.js
  */
 // /userinfo/2144/id => ['/userinfo','/useinfo/2144,'/userindo/2144/id']
 export const urlToList = (url: string) => {
@@ -15,9 +16,10 @@ export const urlToList = (url: string) => {
 // preventing XSS attacks
 export const escape = (str: string) => str.replace(/<\/script/g, '<\\/script').replace(/<!--/g, '<\\!--');
 
-export const getBase64 = (file: any) => new Promise(resolve => {
+export const getBase64 = (file: any) => new Promise((resolve) => {
   const fileReader = new FileReader();
   fileReader.readAsDataURL(file);
+  // eslint-disable-next-line
   fileReader.onload = function () {
     resolve(this.result as any);
   };

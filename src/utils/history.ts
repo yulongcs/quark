@@ -7,6 +7,8 @@ export const goPage = (url: string) => history.push(url);
 
 export const goBack = () => history.goBack();
 
-export const jumpExternalUrl =(url: string) => location.href = url;
+export const jumpExternalUrl = (url: string) => {
+  window.location.href = url;
+};
 
 export default history;

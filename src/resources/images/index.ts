@@ -3,6 +3,6 @@ import logoIconImg from './logo-icon.svg';
 import logoImg from './logo.svg';
 
 export default {
-	logoImg,
-	logoIconImg
+  logoImg,
+  logoIconImg
 };

@@ -14,7 +14,7 @@ interface IDevice {
 }
 
 const getVersion = (label: string, agent: string) => { // 获取版本号
-  const exp = new RegExp(label + '/([^\\s\\_\\-]+)');
+  const exp = new RegExp(`${label}/([^\\s\\_\\-]+)`);
   const info = agent.match(exp);
   if (info && info.length > 0) {
     return info[1];
@@ -25,22 +25,22 @@ const getVersion = (label: string, agent: string) => { // 获取版本号
 const getOs = (agent: string) => { // 获取底层操作系统
   if (/windows/.test(agent)) {
     return 'windows';
-  } else if (/iphone|ipod|ipad|ios/.test(agent)) {
+  } if (/iphone|ipod|ipad|ios/.test(agent)) {
     return 'ios';
-  } else if (/linux/.test(agent)) { // android底层操作系统为linux
+  } if (/linux/.test(agent)) { // android底层操作系统为linux
     return 'linux';
-  } else if (/mac/.test(agent)) {
+  } if (/mac/.test(agent)) {
     return 'mac';
   }
   return 'unknown';
 };
 
 // 获取ie版本(ie11并没有msie的标识)
-const getIeVersion = (agent: string) => (!!(window as any).ActiveXObject || 'ActiveXObject' in window) ? ((agent.match(/msie\s(\d+)/) || [])[1] || '11') : false;
+const getIeVersion = (agent: string) => ((!!(window as any).ActiveXObject || 'ActiveXObject' in window) ? ((agent.match(/msie\s(\d+)/) || [])[1] || '11') : false);
 
 /**
  * 返回设备信息
- * 
+ *
  * @return {IDevice}
  */
 const device = () => {

@@ -1,7 +1,7 @@
 /**
  * useDocumentTitle hooks
  * Set html title
- * 
+ *
  * Create by vdfor at 2018/12/29
  */
 

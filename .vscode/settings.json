@@ -1,5 +1,19 @@
 {
   "editor.tabSize": 2,
-  "tslint.autoFixOnSave": true,
-  "tslint.packageManager": "yarn"
+  "eslint.validate": [
+    {
+      "language": "typescript",
+      "autoFix": true
+    },
+    {
+      "language": "typescriptreact",
+      "autoFix": true
+    }
+  ],
+  "eslint.autoFixOnSave": true,
+  "eslint.packageManager": "yarn",
+  // "eslint.workingDirectories": [
+  //   "./packages/nix",
+  //   "./packages/specialnext"
+  // ],
 }

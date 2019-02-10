@@ -46,11 +46,10 @@ const codeMessage = { // copy from https://github.com/ant-design/ant-design-pro/
   500: '服务器发生错误，请检查服务器。',
   502: '网关错误。',
   503: '服务不可用，服务器暂时过载或维护。',
-  504: '网关超时。',
+  504: '网关超时。'
 };
 
 const fetchGo = async (retry: number, url: string, options: IFetchOptions = {}): Promise<any> => {
-
   try {
     let timer;
     const timeoutPromise = new Promise((resolve, reject) => {
@@ -59,6 +58,7 @@ const fetchGo = async (retry: number, url: string, options: IFetchOptions = {}):
           resolve({});
           return;
         }
+        // eslint-disable-next-line
         reject({ status: 504, statusText: '请求超时' });
       }, config.timeout);
     });
@@ -99,7 +99,6 @@ const fetchGo = async (retry: number, url: string, options: IFetchOptions = {}):
     (error as any).response = res;
 
     throw error;
-
   } catch (error) {
     // console.log(error);
     if (error.message === INVALID_RES_BODY_TYPE) {
@@ -113,19 +112,19 @@ const fetchGo = async (retry: number, url: string, options: IFetchOptions = {}):
       // return;
     }
 
+    // eslint-disable-next-line
     retry += 1;
 
     if (retry > config.retryTimes) {
       throw error;
     }
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       setTimeout(() => { // 异常自动重连
         resolve(fetchGo(retry, url, options));
       }, config.retryInterval);
     });
   }
-
 };
 
 /**
@@ -145,10 +144,10 @@ export default (url: string, options: IRequestOptions = {}): Promise<any> => {
   const token = 'test-token';
 
   if (
-    newOptions.method === 'POST' ||
-    newOptions.method === 'PUT' ||
-    newOptions.method === 'PATCH' ||
-    newOptions.method === 'DELETE'
+    newOptions.method === 'POST'
+    || newOptions.method === 'PUT'
+    || newOptions.method === 'PATCH'
+    || newOptions.method === 'DELETE'
   ) {
     if (!(newOptions.data instanceof FormData)) { // newOptions.data is not FormData
       newOptions.headers = {
@@ -175,7 +174,7 @@ export default (url: string, options: IRequestOptions = {}): Promise<any> => {
       const querys = newOptions.params || {};
       return Object.keys(querys).map(key => `${key}=${typeof querys[key] === 'string' || typeof querys[key] === 'number' ? querys[key] : ''}`).join('&');
     })();
-    newUrl += '?' + urlQuery;
+    newUrl += `?${urlQuery}`;
     newOptions = _.omit(newOptions, 'params');
   }
 

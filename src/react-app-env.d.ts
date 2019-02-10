@@ -1,2 +1,2 @@
 /// <reference path='./type.d.ts' />
-/// <reference types='cra-quark' />
+/// <reference types='react-scripts' />

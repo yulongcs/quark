@@ -1,13 +1,13 @@
 const fs = require('fs');
 const { parse: sassParse } = require('sass-variable-parser');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
+const paths = require('react-scripts/config/paths');
 
 /**
  *  Get html template
  *  Created by vdfor at 2018/12/20
  *  */
-const getHtmlTemplate = (i, paths) => {
+const getHtmlTemplate = (i) => {
   if (i === 'index') {
     return paths.appHtml;
   }
@@ -56,7 +56,7 @@ const getOutsideBabelLoader = config => { // Process any JS outside of the app w
 /**
  *  Created by vdfor at 2018/12/20
  *  */
-const multiPageConfig = (config, env, paths) => {
+const multiPageConfig = (config, env) => {
   const entry = {};
   const htmlWebpackPlugins = [];
   const defaultHtmlPluginOpts = config.plugins.find(plugin => plugin instanceof HtmlWebpackPlugin).options;
@@ -76,7 +76,7 @@ const multiPageConfig = (config, env, paths) => {
     }
     htmlWebpackPlugins.push(new HtmlWebpackPlugin({
       ...defaultHtmlPluginOpts,
-      template: getHtmlTemplate(i, paths),
+      template: getHtmlTemplate(i),
       chunks: [i],
       filename: `${i}.html`
     }));
@@ -100,21 +100,23 @@ const multiPageConfig = (config, env, paths) => {
  *  Based on https://github.com/arackaf/customize-cra
  *  Modified by vdfor at 2018/12/20
  *  */
-const disableEsLint = config => {
-  let eslintRules = config.module.rules.filter(
+const setEslint = config => {
+  const eslintRules = config.module.rules.filter(
     r => r.use && r.use.some(u => u.options && u.options.useEslintrc !== void 0)
   );
-  eslintRules.forEach(rule => {
-    config.module.rules = config.module.rules.filter(r => r !== rule);
-  });
+  const eslintRule = eslintRules.find(r => r.enforce === 'pre');
+  eslintRule.test = /\.(js|mjs|jsx|ts|tsx)$/;
+  eslintRule.exclude = /node_modules/;
+  eslintRule.use[0].options.useEslintrc = true;
+  eslintRule.use[0].options.ignore = true;
   return config;
-};
+}
 
 /**
  *  Based on https://github.com/arackaf/customize-cra
  *  Modified by vdfor at 2018/12/20
  *  */
-const addLessLoader = (config, env, paths, loaderConfig) => {
+const addLessLoader = (config, env, loaderConfig) => {
   const mode = env === 'development' ? 'dev' : 'prod';
   // Need these for production mode, which are copied from react-scripts
   const publicPath = paths.servedPath;
@@ -203,26 +205,12 @@ const addSvgIconLoader = config => {
   return config;
 };
 
-/**
- *  Created by vdfor at 2018/12/20
- *  */
-const setTsCheckerOpts = (config, options = {}) => {
-  const iterablePlugins = config.plugins.entries();
-  for (const [index, plugin] of iterablePlugins) {
-    if (plugin instanceof ForkTsCheckerWebpackPlugin) {
-      config.plugins[index] = new ForkTsCheckerWebpackPlugin({ ...plugin.options, ...options });
-      break;
-    }
-  }
-  return config;
-};
-
 // override
-module.exports = (config, env, { paths }) => {
-  config = disableEsLint(config);
+module.exports = (config, env) => {
+  config = setEslint(config);
   config = addBabelPlugin(config, ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]);
   config = addOutsideBabelExclude(config, [/@ckeditor.*/]); // support ckeditor5
-  config = addLessLoader(config, env, paths, {
+  config = addLessLoader(config, env, {
     options: { // custom antd themes
       modifyVars: sassParse(fs.readFileSync(paths.appSrc + '/themes/antd.scss').toString(), { camelCase: false, indented: false }),
       javascriptEnabled: true
@@ -230,7 +218,6 @@ module.exports = (config, env, { paths }) => {
     include: /[\\/]node_modules[\\/].*antd[\\/]/
   });
   config = addSvgIconLoader(config);
-  config = setTsCheckerOpts(config, { tslint: paths.appPath + '/tslint.json' });
-  config = multiPageConfig(config, env, paths);
+  config = multiPageConfig(config, env);
   return config;
 };

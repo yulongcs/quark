@@ -1,7 +1,7 @@
 /**
  * Jumbotron
  * Reference from https://getbootstrap.com/docs/4.2/components/jumbotron
- * 
+ *
  * Create by vdfor at 2018/12/29
  */
 
@@ -16,9 +16,10 @@ interface IProps {
   style?: React.CSSProperties;
 }
 
-const Jumbotron: React.SFC<IProps> = (props) => {
-
-  const { style, title, description, buttonTitle, onButtonClick } = props;
+const Jumbotron: React.SFC<IProps> = (props: IProps) => {
+  const {
+    style, title, description, buttonTitle, onButtonClick
+  } = props;
 
   const styles = style || {};
 
@@ -27,7 +28,7 @@ const Jumbotron: React.SFC<IProps> = (props) => {
       <div style={{ padding: '0 60px' }}>
         <h1>{title}</h1>
         <p>{description}</p>
-        <Button type='primary' size='large' onClick={onButtonClick}>{buttonTitle || 'Learn more'}</Button>
+        <Button type="primary" size="large" onClick={onButtonClick}>{buttonTitle || 'Learn more'}</Button>
       </div>
     </div>
   );
