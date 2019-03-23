@@ -1,8 +1,7 @@
-import * as _ from 'lodash';
-
-enum ResponseBodyTypeEnum {
+export enum ResponseBodyTypeEnum {
   DEFAULT = 'default', // JSON and text
-  // TEXT = 'text',
+  JSON = 'json',
+  TEXT = 'text',
   ARRAYBUFFER = 'arrayBuffer',
   BLOB = 'blob',
   FORMDATA = 'formData'
@@ -72,15 +71,24 @@ const fetchGo = async (retry: number, url: string, options: IFetchOptions = {}):
     }
     if (res.ok) {
       switch (options.resBodyType) {
-        case ResponseBodyTypeEnum.DEFAULT:
-          try {
-            return res.json();
-          } catch (error) {
-            console.log('response-body type is text, not json. ', error);
-            return res.text();
-          }
-        // case ResponseBodyTypeEnum.TEXT:
-        //   return res.text();
+        case ResponseBodyTypeEnum.DEFAULT: {
+          return new Promise((resolve) => {
+            res.clone().json()
+              .then((data) => {
+                resolve(typeof data === 'object' ? data : String(data));
+              })
+              .catch((e) => {
+                if (!1) { // 无作用 -- to fix ['e' is defined but never used]
+                  console.error(e);
+                }
+                resolve(res.text());
+              });
+          });
+        }
+        case ResponseBodyTypeEnum.JSON:
+          return res.json();
+        case ResponseBodyTypeEnum.TEXT:
+          return res.text();
         case ResponseBodyTypeEnum.BLOB:
           return res.blob();
         case ResponseBodyTypeEnum.ARRAYBUFFER:
@@ -135,7 +143,7 @@ const fetchGo = async (retry: number, url: string, options: IFetchOptions = {}):
  */
 export default (url: string, options: IRequestOptions = {}): Promise<any> => {
   let newUrl = url;
-  let newOptions = {
+  const newOptions = {
     // ...{
     //   credentials: 'include'
     // },
@@ -175,12 +183,12 @@ export default (url: string, options: IRequestOptions = {}): Promise<any> => {
       return Object.keys(querys).map(key => `${key}=${typeof querys[key] === 'string' || typeof querys[key] === 'number' ? querys[key] : ''}`).join('&');
     })();
     newUrl += `?${urlQuery}`;
-    newOptions = _.omit(newOptions, 'params');
+    delete newOptions.params;
   }
 
   if (newOptions.data) {
     (newOptions as any).body = newOptions.data;
-    newOptions = _.omit(newOptions, 'data');
+    delete newOptions.data;
   }
 
   const fetchOptions = {

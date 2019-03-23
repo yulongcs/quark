@@ -1,4 +1,5 @@
 import uuid from 'uuid/v5';
+import { message } from 'antd';
 
 // compute bytes
 // eslint-disable-next-line
@@ -29,3 +30,16 @@ export const getBase64 = (file: any) => new Promise((resolve) => {
 // export const generateHash = (index = 10) => Math.random().toString(36).slice(2, index + 2);
 
 export const uuidGen = () => uuid(Math.random().toString(36).slice(2, 12), uuid.URL);
+
+export const handleRequestError = async (error: any, logTip: string): Promise<any> => {
+  try {
+    const errorJson = await error.response.json();
+    if (errorJson && errorJson.code && errorJson.message) {
+      message.error(errorJson.message);
+    }
+    throw error;
+  } catch (err) {
+    console.error(logTip, err);
+    message.error('网络错误，请重试');
+  }
+};
