@@ -40,7 +40,6 @@
     "webpack",
     "jest",
     "src/setupTests.ts",
-    "src/resources/nim/*.js",
-    "./src/setupProxy.js"
+    "src/setupProxy.js"
   ]
 }
