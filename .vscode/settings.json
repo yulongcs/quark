@@ -11,9 +11,5 @@
     }
   ],
   "eslint.autoFixOnSave": true,
-  "eslint.packageManager": "yarn",
-  // "eslint.workingDirectories": [
-  //   "./packages/nix",
-  //   "./packages/specialnext"
-  // ],
+  "eslint.packageManager": "yarn"
 }

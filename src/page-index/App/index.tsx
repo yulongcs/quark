@@ -14,7 +14,6 @@ import { Header } from './views';
 
 const HomeComponent = React.lazy(() => import('../Home'));
 const LinkComponent = React.lazy(() => import('../Link'));
-const GlobalSettingComponent = React.lazy(() => import('../GlobalSetting'));
 const NotFoundComponent = React.lazy(() => import('../NotFound'));
 
 const App = () => (
@@ -29,7 +28,6 @@ const App = () => (
             </Route>
             <Route path="/home" component={WaitingComponent(HomeComponent)} />
             <Route path="/link" component={WaitingComponent(LinkComponent)} />
-            <Route path="/global-setting" component={WaitingComponent(GlobalSettingComponent)} />
             <Route path="*" component={WaitingComponent(NotFoundComponent)} />
           </Switch>
         </Layout.Content>
