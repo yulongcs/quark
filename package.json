@@ -14,12 +14,14 @@
   "private": true,
   "dependencies": {
     "antd": "^3.16.6",
+    "antd-mobile": "^2.2.12",
     "history": "^4.7.2",
     "lodash": "^4.17.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^4.3.1",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "vconsole": "^3.3.0"
   },
   "devDependencies": {
     "@types/jest": "24.0.11",
@@ -37,6 +39,7 @@
     "eslint-config-react-app": "^4.0.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
+    "postcss-pxtorem": "^4.0.1",
     "react-app-rewired": "^2.1.0",
     "react-scripts": "3.0.0",
     "sass-variable-parser": "^1.2.2",

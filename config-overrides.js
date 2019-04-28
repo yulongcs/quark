@@ -1,6 +1,7 @@
 const fs = require('fs');
 const { parse: sassParse } = require('sass-variable-parser');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const pxtorem = require('postcss-pxtorem');
 const paths = require('react-scripts/config/paths');
 
 /**
@@ -169,6 +170,27 @@ const addLessLoader = (config, env, loaderConfig) => {
 
 /**
  *  Based on https://github.com/arackaf/customize-cra
+ *  Modified by vdfor at 2019/03/27
+ *  */
+const addPostcssPlugins = (config, plugins) => {
+  const rules = config.module.rules.find(rule => Array.isArray(rule.oneOf))
+    .oneOf;
+  rules.forEach(r => r.use && r.use.forEach(u => {
+    if (u.options && u.options.ident === 'postcss') {
+      if (!u.options.plugins) {
+        u.options.plugins = () => [...plugins];
+      }
+      if (u.options.plugins) {
+        const originalPlugins = u.options.plugins;
+        u.options.plugins = () => [...originalPlugins(), ...plugins];
+      }
+    }
+  }));
+  return config;
+}
+
+/**
+ *  Based on https://github.com/arackaf/customize-cra
  *  Modified by vdfor at 2018/12/25
  *  */
 const addBabelPlugin = (config, plugin) => {
@@ -197,7 +219,6 @@ const addOutsideBabelExclude = (config, regExpArr) => {
  *  */
 const addSvgIconLoader = config => {
   const loaders = config.module.rules.find(rule => Array.isArray(rule.oneOf)).oneOf;
-  // Insert less-loader as the penultimate item of loaders (before file-loader)
   loaders.splice(loaders.length - 1, 0, {
     test: /-icon\.svg(\?v=\d+\.\d+\.\d+)?$/,
     use: [{ loader: require.resolve('@svgr/webpack') }]
@@ -208,7 +229,8 @@ const addSvgIconLoader = config => {
 // override
 module.exports = (config, env) => {
   config = setEslint(config);
-  config = addBabelPlugin(config, ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]);
+  config = addBabelPlugin(config, ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }, 'ant']);
+  config = addBabelPlugin(config, ['import', { libraryName: 'antd-mobile', style: true }, 'antd-mobile']);
   config = addOutsideBabelExclude(config, [/@ckeditor.*/]); // support ckeditor5
   config = addLessLoader(config, env, {
     options: { // custom antd themes
@@ -217,6 +239,23 @@ module.exports = (config, env) => {
     },
     include: /[\\/]node_modules[\\/].*antd[\\/]/
   });
+  config = addLessLoader(config, env, {
+    options: { // custom antd-mobile themes
+      modifyVars: sassParse(fs.readFileSync(paths.appSrc + '/themes/antd-mobile.scss').toString(), { camelCase: false, indented: false }),
+      javascriptEnabled: true
+    },
+    include: /[\\/]node_modules[\\/].*antd-mobile[\\/]/
+  });
+  if (process.env.REACT_APP_PLATFORM === 'mobile') { // tran px to rem if platform is mobile
+    config = addPostcssPlugins(config, [pxtorem({
+      rootValue: 14,
+      unitPrecision: 5,
+      propList: ['*'],
+      replace: true,
+      mediaQuery: false,
+      minPixelValue: 0
+    })]);
+  }
   config = addSvgIconLoader(config);
   config = multiPageConfig(config, env);
   return config;
