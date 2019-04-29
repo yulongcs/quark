@@ -1,7 +1,6 @@
-// import { createHashHistory as createHistory } from 'history';
-import { createBrowserHistory as createHistory } from 'history';
+import { createBrowserHistory, createHashHistory } from 'history';
 
-const history = createHistory();
+const history = process.env.NODE_ENV === 'development' ? createHashHistory() : createBrowserHistory();
 
 export const goPage = (url: string) => history.push(url);
 

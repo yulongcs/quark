@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import VConsole from 'vconsole';
-import { App } from './page-mobile';
+import App from './page-mobile/App';
 // import './resources/styles/index.scss';
 import * as serviceWorker from './serviceWorker';
 
