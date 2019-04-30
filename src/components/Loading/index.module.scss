@@ -1,0 +1,50 @@
+.box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.line {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 15px;
+  background-color: #f03d3e;
+  margin-right: 2px;
+  animation: loadingTranslate 2s infinite;
+}
+
+.line2 {
+  animation-delay: .15s
+}
+
+.line3 {
+  animation-delay: .30s
+}
+
+.line4 {
+  animation-delay: .45s
+}
+
+@keyframes loadingTranslate {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  35% {
+    transform: translate3d(0, 0, 0);
+    opacity: .3;
+  }
+  50% {
+    transform: translate3d(0, -20px, 0);
+    opacity: .8;
+  }
+  70% {
+    transform: translate3d(0, 3px, 0);
+    opacity: .8;
+  }
+  85% {
+    transform: translate3d(0, -3px, 0)
+  }
+}
