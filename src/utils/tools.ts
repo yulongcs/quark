@@ -15,7 +15,12 @@ export const urlToList = (url: string) => {
 };
 
 // preventing XSS attacks
-export const escape = (str: string) => str.replace(/<\/script/g, '<\\/script').replace(/<!--/g, '<\\!--');
+export const escape = (str: string) => {
+  if (!str) {
+    return str;
+  }
+  return str.replace(/<\/script/g, '<\\/script').replace(/<!--/g, '<\\!--');
+};
 
 export const getBase64 = (file: any) => new Promise((resolve) => {
   const fileReader = new FileReader();
@@ -36,6 +41,7 @@ export const handleRequestError = async (error: any, logTip: string): Promise<an
     const errorJson = await error.response.json();
     if (errorJson && errorJson.code && errorJson.message) {
       message.error(errorJson.message);
+      return;
     }
     throw error;
   } catch (err) {
