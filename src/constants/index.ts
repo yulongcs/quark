@@ -4,3 +4,5 @@ export enum BUILD_VERSION {
   TEST = 'test',
   DEV = 'dev'
 }
+
+export const DATA_QUARK_SELECTOR_ID = 'data-quark-selector-id';
