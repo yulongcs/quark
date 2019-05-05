@@ -20,9 +20,10 @@ const states = {
 
 export default ({ style = {}, state = 'empty', image }: IProps) => {
   const matchState = states[state] || {};
+  const imgClassName = styles[matchState.imgClassName];
   return (
-    <div className={styles.box} style={{ ...style, ...(image ? { backgroundImage: `url(${image})` } : {}) }}>
-      <div className={`${styles.img} ${matchState.imgClassName}`} />
+    <div className={styles.box} style={style}>
+      <div className={`${styles.img} ${imgClassName}`} style={{ ...(image ? { backgroundImage: `url(${image})` } : {}) }} />
       <p className={styles.tip}>{matchState.tipText}</p>
     </div>
   );
