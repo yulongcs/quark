@@ -5,6 +5,7 @@ interface IProps {
   style?: React.CSSProperties;
   state?: 'empty' | 'error';
   image?: string;
+  tipText?: string | React.ReactElement;
 }
 
 const states = {
@@ -18,13 +19,15 @@ const states = {
   }
 };
 
-export default ({ style = {}, state = 'empty', image }: IProps) => {
+export default ({
+  style = {}, state = 'empty', image, tipText
+}: IProps) => {
   const matchState = states[state] || {};
   const imgClassName = styles[matchState.imgClassName];
   return (
     <div className={styles.box} style={style}>
       <div className={`${styles.img} ${imgClassName}`} style={{ ...(image ? { backgroundImage: `url(${image})` } : {}) }} />
-      <p className={styles.tip}>{matchState.tipText}</p>
+      <p className={styles.tip}>{tipText || matchState.tipText}</p>
     </div>
   );
 };
