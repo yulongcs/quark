@@ -27,7 +27,7 @@ export default ({
   return (
     <div className={styles.box} style={style}>
       <div className={`${styles.img} ${imgClassName}`} style={{ ...(image ? { backgroundImage: `url(${image})` } : {}) }} />
-      <p className={styles.tip}>{tipText || matchState.tipText}</p>
+      <div className={styles.tip}>{tipText || matchState.tipText}</div>
     </div>
   );
 };

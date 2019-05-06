@@ -4,7 +4,7 @@ import { useDocumentTitle } from '../../hooks';
 
 const Home = () => {
   useDocumentTitle({ title: 'Home Page' });
-  const showMessage = () => Toast.info('更新成功');
+  const showMessage = () => Toast.info('update info success');
   return (
     <h1 onClick={showMessage}>Home Page</h1>
   );

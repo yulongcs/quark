@@ -51,8 +51,8 @@ const show = (props: IToastProps) => {
 };
 
 export default {
-  fail: (content: string = '', duration: number = 3) => show({ content, duration, status: 'fail' }),
-  success: (content: string = '', duration: number = 3) => show({ content, duration, status: 'success' }),
-  info: (content: string = '', duration: number = 3) => show({ content, duration, status: 'info' }),
+  fail: (content: string = '', duration: number = 2) => show({ content, duration, status: 'fail' }),
+  success: (content: string = '', duration: number = 2) => show({ content, duration, status: 'success' }),
+  info: (content: string = '', duration: number = 2) => show({ content, duration, status: 'info' }),
   destroy: hide
 };
