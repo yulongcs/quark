@@ -231,7 +231,7 @@ module.exports = (config, env) => {
   config = setEslint(config);
   config = addBabelPlugin(config, ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }, 'ant']);
   config = addBabelPlugin(config, ['import', { libraryName: 'antd-mobile', style: true }, 'antd-mobile']);
-  config = addOutsideBabelExclude(config, [/@ckeditor.*/]); // support ckeditor5
+  // config = addOutsideBabelExclude(config, [/@ckeditor.*/]); // support ckeditor5
   config = addLessLoader(config, env, {
     options: { // custom antd themes
       modifyVars: sassParse(fs.readFileSync(paths.appSrc + '/themes/antd.scss').toString(), { camelCase: false, indented: false }),
@@ -246,16 +246,15 @@ module.exports = (config, env) => {
     },
     include: /[\\/]node_modules[\\/].*antd-mobile[\\/]/
   });
-  if (process.env.REACT_APP_PLATFORM === 'mobile') { // tran px to rem if platform is mobile
-    config = addPostcssPlugins(config, [pxtorem({
-      rootValue: 14,
-      unitPrecision: 5,
-      propList: ['*'],
-      replace: true,
-      mediaQuery: false,
-      minPixelValue: 0
-    })]);
-  }
+  config = addPostcssPlugins(config, [pxtorem({
+    rootValue: 14,
+    unitPrecision: 5,
+    propList: ['*'],
+    replace: true,
+    mediaQuery: false,
+    minPixelValue: 0,
+    selectorBlackList: [/^.ant-/, /quarkIndex/]
+  })]);
   config = addSvgIconLoader(config);
   config = multiPageConfig(config, env);
   return config;

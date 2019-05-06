@@ -1,12 +1,1 @@
-/* chrome滚动条样式定制 */
-::-webkit-scrollbar {
-  width: 4px;
-  height: 6px;
-}
-::-webkit-scrollbar-thumb {
-  background-color: #6e6e6e;
-  outline: 1px solid #333;
-}
-::-webkit-scrollbar-track {
-  background: rgba(0,0,0,.3);
-}
+@import './common-pc.scss';

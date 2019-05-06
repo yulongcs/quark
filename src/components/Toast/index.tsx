@@ -4,7 +4,7 @@ import { DATA_QUARK_SELECTOR_ID } from '../../constants';
 import styles from './index.module.scss';
 
 interface IToastProps {
-  status: 'fail' | 'success';
+  status: 'fail' | 'success' | 'info';
   content: string | React.ReactElement;
   duration: number;
 }
@@ -12,14 +12,15 @@ interface IToastProps {
 const DATA_QUARK_TOAST_ID = 'data-quark-toast';
 
 const iconClassNames = {
-  fail: 'iconFail'
+  fail: 'iconFail',
+  success: 'iconSuccess'
 };
 
 const Toast = ({ content, status }: IToastProps) => (
   <div className={`${styles.box} ${styles.boxMask}`}>
     <div className={styles.main}>
-      <div className={`${styles.icon} ${iconClassNames[status] ? styles[iconClassNames[status]] : ''}`} />
-      <div className={styles.content}>{content}</div>
+      {status !== 'info' && <div className={`${styles.icon} ${iconClassNames[status] ? styles[iconClassNames[status]] : ''}`} />}
+      <div className={`${styles.content} ${status === 'info' ? styles.infoContent : ''}`}>{content}</div>
     </div>
   </div>
 );
@@ -50,6 +51,8 @@ const show = (props: IToastProps) => {
 };
 
 export default {
-  fail: (content: string = '', duration: number = 2) => show({ content, duration, status: 'fail' }),
+  fail: (content: string = '', duration: number = 3) => show({ content, duration, status: 'fail' }),
+  success: (content: string = '', duration: number = 3) => show({ content, duration, status: 'success' }),
+  info: (content: string = '', duration: number = 3) => show({ content, duration, status: 'info' }),
   destroy: hide
 };

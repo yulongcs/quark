@@ -1,0 +1,18 @@
+html {
+  font-size: 14pX;
+}
+
+/* chrome scrollbar custom */
+::-webkit-scrollbar {
+  width: 4pX;
+  height: 6pX;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #6e6e6e;
+  outline: 1pX solid #333;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,.3);
+}
