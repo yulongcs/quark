@@ -1,16 +1,12 @@
 import * as React from 'react';
-import { Toast } from '../../components';
+import { goPage } from '../../utils';
 import { useDocumentTitle } from '../../hooks';
-import { request } from '../../utils';
 
 const Home = () => {
-  useDocumentTitle({ title: 'Home Page' });
-  const showMessage = () => Toast.info('update info success');
-  React.useEffect(() => {
-    request('http://g.cn', { method: 'GET' });
-  }, []);
+  useDocumentTitle({ title: 'Home' });
+  const goAboutPage = () => goPage('/about');
   return (
-    <h1 onClick={showMessage}>Home Page</h1>
+    <h1 onClick={goAboutPage}>[mobile] Home Page</h1>
   );
 };
 
