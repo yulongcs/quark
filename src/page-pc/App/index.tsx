@@ -14,7 +14,7 @@ import { Header } from './views';
 
 const HomeComponent = React.lazy(() => import('../Home'));
 const LinkComponent = React.lazy(() => import('../Link'));
-const NotFoundComponent = React.lazy(() => import('../NotFound'));
+const NotFoundComponent = React.lazy(() => import('../../components/NotFound'));
 
 const App = () => (
   <AppContext.Provider value={APP_CONTEXT_INIT_VALUES}>
@@ -28,7 +28,7 @@ const App = () => (
             </Route>
             <Route path="/home" component={WaitingComponent(HomeComponent)} />
             <Route path="/link" component={WaitingComponent(LinkComponent)} />
-            <Route path="*" component={WaitingComponent(NotFoundComponent)} />
+            <Route path="*" component={WaitingComponent(NotFoundComponent, { style: { height: '100%' } })} />
           </Switch>
         </Layout.Content>
       </Layout>

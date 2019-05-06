@@ -9,6 +9,7 @@ import { WaitingComponent, AliveComponent } from '../../components';
 import { history } from '../../utils';
 
 const HomeComponent = React.lazy(() => import('../Home'));
+const NotFoundComponent = React.lazy(() => import('../../components/NotFound'));
 
 const App: React.SFC = () => (
   <AliveComponent>
@@ -18,6 +19,7 @@ const App: React.SFC = () => (
           <Redirect to={{ pathname: '/home' }} />
         </Route>
         <Route path="/home" component={WaitingComponent(HomeComponent)} />
+        <Route path="*" component={WaitingComponent(NotFoundComponent)} />
       </Switch>
     </Router>
   </AliveComponent>

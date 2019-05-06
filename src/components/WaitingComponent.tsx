@@ -1,10 +1,11 @@
 import * as React from 'react';
+import Loading from './Loading';
 
 const { Suspense } = React;
 
-const WaitingComponent = (Component: any) => (props: any) => (
-  <Suspense fallback={<h1>Loading...</h1>}>
-    <Component {...props} />
+const WaitingComponent = (Component: any, iprops: any = {}) => (props: any) => (
+  <Suspense fallback={<Loading style={{ height: '100vh' }} />}>
+    <Component {...props} {...iprops} />
   </Suspense>
 );
 
