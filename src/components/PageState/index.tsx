@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { errorImg, emptyImg } from './constant';
 import styles from './index.module.scss';
 
 interface IProps {
@@ -10,11 +11,11 @@ interface IProps {
 
 const states = {
   empty: {
-    imgClassName: 'imgEmpty',
+    image: emptyImg,
     tipText: 'No Data'
   },
   error: {
-    imgClassName: 'imgError',
+    image: errorImg,
     tipText: 'Sorry, Page Error'
   }
 };
@@ -23,10 +24,11 @@ export default ({
   style = {}, state = 'empty', image, tipText
 }: IProps) => {
   const matchState = states[state] || {};
-  const imgClassName = styles[matchState.imgClassName];
   return (
     <div className={styles.box} style={style}>
-      <div className={`${styles.img} ${imgClassName}`} style={{ ...(image ? { backgroundImage: `url(${image})` } : {}) }} />
+      <div className={styles.imgWrap}>
+        <img alt="pic" className={styles.image} src={image || matchState.image} />
+      </div>
       <div className={styles.tip}>{tipText || matchState.tipText}</div>
     </div>
   );
