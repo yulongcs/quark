@@ -1,4 +1,4 @@
-# quark
+# react-sail
 
 Seed of react
 
@@ -15,7 +15,7 @@ Seed of react
 
 > config `cra` with not eject
 
-built-in support by `quark`:
+built-in support by `react-sail`:
 
 + `eslint` config (with `.eslintrc.js` and `.eslintignore`) - `setEslint`
 + custom `antd`/`antd-mobile` theme - `addLessLoader`

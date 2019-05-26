@@ -1,16 +1,16 @@
 {
-  "name": "quark",
+  "name": "react-sail",
   "version": "2.2.0",
   "author": "vdfor",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vdfor/quark.git"
+    "url": "https://github.com/vdfor/react-sail.git"
   },
   "bugs": {
-    "url": "https://github.com/vdfor/quark/issues"
+    "url": "https://github.com/vdfor/react-sail/issues"
   },
-  "homepage": "https://github.com/vdfor/quark#readme",
+  "homepage": "https://github.com/vdfor/react-sail#readme",
   "private": true,
   "dependencies": {
     "antd": "^3.16.6",
