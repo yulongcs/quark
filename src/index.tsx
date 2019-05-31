@@ -10,9 +10,9 @@ document.addEventListener('submit', (e) => {
   e.preventDefault();
 });
 
-if (process.env.REACT_APP_ENV !== 'prod') {
-  // eslint-disable-next-line
-  new VConsole();
+if (process.env.NODE_ENV === 'development') {
+  const vconsole = new VConsole();
+  console.log(`vconsole init, version is ${vconsole.version}.`);
 }
 
 ReactDOM.render(

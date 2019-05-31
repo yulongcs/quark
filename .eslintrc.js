@@ -33,7 +33,20 @@ module.exports = {
     'max-len': ['error', 200],
     'no-console': ['off'],
     'no-constant-condition': ['off'],
-    'react/jsx-filename-extension': ['error', { extensions: ['ts', 'tsx'] }]
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [{
+          "name": "styled-components",
+          "message": "Please import from styled-components/macro."
+        }],
+        "patterns": [
+          "!styled-components/macro"
+        ]
+      }
+    ],
+    'react/jsx-filename-extension': ['error', { extensions: ['ts', 'tsx'] }],
+    'import/no-extraneous-dependencies': ['off']
   },
   settings: {
     'import/resolver': {

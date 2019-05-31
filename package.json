@@ -13,7 +13,7 @@
   "homepage": "https://github.com/vdfor/react-sail#readme",
   "private": true,
   "dependencies": {
-    "@vdfor/react-component": "^0.2.0",
+    "@vdfor/react-component": "^0.2.1",
     "antd-mobile": "^2.2.12",
     "history": "^4.7.2",
     "lodash": "^4.17.11",
@@ -47,12 +47,8 @@
     "typescript": "3.5.1"
   },
   "scripts": {
-    "start": "yarn run start:dev",
-    "start:dev": "cross-env REACT_APP_ENV=dev PORT=8182 react-app-rewired start",
-    "start:test": "cross-env REACT_APP_ENV=test PORT=8182 react-app-rewired start",
-    "build": "yarn run build:prod",
-    "build:test": "cross-env REACT_APP_ENV=test GENERATE_SOURCEMAP=false PUBLIC_URL=. react-app-rewired build",
-    "build:prod": "cross-env REACT_APP_ENV=prod GENERATE_SOURCEMAP=false PUBLIC_URL=. react-app-rewired build",
+    "start": "cross-env PORT=8182 react-app-rewired start",
+    "build": "cross-env GENERATE_SOURCEMAP=false PUBLIC_URL=. react-app-rewired build",
     "test": "react-app-rewired test",
     "eslint:check": "eslint src --ext .ts,.tsx",
     "eslint:fix": "eslint src --fix --ext .ts,.tsx"

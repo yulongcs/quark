@@ -5,7 +5,6 @@ import {
   Router,
   Switch
 } from 'react-router-dom';
-// // eslint-disable-next-line
 import { Loadable } from '@vdfor/react-component';
 import { AliveComponent } from '../../components';
 import { history } from '../../utils';

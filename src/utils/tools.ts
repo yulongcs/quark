@@ -1,10 +1,6 @@
 import uuid from 'uuid/v5';
 import { Toast } from 'antd-mobile';
 
-// compute bytes
-// eslint-disable-next-line
-export const getSizeOf = (str: string) => str.replace(/[^\x00-\xff]/g, 'xx').length;
-
 /**
  * copy from https://github.com/ant-design/ant-design-pro/blob/master/src/components/_utils/pathTools.js
  */
@@ -22,7 +18,7 @@ export const escape = (str: string) => {
   return str.replace(/<\/script/g, '<\\/script').replace(/<!--/g, '<\\!--');
 };
 
-export const getBase64 = (file: any) => new Promise((resolve) => {
+export const getBase64Str = (file: any) => new Promise((resolve) => {
   const fileReader = new FileReader();
   fileReader.readAsDataURL(file);
   // eslint-disable-next-line

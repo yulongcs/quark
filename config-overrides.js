@@ -226,11 +226,23 @@ const addSvgIconLoader = config => {
   return config;
 };
 
+/**
+ *  Created by vdfor at 2019/05/26
+ *  */
+const addResolveAlias = (config, alias) => {
+  config.resolve.alias = {
+    ...config.resolve.alias,
+    ...alias
+  };
+  return config;
+}
+
 // override
 module.exports = (config, env) => {
   config = setEslint(config);
   // config = addBabelPlugin(config, ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }, 'ant']);
   config = addBabelPlugin(config, ['import', { libraryName: 'antd-mobile', style: true }, 'antd-mobile']);
+  config = addBabelPlugin(config, ['import', { libraryName: '@vdfor/react-component', libraryDirectory: 'dist/es', camel2DashComponentName: false }, '@vdfor/react-component']);
   // config = addOutsideBabelExclude(config, [/@ckeditor.*/]); // support ckeditor5
   // config = addLessLoader(config, env, {
   //   options: { // custom antd themes
@@ -257,5 +269,13 @@ module.exports = (config, env) => {
   })]);
   config = addSvgIconLoader(config);
   config = multiPageConfig(config, env);
+  // config = addResolveAlias(config, {
+  //   // [fix] warning about several instances of module on the page becasuse of duplicated module in node_modules
+  //   'styled-components': require.resolve('styled-components')
+  // });
+  // config = addResolveAlias(config, {
+  //   // [fix] warning about several instances of module on the page becasuse of duplicated module in node_modules
+  //   'react': require.resolve('react')
+  // });
   return config;
 };
