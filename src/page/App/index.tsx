@@ -5,11 +5,12 @@ import {
   Router,
   Switch
 } from 'react-router-dom';
-import { WaitingComponent, AliveComponent } from '../../components';
+// // eslint-disable-next-line
+import { Loadable } from '@vdfor/react-component';
+import { AliveComponent } from '../../components';
 import { history } from '../../utils';
 
 const HomeComponent = React.lazy(() => import('../Home'));
-const NotFoundComponent = React.lazy(() => import('../../components/NotFound'));
 
 const App: React.SFC = () => (
   <AliveComponent>
@@ -18,8 +19,7 @@ const App: React.SFC = () => (
         <Route exact path="/">
           <Redirect to={{ pathname: '/home' }} />
         </Route>
-        <Route path="/home" component={WaitingComponent(HomeComponent)} />
-        <Route path="*" component={WaitingComponent(NotFoundComponent)} />
+        <Route path="/home" component={Loadable(HomeComponent)} />
       </Switch>
     </Router>
   </AliveComponent>

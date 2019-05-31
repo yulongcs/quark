@@ -229,16 +229,16 @@ const addSvgIconLoader = config => {
 // override
 module.exports = (config, env) => {
   config = setEslint(config);
-  config = addBabelPlugin(config, ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }, 'ant']);
+  // config = addBabelPlugin(config, ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }, 'ant']);
   config = addBabelPlugin(config, ['import', { libraryName: 'antd-mobile', style: true }, 'antd-mobile']);
   // config = addOutsideBabelExclude(config, [/@ckeditor.*/]); // support ckeditor5
-  config = addLessLoader(config, env, {
-    options: { // custom antd themes
-      modifyVars: sassParse(fs.readFileSync(paths.appSrc + '/themes/antd.scss').toString(), { camelCase: false, indented: false }),
-      javascriptEnabled: true
-    },
-    include: /[\\/]node_modules[\\/].*antd[\\/]/
-  });
+  // config = addLessLoader(config, env, {
+  //   options: { // custom antd themes
+  //     modifyVars: sassParse(fs.readFileSync(paths.appSrc + '/themes/antd.scss').toString(), { camelCase: false, indented: false }),
+  //     javascriptEnabled: true
+  //   },
+  //   include: /[\\/]node_modules[\\/].*antd[\\/]/
+  // });
   config = addLessLoader(config, env, {
     options: { // custom antd-mobile themes
       modifyVars: sassParse(fs.readFileSync(paths.appSrc + '/themes/antd-mobile.scss').toString(), { camelCase: false, indented: false }),
@@ -252,8 +252,8 @@ module.exports = (config, env) => {
     propList: ['*'],
     replace: true,
     mediaQuery: false,
-    minPixelValue: 0,
-    selectorBlackList: [/^.ant-/, /quarkIndex/]
+    minPixelValue: 0
+    // selectorBlackList: [/quarkUn/]
   })]);
   config = addSvgIconLoader(config);
   config = multiPageConfig(config, env);

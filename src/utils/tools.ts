@@ -1,5 +1,5 @@
 import uuid from 'uuid/v5';
-import { Toast } from '../components';
+import { Toast } from 'antd-mobile';
 
 // compute bytes
 // eslint-disable-next-line

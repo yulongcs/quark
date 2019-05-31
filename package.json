@@ -13,21 +13,22 @@
   "homepage": "https://github.com/vdfor/react-sail#readme",
   "private": true,
   "dependencies": {
-    "antd": "^3.16.6",
+    "@vdfor/react-component": "^0.2.0",
     "antd-mobile": "^2.2.12",
     "history": "^4.7.2",
     "lodash": "^4.17.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^4.3.1",
+    "styled-components": "^4.2.1",
     "uuid": "^3.3.2",
     "vconsole": "^3.3.0"
   },
   "devDependencies": {
-    "@types/jest": "24.0.11",
+    "@types/jest": "24.0.13",
     "@types/lodash": "^4.14.120",
-    "@types/node": "11.13.8",
-    "@types/react": "16.8.14",
+    "@types/node": "12.0.4",
+    "@types/react": "16.8.19",
     "@types/react-dom": "16.8.4",
     "@types/react-router-dom": "^4.3.1",
     "@types/uuid": "^3.4.4",
@@ -41,9 +42,9 @@
     "less-loader": "^4.1.0",
     "postcss-pxtorem": "^4.0.1",
     "react-app-rewired": "^2.1.0",
-    "react-scripts": "3.0.0",
+    "react-scripts": "3.0.1",
     "sass-variable-parser": "^1.2.2",
-    "typescript": "3.4.5"
+    "typescript": "3.5.1"
   },
   "scripts": {
     "start": "yarn run start:dev",
