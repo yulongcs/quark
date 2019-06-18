@@ -1,7 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import VConsole from 'vconsole';
+import { Provider } from 'react-redux';
 import App from './page/App';
+import rootReducer from './page/App/reducer';
+import configStore from './store';
 import './resources/styles/index.scss';
 import * as serviceWorker from './serviceWorker';
 
@@ -15,8 +18,12 @@ if (process.env.NODE_ENV === 'development') {
   console.log(`vconsole init, version is ${vconsole.version}.`);
 }
 
+const store = configStore(rootReducer);
+
 ReactDOM.render(
-  <App />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root') as HTMLElement
 );
 

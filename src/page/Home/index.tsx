@@ -1,15 +1,17 @@
 import * as React from 'react';
-import { Spin } from '@vdfor/react-component';
+import { useSelector } from 'react-redux';
+import { useTitle } from '@vdfor/react-component';
+import { IRootReducer } from '../../types';
 import { goPage } from '../../utils';
-import { useDocumentTitle } from '../../hooks';
 
 const Home = () => {
-  useDocumentTitle({ title: 'Home' });
+  useTitle('Home');
   const goAboutPage = () => goPage('/about');
+  const { pageInfo } = useSelector((state: IRootReducer) => state.homeReducer);
+
   return (
     <>
-      <Spin />
-      <h1 onClick={goAboutPage}>[mobile] Home Page</h1>
+      <h1 onClick={goAboutPage}>{pageInfo.pageState}</h1>
     </>
   );
 };
