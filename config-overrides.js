@@ -89,7 +89,7 @@ module.exports = override(
   ),
   addLessLoader({
     options: { // custom antd-mobile themes
-      modifyVars: sassParse(fs.readFileSync(paths.appSrc + '/themes/antd-mobile.scss').toString(), { camelCase: false, indented: false }),
+      modifyVars: sassParse(fs.readFileSync(paths.appSrc + '/config/theme.scss').toString(), { camelCase: false, indented: false }),
       javascriptEnabled: true
     },
     include: /[\\/]node_modules[\\/].*antd-mobile[\\/]/
