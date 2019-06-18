@@ -33,6 +33,7 @@
     "@types/react-router-dom": "^4.3.1",
     "babel-plugin-import": "^1.11.0",
     "cross-env": "^5.2.0",
+    "customize-cra": "^0.2.13",
     "eslint-config-airbnb": "^17.1.0",
     "json-server": "^0.15.0",
     "less": "^3.9.0",

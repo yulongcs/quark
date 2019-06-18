@@ -3,7 +3,8 @@ module.exports = {
     browser: true,
     commonjs: true,
     es6: true,
-    node: true
+    node: true,
+    jest: true
   },
   extends: ['eslint:recommended', 'react-app', 'airbnb', 'plugin:@typescript-eslint/recommended'],
   parser: '@typescript-eslint/parser',
@@ -33,15 +34,15 @@ module.exports = {
     'max-len': ['error', 200],
     'no-console': ['off'],
     'no-constant-condition': ['off'],
-    "no-restricted-imports": [
-      "error",
+    'no-restricted-imports': [
+      'error',
       {
-        "paths": [{
-          "name": "styled-components",
-          "message": "Please import from styled-components/macro."
+        'paths': [{
+          'name': 'styled-components',
+          'message': 'Please import from styled-components/macro.'
         }],
-        "patterns": [
-          "!styled-components/macro"
+        'patterns': [
+          '!styled-components/macro'
         ]
       }
     ],
