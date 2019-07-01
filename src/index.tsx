@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import VConsole from 'vconsole';
 import { Provider } from 'react-redux';
+import config from './config';
 import App from './page/App';
 import rootReducer from './page/App/reducer';
 import configStore from './store';
@@ -13,9 +13,12 @@ document.addEventListener('submit', (e) => {
   e.preventDefault();
 });
 
-if (process.env.NODE_ENV === 'development') {
-  const vconsole = new VConsole();
-  console.log(`vconsole init, version is ${vconsole.version}.`);
+if (config.useVconsole) {
+  import('vconsole').then((m) => {
+    const VConsole = m.default;
+    const vconsole = new VConsole();
+    console.info(`vconsole init, version is ${vconsole.version}.`);
+  });
 }
 
 const store = configStore(rootReducer);
