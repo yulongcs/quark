@@ -10,12 +10,12 @@ import { setRouteAction } from './action';
 import { AliveComponent, Route } from '../../components';
 import { history } from '../../utils';
 
-const HomeComponent = React.lazy(() => import('../Home'));
-const AboutComponent = React.lazy(() => import('../About'));
+const HomePage = React.lazy(() => import('../Home'));
+const ListPage = React.lazy(() => import('../List'));
 
 const routes = [
-  { path: '/home', component: Loadable(HomeComponent), title: 'Home' },
-  { path: '/about', component: Loadable(AboutComponent), title: 'About' }
+  { path: '/home', component: Loadable(HomePage), title: 'Home' },
+  { path: '/list', component: Loadable(ListPage), title: '列表' }
 ];
 
 const App: React.SFC = () => {

@@ -34,8 +34,8 @@ export const handleRequestError = async ({
 }: {
   error: any;
   logTitle: string;
-  showMessage: boolean;
-  showUnexpectMessage: boolean;
+  showMessage?: boolean;
+  showUnexpectMessage?: boolean;
 }): Promise<any> => {
   try {
     const errorJson = await error.response.json();

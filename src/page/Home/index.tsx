@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Spin } from '@vdfor/react-component';
 import { initAction } from './action';
-import { IRootReducer, PAGE_STATUS_ENUM } from '../../types';
+import { IRootReducer } from '../App/type';
+import { PAGE_STATUS_ENUM } from '../../types';
 import { goPage } from '../../utils';
 
-export default ({ location }: RouteComponentProps) => {
+export default () => {
   const goAboutPage = () => goPage('/about');
   const { pageInfo: { pageState } } = useSelector((state: IRootReducer) => state.homeReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(initAction());
-  }, [dispatch, location.pathname]);
+  }, [dispatch]);
 
   return pageState === PAGE_STATUS_ENUM.CONTENT ? (
     <>

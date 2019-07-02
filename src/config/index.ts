@@ -1,7 +1,7 @@
 const config = {
   development: {
     history: 'browser',
-    apiBaseUrl: 'http://192.168.31.2:8182',
+    apiBaseUrl: 'http://localhost:3000',
     useVconsole: false
   },
   production: {

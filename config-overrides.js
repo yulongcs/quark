@@ -88,10 +88,8 @@ module.exports = override(
     ['import', { libraryName: '@vdfor/react-component', libraryDirectory: 'dist/es', camel2DashComponentName: false }, '@vdfor/react-component']
   ),
   addLessLoader({
-    options: { // custom antd-mobile themes
-      modifyVars: sassParse(fs.readFileSync(paths.appSrc + '/config/theme.scss').toString(), { camelCase: false, indented: false }),
-      javascriptEnabled: true
-    },
+    modifyVars: sassParse(fs.readFileSync(paths.appSrc + '/config/theme.scss').toString(), { camelCase: false, indented: false }),
+    javascriptEnabled: true,
     include: /[\\/]node_modules[\\/].*antd-mobile[\\/]/
   }),
   addPostcssPlugins([pxtorem({

@@ -1,5 +1,3 @@
-import { IHomeReducer } from '../page/Home/type';
-
 export enum PAGE_STATUS_ENUM {
   LOADING = 'loading',
   EMPTY = 'empty',
@@ -7,6 +5,8 @@ export enum PAGE_STATUS_ENUM {
   CONTENT = 'content'
 }
 
-export interface IRootReducer {
-  homeReducer: IHomeReducer;
+export enum LOAD_ACTION_ENUM {
+  REFRESH = 'refresh',
+  LOADMORE = 'loadMore',
+  RESET = 'reset'
 }
