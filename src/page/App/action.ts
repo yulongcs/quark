@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
-import { SET_ROUTE } from './constant';
+import { SET_APP_STATE } from './constant';
+import { IAppReducer } from './type';
 
-export const setRouteAction = (route: string) => (dispatch: Dispatch) => {
-  dispatch({ type: SET_ROUTE, payload: route });
+export const setAppStateAction = (props: Partial<IAppReducer>) => (dispatch: Dispatch) => {
+  dispatch({ type: SET_APP_STATE, payload: props });
 };

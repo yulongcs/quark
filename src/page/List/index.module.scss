@@ -1,8 +1,21 @@
+@import '../../assets/styles/varibles.scss';
+
+.container {
+  height: $routeWithTarBarHeight;
+}
+
 .listBox {
+  height: $routeWithTarBarHeight;
 
   :global {
     .am-list-body {
-      background: #f2f2f2;
+      background: $routeBgColor;
+      border-top: none;
+      border-bottom: none;
     }
   }
+}
+
+.listLoading {
+  text-align: center;
 }

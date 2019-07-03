@@ -3,3 +3,7 @@ export { default as logoImg } from './logo.svg';
 export { default as logoIconImg } from './logo-icon.svg';
 export { default as notFoundImg } from './not-found.svg';
 export { default as backToHomeClick } from './back-to-home-click.svg';
+export { default as tarBarHomeImg } from './tar-bar-home.svg';
+export { default as tarBarHomeSelectedImg } from './tar-bar-home-selected.svg';
+export { default as tarBarListImg } from './tar-bar-list.svg';
+export { default as tarBarListSelectedImg } from './tar-bar-list-selected.svg';

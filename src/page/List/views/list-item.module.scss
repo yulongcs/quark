@@ -1,17 +1,17 @@
 .box {
   width: 100%;
   background: #ffffff;
-  font-size: 14px;
-  line-height: 22px;
-  padding: 6px 15px;
+  padding: 12px 30px;
   border-bottom: 1pX solid #e8e8e8;
-  margin: 4px 0;
+  margin-bottom: 16px;
+  line-height: 1.5;
 }
 
 .header {
   color: rgba(0, 0, 0, 0.65);
   transition: all .3s;
   font-weight: 500;
+  font-size: 32px;
 }
 
 .desc {
@@ -23,4 +23,13 @@
   -webkit-line-clamp: 2;
   /* autoprefixer: ignore next */
   -webkit-box-orient: vertical;
+  margin-top: 16px;
+  font-size: 28px;
+}
+
+.footer {
+  margin-top: 16px;
+  color: #888888;
+  display: flex;
+  font-size: 28px;
 }

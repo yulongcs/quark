@@ -2,6 +2,7 @@ import { PAGE_STATUS_ENUM } from '../../types';
 
 export interface IPageInfoProps {
   pageState: PAGE_STATUS_ENUM;
+  scrollTop: number;
 }
 
 export interface IListData {
@@ -16,6 +17,7 @@ export interface IListProps {
   data: IListData[];
   pageNum: number;
   pageSize: number;
+  hasMore: boolean;
 }
 
 export interface IListPageReducer {

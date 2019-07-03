@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+// import ReactDOM from 'react-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { ListView } from 'antd-mobile';
+import { ListView, PullToRefresh } from 'antd-mobile';
 import { Spin } from '@vdfor/react-component';
-import { initAction, loadListAction } from './action';
+import {
+  initAction, loadListAction, refreshAction, setPageStateAction
+} from './action';
 import { ListItem } from './views';
 import { IListData } from './type';
 import { IRootReducer } from '../App/type';
@@ -14,24 +17,55 @@ const dataSource = new ListView.DataSource({
 });
 
 export default () => {
-  const { pageInfo: { pageState }, listInfo: { data } } = useSelector((state: IRootReducer) => state.listPageReducer);
+  const listEle = useRef(null);
+  const {
+    pageInfo: { pageState, scrollTop }, listInfo: {
+      data, loading, hasMore
+    }
+  } = useSelector((state: IRootReducer) => state.listPageReducer);
   const dispatch = useDispatch();
 
   const loadMoreList = () => dispatch(loadListAction(LOAD_ACTION_ENUM.LOADMORE));
+  const refreshPage = () => dispatch(refreshAction());
 
   useEffect(() => {
     dispatch(initAction());
-  }, [dispatch]);
+    if (listEle && listEle.current) {
+      (listEle.current as any).getInnerViewNode().parentNode.scrollTop = scrollTop;
+    }
+    return () => {
+      // eslint-disable-next-line
+      dispatch(setPageStateAction({ scrollTop: (listEle.current && (listEle.current as any).getInnerViewNode().parentNode.scrollTop) || 0 }));
+    };
+  }, [dispatch, scrollTop]);
 
-  return pageState === PAGE_STATUS_ENUM.CONTENT ? (
-    <ListView
-      className={styles.listBox}
-      dataSource={dataSource.cloneWithRows(data)}
-      renderRow={(rowData: IListData) => <ListItem {...rowData} />}
-      useBodyScroll
-      onEndReachedThreshold={10}
-      pageSize={4}
-      onEndReached={loadMoreList}
-    />
-  ) : <Spin style={{ height: '100vh' }} />;
+  return (
+    <div className={styles.container}>
+      {(pageState === PAGE_STATUS_ENUM.CONTENT || pageState === PAGE_STATUS_ENUM.REFRESH) ? (
+        <PullToRefresh
+          direction="down"
+          distanceToRefresh={25}
+          getScrollContainer={undefined as any}
+          indicator={{}}
+          refreshing={pageState === PAGE_STATUS_ENUM.REFRESH}
+          damping={60}
+          onRefresh={refreshPage}
+        >
+          <ListView
+            ref={listEle}
+            initialListSize={data.length}
+            className={styles.listBox}
+            dataSource={dataSource.cloneWithRows(data)}
+            renderRow={(rowData: IListData) => <ListItem {...rowData} />}
+            renderFooter={() => (<div className={styles.listLoading}>{(!hasMore && 'No More') || (loading ? 'loading...' : '')}</div>)}
+            useBodyScroll={false}
+            onEndReachedThreshold={10}
+            scrollRenderAheadDistance={500}
+            pageSize={4}
+            onEndReached={loadMoreList}
+          />
+        </PullToRefresh>
+      ) : <Spin />}
+    </div>
+  );
 };

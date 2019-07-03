@@ -93,9 +93,10 @@ module.exports = override(
     include: /[\\/]node_modules[\\/].*antd-mobile[\\/]/
   }),
   addPostcssPlugins([pxtorem({
-    rootValue: 14,
+    rootValue: 28,
     unitPrecision: 5,
     propList: ['*'],
+    selectorBlackList: [/.am-/],
     replace: true,
     mediaQuery: false,
     minPixelValue: 0

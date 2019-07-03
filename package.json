@@ -1,5 +1,5 @@
 {
-  "name": "quark",
+  "name": "@vdfor/quark",
   "version": "2.2.0",
   "author": "vdfor",
   "license": "MIT",
@@ -15,6 +15,7 @@
   "dependencies": {
     "@vdfor/react-component": "^0.2.1",
     "antd-mobile": "^2.2.12",
+    "dayjs": "^1.8.14",
     "history": "^4.7.2",
     "lodash": "^4.17.11",
     "react": "^16.8.6",
@@ -54,7 +55,6 @@
     "build": "cross-env GENERATE_SOURCEMAP=false PUBLIC_URL=. react-app-rewired build",
     "test": "react-app-rewired test",
     "mock": "json-server --watch db.json",
-    "eslint:check": "eslint src --ext .ts,.tsx",
     "eslint:fix": "eslint src --fix --ext .ts,.tsx"
   },
   "browserslist": {

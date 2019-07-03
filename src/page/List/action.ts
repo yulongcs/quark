@@ -1,18 +1,35 @@
 import { Dispatch } from 'redux';
 import { loadListApi } from './api';
 import { IRootReducer } from '../App/type';
-import { LOAD_ACTION_ENUM } from '../../types';
+import { LOAD_ACTION_ENUM, PAGE_STATUS_ENUM } from '../../types';
+import { IPageInfoProps } from './type';
 import {
-  LOAD_LIST_SUCCESS, LOAD_PAGE_REQUEST, LOAD_PAGE_FAIL, LOAD_PAGE_SUCCESS
+  LOAD_LIST_SUCCESS, LOAD_LIST_REQUEST, SET_PAGE_STATE, REFRESH_LIST_REQUEST, REFRESH_LIST_SUCCESS
 } from './constant';
 import { handleRequestError } from '../../utils';
 
-export const loadListAction = (action: LOAD_ACTION_ENUM = LOAD_ACTION_ENUM.LOADMORE) => async (dispatch: Dispatch, getState: any) => {
-  const { listPageReducer: { listInfo: { pageNum, pageSize } } } = getState() as IRootReducer;
+export const setPageStateAction = (payload: Partial<IPageInfoProps> = {}) => (dispatch: Dispatch<any>) => {
+  dispatch({ type: SET_PAGE_STATE, payload });
+};
+
+export const loadListAction = (action: LOAD_ACTION_ENUM = LOAD_ACTION_ENUM.LOADMORE) => async (dispatch: Dispatch<any>, getState: any) => {
+  const {
+    listPageReducer: {
+      pageInfo: { pageState },
+      listInfo: {
+        hasMore, loading
+      }
+    }
+  } = getState() as IRootReducer;
+  if (loading || (action !== LOAD_ACTION_ENUM.REFRESH && (pageState === PAGE_STATUS_ENUM.REFRESH || !hasMore))) {
+    return;
+  }
+  dispatch({ type: action === LOAD_ACTION_ENUM.REFRESH ? REFRESH_LIST_REQUEST : LOAD_LIST_REQUEST });
   try {
+    const { listPageReducer: { listInfo: { pageNum, pageSize } } } = getState() as IRootReducer;
     const data = await loadListApi({ _page: pageNum, _limit: pageSize });
     dispatch({
-      type: LOAD_LIST_SUCCESS,
+      type: action === LOAD_ACTION_ENUM.REFRESH ? REFRESH_LIST_SUCCESS : LOAD_LIST_SUCCESS,
       payload: data
     });
   } catch (error) {
@@ -24,13 +41,32 @@ export const loadListAction = (action: LOAD_ACTION_ENUM = LOAD_ACTION_ENUM.LOADM
   }
 };
 
-export const initAction = () => async (dispatch: Dispatch<any>) => {
-  dispatch({ type: LOAD_PAGE_REQUEST });
+export const initAction = () => async (dispatch: Dispatch<any>, getState: any) => {
+  const {
+    listPageReducer: {
+      pageInfo: { pageState }
+    }
+  } = getState() as IRootReducer;
+  if (pageState === PAGE_STATUS_ENUM.CONTENT) { // keep-alive
+    return;
+  }
+  dispatch(setPageStateAction({ pageState: PAGE_STATUS_ENUM.LOADING }));
   try {
     await dispatch(loadListAction(LOAD_ACTION_ENUM.RESET));
-    dispatch({ type: LOAD_PAGE_SUCCESS });
+    dispatch(setPageStateAction({ pageState: PAGE_STATUS_ENUM.CONTENT }));
   } catch (error) {
-    dispatch({ type: LOAD_PAGE_FAIL });
+    dispatch(setPageStateAction({ pageState: PAGE_STATUS_ENUM.ERROR }));
     handleRequestError({ error, logTitle: '[LIST] init action error' });
+  }
+};
+
+export const refreshAction = () => async (dispatch: Dispatch<any>) => {
+  dispatch(setPageStateAction({ pageState: PAGE_STATUS_ENUM.REFRESH }));
+  try {
+    await dispatch(loadListAction(LOAD_ACTION_ENUM.REFRESH));
+  } catch (error) {
+    handleRequestError({ error, logTitle: '[LIST] refresh action error' });
+  } finally {
+    dispatch(setPageStateAction({ pageState: PAGE_STATUS_ENUM.CONTENT }));
   }
 };

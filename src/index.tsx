@@ -5,7 +5,7 @@ import config from './config';
 import App from './page/App';
 import rootReducer from './page/App/reducer';
 import configStore from './store';
-import './resources/styles/index.scss';
+import './assets/styles/index.scss';
 import * as serviceWorker from './serviceWorker';
 
 // 防止表单提交导致页面刷新的统一处理

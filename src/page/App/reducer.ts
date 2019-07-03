@@ -1,5 +1,5 @@
 import { combineReducers, AnyAction, Reducer } from 'redux';
-import { SET_ROUTE } from './constant';
+import { SET_APP_STATE } from './constant';
 import { IRootReducer } from './type';
 import homeReducer from '../Home/reducer';
 import listPageReducer from '../List/reducer';
@@ -10,10 +10,10 @@ const INITIAL_APP_STATE = {
 
 const appReducer = (state = INITIAL_APP_STATE, action: AnyAction) => {
   switch (action.type) {
-    case SET_ROUTE:
+    case SET_APP_STATE:
       return {
         ...state,
-        route: action.payload
+        ...action.payload
       };
     default:
       return state;
