@@ -32,7 +32,9 @@ const TabBarComponent = () => {
           <TabBar.Item
             selected={route === i.path}
             onPress={() => goPage(i.path)}
-            {...{ ...i, icon: setTabBarIconComponent(i.icon), selectedIcon: setTabBarIconComponent(i.selectedIcon) }}
+            {...{
+              ...i, icon: setTabBarIconComponent(i.icon), selectedIcon: setTabBarIconComponent(i.selectedIcon), title: i.tabBarTitle
+            }}
           />
         ))}
       </TabBar>

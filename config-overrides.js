@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { override, addBabelPlugins, addLessLoader, addPostcssPlugins, useEslintRc, enableEslintTypescript, addWebpackAlias } = require('customize-cra');
+const { override, addBabelPlugins, addLessLoader, addPostcssPlugins, useEslintRc, enableEslintTypescript } = require('customize-cra');
 const { parse: sassParse } = require('sass-variable-parser');
 const paths = require('react-scripts/config/paths');
 const pxtorem = require('postcss-pxtorem');
@@ -102,7 +102,7 @@ module.exports = override(
     minPixelValue: 0
   })]),
   addSvgIconLoader(),
-  setMultiPage(),
-  addWebpackAlias({ 'styled-components': require.resolve('styled-components') }),
-  addWebpackAlias({ 'react': require.resolve('react') })
+  setMultiPage()
+  // addWebpackAlias({ 'styled-components': require.resolve('styled-components') }),
+  // addWebpackAlias({ 'react': require.resolve('react') })
 );
