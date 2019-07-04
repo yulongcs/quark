@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Loadable } from '@vdfor/react-component';
 import { IRootReducer } from './type';
 import { setAppBasicStateAction } from '../../store/action';
-import { IAppBasicReducer } from '../../types';
+import { IAppBasicStateProps } from '../../types';
 import { Route } from '../../components';
 import { history, goPage, pxToRem } from '../../utils';
 import routes from './routes';
@@ -23,7 +23,7 @@ const setTabBarIconComponent = (icon: string) => (
 const getLoadableRoutePage = (component: () => Promise<{ default: ComponentType<any> }>) => Loadable(lazy(component));
 
 const TabBarComponent = () => {
-  const { route, showTabBar } = useSelector((state: IRootReducer) => state.appBasicReducer);
+  const { basicState: { route, showTabBar } } = useSelector((state: IRootReducer) => state.appBasicReducer);
   const tabs = routes.filter(i => i.showTabBar);
   return showTabBar ? (
     <div className={styles.tabBar}>
@@ -44,7 +44,7 @@ const TabBarComponent = () => {
 
 export default () => {
   const dispatch = useDispatch();
-  const setAppBasicState = (values: Partial<IAppBasicReducer>) => {
+  const setAppBasicState = (values: Partial<IAppBasicStateProps>) => {
     dispatch(setAppBasicStateAction(values));
   };
   const basicProps = {

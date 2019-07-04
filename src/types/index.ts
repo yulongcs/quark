@@ -14,12 +14,25 @@ export enum LOAD_ACTION_ENUM {
   RESET = 'reset'
 }
 
-export interface IAppBasicReducer {
+export interface IAppBasicStateProps {
   title: string;
   showTabBar: boolean;
   route: string;
 }
 
-export interface ICustomRouteProps extends RouteProps, Partial<IAppBasicReducer> {
-  setAppBasicState: (state: Partial<IAppBasicReducer>) => void;
+export interface ICustomRouteProps extends RouteProps, Partial<IAppBasicStateProps> {
+  setAppBasicState: (state: Partial<IAppBasicStateProps>) => void;
+}
+
+export interface IEnvProps {
+  nodeEnv: string;
+  quarkVersion: string;
+  device: string;
+  os: string;
+  browser: string;
+}
+
+export interface IAppBasicProps {
+  envInfo: IEnvProps;
+  basicState: IAppBasicStateProps;
 }

@@ -1,6 +1,15 @@
-import { AnyAction } from 'redux';
-import { SET_APP_BASIC_STATE } from './constant';
-import { IAppBasicReducer } from '../types';
+import { AnyAction, combineReducers, Reducer } from 'redux';
+import { SET_APP_BASIC_STATE, SET_ENV_INFO } from './constant';
+import { IAppBasicStateProps, IEnvProps, IAppBasicProps } from '../types';
+import { md } from '../utils';
+
+const INITIAL_ENV_INFO = {
+  nodeEnv: process.env.NODE_ENV,
+  quarkVersion: process.env.REACT_APP_VERSION || 'unknown',
+  device: `${md.mobile()}-${md.phone()}`,
+  os: md.os(),
+  browser: `${md.userAgent()}${md.version(md.userAgent())}`
+};
 
 const INITIAL_APP_STATE = {
   route: '/',
@@ -8,7 +17,19 @@ const INITIAL_APP_STATE = {
   showTabBar: true
 };
 
-export default (state: IAppBasicReducer = INITIAL_APP_STATE, action: AnyAction) => {
+const envInfoReducer = (state: IEnvProps = INITIAL_ENV_INFO, action: AnyAction) => {
+  switch (action.type) {
+    case SET_ENV_INFO:
+      return {
+        ...state,
+        ...action.payload
+      };
+    default:
+      return state;
+  }
+};
+
+const basicStateReducer = (state: IAppBasicStateProps = INITIAL_APP_STATE, action: AnyAction) => {
   switch (action.type) {
     case SET_APP_BASIC_STATE:
       return {
@@ -19,3 +40,8 @@ export default (state: IAppBasicReducer = INITIAL_APP_STATE, action: AnyAction) 
       return state;
   }
 };
+
+export default combineReducers({
+  envInfo: envInfoReducer,
+  basicState: basicStateReducer
+}) as Reducer<IAppBasicProps>;

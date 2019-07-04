@@ -1,1 +1,2 @@
 export const SET_APP_BASIC_STATE = 'SET_APP_BASIC_STATE';
+export const SET_ENV_INFO = 'SET_ENV_INFO';
