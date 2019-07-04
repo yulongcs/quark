@@ -1,13 +1,9 @@
+import { IAppBasicReducer } from '../../types';
 import { IHomeReducer } from '../Home/type';
 import { IListPageReducer } from '../List/type';
 
-export interface IAppReducer {
-  route: string;
-  showTabBar: boolean;
-}
-
 export interface IRootReducer {
-  appReducer: IAppReducer;
+  appBasicReducer: IAppBasicReducer;
   homeReducer: IHomeReducer;
   listPageReducer: IListPageReducer;
 }

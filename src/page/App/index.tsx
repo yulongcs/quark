@@ -1,55 +1,39 @@
-import * as React from 'react';
+import React, { lazy, ComponentType } from 'react';
 import {
   Redirect,
+  Route as DefaultRoute,
   Router,
   Switch
 } from 'react-router-dom';
 import { TabBar } from 'antd-mobile';
-import { Loadable } from '@vdfor/react-component';
 import { useDispatch, useSelector } from 'react-redux';
+import { Loadable } from '@vdfor/react-component';
 import { IRootReducer } from './type';
-import { setAppStateAction } from './action';
-import { AliveComponent, Route } from '../../components';
-import { history, goPage } from '../../utils';
-import {
-  tarBarHomeImg, tarBarHomeSelectedImg, tarBarListImg, tarBarListSelectedImg
-} from '../../assets/images';
+import { setAppBasicStateAction } from '../../store/action';
+import { IAppBasicReducer } from '../../types';
+import { Route } from '../../components';
+import { history, goPage, pxToRem } from '../../utils';
+import routes from './routes';
 import styles from './index.module.scss';
 
-const setIconComponent = (icon: string) => (
-  <div className={styles.tabBarIcon} style={{ backgroundImage: `url(${icon})` }} />
+const setTabBarIconComponent = (icon: string) => (
+  <div style={{ width: pxToRem(44), height: pxToRem(44), background: `transparent url(${icon}) center / contain no-repeat` }} />
 );
 
-const tabs = [
-  {
-    key: '/home', title: '首页', icon: setIconComponent(tarBarHomeImg), selectedIcon: setIconComponent(tarBarHomeSelectedImg)
-  },
-  {
-    key: '/list', title: '列表', icon: setIconComponent(tarBarListImg), selectedIcon: setIconComponent(tarBarListSelectedImg)
-  }
-];
-
-const HomePage = React.lazy(() => import('../Home'));
-const ListPage = React.lazy(() => import('../List'));
-
-const routes = [
-  {
-    path: '/home', showTabBar: true, component: Loadable(HomePage), title: '首页'
-  },
-  {
-    path: '/list', showTabBar: true, component: Loadable(ListPage), title: '长列表'
-  }
-];
+const getLoadableRoutePage = (component: () => Promise<{ default: ComponentType<any> }>) => Loadable(lazy(component));
 
 const TabBarComponent = () => {
-  const { route } = useSelector((state: IRootReducer) => state.appReducer);
-  const showTabBarRoute = routes.filter(i => (i.showTabBar && i.path === route));
-  const isShowTabBar = showTabBarRoute.length > 0;
-  return isShowTabBar ? (
+  const { route, showTabBar } = useSelector((state: IRootReducer) => state.appBasicReducer);
+  const tabs = routes.filter(i => i.showTabBar);
+  return showTabBar ? (
     <div className={styles.tabBar}>
       <TabBar noRenderContent>
         {tabs.map(i => (
-          <TabBar.Item selected={route === i.key} {...i} onPress={() => goPage(i.key)} />
+          <TabBar.Item
+            selected={route === i.path}
+            onPress={() => goPage(i.path)}
+            {...{ ...i, icon: setTabBarIconComponent(i.icon), selectedIcon: setTabBarIconComponent(i.selectedIcon) }}
+          />
         ))}
       </TabBar>
     </div>
@@ -58,24 +42,23 @@ const TabBarComponent = () => {
 
 export default () => {
   const dispatch = useDispatch();
-  const setRoute = (route: string) => {
-    dispatch(setAppStateAction({ route }));
+  const setAppBasicState = (values: Partial<IAppBasicReducer>) => {
+    dispatch(setAppBasicStateAction(values));
   };
   const basicProps = {
-    setRoute,
-    title: 'quark'
+    setAppBasicState
   };
   return (
-    <AliveComponent>
+    <>
       <Router history={history}>
         <Switch>
-          <Route {...basicProps} exact path="/">
+          <DefaultRoute exact path="/">
             <Redirect to={{ pathname: '/home' }} />
-          </Route>
-          {routes.map(i => <Route key={i.path} {...{ ...basicProps, ...i }} />)}
+          </DefaultRoute>
+          {routes.map(i => <Route {...{ ...basicProps, ...i, component: getLoadableRoutePage(i.component) }} />)}
         </Switch>
       </Router>
       <TabBarComponent />
-    </AliveComponent>
+    </>
   );
 };

@@ -1,2 +1,0 @@
-export const SET_ALIVE_DATA = 'SET_ALIVE_DATA';
-export const REMOVE_ALIVE_DATA = 'REMOVE_ALIVE_DATA';

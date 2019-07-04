@@ -26,6 +26,8 @@ export const getBase64Str = (file: any) => new Promise((resolve) => {
   };
 });
 
+export const pxToRem = (px: number) => `${px / 28}rem`;
+
 // // 生成随机数字加字母(index - 最大长度)
 // export const generateHash = (index = 10) => Math.random().toString(36).slice(2, index + 2);
 

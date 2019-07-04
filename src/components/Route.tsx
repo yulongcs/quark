@@ -1,16 +1,14 @@
 import React from 'react';
-import { Route, RouteProps } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { useTitle } from '@vdfor/react-component';
+import { ICustomRouteProps } from '../types';
 
-interface IProps extends RouteProps {
-  setRoute: (route: string) => void;
-  title: string;
-}
-
-export default (props: IProps) => {
-  const { location: { pathname = '/' } = {}, setRoute, title = '' } = props;
+export default (props: ICustomRouteProps) => {
+  const {
+    location: { pathname = '/' } = {}, title = '', showTabBar = true, setAppBasicState
+  } = props;
   useTitle(title);
-  setRoute(pathname);
+  setAppBasicState({ route: pathname, showTabBar });
   return (
     <Route {...props} />
   );
