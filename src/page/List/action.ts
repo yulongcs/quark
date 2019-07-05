@@ -4,7 +4,7 @@ import { IRootReducer } from '../App/type';
 import { LOAD_ACTION_ENUM, PAGE_STATUS_ENUM } from '../../types';
 import { IPageInfoProps } from './type';
 import {
-  LOAD_LIST_SUCCESS, LOAD_LIST_REQUEST, SET_PAGE_STATE, REFRESH_LIST_REQUEST, REFRESH_LIST_SUCCESS
+  PAGE_NAME, LOAD_LIST_SUCCESS, LOAD_LIST_REQUEST, SET_PAGE_STATE, REFRESH_LIST_REQUEST, REFRESH_LIST_SUCCESS
 } from './constant';
 import { handleRequestError } from '../../utils';
 
@@ -34,7 +34,9 @@ export const loadListAction = (action: LOAD_ACTION_ENUM = LOAD_ACTION_ENUM.LOADM
     });
   } catch (error) {
     if (action === LOAD_ACTION_ENUM.LOADMORE) {
-      handleRequestError({ error, logTitle: '[LIST] load list action error', showMessage: false });
+      handleRequestError({
+        error, page: PAGE_NAME, logTitle: 'load list action error', showMessage: false
+      });
     } else {
       throw error;
     }
@@ -56,7 +58,7 @@ export const initAction = () => async (dispatch: Dispatch<any>, getState: any) =
     dispatch(setPageStateAction({ pageState: PAGE_STATUS_ENUM.CONTENT }));
   } catch (error) {
     dispatch(setPageStateAction({ pageState: PAGE_STATUS_ENUM.ERROR }));
-    handleRequestError({ error, logTitle: '[LIST] init action error' });
+    handleRequestError({ error, page: PAGE_NAME, logTitle: 'init action error' });
   }
 };
 
@@ -65,7 +67,7 @@ export const refreshAction = () => async (dispatch: Dispatch<any>) => {
   try {
     await dispatch(loadListAction(LOAD_ACTION_ENUM.REFRESH));
   } catch (error) {
-    handleRequestError({ error, logTitle: '[LIST] refresh action error' });
+    handleRequestError({ error, page: PAGE_NAME, logTitle: 'refresh action error' });
   } finally {
     dispatch(setPageStateAction({ pageState: PAGE_STATUS_ENUM.CONTENT }));
   }

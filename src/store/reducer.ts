@@ -5,7 +5,8 @@ import { md } from '../utils';
 
 const INITIAL_ENV_INFO = {
   nodeEnv: process.env.NODE_ENV,
-  quarkVersion: process.env.REACT_APP_VERSION || 'unknown',
+  projectVersion: process.env.REACT_APP_VERSION || 'unknown',
+  projectName: process.env.REACT_APP_NAME || 'unknown',
   device: `${md.mobile()}-${md.phone()}`,
   os: md.os(),
   browser: `${md.userAgent()}${md.version(md.userAgent())}`

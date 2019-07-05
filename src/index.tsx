@@ -5,6 +5,7 @@ import config from './config';
 import App from './page/App';
 import rootReducer from './page/App/reducer';
 import configStore from './store';
+import { indexDbInit } from './utils';
 import './assets/styles/index.scss';
 import * as serviceWorker from './serviceWorker';
 
@@ -20,6 +21,8 @@ if (config.useVconsole) {
     console.info(`vconsole init, version is ${vconsole.version}.`);
   });
 }
+
+indexDbInit();
 
 const store = configStore(rootReducer);
 

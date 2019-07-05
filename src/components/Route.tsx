@@ -9,7 +9,6 @@ export default (props: ICustomRouteProps) => {
   } = props;
   useTitle(title);
   setAppBasicState({ route: pathname, showTabBar });
-  console.log(process.env);
   return (
     <Route {...props} />
   );

@@ -1,4 +1,5 @@
 import { Toast } from 'antd-mobile';
+import { addToLogCollection } from './db';
 
 /**
  * copy from https://github.com/ant-design/ant-design-pro/blob/master/src/components/_utils/pathTools.js
@@ -32,22 +33,31 @@ export const pxToRem = (px: number) => `${px / 28}rem`;
 // export const generateHash = (index = 10) => Math.random().toString(36).slice(2, index + 2);
 
 export const handleRequestError = async ({
-  error, logTitle, showMessage = true, showUnexpectMessage = true
+  error, logTitle, showMessage = true, showUnexpectMessage = true, page = 'unknown'
 }: {
   error: any;
+  page?: string;
   logTitle: string;
   showMessage?: boolean;
   showUnexpectMessage?: boolean;
 }): Promise<any> => {
   try {
     const errorJson = await error.response.json();
-    if (errorJson && errorJson.code && errorJson.message && showMessage) {
-      Toast.fail(errorJson.message);
+    if (errorJson && errorJson.message) {
+      addToLogCollection({
+        createAt: Date.now(), page, title: logTitle, desc: `[code - ${errorJson.code || 'unknown'}]${errorJson.message}`
+      });
+      if (showMessage) {
+        Toast.fail(errorJson.message);
+      }
       return;
     }
     throw error;
   } catch (err) {
-    console.error(logTitle, error);
+    console.error(`『${page}-${logTitle}』`, error);
+    addToLogCollection({
+      createAt: Date.now(), page, title: logTitle, desc: String(error)
+    });
     if (showMessage && showUnexpectMessage) {
       Toast.fail('网络错误，请重试');
     }

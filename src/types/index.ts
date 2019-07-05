@@ -26,7 +26,8 @@ export interface ICustomRouteProps extends RouteProps, Partial<IAppBasicStatePro
 
 export interface IEnvProps {
   nodeEnv: string;
-  quarkVersion: string;
+  projectVersion: string;
+  projectName: string;
   device: string;
   os: string;
   browser: string;
