@@ -1,3 +1,5 @@
+@import './varibles.scss';
+
 * {
   box-sizing: border-box;
 }
@@ -10,13 +12,13 @@ body {
   font-size: 28px;
 }
 
-@media screen and (min-width: 768pX) {
+@media screen and (min-width: $break-point-768) {
   html {
     font-size: 21.6pX;
   }
 
   body {
-    width: 768pX;
+    width: $break-point-768;
     margin: 0 auto;
   }
 }

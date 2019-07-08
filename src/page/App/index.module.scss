@@ -1,6 +1,14 @@
+@import '../../assets/styles/varibles.scss';
+
 .tabBar {
   position: fixed;
   bottom: 0;
-  height: 100px;
-  width: 100%;
+  left: 0;
+}
+
+@media screen and (min-width: $break-point-768) {
+  .tabBar {
+    width: 768pX;
+    left: auto;
+  }
 }
