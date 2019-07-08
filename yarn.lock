@@ -1351,6 +1351,14 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-native@*":
+  version "0.60.0"
+  resolved "https://registry.npm.taobao.org/@types/react-native/download/@types/react-native-0.60.0.tgz#992ecf1e59c4a92ffa1c1b92c669802e433acd05"
+  integrity sha1-mS7PHlnEqS/6HBuSxmmALkM6zQU=
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/react" "*"
+
 "@types/react-redux@^7.1.0":
   version "7.1.0"
   resolved "https://registry.npm.taobao.org/@types/react-redux/download/@types/react-redux-7.1.0.tgz#ed2c90ff192433251bd8a264195529f3613d53e2"
@@ -1390,6 +1398,15 @@
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
   integrity sha512-l42BggppR6zLmpfU6fq9HEa2oGPEI8yrSPL3GITjfRInppYFahObbIQOQK3UGxEnyQpltZLaPe75046NOZQikw==
+
+"@types/styled-components@^4.1.16":
+  version "4.1.16"
+  resolved "https://registry.npm.taobao.org/@types/styled-components/download/@types/styled-components-4.1.16.tgz#63fb33d02bc41d70a3af88711849b6df5d2a58e0"
+  integrity sha1-Y/sz0CvEHXCjr4hxGEm2310qWOA=
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
+    csstype "^2.2.0"
 
 "@types/tapable@*":
   version "1.0.4"

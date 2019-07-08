@@ -24,16 +24,6 @@ export interface ICustomRouteProps extends RouteProps, Partial<IAppBasicStatePro
   setAppBasicState: (state: Partial<IAppBasicStateProps>) => void;
 }
 
-export interface IEnvProps {
-  nodeEnv: string;
-  projectVersion: string;
-  projectName: string;
-  device: string;
-  os: string;
-  browser: string;
-}
-
 export interface IAppBasicProps {
-  envInfo: IEnvProps;
   basicState: IAppBasicStateProps;
 }
