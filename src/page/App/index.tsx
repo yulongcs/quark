@@ -1,4 +1,4 @@
-import React, { lazy, ComponentType } from 'react';
+import React from 'react';
 import {
   Redirect,
   Route as DefaultRoute,
@@ -14,8 +14,6 @@ import { Route } from '../../components';
 import { history, goPage, pxToRem } from '../../utils';
 import routes from './routes';
 import styles from './index.module.scss';
-
-const getLoadableRoutePage = (component: () => Promise<{ default: ComponentType<any> }>) => Loadable(lazy(component));
 
 const TabBarComponent = () => {
   const { basicState: { route, showTabBar } } = useSelector((state: IRootReducer) => state.appBasicReducer);
@@ -50,7 +48,7 @@ export default () => {
           <DefaultRoute exact path="/">
             <Redirect to={{ pathname: '/home' }} />
           </DefaultRoute>
-          {routes.map(i => <Route {...{ ...basicProps, ...i, component: getLoadableRoutePage(i.component) }} />)}
+          {routes.map(i => <Route {...{ ...basicProps, ...i, component: Loadable({ component: i.component }) }} />)}
         </Switch>
       </Router>
       <TabBarComponent />
