@@ -8,7 +8,7 @@
 
 @media screen and (min-width: $break-point-768) {
   .tabBar {
-    width: 768pX;
+    width: $break-point-768;
     left: auto;
   }
 }
