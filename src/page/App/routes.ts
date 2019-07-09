@@ -34,6 +34,16 @@ export default [
     selectedIcon: tarBarListSelectedImg
   },
   {
+    key: '3',
+    path: '/report/nav',
+    title: '运行报告',
+    tabBarTitle: '运行报告',
+    showTabBar: false,
+    component: () => import('../report/ReportNav'),
+    icon: tarBarListImg,
+    selectedIcon: tarBarListSelectedImg
+  },
+  {
     key: '4',
     path: '/report/env',
     title: '运行环境',
