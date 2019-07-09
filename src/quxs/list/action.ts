@@ -2,6 +2,7 @@ import { Dispatch } from 'redux';
 import { IActionTypes } from './type';
 import { LOAD_ACTION_ENUM } from '../../types';
 import { handleRequestError } from '../../utils';
+import { PAGE_NAME as LOG_REPORT_PAGE_NAME } from '../../page/report/LogReport/constant';
 
 interface IParams extends IActionTypes {
   pageReducerName: string;
@@ -35,8 +36,12 @@ export default ({
   dispatch({ type: action === LOAD_ACTION_ENUM.REFRESH ? REFRESH_LIST_REQUEST : LOAD_LIST_REQUEST });
   try {
     const newState = getState();
-    const { pageNum, pageSize } = newState[pageReducerName].listInfo;
-    const data = await loadListApi({ ...loadListApiExtraParams, ...{ [pageNumMap]: pageNum, [pageSizeMap]: pageSize } });
+    const { pageNum, pageSize, data: listData } = newState[pageReducerName].listInfo;
+    const data = await loadListApi({
+      ...loadListApiExtraParams,
+      ...{ [pageNumMap]: pageNum, [pageSizeMap]: pageSize },
+      ...(pageName === LOG_REPORT_PAGE_NAME ? { listData: action === LOAD_ACTION_ENUM.REFRESH ? [] : listData } : {}) // logReportPage的list数据从本地数据库获取，此处进行特殊处理
+    });
     dispatch({
       type: action === LOAD_ACTION_ENUM.REFRESH ? REFRESH_LIST_SUCCESS : LOAD_LIST_SUCCESS,
       payload: data

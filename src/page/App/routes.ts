@@ -42,5 +42,15 @@ export default [
     component: () => import('../report/EnvReport'),
     icon: tarBarListImg,
     selectedIcon: tarBarListSelectedImg
+  },
+  {
+    key: '5',
+    path: '/report/log',
+    title: '运行日志',
+    tabBarTitle: '运行日志',
+    showTabBar: false,
+    component: () => import('../report/LogReport'),
+    icon: tarBarListImg,
+    selectedIcon: tarBarListSelectedImg
   }
 ];

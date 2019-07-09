@@ -33,11 +33,14 @@ export interface IQuxPageInfoProps {
   scrollTop: number;
 }
 
-export interface IQuxListProps {
-  loading: boolean;
-  data: any[];
+export interface IQuxPaginationBasicProps {
   pageNum: number;
   pageSize: number;
+}
+
+export interface IQuxListProps extends IQuxPaginationBasicProps {
+  loading: boolean;
+  data: any[];
   hasMore: boolean;
   refreshing: boolean;
 }

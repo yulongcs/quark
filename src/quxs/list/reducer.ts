@@ -6,7 +6,7 @@ const INITIAL_LIST_STATE = {
   data: [],
   loading: false,
   refreshing: false,
-  pageSize: 8,
+  pageSize: 12,
   pageNum: 1,
   hasMore: true
 };

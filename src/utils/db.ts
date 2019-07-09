@@ -55,17 +55,21 @@ export const indexDbDml = ({
     } else if (get) {
       const g = store.openCursor(get.range, get.direction || 'next');
       let len = 0;
+      const resData: any[] = [];
       g.addEventListener('success', (e: any) => {
         const cursor = e.target.result;
         if (cursor) {
           if (typeof get.limit === 'number' && len >= get.limit) {
+            if (get.cb) {
+              get.cb(resData);
+            }
             return;
           }
           len += 1;
-          if (get.cb) {
-            get.cb(cursor.value);
-          }
+          resData.push({ ...cursor.value, key: cursor.key });
           cursor.continue();
+        } else if (get.cb) {
+          get.cb(resData);
         }
       });
     } else if (clear) {
@@ -82,19 +86,27 @@ export const addToLogCollection = (obj: Record<string, any>) => {
   });
 };
 
-export const getFromLogCollection = () => {
-  indexDbDml({
-    collectionName: config.logCollectionName,
-    wa: 'readonly',
-    get: {
-      range: IDBKeyRange.lowerBound(2, true),
-      direction: 'prevunique',
-      limit: 10,
-      cb: (e: any) => {
-        console.log(e);
+export const getFromLogCollection = async ({ range, limit = 20 }: {
+  range: IDBKeyRange | number | string | null;
+  limit?: number;
+}) => {
+  let resData: any = [];
+  await new Promise((resolve) => {
+    indexDbDml({
+      collectionName: config.logCollectionName,
+      wa: 'readonly',
+      get: {
+        range, // IDBKeyRange.lowerBound(38, true)
+        direction: 'prevunique',
+        limit,
+        cb: (data: any) => {
+          resData = data;
+          resolve(true);
+        }
       }
-    }
+    });
   });
+  return resData;
 };
 
 export const clearLogCollection = () => {
