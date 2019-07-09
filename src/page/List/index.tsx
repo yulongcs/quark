@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from 'react';
-// import ReactDOM from 'react-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { ListView, PullToRefresh } from 'antd-mobile';
 import { Spin } from '@vdfor/react-component';
+import { ErrorPage } from '../../components';
 import {
   initAction, loadListAction, refreshAction, setPageStateAction
 } from './action';
 import { ListItem } from './views';
-import { IListData } from './type';
+import { IListItemData } from './type';
 import { IRootReducer } from '../App/type';
 import { PAGE_STATUS_ENUM, LOAD_ACTION_ENUM } from '../../types';
 import styles from './index.module.scss';
@@ -41,7 +41,7 @@ export default () => {
 
   return (
     <div className={styles.container}>
-      {(pageState === PAGE_STATUS_ENUM.CONTENT || pageState === PAGE_STATUS_ENUM.REFRESH) ? (
+      {((pageState === PAGE_STATUS_ENUM.CONTENT || pageState === PAGE_STATUS_ENUM.REFRESH) && (
         <PullToRefresh
           direction="down"
           distanceToRefresh={25}
@@ -56,7 +56,7 @@ export default () => {
             initialListSize={data.length}
             className={styles.listBox}
             dataSource={dataSource.cloneWithRows(data)}
-            renderRow={(rowData: IListData) => <ListItem {...rowData} />}
+            renderRow={(rowData: IListItemData) => <ListItem {...rowData} />}
             renderFooter={() => (<div className={styles.listLoading}>{(!hasMore && 'No More') || (loading ? 'loading...' : '')}</div>)}
             useBodyScroll={false}
             onEndReachedThreshold={10}
@@ -65,7 +65,7 @@ export default () => {
             onEndReached={loadMoreList}
           />
         </PullToRefresh>
-      ) : <Spin />}
+      )) || (pageState === PAGE_STATUS_ENUM.ERROR ? <ErrorPage /> : <Spin />)}
     </div>
   );
 };

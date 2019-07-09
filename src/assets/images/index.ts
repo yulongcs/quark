@@ -7,3 +7,4 @@ export { default as tarBarHomeImg } from './tar-bar-home.svg';
 export { default as tarBarHomeSelectedImg } from './tar-bar-home-selected.svg';
 export { default as tarBarListImg } from './tar-bar-list.svg';
 export { default as tarBarListSelectedImg } from './tar-bar-list-selected.svg';
+export { default as pageErrorImg } from './page-error.svg';

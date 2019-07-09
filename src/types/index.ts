@@ -27,3 +27,17 @@ export interface ICustomRouteProps extends RouteProps, Partial<IAppBasicStatePro
 export interface IAppBasicProps {
   basicState: IAppBasicStateProps;
 }
+
+export interface IQuxPageInfoProps {
+  pageState: PAGE_STATUS_ENUM;
+  scrollTop: number;
+}
+
+export interface IQuxListProps {
+  loading: boolean;
+  data: any[];
+  pageNum: number;
+  pageSize: number;
+  hasMore: boolean;
+  refreshing: boolean;
+}

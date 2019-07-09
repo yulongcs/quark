@@ -1,12 +1,12 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import styles from './list-item.module.scss';
-import { IListData } from '../type';
+import { IListItemData } from '../type';
 import { goPage } from '../../../utils';
 
 export default React.memo(({
   id, title, desc, time
-}: IListData) => (
+}: IListItemData) => (
   <div className={styles.box} onClick={() => goPage(`/list-detail/${id}`)}>
     <div className={styles.header}>{title}</div>
     <div className={styles.desc}>{desc}</div>
