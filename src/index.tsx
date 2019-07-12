@@ -6,7 +6,7 @@ import App from './page/App';
 import rootReducer from './page/App/reducer';
 import configStore from './store';
 import { indexDbInit } from './utils';
-import './assets/styles/index.scss';
+import { StyledGlobal } from './components';
 import * as serviceWorker from './serviceWorker';
 
 // 防止表单提交导致页面刷新的统一处理
@@ -28,7 +28,10 @@ const store = configStore(rootReducer);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <>
+      <StyledGlobal />
+      <App />
+    </>
   </Provider>,
   document.getElementById('root') as HTMLElement
 );

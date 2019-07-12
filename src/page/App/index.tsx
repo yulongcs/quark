@@ -7,19 +7,32 @@ import {
 } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loadable, TabBar } from '@vdfor/react-component';
+import styled from 'styled-components/macro';
 import { IRootReducer } from './type';
 import { setAppBasicStateAction } from '../../store/action';
 import { IAppBasicStateProps } from '../../types';
 import { Route } from '../../components';
 import { history, goPage, pxToRem } from '../../utils';
+import { BREAK_POINT_768 } from '../../constants';
 import routes from './routes';
-import styles from './index.module.scss';
+
+const TarBarView = styled(TabBar)`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: ${pxToRem(100)};
+
+  @media screen and (min-width: ${BREAK_POINT_768}) {
+    width: ${BREAK_POINT_768};
+    left: auto;
+  }
+`;
 
 const TabBarComponent = () => {
   const { basicState: { route, showTabBar } } = useSelector((state: IRootReducer) => state.appBasicReducer);
   const tabs = routes.filter(i => i.showTabBar);
   return showTabBar ? (
-    <TabBar className={styles.tabBar} height={pxToRem(100)}>
+    <TarBarView>
       {tabs.map(i => (
         <TabBar.Item
           selected={route === i.path}
@@ -29,7 +42,7 @@ const TabBarComponent = () => {
           }}
         />
       ))}
-    </TabBar>
+    </TarBarView>
   ) : null;
 };
 
