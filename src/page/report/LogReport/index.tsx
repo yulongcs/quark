@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ListView, PullToRefresh } from 'antd-mobile';
 import { Spin } from '@vdfor/react-component';
+import styled from 'styled-components/macro';
 import { ErrorPage } from '../../../components';
 import {
   initAction, loadListAction, refreshAction, setPageStateAction
@@ -10,7 +11,33 @@ import { ListItem } from './views';
 import { IListItemData } from './type';
 import { IRootReducer } from '../../App/type';
 import { PAGE_STATUS_ENUM, LOAD_ACTION_ENUM } from '../../../types';
-import styles from './index.module.scss';
+import { ROUTE_WITH_NOT_TAB_BAR_HEIGHT, ROUTE_BG_COLOR } from '../../../constants';
+
+const WrapperView = styled.div`
+  height: ${ROUTE_WITH_NOT_TAB_BAR_HEIGHT};
+`;
+
+const ListBoxView = styled(ListView)`
+  height: ${ROUTE_WITH_NOT_TAB_BAR_HEIGHT};
+  background: ${ROUTE_BG_COLOR};
+
+  .am-list-body {
+    background-color: ${ROUTE_BG_COLOR};
+    border-top: none;
+    border-bottom: none;
+
+    ::before {
+      height: 0 !important;
+    }
+    ::after {
+      height: 0 !important;
+    }
+  }
+`;
+
+const ListBoxFooterView = styled.div`
+  text-align: center;
+`;
 
 const dataSource = new ListView.DataSource({
   rowHasChanged: (row1: any, row2: any) => row1 !== row2
@@ -40,7 +67,7 @@ export default () => {
   }, [dispatch, scrollTop]);
 
   return (
-    <div className={styles.container}>
+    <WrapperView>
       {((pageState === PAGE_STATUS_ENUM.CONTENT || pageState === PAGE_STATUS_ENUM.REFRESH) && (
         <PullToRefresh
           direction="down"
@@ -51,13 +78,12 @@ export default () => {
           damping={60}
           onRefresh={refreshPage}
         >
-          <ListView
+          <ListBoxView
             ref={listEle}
             initialListSize={data.length}
-            className={styles.listBox}
             dataSource={dataSource.cloneWithRows(data)}
             renderRow={(rowData: IListItemData) => <ListItem {...rowData} />}
-            renderFooter={() => (<div className={styles.listLoading}>{(!hasMore && 'No More') || (loading ? 'loading...' : '')}</div>)}
+            renderFooter={() => (<ListBoxFooterView>{(!hasMore && 'No More') || (loading ? 'loading...' : '')}</ListBoxFooterView>)}
             useBodyScroll={false}
             onEndReachedThreshold={10}
             scrollRenderAheadDistance={500}
@@ -66,6 +92,6 @@ export default () => {
           />
         </PullToRefresh>
       )) || (pageState === PAGE_STATUS_ENUM.ERROR ? <ErrorPage /> : <Spin />)}
-    </div>
+    </WrapperView>
   );
 };
