@@ -4,7 +4,13 @@ import { IRootReducer } from '../../app';
 import { getSetQuxPageStateAction, getQuxLoadListAction } from '../../../qux';
 import { LOAD_ACTION_ENUM, PAGE_STATUS_ENUM, IQuxPaginationBasicProps } from '../../../type';
 import {
-  PAGE_NAME, LOAD_LOG_REPORT_PAGE_LIST_SUCCESS, LOAD_LOG_REPORT_PAGE_LIST_REQUEST, SET_LOG_REPORT_PAGE_PAGE_STATE, REFRESH_LOG_REPORT_PAGE_LIST_REQUEST, REFRESH_LOG_REPORT_PAGE_LIST_SUCCESS
+  PAGE_NAME,
+  PAGE_REDUCER_NAME,
+  LOAD_LOG_REPORT_PAGE_LIST_SUCCESS,
+  LOAD_LOG_REPORT_PAGE_LIST_REQUEST,
+  SET_LOG_REPORT_PAGE_PAGE_STATE,
+  REFRESH_LOG_REPORT_PAGE_LIST_REQUEST,
+  REFRESH_LOG_REPORT_PAGE_LIST_SUCCESS
 } from './constant';
 import { handleRequestError, getFromLogCollection } from '../../../util';
 
@@ -23,7 +29,7 @@ const loadListApi = async ({ pageSize, listData }: ILoadListApiParams) => {
 export const setPageStateAction = getSetQuxPageStateAction({ SET_PAGE_STATE: SET_LOG_REPORT_PAGE_PAGE_STATE });
 
 export const loadListAction = getQuxLoadListAction({
-  pageReducerName: 'logReportPageReducer',
+  pageReducerName: PAGE_REDUCER_NAME,
   LOAD_LIST_REQUEST: LOAD_LOG_REPORT_PAGE_LIST_REQUEST,
   LOAD_LIST_SUCCESS: LOAD_LOG_REPORT_PAGE_LIST_SUCCESS,
   REFRESH_LIST_REQUEST: REFRESH_LOG_REPORT_PAGE_LIST_REQUEST,

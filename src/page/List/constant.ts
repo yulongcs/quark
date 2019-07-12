@@ -1,4 +1,5 @@
 export const PAGE_NAME = 'ListPage';
+export const PAGE_REDUCER_NAME = 'listPageReducer';
 export const SET_LIST_PAGE_PAGE_STATE = 'SET_LIST_PAGE_PAGE_STATE';
 export const LOAD_LIST_PAGE_LIST_REQUEST = 'LOAD_LIST_PAGE_LIST_REQUEST';
 export const LOAD_LIST_PAGE_LIST_SUCCESS = 'LOAD_LIST_PAGE_LIST_SUCCESS';

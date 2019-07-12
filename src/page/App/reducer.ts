@@ -1,11 +1,11 @@
 import { combineReducers, Reducer } from 'redux';
 import { IRootReducer } from './type';
 import { appBasicReducer } from '../../store';
-import { listPageReducer } from '../list';
-import { logReportPageReducer } from '../report/log-report';
+import { listPageReducer, PAGE_REDUCER_NAME as LIST_PAGE_REDUCER_NAME } from '../list';
+import { logReportPageReducer, PAGE_REDUCER_NAME as LOG_REPORT_PAGE_REDUCER_NAME } from '../report/log-report';
 
 export default combineReducers({
   appBasicReducer,
-  listPageReducer,
-  logReportPageReducer
+  [LIST_PAGE_REDUCER_NAME]: listPageReducer,
+  [LOG_REPORT_PAGE_REDUCER_NAME]: logReportPageReducer
 }) as Reducer<IRootReducer>;
