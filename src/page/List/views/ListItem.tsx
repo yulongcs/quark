@@ -2,7 +2,7 @@ import React from 'react';
 import dayjs from 'dayjs';
 import styled from 'styled-components/macro';
 import { IListItemData } from '../type';
-import { goPage, pxToRem } from '../../../utils';
+import { goPage, pxToRem } from '../../../util';
 
 const WrapperView = styled.div`
   width: 100%;

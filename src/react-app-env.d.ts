@@ -1,2 +1,2 @@
-/// <reference path='./type.d.ts' />
+/// <reference path='./typing.d.ts' />
 /// <reference types='react-scripts' />

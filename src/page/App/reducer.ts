@@ -1,8 +1,8 @@
 import { combineReducers, Reducer } from 'redux';
 import { IRootReducer } from './type';
-import appBasicReducer from '../../store/reducer';
-import listPageReducer from '../List/reducer';
-import logReportPageReducer from '../report/LogReport/reducer';
+import { appBasicReducer } from '../../store';
+import { listPageReducer } from '../list';
+import { logReportPageReducer } from '../report/log-report';
 
 export default combineReducers({
   appBasicReducer,

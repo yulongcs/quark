@@ -1,6 +1,6 @@
 import { AnyAction, combineReducers, Reducer } from 'redux';
 import { SET_APP_BASIC_STATE } from './constant';
-import { IAppBasicStateProps, IAppBasicProps } from '../types';
+import { IAppBasicStateProps, IAppBasicProps } from '../type';
 
 const INITIAL_APP_STATE = {
   route: '/',

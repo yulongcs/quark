@@ -1,8 +1,9 @@
-import { IQuxListProps, IQuxPageInfoProps } from '../../type';
+import { IQuxListProps, IQuxPageInfoProps } from '../../../type';
 
 export interface IListItemData {
-  id: number;
-  time: number;
+  key: number;
+  createAt: number;
+  page: string;
   title: string;
   desc: string;
 }
@@ -11,7 +12,7 @@ export interface IListInfoProps extends IQuxListProps {
   data: IListItemData[];
 }
 
-export interface IListPageProps {
+export interface ILogReportPageProps {
   pageInfo: IQuxPageInfoProps;
   listInfo: IListInfoProps;
 }

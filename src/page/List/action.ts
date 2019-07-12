@@ -1,12 +1,12 @@
 import { Dispatch } from 'redux';
 import { loadListApi } from './api';
-import { IRootReducer } from '../App/type';
-import { getSetQuxPageStateAction, getQuxLoadListAction } from '../../quxs';
-import { LOAD_ACTION_ENUM, PAGE_STATUS_ENUM } from '../../types';
+import { IRootReducer } from '../app';
+import { getSetQuxPageStateAction, getQuxLoadListAction } from '../../qux';
+import { LOAD_ACTION_ENUM, PAGE_STATUS_ENUM } from '../../type';
 import {
   PAGE_NAME, LOAD_LIST_PAGE_LIST_SUCCESS, LOAD_LIST_PAGE_LIST_REQUEST, SET_LIST_PAGE_PAGE_STATE, REFRESH_LIST_PAGE_LIST_REQUEST, REFRESH_LIST_PAGE_LIST_SUCCESS
 } from './constant';
-import { handleRequestError } from '../../utils';
+import { handleRequestError } from '../../util';
 
 export const setPageStateAction = getSetQuxPageStateAction({ SET_PAGE_STATE: SET_LIST_PAGE_PAGE_STATE });
 

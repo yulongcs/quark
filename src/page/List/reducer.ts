@@ -7,7 +7,7 @@ import {
   REFRESH_LIST_PAGE_LIST_SUCCESS,
   SET_LIST_PAGE_PAGE_STATE
 } from './constant';
-import { getQuxPageStateReducer, getQuxListReducer } from '../../quxs';
+import { getQuxPageStateReducer, getQuxListReducer } from '../../qux';
 import { IListPageProps } from './type';
 
 const pageReducer = getQuxPageStateReducer({ SET_PAGE_STATE: SET_LIST_PAGE_PAGE_STATE });

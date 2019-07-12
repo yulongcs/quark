@@ -1,6 +1,6 @@
 import {
   tarBarHomeImg, tarBarHomeSelectedImg, tarBarListImg, tarBarListSelectedImg
-} from '../../assets/images';
+} from '../../asset/images';
 
 export default [
   {
@@ -9,7 +9,7 @@ export default [
     title: '首页',
     tabBarTitle: '首页',
     showTabBar: true,
-    component: () => import('../Home'),
+    component: () => import('../home/Home'),
     icon: tarBarHomeImg,
     selectedIcon: tarBarHomeSelectedImg
   },
@@ -19,7 +19,7 @@ export default [
     title: '长列表',
     tabBarTitle: '列表',
     showTabBar: true,
-    component: () => import('../List'),
+    component: () => import('../list/List'),
     icon: tarBarListImg,
     selectedIcon: tarBarListSelectedImg
   },
@@ -29,7 +29,7 @@ export default [
     title: '列表详情',
     tabBarTitle: '列表详情',
     showTabBar: false,
-    component: () => import('../ListDetail'),
+    component: () => import('../list-detail/ListDetail'),
     icon: tarBarListImg,
     selectedIcon: tarBarListSelectedImg
   },
@@ -39,7 +39,7 @@ export default [
     title: '运行报告',
     tabBarTitle: '运行报告',
     showTabBar: false,
-    component: () => import('../report/ReportNav'),
+    component: () => import('../report/report-nav/ReportNav'),
     icon: tarBarListImg,
     selectedIcon: tarBarListSelectedImg
   },
@@ -49,7 +49,7 @@ export default [
     title: '运行环境',
     tabBarTitle: '运行环境',
     showTabBar: false,
-    component: () => import('../report/EnvReport'),
+    component: () => import('../report/env-report/EnvReport'),
     icon: tarBarListImg,
     selectedIcon: tarBarListSelectedImg
   },
@@ -59,7 +59,7 @@ export default [
     title: '运行日志',
     tabBarTitle: '运行日志',
     showTabBar: false,
-    component: () => import('../report/LogReport'),
+    component: () => import('../report/log-report/LogReport'),
     icon: tarBarListImg,
     selectedIcon: tarBarListSelectedImg
   }

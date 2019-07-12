@@ -1,6 +1,6 @@
-import { IAppBasicProps } from '../../types';
-import { IListPageProps } from '../List/type';
-import { ILogReportPageProps } from '../report/LogReport/type';
+import { IAppBasicProps } from '../../type';
+import { IListPageProps } from '../list';
+import { ILogReportPageProps } from '../report/log-report';
 
 export interface IRootReducer {
   appBasicReducer: IAppBasicProps;
