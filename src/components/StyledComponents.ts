@@ -15,6 +15,10 @@ export const StyledGlobal = createGlobalStyle`
     font-size: ${pxToRem(28)} !important;
   }
 
+  p {
+    margin: 0;
+  }
+
   @media screen and (min-width: ${BREAK_POINT_768}) {
     html {
       font-size: 21.6pX;

@@ -11,7 +11,7 @@ export const validENCharacterRegx = /^[a-zA-Z]+$/;
 export const nonnegativeIntegerRegx = /^\d+$/;
 
 // url
-export const urlRegx = /(^#)|(^http(s*):\/\/[^\s]+\.[^\s]+)/;
+export const urlRegx = /^http(s*):\/\/[^\s]+\.[^\s]+/;
 
 // email
 // eslint-disable-next-line
