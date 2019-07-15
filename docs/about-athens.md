@@ -8,4 +8,4 @@
 
 目前，该项目还在计划讨论阶段
 
-![Athens数据库设计](http://assets.processon.com/chart_image/5c2d79fbe4b0f430adf1e40d.png)
+![Athens数据库设计](http://assets.processon.com/chart_image/5c2d79fbe4b0f430adf1e40d.png "Athens数据库设计")
