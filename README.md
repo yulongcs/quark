@@ -6,7 +6,9 @@
 
 </div>
 
-quark, 原意为构成物质的基本单元。在这里，我们理解为基石，本项目以此命名，是希望能够帮助快速构建移动web开发。我们清楚，quark还很年轻，也有很多不足，但我们也相信，quark充满着朝气。
+quark, 原意为构成物质的基本单元。在这里，我们理解为基石，本项目以此命名，是希望能够帮助快速构建移动web开发。
+
+quark虽然年轻，但充满着朝气。
 
 ```bash
 yarn # install dependencies and devDependencies
@@ -51,7 +53,7 @@ quark内置了`pxToRem`，以`750px`作为换算单位。针对js内的样式，
 yarn run mock
 ```
 
-未来`mock`的实现方式，请查看我们的[Athens](docs/about-athens.md)计划。
+未来`mock`的实现方式，请查看我们的[Athens计划](docs/about-athens.md)。
 
 ## typescript
 
