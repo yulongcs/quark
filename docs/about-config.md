@@ -12,7 +12,7 @@
 | --- | --- | --- | --- |
 | dbName | indexdb数据库名称 | string | - |
 | logCollectionName | 运行日志记录表名称 | string | - |
-| history | 路由模式 | string | browser \/ hash |
+| history | 路由模式 | string | browser \| hash |
 | apiBaseUrl | 后端接口baseUrl | string | - |
 | useVconsole | 是否使用vconsole | boolean | - |
 | useLogRecord | 是否使用日志记录功能 | boolean | - |
