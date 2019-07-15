@@ -25,7 +25,7 @@ yarn run build # build for production
 
 ## 基于create-react-app
 
-quark基于[create-react-app](https://github.com/facebook/create-react-app.git)构建，通过[https://github.com/timarney/react-app-rewired.git]和[customize-cra](https://github.com/arackaf/customize-cra)实现在不eject的情况下更改配置。除了`customize-cra`提供的实用功能后，我们也实现了一些额外功能，比如多页配置、svg处理为react组件等，我们也计划在将来将这些额外配置提交到`customize-cra`。
+quark基于[create-react-app](https://github.com/facebook/create-react-app.git)构建，通过[react-app-rewired](https://github.com/timarney/react-app-rewired.git)和[customize-cra](https://github.com/arackaf/customize-cra)实现在不eject的情况下更改配置。除了`customize-cra`提供的实用功能后，我们也实现了一些额外功能，比如多页配置、svg处理为react组件等，我们也计划在将来将这些额外配置提交到`customize-cra`。
 
 ## redux
 
@@ -71,7 +71,7 @@ quark全面拥抱[typescript](https://www.typescriptlang.org)
 
 ## request
 
-基于原生的`fetch`实现`request`封装，未来，我们也许会将其独立为一个单独的库。
+基于原生的`fetch`实现`request`封装，我们正在考虑将其独立为单独库。
 
 ## 统一配置
 
