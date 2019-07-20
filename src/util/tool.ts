@@ -1,4 +1,5 @@
 import { Toast } from 'antd-mobile';
+import shortId from 'shortid';
 import { addToLogCollection } from './db';
 
 /**
@@ -63,3 +64,5 @@ export const handleRequestError = async ({
     }
   }
 };
+
+export const uuidGen = () => shortId.gennerate();
