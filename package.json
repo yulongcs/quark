@@ -13,7 +13,7 @@
   "homepage": "https://github.com/vdfor/quark#readme",
   "private": true,
   "dependencies": {
-    "@vdfor/react-component": "^0.5.0",
+    "@vdfor/react-component": "^0.6.2",
     "antd-mobile": "^2.2.12",
     "dayjs": "^1.8.14",
     "history": "^4.7.2",
