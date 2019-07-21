@@ -39,6 +39,10 @@ quark面向移动而生，我们选择[antd-mobile](https://mobile.ant.design/in
 
 quark曾经内置了一些自实现的组件和[hooks](https://reactjs.org/docs/hooks-intro.html)，现在，我们将其独立到[@vdfor/react-component](https://github.com/vdfor/react-component.git)，如路由的懒加载、TabBar导航等。
 
+## 路由同步
+
+quark实现了路由同步，可从`store`随时获取。
+
 ## css解决方案
 
 我们推荐使用`css in js`作为css解决方案，示例的页面均是采用此方案(powered by [styled-components](https://github.com/styled-components/styled-components))。当然，我们也支持`css-module`作为解决方案。
