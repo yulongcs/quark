@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ListView, PullToRefresh } from 'antd-mobile';
-import { Spin } from '@vdfor/react-component';
 import styled from 'styled-components/macro';
-import { ErrorPage } from '../../component';
+import { ErrorPage, ListSkeleton } from '../../component';
 import {
   initAction, loadListAction, refreshAction, setPageStateAction
 } from './action';
@@ -91,5 +90,5 @@ export default () => {
   if (pageState === PAGE_STATUS_ENUM.ERROR) {
     return <ErrorPage />;
   }
-  return <Spin />;
+  return <ListSkeleton />;
 };
