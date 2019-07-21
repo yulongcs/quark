@@ -13,10 +13,6 @@ import { IRootReducer } from '../app/type';
 import { PAGE_STATUS_ENUM, LOAD_ACTION_ENUM } from '../../type';
 import { ROUTE_WITH_TAB_BAR_HEIGHT, ROUTE_BG_COLOR } from '../../constant';
 
-const WrapperView = styled.div`
-  height: ${ROUTE_WITH_TAB_BAR_HEIGHT};
-`;
-
 const ListBoxView = styled(ListView)`
   height: ${ROUTE_WITH_TAB_BAR_HEIGHT};
   background: ${ROUTE_BG_COLOR};
@@ -66,32 +62,34 @@ export default () => {
     };
   }, [dispatch, scrollTop]);
 
-  return (
-    <WrapperView>
-      {((pageState === PAGE_STATUS_ENUM.CONTENT || pageState === PAGE_STATUS_ENUM.REFRESH) && (
-        <PullToRefresh
-          direction="down"
-          distanceToRefresh={25}
-          getScrollContainer={undefined as any}
-          indicator={{}}
-          refreshing={pageState === PAGE_STATUS_ENUM.REFRESH}
-          damping={60}
-          onRefresh={refreshPage}
-        >
-          <ListBoxView
-            ref={listEle}
-            initialListSize={data.length}
-            dataSource={dataSource.cloneWithRows(data)}
-            renderRow={(rowData: IListItemData) => <ListItem {...rowData} />}
-            renderFooter={() => (<ListBoxFooterView>{(!hasMore && 'No More') || (loading ? 'loading...' : '')}</ListBoxFooterView>)}
-            useBodyScroll={false}
-            onEndReachedThreshold={10}
-            scrollRenderAheadDistance={500}
-            pageSize={4}
-            onEndReached={loadMoreList}
-          />
-        </PullToRefresh>
-      )) || (pageState === PAGE_STATUS_ENUM.ERROR ? <ErrorPage /> : <Spin />)}
-    </WrapperView>
-  );
+  if (pageState === PAGE_STATUS_ENUM.CONTENT || pageState === PAGE_STATUS_ENUM.REFRESH) {
+    return (
+      <PullToRefresh
+        direction="down"
+        distanceToRefresh={25}
+        getScrollContainer={undefined as any}
+        indicator={{}}
+        refreshing={pageState === PAGE_STATUS_ENUM.REFRESH}
+        damping={60}
+        onRefresh={refreshPage}
+      >
+        <ListBoxView
+          ref={listEle}
+          initialListSize={data.length}
+          dataSource={dataSource.cloneWithRows(data)}
+          renderRow={(rowData: IListItemData) => <ListItem {...rowData} />}
+          renderFooter={() => (<ListBoxFooterView>{(!hasMore && 'No More') || (loading ? 'loading...' : '')}</ListBoxFooterView>)}
+          useBodyScroll={false}
+          onEndReachedThreshold={10}
+          scrollRenderAheadDistance={500}
+          pageSize={4}
+          onEndReached={loadMoreList}
+        />
+      </PullToRefresh>
+    );
+  }
+  if (pageState === PAGE_STATUS_ENUM.ERROR) {
+    return <ErrorPage />;
+  }
+  return <Spin />;
 };
