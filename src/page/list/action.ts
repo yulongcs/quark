@@ -4,19 +4,26 @@ import { IRootReducer } from '../app';
 import { getSetQuxPageStateAction, getQuxLoadListAction, resetQuxListAction } from '../../qux';
 import { LOAD_ACTION_ENUM, PAGE_STATUS_ENUM } from '../../type';
 import {
-  PAGE_NAME, LOAD_LIST_PAGE_LIST_SUCCESS, LOAD_LIST_PAGE_LIST_REQUEST, SET_LIST_PAGE_PAGE_STATE, REFRESH_LIST_PAGE_LIST_REQUEST, REFRESH_LIST_PAGE_LIST_SUCCESS, RESET_LIST_PAGE_LIST
+  PAGE_NAME,
+  PAGE_REDUCER_NAME,
+  LOAD_LIST_PAGE_LIST_SUCCESS,
+  LOAD_LIST_PAGE_LIST_REQUEST,
+  SET_LIST_PAGE_PAGE_STATE,
+  REFRESH_LIST_PAGE_LIST_REQUEST,
+  REFRESH_LIST_PAGE_LIST_SUCCESS,
+  RESET_LIST_PAGE_LIST
 } from './constant';
 import { handleRequestError } from '../../util';
 
 export const setPageStateAction = getSetQuxPageStateAction({ SET_PAGE_STATE: SET_LIST_PAGE_PAGE_STATE });
 
 export const resetListAction = resetQuxListAction({
-  pageReducerName: 'listPageReducer',
+  pageReducerName: PAGE_REDUCER_NAME,
   RESET_LIST: RESET_LIST_PAGE_LIST
 });
 
 export const loadListAction = getQuxLoadListAction({
-  pageReducerName: 'listPageReducer',
+  pageReducerName: PAGE_REDUCER_NAME,
   LOAD_LIST_REQUEST: LOAD_LIST_PAGE_LIST_REQUEST,
   LOAD_LIST_SUCCESS: LOAD_LIST_PAGE_LIST_SUCCESS,
   REFRESH_LIST_REQUEST: REFRESH_LIST_PAGE_LIST_REQUEST,
