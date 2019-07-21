@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import {
   Redirect,
   Route as DefaultRoute,
@@ -13,7 +13,7 @@ import { setAppBasicStateAction } from '../../store';
 import { IAppBasicStateProps } from '../../type';
 import { Route } from '../../component';
 import { history, goPage, pxToRem } from '../../util';
-import { BREAK_POINT_768 } from '../../constant';
+import { BREAK_POINT_768, ROUTE_WITH_NOT_TAB_BAR_HEIGHT, ROUTE_WITH_TAB_BAR_HEIGHT } from '../../constant';
 import routes from './routes';
 
 const TarBarView = styled(TabBar)`
@@ -27,6 +27,15 @@ const TarBarView = styled(TabBar)`
     left: auto;
   }
 `;
+
+const RouterWrapper = ({ children }: PropsWithChildren<any>) => {
+  const { basicState: { showTabBar } } = useSelector((state: IRootReducer) => state.appBasicReducer);
+  return (
+    <div style={{ height: showTabBar ? ROUTE_WITH_TAB_BAR_HEIGHT : ROUTE_WITH_NOT_TAB_BAR_HEIGHT, overflow: 'auto' }}>
+      {children}
+    </div>
+  );
+};
 
 const TabBarComponent = () => {
   const { basicState: { route, showTabBar } } = useSelector((state: IRootReducer) => state.appBasicReducer);
@@ -56,14 +65,16 @@ export default () => {
   };
   return (
     <>
-      <Router history={history}>
-        <Switch>
-          <DefaultRoute exact path="/">
-            <Redirect to={{ pathname: '/home' }} />
-          </DefaultRoute>
-          {routes.map(i => <Route {...{ ...basicProps, ...i, component: Loadable({ component: i.component }) }} />)}
-        </Switch>
-      </Router>
+      <RouterWrapper>
+        <Router history={history}>
+          <Switch>
+            <DefaultRoute exact path="/">
+              <Redirect to={{ pathname: '/home' }} />
+            </DefaultRoute>
+            {routes.map(i => <Route {...{ ...basicProps, ...i, component: Loadable({ component: i.component }) }} />)}
+          </Switch>
+        </Router>
+      </RouterWrapper>
       <TabBarComponent />
     </>
   );
