@@ -65,4 +65,4 @@ export const handleRequestError = async ({
   }
 };
 
-export const uuidGen = () => shortId.gennerate();
+export const uuidGen = () => shortId.generate();
