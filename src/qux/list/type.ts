@@ -7,4 +7,5 @@ export interface IActionTypes {
 
 export interface IReducerTypes extends IActionTypes {
   LOAD_LIST_FAIL: string;
+  RESET_LIST: string;
 }

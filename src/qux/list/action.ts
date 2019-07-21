@@ -4,7 +4,12 @@ import { LOAD_ACTION_ENUM } from '../../type';
 import { handleRequestError } from '../../util';
 import { PAGE_NAME as LOG_REPORT_PAGE_NAME } from '../../page/report/log-report/constant';
 
-interface IParams extends IActionTypes {
+interface IResetListParams {
+  pageReducerName: string;
+  RESET_LIST: string;
+}
+
+interface ILoadListParams extends IActionTypes {
   pageReducerName: string;
   loadListApi: (opts: any) => Promise<any>;
   loadListApiExtraParams?: Record<string, any>;
@@ -13,7 +18,18 @@ interface IParams extends IActionTypes {
   pageNumMap?: string;
 }
 
-export default ({
+export const resetQuxListAction = ({
+  pageReducerName,
+  RESET_LIST
+}: IResetListParams) => () => async (dispatch: Dispatch<any>, getState: any) => {
+  const state = getState();
+  if (!(state[pageReducerName] && state[pageReducerName].listInfo)) {
+    return;
+  }
+  dispatch({ type: RESET_LIST });
+};
+
+export const getQuxLoadListAction = ({
   pageReducerName,
   loadListApi,
   LOAD_LIST_REQUEST,
@@ -24,7 +40,7 @@ export default ({
   loadListApiExtraParams = {},
   pageSizeMap = 'pageSize',
   pageNumMap = 'pageNum'
-}: IParams) => (action: LOAD_ACTION_ENUM = LOAD_ACTION_ENUM.LOADMORE) => async (dispatch: Dispatch<any>, getState: any) => {
+}: ILoadListParams) => (action: LOAD_ACTION_ENUM = LOAD_ACTION_ENUM.LOADMORE) => async (dispatch: Dispatch<any>, getState: any) => {
   const state = getState();
   if (!(state[pageReducerName] && state[pageReducerName].listInfo)) {
     return;

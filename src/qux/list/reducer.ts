@@ -12,9 +12,14 @@ const INITIAL_LIST_STATE = {
 };
 
 export default ({
-  LOAD_LIST_REQUEST, LOAD_LIST_SUCCESS, LOAD_LIST_FAIL, REFRESH_LIST_REQUEST, REFRESH_LIST_SUCCESS
+  RESET_LIST, LOAD_LIST_REQUEST, LOAD_LIST_SUCCESS, LOAD_LIST_FAIL, REFRESH_LIST_REQUEST, REFRESH_LIST_SUCCESS
 }: IReducerTypes) => (state: IQuxListProps = INITIAL_LIST_STATE, action: AnyAction) => {
   switch (action.type) {
+    case RESET_LIST:
+      return {
+        ...state,
+        ...INITIAL_LIST_STATE
+      };
     case LOAD_LIST_REQUEST:
       return {
         ...state,

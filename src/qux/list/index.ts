@@ -1,2 +1,2 @@
-export { default as getQuxLoadListAction } from './action';
+export * from './action';
 export { default as getQuxListReducer } from './reducer';
