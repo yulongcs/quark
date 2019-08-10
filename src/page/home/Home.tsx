@@ -4,7 +4,7 @@ import { Carousel } from 'antd-mobile';
 import { StyledCenter } from '../../component';
 import { ROUTE_WITH_TAB_BAR_HEIGHT } from '../../constant';
 import {
-  pxToRem, urlRegx, goPage, jumpExternalUrl, uuidGen
+  pxToRem, urlRegx, goPage, jumpExternalUrl
 } from '../../util';
 
 const data = [
