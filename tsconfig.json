@@ -6,7 +6,7 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react",
     "lib": [
       "dom",
       "dom.iterable",
@@ -31,7 +31,7 @@
     "outDir": "build"
   },
   "include": [
-    "./src/**/*"
+    "src"
   ],
   "exclude": [
     "node_modules",

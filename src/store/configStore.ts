@@ -25,8 +25,4 @@ const enhancer = composeEnhancers(
 );
 
 // configStore
-export default (rootReducer: Reducer<any, AnyAction>) => {
-  const store = createStore(rootReducer, enhancer);
-  console.log(store);
-  return store;
-};
+export default (rootReducer: Reducer<any, AnyAction>) => createStore(rootReducer, enhancer);
