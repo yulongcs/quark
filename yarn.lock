@@ -1323,10 +1323,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.0.tgz#d11813b9c0ff8aaca29f04cbc12817f4c7d656e5"
   integrity sha512-Jrb/x3HT4PTJp6a4avhmJCDEVrPdqLfl3e8GGMbpkGGdwAV5UGlIs4vVEfsHHfylZVOKZWpOqmqFH8CbfOZ6kg==
 
-"@types/node@12.7.1":
-  version "12.7.1"
-  resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-12.7.1.tgz#3b5c3a26393c19b400844ac422bd0f631a94d69d"
-  integrity sha1-O1w6Jjk8GbQAhErEIr0PYxqU1p0=
+"@types/node@12.7.2":
+  version "12.7.2"
+  resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-12.7.2.tgz#c4e63af5e8823ce9cc3f0b34f7b998c2171f0c44"
+  integrity sha1-xOY69eiCPOnMPws097mYwhcfDEQ=
 
 "@types/prop-types@*":
   version "15.7.1"
@@ -1388,10 +1388,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/react@16.9.1":
-  version "16.9.1"
-  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.1.tgz#862c83b4c9d5cd116e42fd9a4f3694843cd2c051"
-  integrity sha1-hiyDtMnVzRFuQv2aTzaUhDzSwFE=
+"@types/react@16.9.2":
+  version "16.9.2"
+  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.2.tgz#6d1765431a1ad1877979013906731aae373de268"
+  integrity sha1-bRdlQxoa0Yd5eQE5BnMarjc94mg=
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -4180,10 +4180,10 @@ eslint-config-airbnb@^17.1.0:
     object.assign "^4.1.0"
     object.entries "^1.0.4"
 
-eslint-config-react-app@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.npm.taobao.org/eslint-config-react-app/download/eslint-config-react-app-5.0.0.tgz#b3639e96fccc24eaaa63c92fc2f4358f79f22fb2"
-  integrity sha1-s2OelvzMJOqqY8kvwvQ1j3nyL7I=
+eslint-config-react-app@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.npm.taobao.org/eslint-config-react-app/download/eslint-config-react-app-5.0.1.tgz#5f3d666ba3ee3cb384eb943e260e868f6c72251b"
+  integrity sha1-Xz1ma6PuPLOE65Q+Jg6Gj2xyJRs=
   dependencies:
     confusing-browser-globals "^1.0.8"
 
@@ -9439,10 +9439,10 @@ react-app-rewired@^2.1.0:
     dotenv "^6.2.0"
     semver "^5.6.0"
 
-react-dev-utils@^9.0.2:
-  version "9.0.2"
-  resolved "https://registry.npm.taobao.org/react-dev-utils/download/react-dev-utils-9.0.2.tgz#14f9a75120513967e13599d4f66d43bced7a3fce"
-  integrity sha1-FPmnUSBROWfhNZnU9m1DvO16P84=
+react-dev-utils@^9.0.3:
+  version "9.0.3"
+  resolved "https://registry.npm.taobao.org/react-dev-utils/download/react-dev-utils-9.0.3.tgz#7607455587abb84599451460eb37cef0b684131a"
+  integrity sha1-dgdFVYeruEWZRRRg6zfO8LaEExo=
   dependencies:
     "@babel/code-frame" "7.5.5"
     address "1.1.0"
@@ -9463,7 +9463,7 @@ react-dev-utils@^9.0.2:
     loader-utils "1.2.3"
     open "^6.3.0"
     pkg-up "2.0.0"
-    react-error-overlay "^6.0.0"
+    react-error-overlay "^6.0.1"
     recursive-readdir "2.2.2"
     shell-quote "1.6.1"
     sockjs-client "1.3.0"
@@ -9480,10 +9480,10 @@ react-dom@^16.8.6:
     prop-types "^15.6.2"
     scheduler "^0.15.0"
 
-react-error-overlay@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.npm.taobao.org/react-error-overlay/download/react-error-overlay-6.0.0.tgz#485beca3db57e8ec2d934d4ee598754467229499"
-  integrity sha1-SFvso9tX6Owtk01O5Zh1RGcilJk=
+react-error-overlay@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.npm.taobao.org/react-error-overlay/download/react-error-overlay-6.0.1.tgz#b8d3cf9bb991c02883225c48044cb3ee20413e0f"
+  integrity sha1-uNPPm7mRwCiDIlxIBEyz7iBBPg8=
 
 react-is@^16.6.0, react-is@^16.8.1:
   version "16.9.0"
@@ -9550,10 +9550,10 @@ react-router@5.0.1:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react-scripts@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.npm.taobao.org/react-scripts/download/react-scripts-3.1.0.tgz#f4c4133072908e709a23864ccb49076ccbeb766b"
-  integrity sha1-9MQTMHKQjnCaI4ZMy0kHbMvrdms=
+react-scripts@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.npm.taobao.org/react-scripts/download/react-scripts-3.1.1.tgz#1796bc92447f3a2d3072c3b71ca99f88d099c48d"
+  integrity sha1-F5a8kkR/Oi0wcsO3HKmfiNCZxI0=
   dependencies:
     "@babel/core" "7.5.5"
     "@svgr/webpack" "4.3.2"
@@ -9570,7 +9570,7 @@ react-scripts@3.1.0:
     dotenv "6.2.0"
     dotenv-expand "4.2.0"
     eslint "^6.1.0"
-    eslint-config-react-app "^5.0.0"
+    eslint-config-react-app "^5.0.1"
     eslint-loader "2.2.1"
     eslint-plugin-flowtype "3.13.0"
     eslint-plugin-import "2.18.2"
@@ -9595,7 +9595,7 @@ react-scripts@3.1.0:
     postcss-preset-env "6.7.0"
     postcss-safe-parser "4.0.1"
     react-app-polyfill "^1.0.2"
-    react-dev-utils "^9.0.2"
+    react-dev-utils "^9.0.3"
     resolve "1.12.0"
     resolve-url-loader "3.1.0"
     sass-loader "7.2.0"
