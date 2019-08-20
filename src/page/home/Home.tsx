@@ -13,6 +13,9 @@ const data = [
   },
   {
     key: '1', text: '页面 · 运行报告', link: '/report/nav', bgColor: '#f44e26'
+  },
+  {
+    key: '2', text: 'CHUX DEMO', link: '/chux-demo', bgColor: '#1890ff'
   }
 ];
 

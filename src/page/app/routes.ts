@@ -62,5 +62,15 @@ export default [
     component: () => import('../report/log-report/LogReport'),
     icon: tarBarListImg,
     selectedIcon: tarBarListSelectedImg
+  },
+  {
+    key: '6',
+    path: '/chux-demo',
+    title: 'chux-demo',
+    tabBarTitle: 'chux-demo',
+    showTabBar: false,
+    component: () => import('../chux-demo/ChuxDemo'),
+    icon: tarBarHomeImg,
+    selectedIcon: tarBarHomeSelectedImg
   }
 ];
