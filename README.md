@@ -27,9 +27,13 @@ yarn run build # build for production
 
 quark基于[create-react-app](https://github.com/facebook/create-react-app.git)构建，通过[react-app-rewired](https://github.com/timarney/react-app-rewired.git)和[customize-cra](https://github.com/arackaf/customize-cra)实现在不eject的情况下更改配置。除了`customize-cra`提供的实用功能后，我们也实现了一些额外功能，比如多页配置、svg处理为react组件等，我们也计划在将来将这些额外配置提交到`customize-cra`。
 
-## redux
+## 状态管理
+
+### redux - 全局状态管理
 
 我们使用[redux](https://github.com/reduxjs/redux)来进行状态管理，使用扁平化的数据结构。通过`redux`的全局状态管理，我们亦实现类`vue`的`keep-alive`功能，并且具有更大的自主性。
+
+### chux(context-hooks-redux) - 局部状态管理
 
 ## antd-mobile
 
