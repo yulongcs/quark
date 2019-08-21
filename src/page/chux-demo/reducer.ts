@@ -1,6 +1,6 @@
 import { CHANGE_VALUE } from './constant';
 
-export const INITIAL_STATE = { value: 12 };
+export const INITIAL_STATE = { value: 0 };
 
 export const reducer = (state = INITIAL_STATE, action: any) => {
   switch (action.type) {

@@ -3,7 +3,9 @@
  *  参考自 https://github.com/ymzuiku/react-hooks-redux
  * */
 
-import React, { createContext, useContext, useReducer } from 'react';
+import React, {
+  createContext, useContext, useReducer, PropsWithChildren
+} from 'react';
 
 interface ICreateStoreOptions {
   reducer: (state: any, action: any) => void;
@@ -17,14 +19,17 @@ const initOptions = {
 export default (options: ICreateStoreOptions) => {
   const { initialState, reducer } = { ...initOptions, ...options };
 
-  const Context = createContext({} as any);
+  const Context = createContext(initialState);
 
   const store = {
     selfState: initialState,
     useContext: () => useContext(Context),
     dispatch: undefined as any,
     getState: () => store.selfState,
-    initialState
+    initialState,
+    cleanup: () => {
+      store.dispatch = undefined;
+    }
   };
 
   const middlewareReducer = (lastState: any, action: any) => {
@@ -33,7 +38,7 @@ export default (options: ICreateStoreOptions) => {
     return nextState;
   };
 
-  const Provider = (props: any) => {
+  const Provider = ({ children }: PropsWithChildren<any>) => {
     const [state, dispatch] = useReducer(middlewareReducer, initialState);
     if (!store.dispatch) {
       store.dispatch = async (action: any) => {
@@ -44,7 +49,7 @@ export default (options: ICreateStoreOptions) => {
         }
       };
     }
-    return <Context.Provider {...props} value={state} />;
+    return <Context.Provider value={state}>{children}</Context.Provider>;
   };
 
   return { Provider, store };

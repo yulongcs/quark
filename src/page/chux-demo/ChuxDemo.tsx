@@ -1,9 +1,9 @@
 import React from 'react';
 import { Provider } from './store';
-import Child from './Child';
+import { Main } from './views';
 
 export default () => (
   <Provider>
-    <Child />
+    <Main />
   </Provider>
 );

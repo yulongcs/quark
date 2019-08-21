@@ -2,7 +2,6 @@ import { store } from './store';
 import { CHANGE_VALUE } from './constant';
 
 export const changeValueAction = () => {
-  const { dispatch, getState } = store;
+  const { dispatch } = store;
   dispatch({ type: CHANGE_VALUE });
-  console.log('getState', getState());
 };
