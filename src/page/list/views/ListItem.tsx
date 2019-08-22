@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import dayjs from 'dayjs';
 import styled from 'styled-components/macro';
 import { IListItemData } from '../type';
@@ -39,7 +39,7 @@ const FooterView = styled.div`
   font-size: ${pxToRem(28)};
 `;
 
-export default React.memo(({
+export default memo(({
   id, title, desc, time
 }: IListItemData) => (
   <WrapperView onClick={() => goPage(`/list-detail/${id}`)}>

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, memo } from 'react';
 import {
   Redirect,
   Route as DefaultRoute,
@@ -28,16 +28,16 @@ const TarBarView = styled(TabBar)`
   }
 `;
 
-const RouterWrapper = ({ children }: PropsWithChildren<any>) => {
+const RouterWrapper = memo(({ children }: PropsWithChildren<any>) => {
   const { basicState: { showTabBar } } = useSelector((state: IRootReducer) => state.appBasicReducer);
   return (
     <div style={{ height: showTabBar ? ROUTE_WITH_TAB_BAR_HEIGHT : ROUTE_WITH_NOT_TAB_BAR_HEIGHT, overflow: 'auto' }}>
       {children}
     </div>
   );
-};
+});
 
-const TabBarComponent = () => {
+const TabBarComponent = memo(() => {
   const { basicState: { route, showTabBar } } = useSelector((state: IRootReducer) => state.appBasicReducer);
   const tabs = routes.filter(i => i.showTabBar);
   return showTabBar ? (
@@ -53,9 +53,9 @@ const TabBarComponent = () => {
       ))}
     </TarBarView>
   ) : null;
-};
+});
 
-export default () => {
+export default memo(() => {
   const dispatch = useDispatch();
   const setAppBasicState = (values: Partial<IAppBasicStateProps>) => {
     dispatch(setAppBasicStateAction(values));
@@ -78,4 +78,4 @@ export default () => {
       <TabBarComponent />
     </>
   );
-};
+});

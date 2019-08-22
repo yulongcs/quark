@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ListView, PullToRefresh } from 'antd-mobile';
 import { Spin } from '@vdfor/react-component';
@@ -43,7 +43,7 @@ const dataSource = new ListView.DataSource({
   rowHasChanged: (row1: any, row2: any) => row1 !== row2
 });
 
-export default () => {
+export default memo(() => {
   const listEle = useRef(null);
   const {
     pageInfo: { pageState, scrollTop }, listInfo: {
@@ -94,4 +94,4 @@ export default () => {
       )) || (pageState === PAGE_STATUS_ENUM.ERROR ? <ErrorPage /> : <Spin />)}
     </WrapperView>
   );
-};
+});

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ListView, PullToRefresh } from 'antd-mobile';
 import styled from 'styled-components/macro';
@@ -38,7 +38,7 @@ const dataSource = new ListView.DataSource({
   rowHasChanged: (row1: any, row2: any) => row1 !== row2
 });
 
-export default () => {
+export default memo(() => {
   const listEle = useRef(null);
   const {
     pageInfo: { pageState, scrollTop }, listInfo: {
@@ -61,34 +61,30 @@ export default () => {
     };
   }, [dispatch, scrollTop]);
 
-  if (pageState === PAGE_STATUS_ENUM.CONTENT || pageState === PAGE_STATUS_ENUM.REFRESH) {
-    return (
-      <PullToRefresh
-        direction="down"
-        distanceToRefresh={25}
-        getScrollContainer={undefined as any}
-        indicator={{}}
-        refreshing={pageState === PAGE_STATUS_ENUM.REFRESH}
-        damping={60}
-        onRefresh={refreshPage}
-      >
-        <ListBoxView
-          ref={listEle}
-          initialListSize={data.length}
-          dataSource={dataSource.cloneWithRows(data)}
-          renderRow={(rowData: IListItemData) => <ListItem {...rowData} />}
-          renderFooter={() => (<ListBoxFooterView>{(!hasMore && 'No More') || (loading ? 'loading...' : '')}</ListBoxFooterView>)}
-          useBodyScroll={false}
-          onEndReachedThreshold={10}
-          scrollRenderAheadDistance={500}
-          pageSize={4}
-          onEndReached={loadMoreList}
-        />
-      </PullToRefresh>
-    );
-  }
-  if (pageState === PAGE_STATUS_ENUM.ERROR) {
-    return <ErrorPage />;
-  }
-  return <ListSkeleton />;
-};
+  return ((pageState === PAGE_STATUS_ENUM.CONTENT || pageState === PAGE_STATUS_ENUM.REFRESH) && (
+    <PullToRefresh
+      direction="down"
+      distanceToRefresh={25}
+      getScrollContainer={undefined as any}
+      indicator={{}}
+      refreshing={pageState === PAGE_STATUS_ENUM.REFRESH}
+      damping={60}
+      onRefresh={refreshPage}
+    >
+      <ListBoxView
+        ref={listEle}
+        initialListSize={data.length}
+        dataSource={dataSource.cloneWithRows(data)}
+        renderRow={(rowData: IListItemData) => <ListItem {...rowData} />}
+        renderFooter={() => (<ListBoxFooterView>{(!hasMore && 'No More') || (loading ? 'loading...' : '')}</ListBoxFooterView>)}
+        useBodyScroll={false}
+        onEndReachedThreshold={10}
+        scrollRenderAheadDistance={500}
+        pageSize={4}
+        onEndReached={loadMoreList}
+      />
+    </PullToRefresh>
+  )) || (
+    pageState === PAGE_STATUS_ENUM.ERROR ? <ErrorPage /> : <ListSkeleton />
+  );
+});

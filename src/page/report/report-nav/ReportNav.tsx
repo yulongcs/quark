@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components/macro';
 import { pxToRem, goPage } from '../../../util';
 
@@ -35,8 +35,8 @@ const data = [
 
 const len = data.length;
 
-export default () => (
+export default memo(() => (
   <Wrapper>
     {data.map(({ key, path, label }, index) => <Card style={index === len - 1 ? { marginBottom: 0 } : {}} onClick={() => { goPage(path); }} key={key}>{label}</Card>)}
   </Wrapper>
-);
+));

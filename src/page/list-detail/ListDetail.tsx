@@ -1,5 +1,5 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-export default () => (
+export default memo(() => (
   <div>正在设计中...</div>
-);
+));

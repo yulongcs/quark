@@ -72,5 +72,15 @@ export default [
     component: () => import('../chux-demo/ChuxDemo'),
     icon: tarBarHomeImg,
     selectedIcon: tarBarHomeSelectedImg
+  },
+  {
+    key: '7',
+    path: '/rc-demo',
+    title: 'rc-demo',
+    tabBarTitle: 'rc-demo',
+    showTabBar: false,
+    component: () => import('../rc-demo/RcDemo'),
+    icon: tarBarHomeImg,
+    selectedIcon: tarBarHomeSelectedImg
   }
 ];

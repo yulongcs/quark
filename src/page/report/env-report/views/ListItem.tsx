@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components/macro';
 import { pxToRem } from '../../../../util';
 
@@ -23,9 +23,9 @@ const Value = styled.div`
   margin-left: ${pxToRem(12)};
 `;
 
-export default ({ label, value, style = {} }: IProps) => (
+export default memo(({ label, value, style = {} }: IProps) => (
   <Wrapper style={style}>
     {label}
     <Value>{value}</Value>
   </Wrapper>
-);
+));

@@ -1483,10 +1483,10 @@
     lodash.unescape "4.0.1"
     semver "5.5.0"
 
-"@vdfor/react-component@^0.6.2":
-  version "0.6.2"
-  resolved "https://registry.npm.taobao.org/@vdfor/react-component/download/@vdfor/react-component-0.6.2.tgz#66a2fe96f7ce0fecb33c660ee28c492afb367e54"
-  integrity sha1-ZqL+lvfOD+yzPGYO4oxJKvs2flQ=
+"@vdfor/react-component@^0.7.3":
+  version "0.7.3"
+  resolved "https://registry.npm.taobao.org/@vdfor/react-component/download/@vdfor/react-component-0.7.3.tgz#30664d186a8d820c46588ddb2c3f7f694da6ffe3"
+  integrity sha1-MGZNGGqNggxGWI3bLD9/aU2m/+M=
 
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"

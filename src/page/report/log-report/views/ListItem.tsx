@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import dayjs from 'dayjs';
 import { Card } from 'antd-mobile';
 import styled from 'styled-components/macro';
@@ -38,7 +38,7 @@ const DescView = styled.div`
   -webkit-box-orient: vertical;
 `;
 
-export default React.memo(({
+export default memo(({
   title, desc, createAt, page
 }: IListItemData) => (
   <WrapperView>

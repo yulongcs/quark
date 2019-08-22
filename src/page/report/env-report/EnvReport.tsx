@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components/macro';
 import { ListItem } from './views';
 import { pxToRem, getEnv } from '../../../util';
@@ -47,11 +47,11 @@ const envInfoArr = [
 
 const len = envInfoArr.length;
 
-export default () => (
+export default memo(() => (
   <Wrapper>
     <Header>ENV</Header>
     <Section>
       {envInfoArr.map((i, index) => <ListItem {...i} style={index === len - 1 ? { borderBottom: 'none' } : {}} />)}
     </Section>
   </Wrapper>
-);
+));

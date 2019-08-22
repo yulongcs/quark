@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components/macro';
 import { Carousel } from 'antd-mobile';
 import { StyledCenter } from '../../component';
@@ -9,13 +9,16 @@ import {
 
 const data = [
   {
-    key: '0', text: 'Github', link: 'https://github.com/vdfor/quark', bgColor: '#1b86d4'
+    key: '0', text: 'quark · Github', link: 'https://github.com/vdfor/quark', bgColor: '#1b86d4'
   },
   {
     key: '1', text: '页面 · 运行报告', link: '/report/nav', bgColor: '#f44e26'
   },
   {
     key: '2', text: 'CHUX DEMO', link: '/chux-demo', bgColor: '#1890ff'
+  },
+  {
+    key: '3', text: 'DEMO For @vdfor/react-component', link: '/rc-demo', bgColor: '#2f54eb'
   }
 ];
 
@@ -36,6 +39,7 @@ const CarouselItemView = styled(StyledCenter)`
 
 const QuarkIntroView = styled.p`
   height: ${`calc(${ROUTE_WITH_TAB_BAR_HEIGHT} - ${pxToRem(300)})`};
+  line-height: 1.5;
   padding: ${pxToRem(32)};
   overflow: auto;
 `;
@@ -48,7 +52,7 @@ const onCarouselItemClick = (link: string) => () => {
   goPage(link);
 };
 
-export default () => (
+export default memo(() => (
   <WrapperView>
     <CarouselView
       autoplay
@@ -59,7 +63,7 @@ export default () => (
       }) => <CarouselItemView onClick={onCarouselItemClick(link)} style={{ backgroundColor: bgColor }} key={key}>{text}</CarouselItemView>)}
     </CarouselView>
     <QuarkIntroView>
-    quark, 原意为构成物质的基本单元。在这里，我们理解为基石，本项目以此命名，是希望能够帮助快速构建移动web开发。
+      quark, 原意为构成物质的基本单元。在这里，我们理解为基石，本项目以此命名，是希望能够帮助快速构建移动web开发。
     </QuarkIntroView>
   </WrapperView>
-);
+));
