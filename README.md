@@ -8,8 +8,6 @@
 
 quark, 原意为构成物质的基本单元。在这里，我们理解为基石，本项目以此命名，是希望能够帮助快速构建移动web开发。
 
-quark虽然年轻，但充满着朝气。
-
 ```bash
 yarn # install dependencies and devDependencies
 yarn run mock # run mock

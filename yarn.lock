@@ -1485,7 +1485,7 @@
 
 "@vdfor/react-component@^0.6.2":
   version "0.6.2"
-  resolved "https://registry.npm.taobao.org/@vdfor/react-component/download/@vdfor/react-component-0.6.2.tgz?cache=0&sync_timestamp=1563512818499&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vdfor%2Freact-component%2Fdownload%2F%40vdfor%2Freact-component-0.6.2.tgz#66a2fe96f7ce0fecb33c660ee28c492afb367e54"
+  resolved "https://registry.npm.taobao.org/@vdfor/react-component/download/@vdfor/react-component-0.6.2.tgz#66a2fe96f7ce0fecb33c660ee28c492afb367e54"
   integrity sha1-ZqL+lvfOD+yzPGYO4oxJKvs2flQ=
 
 "@webassemblyjs/ast@1.8.5":
