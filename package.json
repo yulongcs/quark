@@ -50,7 +50,6 @@
     "postcss-pxtorem": "^4.0.1",
     "react-app-rewired": "^2.1.0",
     "react-scripts": "3.1.1",
-    "sass-variable-parser": "^1.2.2",
     "typescript": "3.5.3"
   },
   "scripts": {

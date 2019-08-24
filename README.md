@@ -81,9 +81,13 @@ quark全面拥抱[typescript](https://www.typescriptlang.org)
 
 ## 统一配置
 
-`antd-mobile`主题配置、日志记录配置、apiBaseUrl配置等
+日志记录配置、apiBaseUrl配置等
 
 [配置](docs/about-config.md)
+
+## 主题配置
+
+`config-theme.js`对`antd-mobile`进行主题配置
 
 ## lint
 

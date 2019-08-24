@@ -1,9 +1,9 @@
 const fs = require('fs');
 const { override, addBabelPlugins, addLessLoader, addPostcssPlugins, useEslintRc, enableEslintTypescript } = require('customize-cra');
-const { parse: sassParse } = require('sass-variable-parser');
 const paths = require('react-scripts/config/paths');
 const pxtorem = require('postcss-pxtorem');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { antdMobileTheme } = require('./config-theme');
 
 /**
  *  Created by vdfor at 2018/12/20
@@ -88,7 +88,7 @@ module.exports = override(
     ['import', { libraryName: '@vdfor/react-component', libraryDirectory: 'dist/es', camel2DashComponentName: false }, '@vdfor/react-component']
   ),
   addLessLoader({
-    modifyVars: sassParse(fs.readFileSync(paths.appSrc + '/config/theme.scss').toString(), { camelCase: false, indented: false }),
+    modifyVars: antdMobileTheme,
     javascriptEnabled: true,
     include: /[\\/]node_modules[\\/].*antd-mobile[\\/]/
   }),
