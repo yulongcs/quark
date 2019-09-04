@@ -65,16 +65,6 @@ export default [
   },
   {
     key: '6',
-    path: '/chux-demo',
-    title: 'chux-demo',
-    tabBarTitle: 'chux-demo',
-    showTabBar: false,
-    component: () => import('../chux-demo/ChuxDemo'),
-    icon: tarBarHomeImg,
-    selectedIcon: tarBarHomeSelectedImg
-  },
-  {
-    key: '7',
     path: '/rc-demo',
     title: 'rc-demo',
     tabBarTitle: 'rc-demo',

@@ -6,4 +6,3 @@ export { default as request, ResponseBodyTypeEnum } from './request';
 export {
   default as history, goBack, goPage, jumpExternalUrl
 } from './history';
-export { default as chux } from './chux';

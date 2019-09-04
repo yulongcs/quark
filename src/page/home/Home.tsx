@@ -15,10 +15,7 @@ const data = [
     key: '1', text: '页面 · 运行报告', link: '/report/nav', bgColor: '#f44e26'
   },
   {
-    key: '2', text: 'CHUX DEMO', link: '/chux-demo', bgColor: '#1890ff'
-  },
-  {
-    key: '3', text: 'DEMO For @vdfor/react-component', link: '/rc-demo', bgColor: '#2f54eb'
+    key: '2', text: 'DEMO For @vdfor/react-component', link: '/rc-demo', bgColor: '#2f54eb'
   }
 ];
 
