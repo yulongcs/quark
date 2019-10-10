@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import config from './config';
-import { App, rootReducer } from './page/app';
+import App from './page/App';
+import rootReducer from './page/App/reducer';
 import { configStore } from './store';
 import { indexDbInit } from './util';
 import { StyledGlobal } from './component';

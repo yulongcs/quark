@@ -13,8 +13,7 @@ module.exports = {
       jsx: true
     },
     useJSXTextNode: true,
-    extraFileExtensions: ['tsx'],
-    project: './tsconfig.json',
+    extraFileExtensions: ['tsx']
   },
   plugins: ['@typescript-eslint'],
   root: true,

@@ -5,10 +5,10 @@ import { ICustomRouteProps } from '../type';
 
 export default (props: ICustomRouteProps) => {
   const {
-    location: { pathname = '/' } = {}, title = '', showTabBar = true, setAppBasicState
+    location: { pathname = '/' } = {}, title = '', setAppBasicState
   } = props;
   useTitle(title);
-  setAppBasicState({ route: pathname, showTabBar });
+  setAppBasicState({ route: pathname });
   return (
     <Route {...props} />
   );
