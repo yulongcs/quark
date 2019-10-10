@@ -1,4 +1,3 @@
-import { Toast } from 'antd-mobile';
 import uuid from 'uuid/v5';
 import { addToLogCollection } from './db';
 
@@ -49,7 +48,7 @@ export const handleRequestError = async ({
         createAt: Date.now(), page, title: logTitle, desc: `[code - ${errorJson.code || 'unknown'}]${errorJson.message}`
       });
       if (showMessage) {
-        Toast.fail(errorJson.message);
+        // Toast.fail(errorJson.message);
       }
       return;
     }
@@ -60,7 +59,7 @@ export const handleRequestError = async ({
       createAt: Date.now(), page, title: logTitle, desc: String(error)
     });
     if (showMessage && showUnexpectMessage) {
-      Toast.fail('网络错误，请重试');
+      // Toast.fail('网络错误，请重试');
     }
   }
 };

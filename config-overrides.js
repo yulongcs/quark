@@ -1,9 +1,8 @@
 const fs = require('fs');
 const { override, addBabelPlugins, addLessLoader, addPostcssPlugins, useEslintRc, enableEslintTypescript } = require('customize-cra');
 const paths = require('react-scripts/config/paths');
-const pxtorem = require('postcss-pxtorem');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { antdMobileTheme } = require('./config-theme');
+const { antdTheme } = require('./config-theme');
 
 /**
  *  Created by vdfor at 2018/12/20
@@ -84,23 +83,14 @@ module.exports = override(
   enableEslintTypescript(),
   useEslintRc(paths.appPath + '/.eslintrc.js'),
   ...addBabelPlugins(
-    ['import', { libraryName: 'antd-mobile', style: true }, 'antd-mobile'],
+    ['import', { libraryName: 'antd', style: true, libraryDirectory: 'es' }, 'antd'],
     ['import', { libraryName: '@vdfor/react-component', libraryDirectory: 'dist/es', camel2DashComponentName: false }, '@vdfor/react-component']
   ),
   addLessLoader({
-    modifyVars: antdMobileTheme,
+    modifyVars: antdTheme,
     javascriptEnabled: true,
-    include: /[\\/]node_modules[\\/].*antd-mobile[\\/]/
+    include: /[\\/]node_modules[\\/].*antd[\\/]/
   }),
-  addPostcssPlugins([pxtorem({
-    rootValue: 28,
-    unitPrecision: 5,
-    propList: ['*'],
-    selectorBlackList: [/.am-/],
-    replace: true,
-    mediaQuery: false,
-    minPixelValue: 0
-  })]),
   addSvgIconLoader(),
   setMultiPage()
   // addWebpackAlias({ 'styled-components': require.resolve('styled-components') }),

@@ -13,14 +13,6 @@ document.addEventListener('submit', (e) => {
   e.preventDefault();
 });
 
-if (config.useVconsole) {
-  import('vconsole').then((m) => {
-    const VConsole = m.default;
-    const vconsole = new VConsole();
-    console.info(`vconsole init, version is ${vconsole.version}.`);
-  });
-}
-
 indexDbInit();
 
 const store = configStore(rootReducer);
