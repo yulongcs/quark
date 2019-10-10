@@ -31,11 +31,11 @@
     "vconsole": "^3.3.0"
   },
   "devDependencies": {
-    "@types/jest": "24.0.17",
+    "@types/jest": "24.0.18",
     "@types/lodash": "^4.14.136",
-    "@types/node": "12.7.2",
-    "@types/react": "16.9.2",
-    "@types/react-dom": "16.8.5",
+    "@types/node": "12.7.12",
+    "@types/react": "16.9.5",
+    "@types/react-dom": "16.9.1",
     "@types/react-redux": "^7.1.0",
     "@types/react-router-dom": "^4.3.4",
     "@types/styled-components": "^4.1.16",
@@ -49,8 +49,8 @@
     "less-loader": "^4.1.0",
     "postcss-pxtorem": "^4.0.1",
     "react-app-rewired": "^2.1.0",
-    "react-scripts": "3.1.1",
-    "typescript": "3.5.3"
+    "react-scripts": "3.2.0",
+    "typescript": "3.6.4"
   },
   "scripts": {
     "start": "cross-env PORT=8182 react-app-rewired start",
