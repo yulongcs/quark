@@ -1,13 +1,13 @@
 import React, { memo, useState } from 'react';
 import { Button } from 'antd-mobile';
 import {
-  Curtain, Spin, Skeleton, TabBar, Loadable
+  Curtain, Spin, Skeleton, TabBar, Loadable,
 } from '@vdfor/react-component';
 import styled from 'styled-components/macro';
 import { StyledCenter } from '../../component';
 import { pxToRem } from '../../util';
 import {
-  tarBarHomeImg, tarBarHomeSelectedImg, tarBarListImg, tarBarListSelectedImg
+  tarBarHomeImg, tarBarHomeSelectedImg, tarBarListImg, tarBarListSelectedImg,
 } from '../../asset/images';
 
 const WrapperView = styled.div`
@@ -59,14 +59,14 @@ const tabBarData = [
     title: '首页',
     icon: tarBarHomeImg,
     selectedIcon: tarBarHomeSelectedImg,
-    selected: true
+    selected: true,
   },
   {
     key: '1',
     title: '列表',
     icon: tarBarListImg,
-    selectedIcon: tarBarListSelectedImg
-  }
+    selectedIcon: tarBarListSelectedImg,
+  },
 ];
 
 const LazyComponent = Loadable({ component: () => import('./views/LazyComponent') });
@@ -78,8 +78,8 @@ export default memo(() => {
     { key: 0, name: 'Spin', component: <Spin /> },
     { key: 1, name: 'Skeleton', component: <Skeleton rows={5} /> },
     { key: 2, name: 'Curtain', component: <Button size="small" style={{ width: '50%' }} onClick={() => setCurtainVisible(true)} type="primary">Open Curtain</Button> },
-    { key: 3, name: 'TabBar', component: <TabBar theme={{ barTintColor: '#ebedf0' }}>{tabBarData.map(i => (<TabBar.Item {...i} />))}</TabBar> },
-    { key: 4, name: 'Loadable', component: <LazyComponent /> }
+    { key: 3, name: 'TabBar', component: <TabBar theme={{ barTintColor: '#ebedf0' }}>{tabBarData.map((i) => (<TabBar.Item {...i} />))}</TabBar> },
+    { key: 4, name: 'Loadable', component: <LazyComponent /> },
   ];
 
   return (
