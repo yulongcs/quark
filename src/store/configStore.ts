@@ -1,5 +1,5 @@
 import {
-  createStore, applyMiddleware, compose, Reducer, AnyAction
+  createStore, applyMiddleware, compose, Reducer, AnyAction,
 } from 'redux';
 import thunk from 'redux-thunk';
 import { request } from '../util';
@@ -12,7 +12,7 @@ const composeEnhancers = typeof window === 'object'
   }) : compose;
 
 const middlewares = [
-  thunk.withExtraArgument({ request })
+  thunk.withExtraArgument({ request }),
 ];
 
 if (process.env.NODE_ENV === 'development') {
@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const enhancer = composeEnhancers(
-  applyMiddleware(...middlewares)
+  applyMiddleware(...middlewares),
 );
 
 // configStore

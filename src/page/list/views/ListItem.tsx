@@ -40,7 +40,7 @@ const FooterView = styled.div`
 `;
 
 export default memo(({
-  id, title, desc, time
+  id, title, desc, time,
 }: IListItemData) => (
   <WrapperView onClick={() => goPage(`/list-detail/${id}`)}>
     <HeaderView>{title}</HeaderView>

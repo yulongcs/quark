@@ -4,7 +4,7 @@ import { ListView, PullToRefresh } from 'antd-mobile';
 import styled from 'styled-components/macro';
 import { ErrorPage, ListSkeleton } from '../../component';
 import {
-  initAction, loadListAction, refreshAction, setPageStateAction
+  initAction, loadListAction, refreshAction, setPageStateAction,
 } from './action';
 import { ListItem } from './views';
 import { IListItemData } from './type';
@@ -35,15 +35,15 @@ const ListBoxFooterView = styled.div`
 `;
 
 const dataSource = new ListView.DataSource({
-  rowHasChanged: (row1: any, row2: any) => row1 !== row2
+  rowHasChanged: (row1: any, row2: any) => row1 !== row2,
 });
 
 export default memo(() => {
   const listEle = useRef(null);
   const {
     pageInfo: { pageState, scrollTop }, listInfo: {
-      data, loading, hasMore
-    }
+      data, loading, hasMore,
+    },
   } = useSelector((state: IRootReducer) => state.listPageReducer);
   const dispatch = useDispatch();
 

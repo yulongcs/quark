@@ -4,19 +4,19 @@ import { Carousel } from 'antd-mobile';
 import { StyledCenter } from '../../component';
 import { ROUTE_WITH_TAB_BAR_HEIGHT } from '../../constant';
 import {
-  pxToRem, urlRegx, goPage, jumpExternalUrl
+  pxToRem, urlRegx, goPage, jumpExternalUrl,
 } from '../../util';
 
 const data = [
   {
-    key: '0', text: 'quark · Github', link: 'https://github.com/vdfor/quark', bgColor: '#1b86d4'
+    key: '0', text: 'quark · Github', link: 'https://github.com/vdfor/quark', bgColor: '#1b86d4',
   },
   {
-    key: '1', text: '页面 · 运行报告', link: '/report/nav', bgColor: '#f44e26'
+    key: '1', text: '页面 · 运行报告', link: '/report/nav', bgColor: '#f44e26',
   },
   {
-    key: '2', text: 'DEMO For @vdfor/react-component', link: '/rc-demo', bgColor: '#2f54eb'
-  }
+    key: '2', text: 'DEMO For @vdfor/react-component', link: '/rc-demo', bgColor: '#2f54eb',
+  },
 ];
 
 const WrapperView = styled.div`
@@ -56,7 +56,7 @@ export default memo(() => (
       infinite
     >
       {data.map(({
-        key, text, link, bgColor
+        key, text, link, bgColor,
       }) => <CarouselItemView onClick={onCarouselItemClick(link)} style={{ backgroundColor: bgColor }} key={key}>{text}</CarouselItemView>)}
     </CarouselView>
     <QuarkIntroView>

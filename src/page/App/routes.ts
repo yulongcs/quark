@@ -1,5 +1,5 @@
 import {
-  tarBarHomeImg, tarBarHomeSelectedImg, tarBarListImg, tarBarListSelectedImg
+  tarBarHomeImg, tarBarHomeSelectedImg, tarBarListImg, tarBarListSelectedImg,
 } from '../../asset/images';
 
 export default [
@@ -11,7 +11,7 @@ export default [
     showTabBar: true,
     component: () => import('../home/Home'),
     icon: tarBarHomeImg,
-    selectedIcon: tarBarHomeSelectedImg
+    selectedIcon: tarBarHomeSelectedImg,
   },
   {
     key: '1',
@@ -21,7 +21,7 @@ export default [
     showTabBar: true,
     component: () => import('../list/List'),
     icon: tarBarListImg,
-    selectedIcon: tarBarListSelectedImg
+    selectedIcon: tarBarListSelectedImg,
   },
   {
     key: '2',
@@ -31,7 +31,7 @@ export default [
     showTabBar: false,
     component: () => import('../list-detail/ListDetail'),
     icon: tarBarListImg,
-    selectedIcon: tarBarListSelectedImg
+    selectedIcon: tarBarListSelectedImg,
   },
   {
     key: '3',
@@ -41,7 +41,7 @@ export default [
     showTabBar: false,
     component: () => import('../report/report-nav/ReportNav'),
     icon: tarBarListImg,
-    selectedIcon: tarBarListSelectedImg
+    selectedIcon: tarBarListSelectedImg,
   },
   {
     key: '4',
@@ -51,7 +51,7 @@ export default [
     showTabBar: false,
     component: () => import('../report/env-report/EnvReport'),
     icon: tarBarListImg,
-    selectedIcon: tarBarListSelectedImg
+    selectedIcon: tarBarListSelectedImg,
   },
   {
     key: '5',
@@ -61,7 +61,7 @@ export default [
     showTabBar: false,
     component: () => import('../report/log-report/LogReport'),
     icon: tarBarListImg,
-    selectedIcon: tarBarListSelectedImg
+    selectedIcon: tarBarListSelectedImg,
   },
   {
     key: '6',
@@ -71,6 +71,6 @@ export default [
     showTabBar: false,
     component: () => import('../rc-demo/RcDemo'),
     icon: tarBarHomeImg,
-    selectedIcon: tarBarHomeSelectedImg
-  }
+    selectedIcon: tarBarHomeSelectedImg,
+  },
 ];

@@ -32,7 +32,7 @@ ReactDOM.render(
       <App />
     </>
   </Provider>,
-  document.getElementById('root') as HTMLElement
+  document.getElementById('root') as HTMLElement,
 );
 
 serviceWorker.unregister();

@@ -27,7 +27,7 @@ const INVALID_RES_BODY_TYPE = 'invalid-response-body-type';
 const config = {
   timeout: 10000, // 指定请求超时的毫秒数(0 表示无超时时间)，如果请求花费了超过 `timeout` 的时间，请求将被中断
   retryTimes: 2, // 请求失败时再次自动重试次数
-  retryInterval: 500 // 请求失败时再次自动重试间隔(ms)
+  retryInterval: 500, // 请求失败时再次自动重试间隔(ms)
 };
 
 const codeMessage = { // copy from https://github.com/ant-design/ant-design-pro/blob/master/src/utils/request.js
@@ -45,18 +45,15 @@ const codeMessage = { // copy from https://github.com/ant-design/ant-design-pro/
   500: '服务器发生错误，请检查服务器。',
   502: '网关错误。',
   503: '服务不可用，服务器暂时过载或维护。',
-  504: '网关超时。'
+  504: '网关超时。',
 };
 
 const fetchGo = async (retry: number, url: string, options: IFetchOptions = {}): Promise<any> => {
   try {
     let timer;
+    // @ts-ignore
     const timeoutPromise = new Promise((resolve, reject) => {
       timer = setTimeout(() => {
-        if (!1) { // 无作用 resolve ts定义不可 unused
-          resolve({});
-          return;
-        }
         // eslint-disable-next-line
         reject({ status: 504, statusText: '请求超时' });
       }, config.timeout);
@@ -77,10 +74,8 @@ const fetchGo = async (retry: number, url: string, options: IFetchOptions = {}):
               .then((data) => {
                 resolve(typeof data === 'object' ? data : String(data));
               })
+              // @ts-ignore
               .catch((e) => {
-                if (!1) { // 无作用 -- to fix ['e' is defined but never used]
-                  console.error(e);
-                }
                 resolve(res.text());
               });
           });
@@ -147,7 +142,7 @@ export default (url: string, options: IRequestOptions = {}): Promise<any> => {
     // ...{
     //   credentials: 'include'
     // },
-    ...options
+    ...options,
   };
   const token = 'test-token';
 
@@ -161,26 +156,26 @@ export default (url: string, options: IRequestOptions = {}): Promise<any> => {
       newOptions.headers = {
         Accept: 'application/json',
         'Content-Type': 'application/json; charset=utf-8',
-        ...newOptions.headers
+        ...newOptions.headers,
       };
       newOptions.data = JSON.stringify(newOptions.data);
     } else { // newOptions.data is FormData
       newOptions.headers = {
         Accept: 'application/json',
-        ...newOptions.headers
+        ...newOptions.headers,
       };
     }
   }
 
   newOptions.headers = {
     Authorization: `Bearer ${token || ''}`,
-    ...newOptions.headers
+    ...newOptions.headers,
   };
 
   if (newOptions.params) {
     const urlQuery = (() => {
       const querys = newOptions.params || {};
-      return Object.keys(querys).map(key => `${key}=${typeof querys[key] === 'string' || typeof querys[key] === 'number' ? querys[key] : ''}`).join('&');
+      return Object.keys(querys).map((key) => `${key}=${typeof querys[key] === 'string' || typeof querys[key] === 'number' ? querys[key] : ''}`).join('&');
     })();
     newUrl += `?${urlQuery}`;
     delete newOptions.params;
@@ -194,7 +189,7 @@ export default (url: string, options: IRequestOptions = {}): Promise<any> => {
   const fetchOptions = {
     method: 'GET',
     resBodyType: ResponseBodyTypeEnum.DEFAULT,
-    ...newOptions
+    ...newOptions,
   };
 
   return fetchGo(0, newUrl, fetchOptions);

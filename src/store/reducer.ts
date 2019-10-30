@@ -5,7 +5,7 @@ import { IAppBasicStateProps, IAppBasicProps } from '../type';
 const INITIAL_APP_STATE = {
   route: '/',
   title: 'quark',
-  showTabBar: true
+  showTabBar: true,
 };
 
 const basicStateReducer = (state: IAppBasicStateProps = INITIAL_APP_STATE, action: AnyAction) => {
@@ -13,7 +13,7 @@ const basicStateReducer = (state: IAppBasicStateProps = INITIAL_APP_STATE, actio
     case SET_APP_BASIC_STATE:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       };
     default:
       return state;
@@ -21,5 +21,5 @@ const basicStateReducer = (state: IAppBasicStateProps = INITIAL_APP_STATE, actio
 };
 
 export default combineReducers({
-  basicState: basicStateReducer
+  basicState: basicStateReducer,
 }) as Reducer<IAppBasicProps>;

@@ -4,7 +4,7 @@ import { PAGE_STATUS_ENUM, IQuxPageInfoProps } from '../../type';
 
 const INITIAL_PAGE_STATE = {
   pageState: PAGE_STATUS_ENUM.LOADING,
-  scrollTop: 0
+  scrollTop: 0,
 };
 
 export default ({ SET_PAGE_STATE }: IActionTypes) => (state: IQuxPageInfoProps = INITIAL_PAGE_STATE, action: AnyAction) => {
@@ -12,7 +12,7 @@ export default ({ SET_PAGE_STATE }: IActionTypes) => (state: IQuxPageInfoProps =
     case SET_PAGE_STATE:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       };
     default:
       return state;

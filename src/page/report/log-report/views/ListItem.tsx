@@ -39,7 +39,7 @@ const DescView = styled.div`
 `;
 
 export default memo(({
-  title, desc, createAt, page
+  title, desc, createAt, page,
 }: IListItemData) => (
   <WrapperView>
     <CardView>

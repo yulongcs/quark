@@ -3,7 +3,7 @@ import {
   Redirect,
   Route as DefaultRoute,
   Router,
-  Switch
+  Switch,
 } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loadable, TabBar } from '@vdfor/react-component';
@@ -39,15 +39,15 @@ const RouterWrapper = memo(({ children }: PropsWithChildren<any>) => {
 
 const TabBarComponent = memo(() => {
   const { basicState: { route, showTabBar } } = useSelector((state: IRootReducer) => state.appBasicReducer);
-  const tabs = routes.filter(i => i.showTabBar);
+  const tabs = routes.filter((i) => i.showTabBar);
   return showTabBar ? (
     <TarBarView>
-      {tabs.map(i => (
+      {tabs.map((i) => (
         <TabBar.Item
           selected={route === i.path}
           onPress={() => goPage(i.path)}
           {...{
-            ...i, title: i.tabBarTitle
+            ...i, title: i.tabBarTitle,
           }}
         />
       ))}
@@ -61,7 +61,7 @@ export default memo(() => {
     dispatch(setAppBasicStateAction(values));
   };
   const basicProps = {
-    setAppBasicState
+    setAppBasicState,
   };
   return (
     <>
@@ -71,7 +71,7 @@ export default memo(() => {
             <DefaultRoute exact path="/">
               <Redirect to={{ pathname: '/home' }} />
             </DefaultRoute>
-            {routes.map(i => <Route {...{ ...basicProps, ...i, component: Loadable({ component: i.component }) }} />)}
+            {routes.map((i) => <Route {...{ ...basicProps, ...i, component: Loadable({ component: i.component }) }} />)}
           </Switch>
         </Router>
       </RouterWrapper>

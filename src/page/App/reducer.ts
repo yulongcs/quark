@@ -7,5 +7,5 @@ import { logReportPageReducer, PAGE_REDUCER_NAME as LOG_REPORT_PAGE_REDUCER_NAME
 export default combineReducers({
   appBasicReducer,
   [LIST_PAGE_REDUCER_NAME]: listPageReducer,
-  [LOG_REPORT_PAGE_REDUCER_NAME]: logReportPageReducer
+  [LOG_REPORT_PAGE_REDUCER_NAME]: logReportPageReducer,
 }) as Reducer<IRootReducer>;

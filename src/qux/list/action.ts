@@ -20,7 +20,7 @@ interface ILoadListParams extends IActionTypes {
 
 export const resetQuxListAction = ({
   pageReducerName,
-  RESET_LIST
+  RESET_LIST,
 }: IResetListParams) => () => async (dispatch: Dispatch<any>, getState: any) => {
   const state = getState();
   if (!(state[pageReducerName] && state[pageReducerName].listInfo)) {
@@ -39,7 +39,7 @@ export const getQuxLoadListAction = ({
   pageName,
   loadListApiExtraParams = {},
   pageSizeMap = 'pageSize',
-  pageNumMap = 'pageNum'
+  pageNumMap = 'pageNum',
 }: ILoadListParams) => (action: LOAD_ACTION_ENUM = LOAD_ACTION_ENUM.LOADMORE) => async (dispatch: Dispatch<any>, getState: any) => {
   const state = getState();
   if (!(state[pageReducerName] && state[pageReducerName].listInfo)) {
@@ -56,16 +56,16 @@ export const getQuxLoadListAction = ({
     const data = await loadListApi({
       ...loadListApiExtraParams,
       ...{ [pageNumMap]: pageNum, [pageSizeMap]: pageSize },
-      ...(pageName === LOG_REPORT_PAGE_NAME ? { listData: action === LOAD_ACTION_ENUM.REFRESH ? [] : listData } : {}) // logReportPage的list数据从本地数据库获取，此处进行特殊处理
+      ...(pageName === LOG_REPORT_PAGE_NAME ? { listData: action === LOAD_ACTION_ENUM.REFRESH ? [] : listData } : {}), // logReportPage的list数据从本地数据库获取，此处进行特殊处理
     });
     dispatch({
       type: action === LOAD_ACTION_ENUM.REFRESH ? REFRESH_LIST_SUCCESS : LOAD_LIST_SUCCESS,
-      payload: data
+      payload: data,
     });
   } catch (error) {
     if (action === LOAD_ACTION_ENUM.LOADMORE) {
       handleRequestError({
-        error, page: pageName, logTitle: 'load list action error', showMessage: false
+        error, page: pageName, logTitle: 'load list action error', showMessage: false,
       });
     } else {
       throw error;

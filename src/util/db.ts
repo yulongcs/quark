@@ -23,7 +23,7 @@ export const indexDbInit = () => {
 };
 
 export const indexDbDml = ({
-  collectionName, add, put, remove, get, wa = 'readwrite', clear
+  collectionName, add, put, remove, get, wa = 'readwrite', clear,
 }: {
   collectionName: string;
   wa?: 'readwrite' | 'readonly';
@@ -82,7 +82,7 @@ export const indexDbDml = ({
 export const addToLogCollection = (obj: Record<string, any>) => {
   indexDbDml({
     collectionName: config.logCollectionName,
-    add: obj
+    add: obj,
   });
 };
 
@@ -102,8 +102,8 @@ export const getFromLogCollection = async ({ range, limit = 20 }: {
         cb: (data: any) => {
           resData = data;
           resolve(true);
-        }
-      }
+        },
+      },
     });
   });
   return resData;
@@ -112,6 +112,6 @@ export const getFromLogCollection = async ({ range, limit = 20 }: {
 export const clearLogCollection = () => {
   indexDbDml({
     collectionName: config.logCollectionName,
-    clear: true
+    clear: true,
   });
 };

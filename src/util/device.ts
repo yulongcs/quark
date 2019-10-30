@@ -31,7 +31,7 @@ export const getEnv = () => {
     projectName: process.env.REACT_APP_NAME || 'unknown',
     device: md.mobile(),
     os: getEnvOS(),
-    browser: `${userAgent} ${md.version(userAgent)}`
+    browser: `${userAgent} ${md.version(userAgent)}`,
   };
 };
 

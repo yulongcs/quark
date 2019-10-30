@@ -19,21 +19,19 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   root: true,
   rules: {
+    '@typescript-eslint/ban-ts-ignore': ['off'],
     '@typescript-eslint/indent': ['error', 2],
     '@typescript-eslint/interface-name-prefix': ['error', 'always'],
     '@typescript-eslint/no-explicit-any': ['off'],
     '@typescript-eslint/explicit-function-return-type': ['off'],
-    'comma-dangle': ['error', 'never'],
     'import/no-cycle': ['off'],
     'import/prefer-default-export': ['off'],
     'jsx-a11y/anchor-is-valid': ['off'],
     'jsx-a11y/click-events-have-key-events': ['off'],
     'jsx-a11y/no-noninteractive-element-interactions': ['off'],
     'jsx-a11y/no-static-element-interactions': ['off'],
-    'linebreak-style': ['off', 'error', 'windows'],
     'max-len': ['error', 200],
     'no-console': ['off'],
-    'no-constant-condition': ['off'],
     'no-restricted-imports': [
       'error',
       {
@@ -47,7 +45,7 @@ module.exports = {
       }
     ],
     'react/jsx-filename-extension': ['error', { extensions: ['ts', 'tsx'] }],
-    'import/no-extraneous-dependencies': ['off']
+    'react/jsx-props-no-spreading': ['off']
   },
   settings: {
     'import/resolver': {

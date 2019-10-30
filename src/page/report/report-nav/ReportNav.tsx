@@ -30,7 +30,7 @@ const Card = styled.div`
 
 const data = [
   { key: '0', path: '/report/env', label: '运行环境' },
-  { key: '1', path: '/report/log', label: '运行日志' }
+  { key: '1', path: '/report/log', label: '运行日志' },
 ];
 
 const len = data.length;

@@ -42,7 +42,7 @@ const envInfoArr = [
   { key: '2', label: 'NODE_ENV', value: envInfo.nodeEnv },
   { key: '3', label: '运行设备', value: envInfo.device },
   { key: '4', label: '操作系统', value: envInfo.os },
-  { key: '5', label: '浏览器', value: envInfo.browser }
+  { key: '5', label: '浏览器', value: envInfo.browser },
 ];
 
 const len = envInfoArr.length;

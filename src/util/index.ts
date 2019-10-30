@@ -4,5 +4,5 @@ export * from './device';
 export * from './db';
 export { default as request, ResponseBodyTypeEnum } from './request';
 export {
-  default as history, goBack, goPage, jumpExternalUrl
+  default as history, goBack, goPage, jumpExternalUrl,
 } from './history';

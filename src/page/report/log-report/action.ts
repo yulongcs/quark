@@ -10,7 +10,7 @@ import {
   LOAD_LOG_REPORT_PAGE_LIST_REQUEST,
   SET_LOG_REPORT_PAGE_PAGE_STATE,
   REFRESH_LOG_REPORT_PAGE_LIST_REQUEST,
-  REFRESH_LOG_REPORT_PAGE_LIST_SUCCESS
+  REFRESH_LOG_REPORT_PAGE_LIST_SUCCESS,
 } from './constant';
 import { handleRequestError, getFromLogCollection } from '../../../util';
 
@@ -35,14 +35,14 @@ export const loadListAction = getQuxLoadListAction({
   REFRESH_LIST_REQUEST: REFRESH_LOG_REPORT_PAGE_LIST_REQUEST,
   REFRESH_LIST_SUCCESS: REFRESH_LOG_REPORT_PAGE_LIST_SUCCESS,
   pageName: PAGE_NAME,
-  loadListApi
+  loadListApi,
 });
 
 export const initAction = () => async (dispatch: Dispatch<any>, getState: any) => {
   const {
     logReportPageReducer: {
-      pageInfo: { pageState }
-    }
+      pageInfo: { pageState },
+    },
   } = getState() as IRootReducer;
   if (pageState === PAGE_STATUS_ENUM.CONTENT) { // keep-alive
     return;

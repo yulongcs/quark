@@ -11,7 +11,7 @@ import {
   SET_LIST_PAGE_PAGE_STATE,
   REFRESH_LIST_PAGE_LIST_REQUEST,
   REFRESH_LIST_PAGE_LIST_SUCCESS,
-  RESET_LIST_PAGE_LIST
+  RESET_LIST_PAGE_LIST,
 } from './constant';
 import { handleRequestError } from '../../util';
 
@@ -19,7 +19,7 @@ export const setPageStateAction = getSetQuxPageStateAction({ SET_PAGE_STATE: SET
 
 export const resetListAction = resetQuxListAction({
   pageReducerName: PAGE_REDUCER_NAME,
-  RESET_LIST: RESET_LIST_PAGE_LIST
+  RESET_LIST: RESET_LIST_PAGE_LIST,
 });
 
 export const loadListAction = getQuxLoadListAction({
@@ -31,14 +31,14 @@ export const loadListAction = getQuxLoadListAction({
   pageName: PAGE_NAME,
   loadListApi,
   pageNumMap: '_page',
-  pageSizeMap: '_limit'
+  pageSizeMap: '_limit',
 });
 
 export const initAction = () => async (dispatch: Dispatch<any>, getState: any) => {
   const {
     listPageReducer: {
-      pageInfo: { pageState }
-    }
+      pageInfo: { pageState },
+    },
   } = getState() as IRootReducer;
   if (pageState === PAGE_STATUS_ENUM.CONTENT) { // keep-alive
     return;
