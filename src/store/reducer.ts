@@ -4,7 +4,8 @@ import { IAppBasicStateProps, IAppBasicProps } from '../type';
 
 const INITIAL_APP_STATE = {
   route: '/',
-  title: 'quark'
+  title: 'quark',
+  showTabBar: true
 };
 
 const basicStateReducer = (state: IAppBasicStateProps = INITIAL_APP_STATE, action: AnyAction) => {

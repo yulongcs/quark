@@ -3,7 +3,7 @@ import config from '../config';
 
 const history = config.history === 'browser' ? createBrowserHistory() : createHashHistory();
 
-export const goPage = (url: string, replace = false) => {
+export const goPage = (url: string, replace: boolean = false) => {
   if (replace) {
     history.replace(url);
     return;
@@ -13,7 +13,7 @@ export const goPage = (url: string, replace = false) => {
 
 export const goBack = () => history.goBack();
 
-export const jumpExternalUrl = (url: string, replace = false) => {
+export const jumpExternalUrl = (url: string, replace: boolean = false) => {
   if (replace) {
     window.location.replace(url);
     return;
