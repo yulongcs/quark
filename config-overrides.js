@@ -1,8 +1,7 @@
 const fs = require('fs');
-const { override, addBabelPlugins, addLessLoader, addPostcssPlugins, useEslintRc, enableEslintTypescript } = require('customize-cra');
+const { override, addBabelPlugins, addLessLoader, addPostcssPlugins, useEslintRc, enableEslintTypescript, addBundleVisualizer } = require('customize-cra');
 const paths = require('react-scripts/config/paths');
 const pxtorem = require('postcss-pxtorem');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { antdMobileTheme } = require('./config-theme');
 
 /**
@@ -39,5 +38,6 @@ module.exports = override(
     mediaQuery: false,
     minPixelValue: 0
   })]),
-  addSvgIconLoader()
+  addSvgIconLoader(),
+  addBundleVisualizer()
 );

@@ -50,7 +50,8 @@
     "postcss-pxtorem": "^4.0.1",
     "react-app-rewired": "^2.1.4",
     "react-scripts": "3.2.0",
-    "typescript": "3.6.4"
+    "typescript": "3.6.4",
+    "webpack-bundle-analyzer": "^3.6.0"
   },
   "scripts": {
     "start": "cross-env PORT=8182 react-app-rewired start",
