@@ -22,7 +22,8 @@ module.exports = override(
   useEslintRc(paths.appPath + '/.eslintrc.js'),
   ...addBabelPlugins(
     ['import', { libraryName: 'antd-mobile', style: true }, 'antd-mobile'],
-    ['import', { libraryName: '@vdfor/react-component', libraryDirectory: 'dist/es', camel2DashComponentName: false }, '@vdfor/react-component']
+    ['import', { libraryName: '@vdfor/react-component', libraryDirectory: 'dist/es', camel2DashComponentName: false }, '@vdfor/react-component'],
+    ['import', { libraryName: 'lodash',libraryDirectory: '', camel2DashComponentName: false }, 'lodash'],
   ),
   addLessLoader({
     modifyVars: antdMobileTheme,
