@@ -1,0 +1,2 @@
+export const SET_APP_META_STATE = 'SET_APP_META_STATE';
+export const APP_REDUCER_NAME = 'APP_REDUCER';

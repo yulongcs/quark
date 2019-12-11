@@ -1,8 +1,3 @@
-const indexConfig = {
-  dbName: 'quark-db', // indexDB name
-  logCollectionName: 'quark-db-collection-log', // 日志表名称
-};
-
 const config = {
   development: { // 开发环境
     history: 'browser',
@@ -20,4 +15,4 @@ const config = {
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 
-export default { ...indexConfig, ...config[nodeEnv] };
+export default { ...config[nodeEnv] };

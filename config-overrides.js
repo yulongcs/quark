@@ -1,44 +1,44 @@
-const fs = require('fs');
-const { override, addBabelPlugins, addLessLoader, addPostcssPlugins, useEslintRc, enableEslintTypescript, addBundleVisualizer } = require('customize-cra');
+const {
+  override, addBabelPlugins, useEslintRc, enableEslintTypescript, addWebpackAlias, addLessLoader
+} = require('customize-cra');
+const path = require('path');
 const paths = require('react-scripts/config/paths');
-const pxtorem = require('postcss-pxtorem');
-const { antdMobileTheme } = require('./config-theme');
+const { antdTheme } = require('./config-theme');
 
 /**
  *  Created by vdfor at 2018/12/20
  *  */
-const addSvgIconLoader = () => config => {
-  const loaders = config.module.rules.find(rule => Array.isArray(rule.oneOf)).oneOf;
+const addSvgIconLoader = () => (config) => {
+  const loaders = config.module.rules.find((rule) => Array.isArray(rule.oneOf)).oneOf;
   loaders.splice(loaders.length - 1, 0, {
     test: /-icon\.svg(\?v=\d+\.\d+\.\d+)?$/,
-    use: [{ loader: require.resolve('@svgr/webpack') }]
+    use: [{ loader: require.resolve('@svgr/webpack') }],
   });
   return config;
 };
 
-
 module.exports = override(
   enableEslintTypescript(),
-  useEslintRc(paths.appPath + '/.eslintrc.js'),
+  useEslintRc(`${paths.appPath}/.eslintrc.js`),
   ...addBabelPlugins(
-    ['import', { libraryName: 'antd-mobile', style: true }, 'antd-mobile'],
+    ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }, 'antd'],
     ['import', { libraryName: '@vdfor/react-component', libraryDirectory: 'dist/es', camel2DashComponentName: false }, '@vdfor/react-component'],
-    ['import', { libraryName: 'lodash',libraryDirectory: '', camel2DashComponentName: false }, 'lodash'],
+    ['import', { libraryName: 'lodash', libraryDirectory: '', camel2DashComponentName: false }, 'lodash'],
   ),
   addLessLoader({
-    modifyVars: antdMobileTheme,
+    modifyVars: antdTheme,
     javascriptEnabled: true,
-    include: /[\\/]node_modules[\\/].*antd-mobile[\\/]/
+    include: /[\\/]node_modules[\\/].*antd[\\/]/
   }),
-  addPostcssPlugins([pxtorem({
-    rootValue: 28,
-    unitPrecision: 5,
-    propList: ['*'],
-    selectorBlackList: [/.am-/],
-    replace: true,
-    mediaQuery: false,
-    minPixelValue: 0
-  })]),
+  // addLessLoader({
+  //   modifyVars: antdMobileTheme,
+  //   javascriptEnabled: true,
+  //   include: /[\\/]node_modules[\\/].*antd-mobile[\\/]/
+  // }),
   addSvgIconLoader(),
-  addBundleVisualizer()
+  addWebpackAlias({
+    'src': path.resolve(__dirname, './src'),
+    'react': require.resolve('react'),
+    'styled-components': require.resolve('styled-components')
+  })
 );

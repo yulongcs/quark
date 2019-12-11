@@ -1,1 +1,0 @@
-export const SET_APP_BASIC_STATE = 'SET_APP_BASIC_STATE';

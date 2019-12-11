@@ -3,5 +3,5 @@ build
 src/serviceWorker.ts
 src/react-app-env.d.ts
 src/setupProxy.js
+config-overrides.js
 !.eslintrc.js
-src2

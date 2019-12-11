@@ -1,5 +1,5 @@
-const antdMobileTheme = {
-  'brand-primary': '#1890ff'
+const antdTheme = {
+  'primary-color': '#1890ff',
 };
 
-module.exports = { antdMobileTheme };
+module.exports = { antdTheme };

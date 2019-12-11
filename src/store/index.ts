@@ -1,4 +1,5 @@
 export { default as configStore } from './configStore';
-export * from './action';
-export { default as appBasicReducer } from './reducer';
-export * from './constant';
+export * from './actions';
+export { default as appReducer } from './reducers';
+export * from './constants';
+export * from './types';
