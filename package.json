@@ -12,6 +12,11 @@
   },
   "homepage": "https://github.com/vdfor/quark#readme",
   "private": true,
+  "scripts": {
+    "start": "cross-env PORT=8182 react-app-rewired start",
+    "build": "cross-env GENERATE_SOURCEMAP=false PUBLIC_URL=. react-app-rewired build",
+    "eslint:fix": "eslint src --fix --ext .ts,.tsx"
+  },
   "dependencies": {
     "@vdfor/util": "^0.2.0",
     "antd": "^3.26.2",
@@ -50,11 +55,6 @@
     "react-app-rewired": "^2.1.4",
     "react-scripts": "3.3.0",
     "typescript": "~3.7.2"
-  },
-  "scripts": {
-    "start": "cross-env PORT=8182 react-app-rewired start",
-    "build": "cross-env GENERATE_SOURCEMAP=false PUBLIC_URL=. react-app-rewired build",
-    "eslint:fix": "eslint src --fix --ext .ts,.tsx"
   },
   "browserslist": {
     "production": [
