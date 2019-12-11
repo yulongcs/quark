@@ -18,6 +18,7 @@
     "eslint:fix": "eslint src --fix --ext .ts,.tsx"
   },
   "dependencies": {
+    "@vdfor/react-component": "^0.8.0",
     "@vdfor/util": "^0.2.0",
     "antd": "^3.26.2",
     "history": "^4.10.1",

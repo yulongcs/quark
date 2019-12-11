@@ -1487,7 +1487,7 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.5.1", "@babel/runtime@^7.6.0", "@babel/runtime@^7.6.2", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2":
+"@babel/runtime@^7.5.1", "@babel/runtime@^7.6.0", "@babel/runtime@^7.6.2", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6":
   version "7.7.6"
   resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.7.6.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fruntime%2Fdownload%2F%40babel%2Fruntime-7.7.6.tgz#d18c511121aff1b4f2cd1d452f1bac9601dd830f"
   integrity sha1-0YxRESGv8bTyzR1FLxuslgHdgw8=
@@ -2212,6 +2212,13 @@
     lodash.unescape "4.0.1"
     semver "^6.3.0"
     tsutils "^3.17.1"
+
+"@vdfor/react-component@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.npm.taobao.org/@vdfor/react-component/download/@vdfor/react-component-0.8.0.tgz?cache=0&sync_timestamp=1576070601393&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vdfor%2Freact-component%2Fdownload%2F%40vdfor%2Freact-component-0.8.0.tgz#7e928a57375af2c786f56450a8eb5e85f03ff52e"
+  integrity sha1-fpKKVzda8seG9WRQqOtehfA/9S4=
+  dependencies:
+    "@babel/runtime" "^7.7.6"
 
 "@vdfor/util@^0.2.0":
   version "0.2.0"
