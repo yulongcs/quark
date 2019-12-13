@@ -2,7 +2,7 @@ import {
   createStore, applyMiddleware, compose, Reducer, AnyAction,
 } from 'redux';
 import thunk from 'redux-thunk';
-import { request } from 'src/utils';
+import { request } from '@/utils';
 
 const composeEnhancers = typeof window === 'object'
   // eslint-disable-next-line

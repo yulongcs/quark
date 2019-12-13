@@ -3,9 +3,9 @@ import React, {
 } from 'react';
 import { getRandomRound } from '@vdfor/util';
 import styled from 'styled-components/macro';
-import { StyledCenter } from 'src/components';
-import { goPage } from 'src/utils';
-import { PRIMARY_COLOR } from 'src/constants';
+import { StyledCenter } from '@/components';
+import { goPage } from '@/utils';
+import { PRIMARY_COLOR } from '@/constants';
 import { TAGS } from './constants';
 
 const getTagText = (): string => TAGS[getRandomRound(0, TAGS.length - 1)];

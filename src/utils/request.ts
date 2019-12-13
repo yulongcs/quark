@@ -25,7 +25,7 @@ const errorHandler = (error: any) => {
       status = 0, statusText = '未知错误', message = '', url = '',
     } = {},
   } = error;
-  const errortext = message || codeMessage[status] || statusText;
+  const errortext = message || (codeMessage as any)[status] || statusText;
   notification.error({
     message: `请求错误 ${status}: ${url}`,
     description: errortext,

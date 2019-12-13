@@ -1,5 +1,4 @@
-export { default as configStore } from './configStore';
-export * from './actions';
-export { default as appReducer } from './reducers';
-export * from './constants';
-export * from './types';
+import configStore from './configStore';
+import reducer from './reducers';
+
+export default configStore(reducer);

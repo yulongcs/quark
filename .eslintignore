@@ -1,7 +1,6 @@
 node_modules
-build
-src/serviceWorker.ts
-src/react-app-env.d.ts
-src/setupProxy.js
-config-overrides.js
+dist
+.umi/
+.umirc.ts
+config/
 !.eslintrc.js

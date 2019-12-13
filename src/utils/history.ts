@@ -1,17 +1,14 @@
-import { createBrowserHistory, createHashHistory } from 'history';
-import config from '../config';
-
-const history = config.history === 'browser' ? createBrowserHistory() : createHashHistory();
+import router from 'umi/router';
 
 export const goPage = (url: string, replace = false) => {
   if (replace) {
-    history.replace(url);
+    router.replace(url);
     return;
   }
-  history.push(url);
+  router.push(url);
 };
 
-export const goBack = () => history.goBack();
+export const goBack = () => router.goBack();
 
 export const jumpExternalUrl = (url: string, replace = false) => {
   if (replace) {
@@ -20,5 +17,3 @@ export const jumpExternalUrl = (url: string, replace = false) => {
   }
   window.location.href = url;
 };
-
-export default history;

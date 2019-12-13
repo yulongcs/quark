@@ -1,5 +1,4 @@
 export interface IAppMetaState {
-  title: string;
   route: string;
 }
 

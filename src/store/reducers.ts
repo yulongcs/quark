@@ -1,12 +1,11 @@
 import { AnyAction, combineReducers, Reducer } from 'redux';
 import { produce } from 'immer';
-import { IRootReducer } from 'src/types';
+import { IRootReducer } from '@/types';
 import { IAppMetaState, IAppState } from './types';
 import { SET_APP_META_STATE, APP_REDUCER_NAME } from './constants';
 
 const INITIAL_APP_META_STATE = {
   route: '/',
-  title: 'quark',
 };
 
 const metaStateReducer = (state: IAppMetaState = INITIAL_APP_META_STATE, action: AnyAction) => produce(state, (draft) => {

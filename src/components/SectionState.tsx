@@ -1,7 +1,7 @@
 import React, { CSSProperties, memo } from 'react';
 import styled from 'styled-components/macro';
-import { errorStateImg, emptyStateImg } from 'src/assets';
-import { pxTransform } from 'src/utils';
+import { errorStateImg, emptyStateImg } from '@/assets';
+import { pxTransform } from '@/utils';
 import { StyledCenter } from './StyledComponents';
 
 interface ISectionStateProps {

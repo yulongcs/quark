@@ -1,30 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import { ConfigProvider } from '@vdfor/react-component';
-import { StyledGlobal } from 'src/components';
-import App from 'src/page/App';
-import { configStore, appReducer } from 'src/store';
-import { PRIMARY_COLOR } from 'src/constants';
-import * as serviceWorker from './serviceWorker';
+import store from '@/store';
+import { PRIMARY_COLOR } from '@/constants';
 
-// 防止表单提交导致页面刷新的统一处理
-document.addEventListener('submit', (e) => {
-  e.preventDefault();
-});
+// // 防止表单提交导致页面刷新的统一处理
+// document.addEventListener('submit', (e) => {
+//   e.preventDefault();
+// });
 
-const store = configStore(appReducer);
-
-ReactDOM.render(
+export default ({ children }: PropsWithChildren<any>) => (
   <Provider store={store}>
-    <>
-      <StyledGlobal />
-      <ConfigProvider baseFontSize={16} primaryColor={PRIMARY_COLOR}>
-        <App />
-      </ConfigProvider>
-    </>
-  </Provider>,
-  document.getElementById('root') as HTMLElement,
+    <ConfigProvider baseFontSize={16} primaryColor={PRIMARY_COLOR}>
+      {children}
+    </ConfigProvider>
+  </Provider>
 );
-
-serviceWorker.unregister();

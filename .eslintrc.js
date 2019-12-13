@@ -1,12 +1,22 @@
 module.exports = {
-  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'react-app', 'airbnb'],
+  env: {
+    browser: true,
+    commonjs: true,
+    es6: true,
+    node: true,
+    jest: true,
+  },
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'airbnb', 'airbnb/hooks'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
     },
     useJSXTextNode: true,
     extraFileExtensions: ['tsx'],
+    warnOnUnsupportedTypeScriptVersion: true,
   },
   plugins: ['@typescript-eslint'],
   root: true,
@@ -16,8 +26,18 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': ['error', 'always'],
     '@typescript-eslint/no-explicit-any': ['off'],
     '@typescript-eslint/explicit-function-return-type': ['off'],
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
     'import/no-cycle': ['off'],
-    'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.test.ts', 'src/setupTests.ts'] }],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.test.tsx'] }],
     'import/prefer-default-export': ['off'],
     'jsx-a11y/anchor-is-valid': ['off'],
     'jsx-a11y/click-events-have-key-events': ['off'],
@@ -45,11 +65,10 @@ module.exports = {
     'import/resolver': {
       alias: {
         map: [
-          ['src', './src'],
+          ['@', './src'],
         ],
         extensions: ['.ts', '.tsx', '.json', '.js'],
       },
     },
-    'import/extensions': ['.ts', '.tsx', '.js'],
   },
 };
