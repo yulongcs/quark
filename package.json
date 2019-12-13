@@ -13,7 +13,7 @@
   "homepage": "https://github.com/vdfor/quark#readme",
   "private": true,
   "scripts": {
-    "start": "cross-env PORT=8182 umi dev",
+    "start": "cross-env PORT=8280 umi dev",
     "build": "umi build",
     "test": "umi test",
     "lint:fix": "eslint src --fix --ext .ts,.tsx",

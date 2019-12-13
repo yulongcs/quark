@@ -7,8 +7,8 @@ const getReactAppEnvs = () => {
     REACT_APP_NAME: pkg.name,
     REACT_APP_VERSION: pkg.version,
   };
-  const initEnvs = { ...builtConstants, ...process.env };
-  const envs = {};
+  const initEnvs = { ...builtConstants, ...process.env } as any;
+  const envs = {} as any;
   Object.keys(initEnvs).forEach(key => {
     if (/^REACT_APP_/.test(key)) {
       envs[`process.env.${key}`] = initEnvs[key];
