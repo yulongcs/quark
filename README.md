@@ -8,7 +8,7 @@
 
 > react 种子工程，基于 react + redux + immer + typescript + umi + antd 构建。
 
-@vdfor/quark 面向PC平台，移动平台请移步 [@vdfor/quark-taro](https://github.com/vdfor/quark-taro.git)
+@vdfor/quark 面向WEB（PC/h5）平台，多端平台（h5/微信）请移步 [@vdfor/quark-taro](https://github.com/vdfor/quark-taro.git)
 
 ```bash
 yarn # install dependencies and devDependencies

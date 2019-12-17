@@ -2387,7 +2387,7 @@ ansicolors@~0.3.2:
   resolved "https://registry.npm.taobao.org/ansicolors/download/ansicolors-0.3.2.tgz#665597de86a9ffe3aa9bfbe6cae5c6ea426b4979"
   integrity sha1-ZlWX3oap/+Oqm/vmyuXG6kJrSXk=
 
-antd-mobile@2.x:
+antd-mobile@2.x, antd-mobile@^2.3.1:
   version "2.3.1"
   resolved "https://registry.npm.taobao.org/antd-mobile/download/antd-mobile-2.3.1.tgz#04d8709c198eee27c3c41b903cb2ad77a16028e3"
   integrity sha1-BNhwnBmO7ifDxBuQPLKtd6FgKOM=
