@@ -1,5 +1,9 @@
 // eslint-disable-next-line
 import { IConfig } from 'umi-types';
+import fs from 'fs';
+import path from 'path';
+import { parse as sassParse } from 'sass-variable-parser';
+import routes from './routes';
 import pkg from '../package.json';
 
 // 获取 REACT_APP_开头
@@ -16,6 +20,16 @@ const getReactAppEnvs = () => {
     }
   });
   return envs;
+};
+
+// get antd and antd-mobile theme from src/assets/style/theme.scss
+const getTheme = () => {
+  const initTheme = sassParse(fs.readFileSync(path.join(__dirname, '../src/assets/style/theme.scss')).toString(), { camelCase: false, indented: false });
+  const theme = {};
+  Object.keys(initTheme).forEach((key) => {
+    theme[`@${key}`] = initTheme[key];
+  });
+  return theme;
 };
 
 // ref: https://umijs.org/config/
@@ -65,26 +79,10 @@ const config: IConfig = {
     }],
   ],
   publicPath: './',
-  routes: [
-    {
-      path: '/',
-      exact: true,
-      redirect: '/welcome',
-    },
-    {
-      path: '/welcome',
-      component: './welcome',
-      title: '欢迎',
-    },
-    {
-      path: '/index',
-      component: './index',
-      title: '主页',
-    },
-  ],
+  routes,
   sass: {},
   theme: {
-    '@primary-color': '#1890ff',
+    ...getTheme(),
   },
   treeShaking: true,
   urlLoaderExcludes: [/-icon\.svg(\?v=\d+\.\d+\.\d+)?$/],

@@ -60,6 +60,7 @@
     "node-sass": "^4.13.0",
     "react-test-renderer": "^16.7.0",
     "sass-loader": "^8.0.0",
+    "sass-variable-parser": "^1.2.2",
     "umi-plugin-react": "^1.8.0",
     "umi-types": "^0.3.0"
   },

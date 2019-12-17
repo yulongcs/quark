@@ -37,7 +37,7 @@ module.exports = {
       },
     ],
     'import/no-cycle': ['off'],
-    'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.test.tsx'] }],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.test.tsx', './config/**/*', '.umirc.ts'] }],
     'import/prefer-default-export': ['off'],
     'jsx-a11y/anchor-is-valid': ['off'],
     'jsx-a11y/click-events-have-key-events': ['off'],
