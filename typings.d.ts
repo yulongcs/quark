@@ -3,3 +3,4 @@ declare module '*.scss';
 declare module '*.png';
 declare module '*-icon.svg';
 declare module 'vconsole';
+declare module 'postcss-px-to-viewport';

@@ -3,6 +3,7 @@ import { IConfig } from 'umi-types';
 import fs from 'fs';
 import path from 'path';
 import { parse as sassParse } from 'sass-variable-parser';
+import pxToViewPort from 'postcss-px-to-viewport';
 import routes from './routes';
 import pkg from '../package.json';
 
@@ -46,6 +47,20 @@ const config: IConfig = {
   extraBabelPlugins: [
     ['import', { libraryName: '@vdfor/react-component', libraryDirectory: 'dist/es', camel2DashComponentName: false }, '@vdfor/react-component'],
     ['import', { libraryName: 'lodash', libraryDirectory: '', camel2DashComponentName: false }, 'lodash'],
+  ],
+  extraPostCSSPlugins: [
+    pxToViewPort({
+      viewportWidth: 750,
+      propList: ['*'],
+      unitToConvert: 'px',
+      unitPrecision: 5,
+      viewportUnit: 'vw',
+      fontViewportUnit: 'vw',
+      selectorBlackList: [],
+      minPixelValue: 1,
+      mediaQuery: false,
+      replace: true,
+    }),
   ],
   hash: true,
   history: 'browser',

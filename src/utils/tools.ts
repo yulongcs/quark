@@ -18,4 +18,4 @@ export const getBase64Str = (file: any) => new Promise((resolve) => {
   };
 });
 
-export const pxTransform = (px: number) => pxTransformUtil(px, 16);
+export const pxTransform = (px: number) => pxTransformUtil(px, 32);

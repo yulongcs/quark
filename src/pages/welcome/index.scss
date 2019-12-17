@@ -6,14 +6,14 @@
 }
 
 .tag {
-  font-size: 45px;
+  font-size: 90px;
   color: #000000;
   font-weight: 500;
 }
 
 .link {
-  margin-top: 164px;
-  font-size: 24px;
+  margin-top: 328px;
+  font-size: 48px;
   font-weight: 400;
   cursor: pointer;
   color: #121314;
@@ -34,4 +34,19 @@
 
 .link:hover::after {
   top: 0;
+}
+
+@media (min-width:768px) {
+  .tag {
+    font-size: 45px;
+  }
+
+  .link {
+    margin-top: 164px;
+    font-size: 24px;
+    font-weight: 400;
+    cursor: pointer;
+    color: #121314;
+    position: relative;
+  }
 }

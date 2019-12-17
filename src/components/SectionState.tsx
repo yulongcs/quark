@@ -24,7 +24,7 @@ const defaultValues = {
 };
 
 const ImgWrapView = styled(StyledCenter)`
-  max-width: ${pxTransform(120)};
+  max-width: ${pxTransform(240)};
 `;
 
 const ImageView = styled.img`
@@ -34,7 +34,7 @@ const ImageView = styled.img`
 
 const TextView = styled.p`
   color: #9b9b9b;
-  font-size: ${pxTransform(14)};
+  font-size: ${pxTransform(28)};
 `;
 
 export default memo(({

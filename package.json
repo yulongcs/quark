@@ -58,6 +58,7 @@
     "husky": "^0.14.3",
     "lint-staged": "^7.2.2",
     "node-sass": "^4.13.0",
+    "postcss-px-to-viewport": "^1.1.1",
     "react-test-renderer": "^16.7.0",
     "sass-loader": "^8.0.0",
     "sass-variable-parser": "^1.2.2",
