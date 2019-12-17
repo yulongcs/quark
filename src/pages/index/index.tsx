@@ -1,5 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { loadUsersApi } from './api';
 
-export default () => (
-  <h1>Hello, world</h1>
-);
+export default () => {
+  useEffect(() => {
+    const loadUsers = async () => {
+      await loadUsersApi();
+    };
+    loadUsers();
+  }, []);
+  return (
+    <h1>Hello, world</h1>
+  );
+};

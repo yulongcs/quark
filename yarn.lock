@@ -1976,10 +1976,10 @@
   dependencies:
     "@babel/runtime" "^7.7.6"
 
-"@vdfor/util@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.npm.taobao.org/@vdfor/util/download/@vdfor/util-0.2.0.tgz#3dfbaafcfaa75b82a9194838706c26dc26ebc000"
-  integrity sha1-Pfuq/PqnW4KpGUg4cGwm3CbrwAA=
+"@vdfor/util@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.npm.taobao.org/@vdfor/util/download/@vdfor/util-0.3.0.tgz#a8eefaff916ddc9f47916c9bda8ccd077fafb7f4"
+  integrity sha1-qO76/5Ft3J9HkWyb2ozNB3+vt/Q=
 
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"

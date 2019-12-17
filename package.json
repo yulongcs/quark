@@ -13,14 +13,16 @@
   "homepage": "https://github.com/vdfor/quark#readme",
   "private": true,
   "scripts": {
-    "start": "cross-env PORT=8280 umi dev",
-    "build": "umi build",
+    "start:dev": "cross-env PORT=8280 REACT_APP_ENV=dev umi dev",
+    "start:test": "cross-env PORT=8280 REACT_APP_ENV=test umi dev",
+    "build:test": "cross-env REACT_APP_ENV=test umi build",
+    "build:prod": "cross-env REACT_APP_ENV=prod umi build",
     "test": "umi test",
     "lint:fix": "eslint src --fix --ext .ts,.tsx"
   },
   "dependencies": {
     "@vdfor/react-component": "^0.8.0",
-    "@vdfor/util": "^0.2.0",
+    "@vdfor/util": "^0.3.0",
     "antd": "^3.26.2",
     "antd-mobile": "^2.3.1",
     "immer": "^5.0.1",
