@@ -6,9 +6,8 @@ export default () => {
     const loadUsers = async () => {
       try {
         await loadUsersApi();
-        console.log(111);
       } catch (error) {
-        console.log(error, error.status);
+        //
       }
     };
     loadUsers();

@@ -1,4 +1,4 @@
-import request, { RequestOptionsInit, RequestError, ResponseError } from 'umi-request';
+import request, { RequestOptionsInit, ResponseError } from 'umi-request';
 import { notification } from 'antd';
 
 interface IRequestParams extends RequestOptionsInit {
@@ -26,7 +26,9 @@ const codeMessage = { // copy from https://github.com/ant-design/ant-design-pro/
 
 /**
  * 错误处理
- * error instanceof RequestError - 请求超时
+ * 若需要判断是否为请求超时，参考 https://github.com/umijs/umi-request/issues/14
+ * @params error ResponseError
+ * @params showErrorNotification boolean 是否弹出错误通知
  */
 const errorHandler = ({ error, showErrorNotification = true }: {
   error: ResponseError<any>;
@@ -35,7 +37,7 @@ const errorHandler = ({ error, showErrorNotification = true }: {
   if (showErrorNotification) {
     const {
       response: {
-        status = error instanceof RequestError ? 1001 : 0, statusText = '未知错误', url = '',
+        status = '', statusText = '未知错误', url = '',
       } = {},
       message = '',
     } = error;
