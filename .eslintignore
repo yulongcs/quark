@@ -1,6 +1,4 @@
 node_modules
 dist
 .umi/
-.umirc.ts
-config/
 !.eslintrc.js

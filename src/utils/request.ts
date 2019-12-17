@@ -1,7 +1,7 @@
 import { extend, RequestOptionsInit } from 'umi-request';
 import { notification } from 'antd';
 
-const codeMessage = { // copy from https://github.com/ant-design/ant-design-pro/blob/master/src/utils/request.js
+const codeMessage = { // copy from https://github.com/ant-design/ant-design-pro/blob/master/src/utils/request.ts
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
   202: '一个请求已经进入后台排队（异步任务）。',
@@ -22,10 +22,10 @@ const codeMessage = { // copy from https://github.com/ant-design/ant-design-pro/
 const errorHandler = (error: any) => {
   const {
     response: {
-      status = 0, statusText = '未知错误', message = '', url = '',
+      status = 0, statusText = '未知错误', url = '',
     } = {},
   } = error;
-  const errortext = message || (codeMessage as any)[status] || statusText;
+  const errortext = (codeMessage as any)[status] || statusText;
   notification.error({
     message: `请求错误 ${status}: ${url}`,
     description: errortext,
@@ -33,13 +33,13 @@ const errorHandler = (error: any) => {
 };
 
 const request = extend({
+  timeout: 10000, // 写操作慎用
   errorHandler, // 默认错误处理
   // credentials: 'include', // 默认请求是否带上cookie
 });
 
 export default (url: string, options: RequestOptionsInit) => {
   const newOptions = {
-    timeout: 10000, // 写操作慎用
     ...options,
     headers: {
       // Authorization: `Bearer ${token || ''}`,

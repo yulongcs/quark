@@ -4,22 +4,31 @@
     "baseUrl": ".",
     "downlevelIteration": true,
     "esModuleInterop": true,
+    "experimentalDecorators": true,
     "importHelpers": true,
     "jsx": "react",
     "module": "esnext",
     "moduleResolution": "node",
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "resolveJsonModule": true,
     "paths": {
       "@/*": ["src/*"]
     },
     "sourceMap": true,
     "strict": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
     "target": "esnext",
   },
   "include": [
     "src/**/*",
-    "config/**/*",
     "typings.d.ts",
+    "config/**/*",
     ".umirc.ts"
   ]
 }

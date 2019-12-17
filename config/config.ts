@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { IConfig } from 'umi-types';
 import pkg from '../package.json';
 
@@ -9,7 +10,7 @@ const getReactAppEnvs = () => {
   };
   const initEnvs = { ...builtConstants, ...process.env } as any;
   const envs = {} as any;
-  Object.keys(initEnvs).forEach(key => {
+  Object.keys(initEnvs).forEach((key) => {
     if (/^REACT_APP_/.test(key)) {
       envs[`process.env.${key}`] = initEnvs[key];
     }
@@ -19,6 +20,14 @@ const getReactAppEnvs = () => {
 
 // ref: https://umijs.org/config/
 const config: IConfig = {
+  chainWebpack(webpackConfig) {
+    // 以 -icon.svg 结尾的处理成 react component
+    webpackConfig.module
+      .rule('svg')
+      .test(/-icon\.svg(\?v=\d+\.\d+\.\d+)?$/)
+      .use('babel-loader')
+      .loader(require.resolve('@svgr/webpack'));
+  },
   define: { ...getReactAppEnvs() },
   extraBabelPlugins: [
     ['import', { libraryName: '@vdfor/react-component', libraryDirectory: 'dist/es', camel2DashComponentName: false }, '@vdfor/react-component'],
@@ -45,7 +54,7 @@ const config: IConfig = {
         workboxPluginMode: 'GenerateSW',
         workboxOptions: {
           importWorkboxFrom: 'local',
-        }
+        },
       },
       routes: {
         exclude: [
@@ -60,23 +69,25 @@ const config: IConfig = {
     {
       path: '/',
       exact: true,
-      redirect: '/welcome'
+      redirect: '/welcome',
     },
     {
       path: '/welcome',
       component: './welcome',
-      title: '欢迎'
+      title: '欢迎',
     },
     {
       path: '/index',
       component: './index',
-      title: '主页'
-    }
+      title: '主页',
+    },
   ],
+  sass: {},
   theme: {
     '@primary-color': '#1890ff',
   },
-  treeShaking: true
-}
+  treeShaking: true,
+  urlLoaderExcludes: [/-icon\.svg(\?v=\d+\.\d+\.\d+)?$/],
+};
 
 export default config;
