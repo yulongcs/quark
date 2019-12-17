@@ -4,7 +4,12 @@ import { loadUsersApi } from './api';
 export default () => {
   useEffect(() => {
     const loadUsers = async () => {
-      await loadUsersApi();
+      try {
+        await loadUsersApi();
+        console.log(111);
+      } catch (error) {
+        console.log(error, error.status);
+      }
     };
     loadUsers();
   }, []);

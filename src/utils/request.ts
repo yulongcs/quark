@@ -1,5 +1,9 @@
-import { extend, RequestOptionsInit } from 'umi-request';
+import request, { RequestOptionsInit, RequestError, ResponseError } from 'umi-request';
 import { notification } from 'antd';
+
+interface IRequestParams extends RequestOptionsInit {
+  showErrorNotification?: boolean;
+}
 
 const codeMessage = { // copy from https://github.com/ant-design/ant-design-pro/blob/master/src/utils/request.ts
   200: '服务器成功返回请求的数据。',
@@ -17,34 +21,62 @@ const codeMessage = { // copy from https://github.com/ant-design/ant-design-pro/
   502: '网关错误。',
   503: '服务不可用，服务器暂时过载或维护。',
   504: '网关超时。',
+  1001: '请求超时', // 自定义错误 - 请求超时
 };
 
-const errorHandler = (error: any) => {
-  const {
-    response: {
-      status = 0, statusText = '未知错误', url = '',
-    } = {},
-  } = error;
-  const errortext = (codeMessage as any)[status] || statusText;
-  notification.error({
-    message: `请求错误 ${status}: ${url}`,
-    description: errortext,
-  });
+/**
+ * 错误处理
+ * error instanceof RequestError - 请求超时
+ */
+const errorHandler = ({ error, showErrorNotification = true }: {
+  error: ResponseError<any>;
+  showErrorNotification?: boolean;
+}) => {
+  if (showErrorNotification) {
+    const {
+      response: {
+        status = error instanceof RequestError ? 1001 : 0, statusText = '未知错误', url = '',
+      } = {},
+      message = '',
+    } = error;
+    const errortext = message || (codeMessage as any)[status] || statusText;
+    notification.error({
+      message: `请求错误 ${status}: ${url}`,
+      description: errortext,
+    });
+  }
+  throw error;
 };
 
-const request = extend({
-  timeout: 10000, // 写操作慎用
-  errorHandler, // 默认错误处理
-  // credentials: 'include', // 默认请求是否带上cookie
-});
-
-export default (url: string, options: RequestOptionsInit) => {
-  const newOptions = {
+// request拦截器
+request.interceptors.request.use((url, options: IRequestParams) => ({
+  url,
+  options: {
+    timeout: 10000, // 写操作慎用
+    errorHandler: (error) => errorHandler({
+      error,
+      showErrorNotification: options.showErrorNotification,
+    }),
     ...options,
     headers: {
       // Authorization: `Bearer ${token || ''}`,
       ...options.headers,
     },
-  };
-  return request(url, newOptions);
-};
+  },
+}));
+
+// // response拦截器
+// request.interceptors.response.use((response) => {
+//   const { status = 0, statusText = '未知错误', url = '' } = response;
+//   console.log('response', response);
+//   if (!(status >= 200 && status < 400)) {
+//     const errortext = (codeMessage as any)[status] || statusText;
+//     notification.error({
+//       message: `请求错误 ${status}: ${url}`,
+//       description: errortext,
+//     });
+//   }
+//   return response;
+// });
+
+export default (url: string, options: IRequestParams) => request(url, options);
