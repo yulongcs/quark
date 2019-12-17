@@ -16,8 +16,7 @@
     "start": "cross-env PORT=8280 umi dev",
     "build": "umi build",
     "test": "umi test",
-    "lint:fix": "eslint src --fix --ext .ts,.tsx",
-    "precommit": "lint-staged"
+    "lint:fix": "eslint src --fix --ext .ts,.tsx"
   },
   "dependencies": {
     "@vdfor/react-component": "^0.8.0",
@@ -56,8 +55,8 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
-    "husky": "^0.14.3",
-    "lint-staged": "^7.2.2",
+    "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
     "node-sass": "^4.13.0",
     "postcss-px-to-viewport": "^1.1.1",
     "react-test-renderer": "^16.7.0",
@@ -71,6 +70,11 @@
       "eslint --fix",
       "git add"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "babelMacros": {
     "styledComponents": {
