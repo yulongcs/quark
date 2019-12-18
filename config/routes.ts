@@ -17,6 +17,11 @@ const routes: IRoute[] = [
     component: './index',
     title: '主页',
   },
+  {
+    path: '/demo-list',
+    component: './demo/list',
+    title: '列表',
+  },
 ];
 
 export default routes;

@@ -60,6 +60,7 @@ const config: IConfig = {
       minPixelValue: 1,
       mediaQuery: false,
       replace: true,
+      exclude: [/node_modules/],
     }),
   ],
   hash: true,
@@ -70,7 +71,7 @@ const config: IConfig = {
       antd: true,
       dll: true,
       dva: false,
-      dynamicImport: { webpackChunkName: true },
+      dynamicImport: { webpackChunkName: true, loadingComponent: './components/PageLoading' },
       fastClick: true,
       locale: {
         enable: true,

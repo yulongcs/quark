@@ -15,9 +15,17 @@ body, p {
   padding: 0;
 }
 
+body {
+  background-color: #ffffff !important;
+  font-size: 28px !important;
+}
+
 @media screen and (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 16px !important;
+  }
+  body {
+    font-size: 14px !important;
   }
 }
 
@@ -26,4 +34,14 @@ body, p {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.v-styled-transparent-mask {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 1024;
+  pointer-events: none;
 }

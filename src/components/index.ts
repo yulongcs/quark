@@ -1,2 +1,2 @@
 export * from './StyledComponents';
-export { default as SectionState } from './SectionState';
+export { default as SectionStateComponent } from './SectionState';
