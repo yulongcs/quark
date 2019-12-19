@@ -1,4 +1,5 @@
 import request, { RequestOptionsInit } from 'umi-request';
+import AbortController from 'abort-controller';
 import { cancelHttpCode } from '@/constants';
 import {
   setRequestTaskToGlobalData, removeRequestTaskFromGlobalData, handleRequestError,
@@ -8,8 +9,6 @@ interface IRequestParams extends RequestOptionsInit {
   showErrorNotification?: boolean;
   requestTaskName?: string;
 }
-
-const { CancelToken, isCancel } = request;
 
 const codeMessage = { // copy from https://github.com/ant-design/ant-design-pro/blob/master/src/utils/request.ts
   200: '服务器成功返回请求的数据。',
@@ -31,12 +30,12 @@ const codeMessage = { // copy from https://github.com/ant-design/ant-design-pro/
 
 export default (url: string, options: IRequestParams) => new Promise((resolve, reject) => {
   const taskName = options.requestTaskName || url;
-
+  const controller = new AbortController();
+  const { signal } = controller;
+  setRequestTaskToGlobalData(taskName, controller);
   const newOptions = {
     timeout: 10000,
-    cancelToken: new CancelToken(((c) => {
-      setRequestTaskToGlobalData(taskName, c);
-    })),
+    signal,
     ...options,
     headers: {
       // Authorization: `Bearer ${token || ''}`,
@@ -51,7 +50,7 @@ export default (url: string, options: IRequestParams) => new Promise((resolve, r
     })
     .catch((err) => {
       removeRequestTaskFromGlobalData(taskName);
-      const isCancelError = isCancel(err);
+      const isCancelError = err.name === 'AbortError';
       const showErrorNotification = !!options.showErrorNotification && !isCancelError;
       const {
         response: {

@@ -29,8 +29,8 @@ export const removeRequestTaskFromGlobalData = (key: string) => {
 };
 
 export const requestAbort = (taskName: string) => {
-  const cancel = getRequestTaskFromGlobalData(taskName);
-  if (cancel) {
-    cancel('cancel request');
+  const controller = getRequestTaskFromGlobalData(taskName);
+  if (controller) {
+    controller.abort();
   }
 };
