@@ -13,11 +13,9 @@
   "homepage": "https://github.com/vdfor/quark#readme",
   "private": true,
   "scripts": {
-    "start:dev": "cross-env PORT=8280 REACT_APP_ENV=dev umi dev",
-    "start:test": "cross-env PORT=8280 REACT_APP_ENV=test umi dev",
-    "build:test": "cross-env REACT_APP_ENV=test umi build",
-    "build:prod": "cross-env REACT_APP_ENV=prod umi build",
-    "start-server:test": "yarn run build:test && nodemon server.js",
+    "start": "cross-env PORT=8280 REACT_APP_SSR=0 umi dev",
+    "build": "cross-env REACT_APP_SSR=0 umi build",
+    "start:ssr": "cross-env REACT_APP_SSR=1 umi build && nodemon server.js",
     "test": "umi test",
     "lint:fix": "eslint src --fix --ext .ts,.tsx"
   },

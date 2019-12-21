@@ -33,6 +33,8 @@ const getTheme = () => {
   return theme;
 };
 
+const isSSR = process.env.REACT_APP_SSR === '1';
+
 // ref: https://umijs.org/config/
 const config: IConfig = {
   chainWebpack(webpackConfig) {
@@ -84,12 +86,12 @@ const config: IConfig = {
        * pwa与ssr暂不能共存
        * https://github.com/umijs/umi/issues/3815
        */
-      // pwa: {
-      //   workboxPluginMode: 'GenerateSW',
-      //   workboxOptions: {
-      //     importWorkboxFrom: 'local',
-      //   },
-      // },
+      pwa: !isSSR && {
+        workboxPluginMode: 'GenerateSW',
+        workboxOptions: {
+          importWorkboxFrom: 'local',
+        },
+      },
       routes: {
         exclude: [
           /components\//,
@@ -101,7 +103,7 @@ const config: IConfig = {
   publicPath: './',
   routes,
   sass: {},
-  ssr: true,
+  ssr: isSSR,
   theme: {
     ...getTheme(),
   },
