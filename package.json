@@ -12,7 +12,6 @@
   },
   "homepage": "https://github.com/vdfor/quark#readme",
   "private": true,
-  "types": "module",
   "scripts": {
     "start:dev": "cross-env PORT=8280 REACT_APP_ENV=dev umi dev",
     "start:test": "cross-env PORT=8280 REACT_APP_ENV=test umi dev",
