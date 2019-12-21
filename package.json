@@ -12,11 +12,13 @@
   },
   "homepage": "https://github.com/vdfor/quark#readme",
   "private": true,
+  "types": "module",
   "scripts": {
     "start:dev": "cross-env PORT=8280 REACT_APP_ENV=dev umi dev",
     "start:test": "cross-env PORT=8280 REACT_APP_ENV=test umi dev",
     "build:test": "cross-env REACT_APP_ENV=test umi build",
     "build:prod": "cross-env REACT_APP_ENV=prod umi build",
+    "start-server:test": "yarn run build:test && nodemon server.js",
     "test": "umi test",
     "lint:fix": "eslint src --fix --ext .ts,.tsx"
   },
@@ -26,6 +28,9 @@
     "abort-controller": "^3.0.0",
     "antd": "^3.26.2",
     "antd-mobile": "^2.3.1",
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "helmet": "^3.21.2",
     "immer": "^5.0.1",
     "lodash": "^4.17.15",
     "react": "^16.8.6",
@@ -34,10 +39,12 @@
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "regenerator-runtime": "^0.13.3",
     "styled-components": "^4.4.1",
     "umi": "^2.12.6",
     "umi-plugin-locale": "^2.11.3",
-    "umi-request": "^1.2.15"
+    "umi-request": "^1.2.15",
+    "umi-server": "^1.1.8"
   },
   "devDependencies": {
     "@svgr/webpack": "^4.3.3",
@@ -61,6 +68,7 @@
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
     "node-sass": "^4.13.0",
+    "nodemon": "^2.0.2",
     "postcss-px-to-viewport": "^1.1.1",
     "react-test-renderer": "^16.7.0",
     "sass-loader": "^8.0.0",

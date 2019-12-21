@@ -45,7 +45,7 @@ const config: IConfig = {
   },
   define: { ...getReactAppEnvs() },
   extraBabelPlugins: [
-    ['import', { libraryName: '@vdfor/react-component', libraryDirectory: 'dist/es', camel2DashComponentName: false }, '@vdfor/react-component'],
+    ['import', { libraryName: '@vdfor/react-component', libraryDirectory: 'dist/lib', camel2DashComponentName: false }, '@vdfor/react-component'],
     ['import', { libraryName: 'lodash', libraryDirectory: '', camel2DashComponentName: false }, 'lodash'],
   ],
   extraPostCSSPlugins: [
@@ -72,20 +72,24 @@ const config: IConfig = {
       dll: true,
       dva: false,
       dynamicImport: { webpackChunkName: true, loadingComponent: './components/PageLoading' },
-      fastClick: true,
+      // fastClick: true,
       locale: {
-        enable: true,
+        enable: false,
         default: 'en-US',
       },
       manifest: {
         basePath: '/',
       },
-      pwa: {
-        workboxPluginMode: 'GenerateSW',
-        workboxOptions: {
-          importWorkboxFrom: 'local',
-        },
-      },
+      /**
+       * pwa与ssr暂不能共存
+       * https://github.com/umijs/umi/issues/3815
+       */
+      // pwa: {
+      //   workboxPluginMode: 'GenerateSW',
+      //   workboxOptions: {
+      //     importWorkboxFrom: 'local',
+      //   },
+      // },
       routes: {
         exclude: [
           /components\//,
@@ -97,6 +101,7 @@ const config: IConfig = {
   publicPath: './',
   routes,
   sass: {},
+  ssr: true,
   theme: {
     ...getTheme(),
   },
