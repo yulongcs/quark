@@ -15,7 +15,8 @@
   "scripts": {
     "start": "cross-env PORT=8280 REACT_APP_SSR=0 umi dev",
     "build": "cross-env REACT_APP_SSR=0 umi build",
-    "start:ssr": "cross-env REACT_APP_SSR=1 umi build && nodemon server.js",
+    "build:ssr": "cross-env REACT_APP_SSR=1 umi build",
+    "start:server": "nodemon server.js",
     "test": "umi test",
     "lint:fix": "eslint src --fix --ext .ts,.tsx"
   },

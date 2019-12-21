@@ -65,7 +65,7 @@ const config: IConfig = {
       exclude: [/node_modules/],
     }),
   ],
-  hash: true,
+  hash: process.env.NODE_ENV === 'production',
   history: 'browser',
   plugins: [
     // ref: https://umijs.org/plugin/umi-plugin-react.html
