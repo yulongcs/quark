@@ -6,7 +6,8 @@ install:
   - yarn
 
 script:
-  - yarn run build:prod
+  - yarn run build
+  - yarn run build:ssr
 
 sudo: false
 
