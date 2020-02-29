@@ -8,7 +8,7 @@ import styles from './index.scss';
 
 const getTagText = (): string => TAGS[getRandomRound(0, TAGS.length - 1)];
 
-const goIndexPage = () => goPage('/index');
+const goIndexPage = () => goPage('/home');
 
 const Welcome: FC = () => {
   const timer: any = useRef(null);

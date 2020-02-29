@@ -63,7 +63,7 @@ const Index = () => {
 
   return uiStatus === SectionStateEnum.LOADING ? <Spin /> : (
     <div className={styles.wrap}>
-      <Tabs initialPage={currentTab} onChange={onTabChange} tabs={tabList}>
+      <Tabs initialPage={currentTab} onChange={onTabChange} tabs={tabList} swipeable={false}>
         {tabList.map((tab) => (
           <div key={tab.key}>
             {currentTab === tab.key && (

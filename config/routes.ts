@@ -13,13 +13,13 @@ const routes: IRoute[] = [
     title: '欢迎',
   },
   {
-    path: '/index',
-    component: './index',
+    path: '/home',
+    component: './home',
     title: '主页',
   },
   {
-    path: '/demo-list',
-    component: './demo/list',
+    path: '/list-demo',
+    component: './list-demo',
     title: '列表',
   },
 ];
