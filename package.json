@@ -17,8 +17,7 @@
     "build": "cross-env REACT_APP_SSR=0 umi build",
     "build:ssr": "cross-env REACT_APP_SSR=1 umi build",
     "start:server": "nodemon server.js",
-    "test": "umi test",
-    "lint:fix": "eslint src --fix --ext .ts,.tsx"
+    "test": "umi test"
   },
   "dependencies": {
     "@vdfor/react-component": "^0.8.0",

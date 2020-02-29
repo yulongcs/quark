@@ -11,8 +11,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'airbnb',
     'airbnb/hooks',
-    'prettier',
-    'prettier/react'
+    'plugin:prettier/recommended'
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -25,7 +24,7 @@ module.exports = {
     extraFileExtensions: ['tsx'],
     warnOnUnsupportedTypeScriptVersion: true
   },
-  plugins: ['@typescript-eslint', 'prettier'],
+  plugins: ['@typescript-eslint'],
   root: true,
   rules: {
     '@typescript-eslint/ban-ts-ignore': ['off'],
@@ -68,7 +67,6 @@ module.exports = {
         patterns: ['!styled-components/macro']
       }
     ],
-    'prettier/prettier': ['error'],
     'react/jsx-filename-extension': ['error', { extensions: ['ts', 'tsx'] }],
     'react/jsx-props-no-spreading': ['off']
   },
