@@ -1,5 +1,5 @@
-import { APP_REDUCER_NAME } from '@/store/constants';
-import { IAppState } from '@/store/types';
+import { APP_REDUCER_NAME } from '@/stores/constants';
+import { IAppState } from '@/stores/types';
 import { LIST_DEMO_CONSTANTS, IListDemoPageState } from '@/pages';
 
 export interface IRootReducer {

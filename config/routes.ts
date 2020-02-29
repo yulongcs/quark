@@ -8,19 +8,25 @@ const routes: IRoute[] = [
     redirect: '/welcome',
   },
   {
+    path: '/mobile',
+    component: '../layouts/index',
+    routes: [
+      {
+        path: '/mobile/list-demo',
+        component: './ListDemo',
+        title: '列表',
+      },
+    ],
+  },
+  {
     path: '/welcome',
-    component: './welcome',
+    component: './Welcome',
     title: '欢迎',
   },
   {
     path: '/home',
-    component: './home',
+    component: './Home',
     title: '主页',
-  },
-  {
-    path: '/list-demo',
-    component: './list-demo',
-    title: '列表',
   },
 ];
 

@@ -42,7 +42,8 @@
     "umi": "^2.12.6",
     "umi-plugin-locale": "^2.11.3",
     "umi-request": "^1.2.15",
-    "umi-server": "^1.1.8"
+    "umi-server": "^1.1.8",
+    "vconsole": "^3.3.4"
   },
   "devDependencies": {
     "@svgr/webpack": "^4.3.3",
