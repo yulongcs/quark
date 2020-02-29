@@ -1,15 +1,11 @@
-import React, {
-  useEffect, useState,
-} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Tabs, ListView, PullToRefresh } from 'antd-mobile';
 import { LoadActionEnum } from '@vdfor/util';
 import { Spin } from '@vdfor/react-component';
-import {
-  IRootReducer,
-} from '@/types';
+import { IRootReducer } from '@/types';
 import { MobileWrapper, ListWrapper } from '@/components';
-import { requestAbort } from '@/utils';
+import { requestAbort, pxTransform } from '@/utils';
 import { PAGE_REDUCER_NAME, LOAD_LIST_REQUEST_TASK_KEY } from './constants';
 import { initAction, loadListAction } from './actions';
 import styles from './index.scss';
@@ -31,7 +27,11 @@ const Index = () => {
   const {
     uiState: { status: uiStatus },
     listState: {
-      data, hasMore, status: listStatus, loadMoreLoading, refreshLoading,
+      data,
+      hasMore,
+      status: listStatus,
+      loadMoreLoading,
+      refreshLoading,
     },
   } = useSelector((state: IRootReducer) => state[PAGE_REDUCER_NAME]);
   const dispatch = useDispatch();
@@ -46,17 +46,24 @@ const Index = () => {
     }
     requestAbort(LOAD_LIST_REQUEST_TASK_KEY);
     setCurrentTab(key);
-    dispatch(loadListAction(LoadActionEnum.RESET, (key === '2' && 'error') || (key === '3' ? 'empty' : '')));
+    dispatch(
+      loadListAction(
+        LoadActionEnum.RESET,
+        (key === '2' && 'error') || (key === '3' ? 'empty' : ''),
+      ),
+    );
   };
 
-  const onEndReached = () => { // 触底加载更多
+  const onEndReached = () => {
+    // 触底加载更多
     if (!hasMore) {
       return;
     }
     dispatch(loadListAction(LoadActionEnum.LOADMORE));
   };
 
-  const onPullRefresh = async () => { // 下拉刷新 - 下拉刷新时整个页面处于不可操作状态
+  const onPullRefresh = async () => {
+    // 下拉刷新 - 下拉刷新时整个页面处于不可操作状态
     await dispatch(loadListAction(LoadActionEnum.REFRESH));
     // stopPullDownRefresh();
   };
@@ -64,11 +71,19 @@ const Index = () => {
   return (
     <MobileWrapper uiStatus={uiStatus}>
       <div className={styles.wrap}>
-        <Tabs initialPage={currentTab} onChange={onTabChange} tabs={tabList} swipeable={false}>
+        <Tabs
+          initialPage={currentTab}
+          onChange={onTabChange}
+          tabs={tabList}
+          swipeable={false}
+        >
           {tabList.map((tab) => (
             <div key={tab.key}>
               {currentTab === tab.key && (
-                <ListWrapper listStatus={listStatus}>
+                <ListWrapper
+                  style={{ height: `calc(100vh - ${pxTransform(90)})` }}
+                  uiStatus={listStatus}
+                >
                   <ListView
                     useBodyScroll
                     dataSource={dataSource.cloneWithRows(data)}
@@ -76,16 +91,34 @@ const Index = () => {
                     className={styles.list}
                     renderRow={(item) => (
                       <div key={item.id} className={styles.listItem}>
-                        <div className={`v-styled-center ${styles.listItemImgWrap}`}>
-                          <img alt="avatar" className={styles.listItemImg} src={item.imgUrl} />
+                        <div
+                          className={`v-styled-center ${styles.listItemImgWrap}`}
+                        >
+                          <img
+                            alt="avatar"
+                            className={styles.listItemImg}
+                            src={item.imgUrl}
+                          />
                         </div>
                         <div className={styles.listItemContent}>
-                          <div className={styles.listItemContentTitle}>{item.title}</div>
-                          <div className={`v-styled-line-clamp ${styles.listItemContentText}`}>{item.text}</div>
+                          <div className={styles.listItemContentTitle}>
+                            {item.title}
+                          </div>
+                          <div
+                            className={`v-styled-line-clamp ${styles.listItemContentText}`}
+                          >
+                            {item.text}
+                          </div>
                         </div>
                       </div>
                     )}
-                    renderFooter={() => (loadMoreLoading ? <div className={styles.listLoadingWrap}><Spin /></div> : <></>)}
+                    renderFooter={() => (loadMoreLoading ? (
+                      <div className={styles.listLoadingWrap}>
+                        <Spin />
+                      </div>
+                    ) : (
+                      <></>
+                    ))}
                     pullToRefresh={(
                       <PullToRefresh
                         getScrollContainer={undefined as any}
