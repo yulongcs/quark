@@ -67,25 +67,19 @@
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
     "husky": "^3.1.0",
-    "lint-staged": "^9.5.0",
     "node-sass": "^4.13.0",
     "nodemon": "^2.0.2",
     "postcss-px-to-viewport": "^1.1.1",
+    "pretty-quick": "^2.0.1",
     "react-test-renderer": "^16.7.0",
     "sass-loader": "^8.0.0",
     "sass-variable-parser": "^1.2.2",
     "umi-plugin-react": "^1.8.0",
     "umi-types": "^0.3.0"
   },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "git add"
-    ]
-  },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "pretty-quick --staged"
     }
   },
   "babelMacros": {
