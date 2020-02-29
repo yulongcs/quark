@@ -8,8 +8,6 @@ vconsoleInit();
 
 export default ({ children }: PropsWithChildren<any>) => (
   <Provider store={store}>
-    <ConfigProvider baseFontSize={16}>
-      {children}
-    </ConfigProvider>
+    <ConfigProvider baseFontSize={16}>{children}</ConfigProvider>
   </Provider>
 );

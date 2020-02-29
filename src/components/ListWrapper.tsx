@@ -20,17 +20,15 @@ const SectionStateWrapper = styled(StyledCenter)`
 export default ({
   uiStatus = SectionStateEnum.LOADING,
   style = {},
-  children,
+  children
 }: IListWrapperProps) => (
   <WrapperView style={style}>
-    {(uiStatus === SectionStateEnum.LOADING && <SkeletonList />)
-      || (uiStatus === SectionStateEnum.CONTENT ? (
+    {(uiStatus === SectionStateEnum.LOADING && <SkeletonList />) ||
+      (uiStatus === SectionStateEnum.CONTENT ? (
         children
       ) : (
         <SectionStateWrapper>
-          <SectionStateComponent
-            type={uiStatus === SectionStateEnum.ERROR ? 'error' : 'empty'}
-          />
+          <SectionStateComponent type={uiStatus === SectionStateEnum.ERROR ? 'error' : 'empty'} />
         </SectionStateWrapper>
       ))}
   </WrapperView>

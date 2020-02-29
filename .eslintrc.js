@@ -4,21 +4,28 @@ module.exports = {
     commonjs: true,
     es6: true,
     node: true,
-    jest: true,
+    jest: true
   },
-  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'airbnb', 'airbnb/hooks'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'airbnb',
+    'airbnb/hooks',
+    'prettier',
+    'prettier/react'
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
     ecmaFeatures: {
-      jsx: true,
+      jsx: true
     },
     useJSXTextNode: true,
     extraFileExtensions: ['tsx'],
-    warnOnUnsupportedTypeScriptVersion: true,
+    warnOnUnsupportedTypeScriptVersion: true
   },
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'prettier'],
   root: true,
   rules: {
     '@typescript-eslint/ban-ts-ignore': ['off'],
@@ -33,11 +40,14 @@ module.exports = {
         js: 'never',
         jsx: 'never',
         ts: 'never',
-        tsx: 'never',
-      },
+        tsx: 'never'
+      }
     ],
     'import/no-cycle': ['off'],
-    'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.test.tsx', './config/**/*', '.umirc.ts'] }],
+    'import/no-extraneous-dependencies': [
+      'error',
+      { devDependencies: ['**/*.test.tsx', './config/**/*', '.umirc.ts'] }
+    ],
     'import/prefer-default-export': ['off'],
     'jsx-a11y/anchor-is-valid': ['off'],
     'jsx-a11y/click-events-have-key-events': ['off'],
@@ -49,26 +59,25 @@ module.exports = {
     'no-restricted-imports': [
       'error',
       {
-        paths: [{
-          name: 'styled-components',
-          message: 'Please import from styled-components/macro.',
-        }],
-        patterns: [
-          '!styled-components/macro',
+        paths: [
+          {
+            name: 'styled-components',
+            message: 'Please import from styled-components/macro.'
+          }
         ],
-      },
+        patterns: ['!styled-components/macro']
+      }
     ],
+    'prettier/prettier': ['error'],
     'react/jsx-filename-extension': ['error', { extensions: ['ts', 'tsx'] }],
-    'react/jsx-props-no-spreading': ['off'],
+    'react/jsx-props-no-spreading': ['off']
   },
   settings: {
     'import/resolver': {
       alias: {
-        map: [
-          ['@', './src'],
-        ],
-        extensions: ['.ts', '.tsx', '.json', '.js'],
-      },
-    },
-  },
+        map: [['@', './src']],
+        extensions: ['.ts', '.tsx', '.json', '.js']
+      }
+    }
+  }
 };

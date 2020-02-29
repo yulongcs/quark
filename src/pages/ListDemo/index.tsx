@@ -14,11 +14,11 @@ const tabList = [
   { title: '全部', key: '0' },
   { title: '分类', key: '1' },
   { title: '错误', key: '2' },
-  { title: '无数据', key: '3' },
+  { title: '无数据', key: '3' }
 ];
 
 const dataSource = new ListView.DataSource({
-  rowHasChanged: (row1: any, row2: any) => row1.id !== row2.id,
+  rowHasChanged: (row1: any, row2: any) => row1.id !== row2.id
 });
 
 const Index = () => {
@@ -26,13 +26,7 @@ const Index = () => {
 
   const {
     uiState: { status: uiStatus },
-    listState: {
-      data,
-      hasMore,
-      status: listStatus,
-      loadMoreLoading,
-      refreshLoading,
-    },
+    listState: { data, hasMore, status: listStatus, loadMoreLoading, refreshLoading }
   } = useSelector((state: IRootReducer) => state[PAGE_REDUCER_NAME]);
   const dispatch = useDispatch();
 
@@ -47,10 +41,7 @@ const Index = () => {
     requestAbort(LOAD_LIST_REQUEST_TASK_KEY);
     setCurrentTab(key);
     dispatch(
-      loadListAction(
-        LoadActionEnum.RESET,
-        (key === '2' && 'error') || (key === '3' ? 'empty' : ''),
-      ),
+      loadListAction(LoadActionEnum.RESET, (key === '2' && 'error') || (key === '3' ? 'empty' : ''))
     );
   };
 
@@ -71,13 +62,8 @@ const Index = () => {
   return (
     <MobileWrapper uiStatus={uiStatus}>
       <div className={styles.wrap}>
-        <Tabs
-          initialPage={currentTab}
-          onChange={onTabChange}
-          tabs={tabList}
-          swipeable={false}
-        >
-          {tabList.map((tab) => (
+        <Tabs initialPage={currentTab} onChange={onTabChange} tabs={tabList} swipeable={false}>
+          {tabList.map(tab => (
             <div key={tab.key}>
               {currentTab === tab.key && (
                 <ListWrapper
@@ -89,37 +75,29 @@ const Index = () => {
                     dataSource={dataSource.cloneWithRows(data)}
                     onEndReached={onEndReached}
                     className={styles.list}
-                    renderRow={(item) => (
+                    renderRow={item => (
                       <div key={item.id} className={styles.listItem}>
-                        <div
-                          className={`v-styled-center ${styles.listItemImgWrap}`}
-                        >
-                          <img
-                            alt="avatar"
-                            className={styles.listItemImg}
-                            src={item.imgUrl}
-                          />
+                        <div className={`v-styled-center ${styles.listItemImgWrap}`}>
+                          <img alt="avatar" className={styles.listItemImg} src={item.imgUrl} />
                         </div>
                         <div className={styles.listItemContent}>
-                          <div className={styles.listItemContentTitle}>
-                            {item.title}
-                          </div>
-                          <div
-                            className={`v-styled-line-clamp ${styles.listItemContentText}`}
-                          >
+                          <div className={styles.listItemContentTitle}>{item.title}</div>
+                          <div className={`v-styled-line-clamp ${styles.listItemContentText}`}>
                             {item.text}
                           </div>
                         </div>
                       </div>
                     )}
-                    renderFooter={() => (loadMoreLoading ? (
-                      <div className={styles.listLoadingWrap}>
-                        <Spin />
-                      </div>
-                    ) : (
-                      <></>
-                    ))}
-                    pullToRefresh={(
+                    renderFooter={() =>
+                      loadMoreLoading ? (
+                        <div className={styles.listLoadingWrap}>
+                          <Spin />
+                        </div>
+                      ) : (
+                        <></>
+                      )
+                    }
+                    pullToRefresh={
                       <PullToRefresh
                         getScrollContainer={undefined as any}
                         refreshing={refreshLoading}
@@ -129,7 +107,7 @@ const Index = () => {
                         indicator={undefined as any}
                         damping={100}
                       />
-                    )}
+                    }
                   />
                 </ListWrapper>
               )}

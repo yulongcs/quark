@@ -7,8 +7,9 @@ interface ILoadListApiData {
   status: string;
 }
 
-export const loadListApi = (params: ILoadListApiData, requestTaskName: string): Promise<any> => request(`${API_BASE_URL}/quark-mobile/list`, {
-  method: 'GET',
-  params,
-  requestTaskName,
-});
+export const loadListApi = (params: ILoadListApiData, requestTaskName: string): Promise<any> =>
+  request(`${API_BASE_URL}/quark-mobile/list`, {
+    method: 'GET',
+    params,
+    requestTaskName
+  });
