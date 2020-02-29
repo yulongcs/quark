@@ -7,17 +7,11 @@ interface IMobileWrapperProps extends PropsWithChildren<any> {
   uiStatus?: SectionStateEnum;
 }
 
-export default ({
-  uiStatus = SectionStateEnum.LOADING,
-  children,
-}: IMobileWrapperProps) => (
+export default ({ uiStatus = SectionStateEnum.LOADING, children }: IMobileWrapperProps) => (
   <>
-    {(uiStatus === SectionStateEnum.LOADING && <Spin />)
-      || (uiStatus === SectionStateEnum.ERROR ? (
-        <SectionStateComponent
-          style={{ width: '100vw', height: '100vh' }}
-          type="error"
-        />
+    {(uiStatus === SectionStateEnum.LOADING && <Spin />) ||
+      (uiStatus === SectionStateEnum.ERROR ? (
+        <SectionStateComponent style={{ width: '100vw', height: '100vh' }} type="error" />
       ) : (
         children
       ))}

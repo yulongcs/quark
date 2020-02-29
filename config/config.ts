@@ -11,11 +11,11 @@ import pkg from '../package.json';
 const getReactAppEnvs = () => {
   const builtConstants = {
     REACT_APP_NAME: pkg.name,
-    REACT_APP_VERSION: pkg.version,
+    REACT_APP_VERSION: pkg.version
   };
   const initEnvs = { ...builtConstants, ...process.env } as any;
   const envs = {} as any;
-  Object.keys(initEnvs).forEach((key) => {
+  Object.keys(initEnvs).forEach(key => {
     if (/^REACT_APP_/.test(key)) {
       envs[`process.env.${key}`] = initEnvs[key];
     }
@@ -25,9 +25,12 @@ const getReactAppEnvs = () => {
 
 // get antd and antd-mobile theme from src/assets/style/theme.scss
 const getTheme = () => {
-  const initTheme = sassParse(fs.readFileSync(path.join(__dirname, '../src/assets/style/theme.scss')).toString(), { camelCase: false, indented: false });
+  const initTheme = sassParse(
+    fs.readFileSync(path.join(__dirname, '../src/assets/style/theme.scss')).toString(),
+    { camelCase: false, indented: false }
+  );
   const theme = {};
-  Object.keys(initTheme).forEach((key) => {
+  Object.keys(initTheme).forEach(key => {
     theme[`@${key}`] = initTheme[key];
   });
   return theme;
@@ -47,8 +50,20 @@ const config: IConfig = {
   },
   define: { ...getReactAppEnvs() },
   extraBabelPlugins: [
-    ['import', { libraryName: '@vdfor/react-component', libraryDirectory: 'dist/lib', camel2DashComponentName: false }, '@vdfor/react-component'],
-    ['import', { libraryName: 'lodash', libraryDirectory: '', camel2DashComponentName: false }, 'lodash'],
+    [
+      'import',
+      {
+        libraryName: '@vdfor/react-component',
+        libraryDirectory: 'dist/lib',
+        camel2DashComponentName: false
+      },
+      '@vdfor/react-component'
+    ],
+    [
+      'import',
+      { libraryName: 'lodash', libraryDirectory: '', camel2DashComponentName: false },
+      'lodash'
+    ]
   ],
   extraPostCSSPlugins: [
     pxToViewPort({
@@ -62,9 +77,10 @@ const config: IConfig = {
       minPixelValue: 1,
       mediaQuery: false,
       replace: true,
-      exclude: [/node_modules/],
+      exclude: [/node_modules/]
     }),
-    pxToViewPort({ // antd-mobile
+    pxToViewPort({
+      // antd-mobile
       viewportWidth: 375,
       propList: ['*'],
       unitToConvert: 'px',
@@ -74,53 +90,54 @@ const config: IConfig = {
       selectorBlackList: [/^(?!(\.am-)).*/],
       minPixelValue: 1,
       mediaQuery: false,
-      replace: true,
-    }),
+      replace: true
+    })
   ],
   hash: process.env.NODE_ENV === 'production',
   history: 'browser',
   plugins: [
     // ref: https://umijs.org/plugin/umi-plugin-react.html
-    ['umi-plugin-react', {
-      antd: true,
-      dll: true,
-      dva: false,
-      dynamicImport: { webpackChunkName: true, loadingComponent: './components/PageLoading' },
-      // fastClick: true,
-      locale: {
-        enable: false,
-        default: 'en-US',
-      },
-      manifest: {
-        basePath: '/',
-      },
-      /**
-       * pwa与ssr暂不能共存
-       * https://github.com/umijs/umi/issues/3815
-       */
-      pwa: !isSSR && {
-        workboxPluginMode: 'GenerateSW',
-        workboxOptions: {
-          importWorkboxFrom: 'local',
+    [
+      'umi-plugin-react',
+      {
+        antd: true,
+        dll: true,
+        dva: false,
+        dynamicImport: { webpackChunkName: true, loadingComponent: './components/PageLoading' },
+        // fastClick: true,
+        locale: {
+          enable: false,
+          default: 'en-US'
         },
-      },
-      routes: {
-        exclude: [
-          /components\//,
-        ],
-      },
-      title: 'quark',
-    }],
+        manifest: {
+          basePath: '/'
+        },
+        /**
+         * pwa与ssr暂不能共存
+         * https://github.com/umijs/umi/issues/3815
+         */
+        pwa: !isSSR && {
+          workboxPluginMode: 'GenerateSW',
+          workboxOptions: {
+            importWorkboxFrom: 'local'
+          }
+        },
+        routes: {
+          exclude: [/components\//]
+        },
+        title: 'quark'
+      }
+    ]
   ],
   publicPath: './',
   routes,
   sass: {},
   ssr: isSSR,
   theme: {
-    ...getTheme(),
+    ...getTheme()
   },
   treeShaking: true,
-  urlLoaderExcludes: [/-icon\.svg(\?v=\d+\.\d+\.\d+)?$/],
+  urlLoaderExcludes: [/-icon\.svg(\?v=\d+\.\d+\.\d+)?$/]
 };
 
 export default config;

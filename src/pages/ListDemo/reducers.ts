@@ -9,5 +9,5 @@ const listReducer = getQuxListReducer(PAGE_NAME);
 
 export default combineReducers({
   uiState: uiReducer,
-  listState: listReducer,
+  listState: listReducer
 }) as Reducer<IPageState>;

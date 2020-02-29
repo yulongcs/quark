@@ -1,16 +1,15 @@
 import request, { RequestOptionsInit } from 'umi-request';
 import AbortController from 'abort-controller';
 import { cancelHttpCode } from '@/constants';
-import {
-  setRequestTaskToGlobalData, removeRequestTaskFromGlobalData, handleRequestError,
-} from '.';
+import { setRequestTaskToGlobalData, removeRequestTaskFromGlobalData, handleRequestError } from '.';
 
 interface IRequestParams extends RequestOptionsInit {
   showErrorNotification?: boolean;
   requestTaskName?: string;
 }
 
-const codeMessage = { // copy from https://github.com/ant-design/ant-design-pro/blob/master/src/utils/request.ts
+const codeMessage = {
+  // copy from https://github.com/ant-design/ant-design-pro/blob/master/src/utils/request.ts
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
   202: '一个请求已经进入后台排队（异步任务）。',
@@ -25,44 +24,43 @@ const codeMessage = { // copy from https://github.com/ant-design/ant-design-pro/
   500: '服务器发生错误，请检查服务器。',
   502: '网关错误。',
   503: '服务不可用，服务器暂时过载或维护。',
-  504: '网关超时。',
+  504: '网关超时。'
 };
 
-export default (url: string, options: IRequestParams) => new Promise((resolve, reject) => {
-  const taskName = options.requestTaskName || url;
-  const controller = new AbortController();
-  const { signal } = controller;
-  setRequestTaskToGlobalData(taskName, controller);
-  const newOptions = {
-    timeout: 10000,
-    signal,
-    ...options,
-    headers: {
-      // Authorization: `Bearer ${token || ''}`,
-      ...options.headers,
-    },
-  };
+export default (url: string, options: IRequestParams) =>
+  new Promise((resolve, reject) => {
+    const taskName = options.requestTaskName || url;
+    const controller = new AbortController();
+    const { signal } = controller;
+    setRequestTaskToGlobalData(taskName, controller);
+    const newOptions = {
+      timeout: 10000,
+      signal,
+      ...options,
+      headers: {
+        // Authorization: `Bearer ${token || ''}`,
+        ...options.headers
+      }
+    };
 
-  request(url, newOptions)
-    .then((data) => {
-      removeRequestTaskFromGlobalData(taskName);
-      resolve(data);
-    })
-    .catch((err) => {
-      removeRequestTaskFromGlobalData(taskName);
-      const isCancelError = err.name === 'AbortError';
-      const showErrorNotification = !!options.showErrorNotification && !isCancelError;
-      const {
-        response: {
-          status = isCancelError ? cancelHttpCode : '', statusText = '',
-        } = {},
-        message = '未知错误',
-      } = err;
-      const errorText = (codeMessage as any)[status] || statusText || message;
-      const error = new Error(errorText);
-      (error as any).status = status;
-      (error as any).url = url;
-      handleRequestError({ error, showErrorNotification });
-      reject(error);
-    });
-});
+    request(url, newOptions)
+      .then(data => {
+        removeRequestTaskFromGlobalData(taskName);
+        resolve(data);
+      })
+      .catch(err => {
+        removeRequestTaskFromGlobalData(taskName);
+        const isCancelError = err.name === 'AbortError';
+        const showErrorNotification = !!options.showErrorNotification && !isCancelError;
+        const {
+          response: { status = isCancelError ? cancelHttpCode : '', statusText = '' } = {},
+          message = '未知错误'
+        } = err;
+        const errorText = (codeMessage as any)[status] || statusText || message;
+        const error = new Error(errorText);
+        (error as any).status = status;
+        (error as any).url = url;
+        handleRequestError({ error, showErrorNotification });
+        reject(error);
+      });
+  });

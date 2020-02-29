@@ -5,7 +5,7 @@ export const setRequestTaskToGlobalData = (key: string, val: any) => {
   const tasks = (window as any).requestTasks;
   if (!tasks) {
     (window as any).requestTasks = {
-      [key]: val,
+      [key]: val
     };
     return;
   }

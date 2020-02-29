@@ -6,18 +6,21 @@ import { PAGE_NAME, PAGE_REDUCER_NAME, LOAD_LIST_REQUEST_TASK_KEY } from './cons
 
 const setUIStateAction = getQuxUIStateSetStatusAction(PAGE_NAME);
 
-const getLoadListAction = (status = '') => getQuxListAction({
-  pageName: PAGE_NAME,
-  pageReducerName: PAGE_REDUCER_NAME,
-  listAlias: 'listState',
-  isPagination: true,
-  loadRestDataFunc: async ({ pageSize, pageNum }) => {
-    const result = await loadListApi({ pageNum, pageSize, status }, LOAD_LIST_REQUEST_TASK_KEY);
-    return result;
-  },
-});
+const getLoadListAction = (status = '') =>
+  getQuxListAction({
+    pageName: PAGE_NAME,
+    pageReducerName: PAGE_REDUCER_NAME,
+    listAlias: 'listState',
+    isPagination: true,
+    loadRestDataFunc: async ({ pageSize, pageNum }) => {
+      const result = await loadListApi({ pageNum, pageSize, status }, LOAD_LIST_REQUEST_TASK_KEY);
+      return result;
+    }
+  });
 
-export const loadListAction = (loadAction: LoadActionEnum, status = '') => async (dispatch: Dispatch<any>) => {
+export const loadListAction = (loadAction: LoadActionEnum, status = '') => async (
+  dispatch: Dispatch<any>
+) => {
   const selfLoadListAction = getLoadListAction(status);
   await dispatch(selfLoadListAction(loadAction));
 };

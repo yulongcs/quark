@@ -5,7 +5,7 @@ const routes: IRoute[] = [
   {
     path: '/',
     exact: true,
-    redirect: '/welcome',
+    redirect: '/welcome'
   },
   {
     path: '/mobile',
@@ -14,20 +14,20 @@ const routes: IRoute[] = [
       {
         path: '/mobile/list-demo',
         component: './ListDemo',
-        title: '列表',
-      },
-    ],
+        title: '列表'
+      }
+    ]
   },
   {
     path: '/welcome',
     component: './Welcome',
-    title: '欢迎',
+    title: '欢迎'
   },
   {
     path: '/home',
     component: './Home',
-    title: '主页',
-  },
+    title: '主页'
+  }
 ];
 
 export default routes;

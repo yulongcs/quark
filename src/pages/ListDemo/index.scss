@@ -3,7 +3,6 @@
   background: #ffffff;
 
   :global {
-
     .am-tabs-tab-bar-wrap {
       position: fixed;
       left: 0;
@@ -29,7 +28,8 @@
 .list {
   padding: 0;
   :global {
-    .am-list-body::before, .am-list-body::after {
+    .am-list-body::before,
+    .am-list-body::after {
       height: 0 !important;
     }
 

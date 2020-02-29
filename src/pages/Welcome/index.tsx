@@ -1,6 +1,4 @@
-import React, {
-  useState, useRef, useEffect, useCallback, FC,
-} from 'react';
+import React, { useState, useRef, useEffect, useCallback, FC } from 'react';
 import { getRandomRound } from '@vdfor/util';
 import { goPage } from '@/utils';
 import { TAGS } from './constants';
@@ -38,7 +36,9 @@ const Welcome: FC = () => {
   return (
     <div className={`v-styled-center ${styles.wrapper}`}>
       <div className={`v-styled-center ${styles.tag}`}>{tagText}</div>
-      <div className={`v-styled-center ${styles.link}`} onClick={goIndexPage}>ENTER</div>
+      <div className={`v-styled-center ${styles.link}`} onClick={goIndexPage}>
+        ENTER
+      </div>
     </div>
   );
 };

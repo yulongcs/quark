@@ -17,7 +17,8 @@
     "build": "cross-env REACT_APP_SSR=0 umi build",
     "build:ssr": "cross-env REACT_APP_SSR=1 umi build",
     "start:server": "nodemon server.js",
-    "test": "umi test"
+    "test": "umi test",
+    "prettier": "prettier --write {config,src}/**/*.{js,ts,tsx,css,scss}"
   },
   "dependencies": {
     "@vdfor/react-component": "^0.8.0",

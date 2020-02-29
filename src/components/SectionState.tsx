@@ -15,12 +15,12 @@ interface ISectionStateProps {
 const defaultValues = {
   empty: {
     text: '空空如也~',
-    imgUrl: emptyStateImg,
+    imgUrl: emptyStateImg
   },
   error: {
     text: '页面出错了~',
-    imgUrl: errorStateImg,
-  },
+    imgUrl: errorStateImg
+  }
 };
 
 const WrapperView = styled(StyledCenter)`
@@ -45,21 +45,21 @@ const TextView = styled.p`
   margin-top: ${pxTransform(16)};
 `;
 
-export default memo(({
-  style = {}, imgUrl = '', text = '', type, onTextClick,
-}: ISectionStateProps) => {
-  const { text: defaultText = '', imgUrl: defaultImgUrl = '' } = defaultValues[type] || {};
-  const selfOnTextClick = () => {
-    if (onTextClick) {
-      onTextClick();
-    }
-  };
-  return (
-    <WrapperView style={style}>
-      <ImgWrapView>
-        <ImageView src={imgUrl || defaultImgUrl} />
-      </ImgWrapView>
-      <TextView onClick={selfOnTextClick}>{text || defaultText}</TextView>
-    </WrapperView>
-  );
-});
+export default memo(
+  ({ style = {}, imgUrl = '', text = '', type, onTextClick }: ISectionStateProps) => {
+    const { text: defaultText = '', imgUrl: defaultImgUrl = '' } = defaultValues[type] || {};
+    const selfOnTextClick = () => {
+      if (onTextClick) {
+        onTextClick();
+      }
+    };
+    return (
+      <WrapperView style={style}>
+        <ImgWrapView>
+          <ImageView src={imgUrl || defaultImgUrl} />
+        </ImgWrapView>
+        <TextView onClick={selfOnTextClick}>{text || defaultText}</TextView>
+      </WrapperView>
+    );
+  }
+);
