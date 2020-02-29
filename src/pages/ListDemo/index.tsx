@@ -3,12 +3,12 @@ import React, {
 } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Tabs, ListView, PullToRefresh } from 'antd-mobile';
-import { SectionStateEnum, LoadActionEnum } from '@vdfor/util';
-import { Spin, SkeletonList } from '@vdfor/react-component';
+import { LoadActionEnum } from '@vdfor/util';
+import { Spin } from '@vdfor/react-component';
 import {
   IRootReducer,
 } from '@/types';
-import { SectionStateComponent } from '@/components';
+import { MobileWrapper, ListWrapper } from '@/components';
 import { requestAbort } from '@/utils';
 import { PAGE_REDUCER_NAME, LOAD_LIST_REQUEST_TASK_KEY } from './constants';
 import { initAction, loadListAction } from './actions';
@@ -61,14 +61,14 @@ const Index = () => {
     // stopPullDownRefresh();
   };
 
-  return uiStatus === SectionStateEnum.LOADING ? <Spin /> : (
-    <div className={styles.wrap}>
-      <Tabs initialPage={currentTab} onChange={onTabChange} tabs={tabList} swipeable={false}>
-        {tabList.map((tab) => (
-          <div key={tab.key}>
-            {currentTab === tab.key && (
-              <div className={styles.listWrap}>
-                {listStatus === SectionStateEnum.CONTENT && (
+  return (
+    <MobileWrapper uiStatus={uiStatus}>
+      <div className={styles.wrap}>
+        <Tabs initialPage={currentTab} onChange={onTabChange} tabs={tabList} swipeable={false}>
+          {tabList.map((tab) => (
+            <div key={tab.key}>
+              {currentTab === tab.key && (
+                <ListWrapper listStatus={listStatus}>
                   <ListView
                     useBodyScroll
                     dataSource={dataSource.cloneWithRows(data)}
@@ -98,16 +98,13 @@ const Index = () => {
                       />
                     )}
                   />
-                )}
-                {listStatus === SectionStateEnum.LOADING && <SkeletonList />}
-                {listStatus === SectionStateEnum.EMPTY && <SectionStateComponent type="empty" />}
-                {listStatus === SectionStateEnum.ERROR && <SectionStateComponent type="error" />}
-              </div>
-            )}
-          </div>
-        ))}
-      </Tabs>
-    </div>
+                </ListWrapper>
+              )}
+            </div>
+          ))}
+        </Tabs>
+      </div>
+    </MobileWrapper>
   );
 };
 

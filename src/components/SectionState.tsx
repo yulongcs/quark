@@ -23,6 +23,13 @@ const defaultValues = {
   },
 };
 
+const WrapperView = styled(StyledCenter)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
+
 const ImgWrapView = styled(StyledCenter)`
   max-width: ${pxTransform(240)};
 `;
@@ -35,6 +42,7 @@ const ImageView = styled.img`
 const TextView = styled.p`
   color: #9b9b9b;
   font-size: ${pxTransform(28)};
+  margin-top: ${pxTransform(16)};
 `;
 
 export default memo(({
@@ -47,11 +55,11 @@ export default memo(({
     }
   };
   return (
-    <section style={style}>
+    <WrapperView style={style}>
       <ImgWrapView>
         <ImageView src={imgUrl || defaultImgUrl} />
       </ImgWrapView>
       <TextView onClick={selfOnTextClick}>{text || defaultText}</TextView>
-    </section>
+    </WrapperView>
   );
 });

@@ -9,7 +9,7 @@ const routes: IRoute[] = [
   },
   {
     path: '/mobile',
-    component: '../layouts/index',
+    // component: '../layouts/MobileWrapper',
     routes: [
       {
         path: '/mobile/list-demo',
