@@ -7,6 +7,7 @@ import { IRootReducer } from '@/types';
 import { MobileWrapper, ListWrapper } from '@/components';
 import { requestAbort, pxTransform } from '@/utils';
 import { PAGE_REDUCER_NAME, LOAD_LIST_REQUEST_TASK_KEY } from './constants';
+import { IListDataItem } from './types';
 import { initAction, loadListAction } from './actions';
 import styles from './index.scss';
 
@@ -21,7 +22,25 @@ const dataSource = new ListView.DataSource({
   rowHasChanged: (row1: any, row2: any) => row1.id !== row2.id
 });
 
-const Index = () => {
+const renderListRow = (item: IListDataItem) => (
+  <div key={item.id} className={styles.listItem}>
+    <div className={`v-styled-center ${styles.listItemImgWrap}`}>
+      <img alt="avatar" className={styles.listItemImg} src={item.imgUrl} />
+    </div>
+    <div className={styles.listItemContent}>
+      <div className={styles.listItemContentTitle}>{item.title}</div>
+      <div className={`v-styled-line-clamp ${styles.listItemContentText}`}>{item.text}</div>
+    </div>
+  </div>
+);
+
+const renderListFooter = () => (
+  <div className={styles.listLoadingWrap}>
+    <Spin />
+  </div>
+);
+
+export default () => {
   const [currentTab, setCurrentTab] = useState('0');
 
   const {
@@ -67,7 +86,7 @@ const Index = () => {
             <div key={tab.key}>
               {currentTab === tab.key && (
                 <ListWrapper
-                  style={{ height: `calc(100vh - ${pxTransform(90)})` }}
+                  style={{ minHeight: `calc(100vh - ${pxTransform(90)})` }}
                   uiStatus={listStatus}
                 >
                   <ListView
@@ -75,28 +94,8 @@ const Index = () => {
                     dataSource={dataSource.cloneWithRows(data)}
                     onEndReached={onEndReached}
                     className={styles.list}
-                    renderRow={item => (
-                      <div key={item.id} className={styles.listItem}>
-                        <div className={`v-styled-center ${styles.listItemImgWrap}`}>
-                          <img alt="avatar" className={styles.listItemImg} src={item.imgUrl} />
-                        </div>
-                        <div className={styles.listItemContent}>
-                          <div className={styles.listItemContentTitle}>{item.title}</div>
-                          <div className={`v-styled-line-clamp ${styles.listItemContentText}`}>
-                            {item.text}
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                    renderFooter={() =>
-                      loadMoreLoading ? (
-                        <div className={styles.listLoadingWrap}>
-                          <Spin />
-                        </div>
-                      ) : (
-                        <></>
-                      )
-                    }
+                    renderRow={renderListRow}
+                    renderFooter={loadMoreLoading ? renderListFooter : undefined}
                     pullToRefresh={
                       <PullToRefresh
                         getScrollContainer={undefined as any}
@@ -118,5 +117,3 @@ const Index = () => {
     </MobileWrapper>
   );
 };
-
-export default Index;

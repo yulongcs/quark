@@ -10,11 +10,15 @@ interface IListWrapperProps extends PropsWithChildren<any> {
 }
 
 const WrapperView = styled.div`
-  padding: ${pxTransform(8)} ${pxTransform(16)} ${pxTransform(16)};
+  position: relative;
+  padding: ${pxTransform(16)};
 `;
 
 const SectionStateWrapper = styled(StyledCenter)`
-  height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
 `;
 
 export default ({
