@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose, Reducer, AnyAction } from 'redux';
 import thunk from 'redux-thunk';
 import { request } from '@/util';
+import reducer from './reducer';
 
 const composeEnhancers =
   typeof window === 'object' && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -17,4 +18,6 @@ if (process.env.NODE_ENV === 'development') {
 const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
 // configStore
-export default (rootReducer: Reducer<any, AnyAction>) => createStore(rootReducer, enhancer);
+const configStore = (rootReducer: Reducer<any, AnyAction>) => createStore(rootReducer, enhancer);
+
+export default configStore(reducer);

@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Tabs, ListView, PullToRefresh } from 'antd-mobile';
 import { LoadActionEnum } from '@vdfor/util';
 import { Spin } from '@vdfor/react-component';
-import { IRootReducer } from '@/type';
+import { IRootReducer } from '@/store';
 import { MobileWrapper, ListWrapper } from '@/component';
 import { requestAbort, pxTransform } from '@/util';
-import { PAGE_REDUCER_NAME, LOAD_LIST_REQUEST_TASK_KEY } from './constants';
-import { IListDataItem } from './types';
-import { initAction, loadListAction } from './actions';
+import { PAGE_REDUCER_NAME, LOAD_LIST_REQUEST_TASK_KEY } from './constant';
+import { IListDataItem } from './type';
+import { initAction, loadListAction } from './action';
 import styles from './index.less';
 
 const tabList = [

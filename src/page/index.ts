@@ -1,5 +1,5 @@
-import * as LIST_DEMO_CONSTANTS from './ListDemo/constants';
-import listDemoPageReducer from './ListDemo/reducers';
-import { IPageState as IListDemoPageState } from './ListDemo/types';
+import * as LIST_DEMO_CONSTANT from './ListDemo/constant';
+import listDemoPageReducer from './ListDemo/reducer';
+import { IPageState as IListDemoPageState } from './ListDemo/type';
 
-export { LIST_DEMO_CONSTANTS, listDemoPageReducer, IListDemoPageState };
+export { LIST_DEMO_CONSTANT, listDemoPageReducer, IListDemoPageState };

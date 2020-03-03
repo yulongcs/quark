@@ -1,8 +1,8 @@
 import { Dispatch } from 'redux';
 import { SectionStateEnum, LoadActionEnum } from '@vdfor/util';
-import { getQuxUIStateSetStatusAction, getQuxListAction } from '@/qux';
+import { getQuxUIStateSetStatusAction, getQuxListAction } from '@/store/base';
 import { loadListApi } from './api';
-import { PAGE_NAME, PAGE_REDUCER_NAME, LOAD_LIST_REQUEST_TASK_KEY } from './constants';
+import { PAGE_NAME, PAGE_REDUCER_NAME, LOAD_LIST_REQUEST_TASK_KEY } from './constant';
 
 const setUIStateAction = getQuxUIStateSetStatusAction(PAGE_NAME);
 

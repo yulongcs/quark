@@ -1,6 +1,5 @@
 import { Dispatch } from 'redux';
 import { SectionStateEnum, LoadActionEnum } from '@vdfor/util';
-import { IRootReducer } from '@/type';
 import { cancelHttpCode } from '@/constant';
 import {
   REFRESH_LIST_FAIL,
@@ -14,6 +13,7 @@ import {
   LOAD_MORE_LIST_FAIL,
 } from './constant';
 import { IQuxListState } from './type';
+import { IRootReducer } from '../../type';
 
 interface IParams {
   pageName: string;

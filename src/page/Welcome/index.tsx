@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback, FC } from 'react';
 import { getRandomRound } from '@vdfor/util';
 import { goPage } from '@/util';
-import { TAGS } from './constants';
+import { TAGS } from './constant';
 import styles from './index.less';
 
 const getTagText = (): string => TAGS[getRandomRound(0, TAGS.length - 1)];
