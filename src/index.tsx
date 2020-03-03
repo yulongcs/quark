@@ -1,8 +1,8 @@
 import React, { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import { ConfigProvider } from '@vdfor/react-component';
-import store from '@/stores';
-import { vconsoleInit } from '@/utils';
+import store from '@/store';
+import { vconsoleInit } from '@/util';
 
 vconsoleInit();
 

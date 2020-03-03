@@ -1,6 +1,6 @@
 /* eslint-disable */
 require('regenerator-runtime/runtime');
-const server = require('umi-server');
+const server = require('@umijs/server');
 const express = require('express');
 const compression = require('compression');
 const helmet = require('helmet');

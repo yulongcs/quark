@@ -1,17 +1,20 @@
-// eslint-disable-next-line
-import { IConfig } from 'umi-types';
+import { defineConfig } from 'umi';
 import fs from 'fs';
 import path from 'path';
-import { parse as sassParse } from 'sass-variable-parser';
+import lessParse from 'less-var-parse';
 import pxToViewPort from 'postcss-px-to-viewport';
+import apiConfig from './api';
 import routes from './routes';
 import pkg from '../package.json';
 
-// 获取 REACT_APP_开头
+const nodeEnv = process.env.NODE_ENV || 'production';
+
+// 获取 REACT_APP_ 开头环境变量
 const getReactAppEnvs = () => {
   const builtConstants = {
     REACT_APP_NAME: pkg.name,
-    REACT_APP_VERSION: pkg.version
+    REACT_APP_VERSION: pkg.version,
+    ...apiConfig[nodeEnv],
   };
   const initEnvs = { ...builtConstants, ...process.env } as any;
   const envs = {} as any;
@@ -23,47 +26,52 @@ const getReactAppEnvs = () => {
   return envs;
 };
 
+console.log('envs', getReactAppEnvs());
+
 // get antd and antd-mobile theme from src/assets/style/theme.scss
 const getTheme = () => {
-  const initTheme = sassParse(
-    fs.readFileSync(path.join(__dirname, '../src/assets/style/theme.scss')).toString(),
-    { camelCase: false, indented: false }
+  const initTheme = lessParse(
+    fs.readFileSync(path.join(__dirname, '../src/asset/style/theme.less'), 'utf8'),
   );
   const theme = {};
   Object.keys(initTheme).forEach(key => {
-    theme[`@${key}`] = initTheme[key];
+    theme[key] = initTheme[key];
   });
   return theme;
 };
 
-const isSSR = process.env.REACT_APP_SSR === '1';
+// 是否开启SSR
+// const isSSR = process.env.REACT_APP_SSR === '1';
 
-// ref: https://umijs.org/config/
-const config: IConfig = {
-  chainWebpack(webpackConfig) {
+export default defineConfig({
+  chainWebpack(memo) {
     // 以 -icon.svg 结尾的处理成 react component
-    webpackConfig.module
+    memo.module
       .rule('svg')
       .test(/-icon\.svg(\?v=\d+\.\d+\.\d+)?$/)
       .use('babel-loader')
       .loader(require.resolve('@svgr/webpack'));
   },
   define: { ...getReactAppEnvs() },
+  dva: false,
+  dynamicImport: { loading: '@/component/PageLoading' },
+  // @ts-ignore
   extraBabelPlugins: [
     [
       'import',
       {
         libraryName: '@vdfor/react-component',
         libraryDirectory: 'dist/lib',
-        camel2DashComponentName: false
+        camel2DashComponentName: false,
       },
-      '@vdfor/react-component'
+      '@vdfor/react-component',
     ],
     [
       'import',
       { libraryName: 'lodash', libraryDirectory: '', camel2DashComponentName: false },
-      'lodash'
-    ]
+      'lodash',
+    ],
+    'macros',
   ],
   extraPostCSSPlugins: [
     pxToViewPort({
@@ -77,67 +85,39 @@ const config: IConfig = {
       minPixelValue: 1,
       mediaQuery: false,
       replace: true,
-      exclude: [/node_modules/]
+      exclude: [/node_modules/],
     }),
     pxToViewPort({
-      // antd-mobile
+      // 作用于antd-mobile
       viewportWidth: 375,
       propList: ['*'],
       unitToConvert: 'px',
       unitPrecision: 5,
       viewportUnit: 'vw',
       fontViewportUnit: 'vw',
-      selectorBlackList: [/^(?!(\.am-)).*/],
+      selectorBlackList: [],
       minPixelValue: 1,
       mediaQuery: false,
-      replace: true
-    })
+      replace: true,
+      exclude: [/![\\/]node_modules[\\/].*antd-mobile[\\/]/],
+    }),
   ],
-  hash: process.env.NODE_ENV === 'production',
-  history: 'browser',
-  plugins: [
-    // ref: https://umijs.org/plugin/umi-plugin-react.html
-    [
-      'umi-plugin-react',
-      {
-        antd: true,
-        dll: true,
-        dva: false,
-        dynamicImport: { webpackChunkName: true, loadingComponent: './components/PageLoading' },
-        // fastClick: true,
-        locale: {
-          enable: false,
-          default: 'en-US'
-        },
-        manifest: {
-          basePath: '/'
-        },
-        /**
-         * pwa与ssr暂不能共存
-         * https://github.com/umijs/umi/issues/3815
-         */
-        pwa: !isSSR && {
-          workboxPluginMode: 'GenerateSW',
-          workboxOptions: {
-            importWorkboxFrom: 'local'
-          }
-        },
-        routes: {
-          exclude: [/components\//]
-        },
-        title: 'quark'
-      }
-    ]
-  ],
+  favicon: './favicon.ico',
+  hash: nodeEnv === 'production',
+  history: {
+    type: 'browser',
+  },
+  ignoreMomentLocale: true,
+  initialState: false,
+  manifest: {
+    basePath: '/',
+  },
   publicPath: './',
   routes,
-  sass: {},
-  ssr: isSSR,
+  singular: true, // 单数模式
+  // ssr: isSSR,
   theme: {
-    ...getTheme()
+    ...getTheme(),
   },
-  treeShaking: true,
-  urlLoaderExcludes: [/-icon\.svg(\?v=\d+\.\d+\.\d+)?$/]
-};
-
-export default config;
+  title: 'quark',
+});

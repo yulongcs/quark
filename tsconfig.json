@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "downlevelIteration": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
@@ -18,19 +18,15 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@@/*": ["src/.umi/*"]
     },
     "resolveJsonModule": true,
     "sourceMap": true,
     "strict": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "target": "esnext",
+    "target": "esnext"
   },
-  "include": [
-    "src/**/*",
-    "typings.d.ts",
-    "config/**/*",
-    ".umirc.ts"
-  ]
+  "include": ["src/**/*", "typings.d.ts", "config/**/*", ".umirc.ts"]
 }
