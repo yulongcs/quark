@@ -3,30 +3,10 @@ import fs from 'fs';
 import path from 'path';
 import lessParse from 'less-var-parse';
 import pxToViewPort from 'postcss-px-to-viewport';
-import apiConfig from './api';
+import getReactAppEnvs from './env';
 import routes from './routes';
-import pkg from '../package.json';
 
 const nodeEnv = process.env.NODE_ENV || 'production';
-
-// 获取 REACT_APP_ 开头环境变量
-const getReactAppEnvs = () => {
-  const builtConstants = {
-    REACT_APP_NAME: pkg.name,
-    REACT_APP_VERSION: pkg.version,
-    ...apiConfig[nodeEnv],
-  };
-  const initEnvs = { ...builtConstants, ...process.env } as any;
-  const envs = {} as any;
-  Object.keys(initEnvs).forEach(key => {
-    if (/^REACT_APP_/.test(key)) {
-      envs[`process.env.${key}`] = initEnvs[key];
-    }
-  });
-  return envs;
-};
-
-console.log('envs', getReactAppEnvs());
 
 // get antd and antd-mobile theme from src/assets/style/theme.scss
 const getTheme = () => {
