@@ -1,4 +1,4 @@
-import { IQuxUIState, IListBasicState } from '@/store';
+import { IQuxUIState, IListBasicState } from '../base';
 
 export interface IListDataItem {
   id: string;

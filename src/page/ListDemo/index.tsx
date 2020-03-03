@@ -3,12 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Tabs, ListView, PullToRefresh } from 'antd-mobile';
 import { LoadActionEnum } from '@vdfor/util';
 import { Spin } from '@vdfor/react-component';
-import { IRootReducer } from '@/store';
+import { IRootReducer, listDemoAction, LIST_DEMO_CONSTANT, IListDemoListDataItem } from '@/store';
 import { MobileWrapper, ListWrapper } from '@/component';
 import { requestAbort, pxTransform } from '@/util';
-import { PAGE_REDUCER_NAME, LOAD_LIST_REQUEST_TASK_KEY } from './constant';
-import { IListDataItem } from './type';
-import { initAction, loadListAction } from './action';
 import styles from './index.less';
 
 const tabList = [
@@ -22,7 +19,7 @@ const dataSource = new ListView.DataSource({
   rowHasChanged: (row1: any, row2: any) => row1.id !== row2.id,
 });
 
-const renderListRow = (item: IListDataItem) => (
+const renderListRow = (item: IListDemoListDataItem) => (
   <div key={item.id} className={styles.listItem}>
     <div className={`v-styled-center ${styles.listItemImgWrap}`}>
       <img alt="avatar" className={styles.listItemImg} src={item.imgUrl} />
@@ -46,21 +43,21 @@ export default () => {
   const {
     uiState: { status: uiStatus },
     listState: { data, hasMore, status: listStatus, loadMoreLoading, refreshLoading },
-  } = useSelector((state: IRootReducer) => state[PAGE_REDUCER_NAME]);
+  } = useSelector((state: IRootReducer) => state[LIST_DEMO_CONSTANT.ID]);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(initAction());
+    dispatch(listDemoAction.init());
   }, [dispatch]);
 
   const onTabChange = ({ key }: any) => {
     if (key === currentTab) {
       return;
     }
-    requestAbort(LOAD_LIST_REQUEST_TASK_KEY);
+    requestAbort(LIST_DEMO_CONSTANT.LOAD_LIST_REQUEST_TASK_KEY);
     setCurrentTab(key);
     dispatch(
-      loadListAction(
+      listDemoAction.loadList(
         LoadActionEnum.RESET,
         (key === '2' && 'error') || (key === '3' ? 'empty' : ''),
       ),
@@ -72,12 +69,12 @@ export default () => {
     if (!hasMore) {
       return;
     }
-    dispatch(loadListAction(LoadActionEnum.LOADMORE));
+    dispatch(listDemoAction.loadList(LoadActionEnum.LOADMORE));
   };
 
   const onPullRefresh = async () => {
     // 下拉刷新 - 下拉刷新时整个页面处于不可操作状态
-    await dispatch(loadListAction(LoadActionEnum.REFRESH));
+    await dispatch(listDemoAction.loadList(LoadActionEnum.REFRESH));
     // stopPullDownRefresh();
   };
 

@@ -1,0 +1,2 @@
+export const ID = 'LIST_DEMO';
+export const LOAD_LIST_REQUEST_TASK_KEY = 'LIST_DEMO_LOAD_LIST_REQUEST_TASK';
