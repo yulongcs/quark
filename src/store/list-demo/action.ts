@@ -1,4 +1,4 @@
-import { Dispatch, AnyAction } from 'redux';
+import { Dispatch } from 'redux';
 import { SectionStateEnum, LoadActionEnum } from '@vdfor/util';
 import { getQuxUIStateSetStatusAction, getQuxListAction } from '../base';
 import { loadListApi } from './api';
