@@ -348,7 +348,7 @@
   resolved "https://registry.npm.taobao.org/@babel/parser/download/@babel/parser-7.8.4.tgz?cache=0&sync_timestamp=1582806107669&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fparser%2Fdownload%2F%40babel%2Fparser-7.8.4.tgz#d1dbe64691d60358a974295fa53da074dd2ce8e8"
   integrity sha1-0dvmRpHWA1ipdClfpT2gdN0s6Og=
 
-"@babel/parser@7.8.6", "@babel/parser@^7.0.0", "@babel/parser@^7.1.0", "@babel/parser@^7.4.3", "@babel/parser@^7.7.5", "@babel/parser@^7.8.4", "@babel/parser@^7.8.6":
+"@babel/parser@7.8.6", "@babel/parser@^7.1.0", "@babel/parser@^7.4.3", "@babel/parser@^7.7.5", "@babel/parser@^7.8.4", "@babel/parser@^7.8.6":
   version "7.8.6"
   resolved "https://registry.npm.taobao.org/@babel/parser/download/@babel/parser-7.8.6.tgz#ba5c9910cddb77685a008e3c587af8d27b67962c"
   integrity sha1-ulyZEM3bd2haAI48WHr40ntnliw=
@@ -3463,18 +3463,6 @@ babel-core@7.0.0-bridge.0:
   resolved "https://registry.npm.taobao.org/babel-core/download/babel-core-7.0.0-bridge.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fbabel-core%2Fdownload%2Fbabel-core-7.0.0-bridge.0.tgz#95a492ddd90f9b4e9a4a1da14eb335b87b634ece"
   integrity sha1-laSS3dkPm06aSh2hTrM1uHtjTs4=
 
-babel-eslint@^10.0.3:
-  version "10.0.3"
-  resolved "https://registry.npm.taobao.org/babel-eslint/download/babel-eslint-10.0.3.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fbabel-eslint%2Fdownload%2Fbabel-eslint-10.0.3.tgz#81a2c669be0f205e19462fed2482d33e4687a88a"
-  integrity sha1-gaLGab4PIF4ZRi/tJILTPkaHqIo=
-  dependencies:
-    "@babel/code-frame" "^7.0.0"
-    "@babel/parser" "^7.0.0"
-    "@babel/traverse" "^7.0.0"
-    "@babel/types" "^7.0.0"
-    eslint-visitor-keys "^1.0.0"
-    resolve "^1.12.0"
-
 babel-jest@^25.1.0:
   version "25.1.0"
   resolved "https://registry.npm.taobao.org/babel-jest/download/babel-jest-25.1.0.tgz#206093ac380a4b78c4404a05b3277391278f80fb"
@@ -5630,7 +5618,7 @@ eslint-utils@^1.4.3:
   dependencies:
     eslint-visitor-keys "^1.1.0"
 
-eslint-visitor-keys@^1.0.0, eslint-visitor-keys@^1.1.0:
+eslint-visitor-keys@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npm.taobao.org/eslint-visitor-keys/download/eslint-visitor-keys-1.1.0.tgz#e2a82cea84ff246ad6fb57f9bde5b46621459ec2"
   integrity sha1-4qgs6oT/JGrW+1f5veW0ZiFFnsI=
@@ -10366,7 +10354,7 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier@1.19.1:
+prettier@1.19.1, prettier@^1.19.1:
   version "1.19.1"
   resolved "https://registry.npm.taobao.org/prettier/download/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
   integrity sha1-99f1/4qc2HKnvkyhQglZVqYHl8s=
@@ -12992,6 +12980,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.npm.taobao.org/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+typescript@^3.8.3:
+  version "3.8.3"
+  resolved "https://registry.npm.taobao.org/typescript/download/typescript-3.8.3.tgz#409eb8544ea0335711205869ec458ab109ee1061"
+  integrity sha1-QJ64VE6gM1cRIFhp7EWKsQnuEGE=
 
 ua-parser-js@^0.7.18:
   version "0.7.20"
