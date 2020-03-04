@@ -3,7 +3,6 @@ import { SectionStateEnum, LoadActionEnum } from '@vdfor/util';
 import { getQuxUIStateSetStatusAction, getQuxListAction } from '../base';
 import { loadListApi } from './api';
 import { ID, LOAD_LIST_REQUEST_TASK_KEY } from './constant';
-import { appAction } from '..';
 
 const setUIStateAction = getQuxUIStateSetStatusAction(ID);
 
@@ -23,7 +22,6 @@ export const loadList = (loadAction: LoadActionEnum, status = '') => async (
   dispatch: Dispatch<any>,
 ) => {
   const selfLoadListAction = getLoadListAction(status);
-  dispatch(appAction.setAppMetaState({ route: '/list' }));
   await dispatch(selfLoadListAction(loadAction));
 };
 

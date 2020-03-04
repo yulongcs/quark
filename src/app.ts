@@ -6,8 +6,8 @@ import React from 'react';
 import { store, appAction } from '@/store';
 import Index from './index';
 
-export const onRouteChange = ({ location: { pathname = '/' } = {} }: any) => {
-  store.dispatch(appAction.setAppMetaState({ route: pathname })); // 路由信息同步到store
+export const onRouteChange = ({ location: { pathname = '/' } = {} }) => {
+  store.dispatch(appAction.setAppRouteState({ path: pathname })); // 当前路由信息同步到store
 };
 
 export const rootContainer = (container: any) => React.createElement(Index, null, container);

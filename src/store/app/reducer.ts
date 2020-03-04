@@ -1,13 +1,13 @@
 import { AnyAction, combineReducers, Reducer } from 'redux';
 import { produce } from 'immer';
-import { IAppMetaState, IAppState } from './type';
+import { IAppRouteState, IAppState } from './type';
 import { SET_APP_META_STATE } from './constant';
 
 const INITIAL_APP_META_STATE = {
-  route: '/',
+  path: '/',
 };
 
-const metaStateReducer = (state: IAppMetaState = INITIAL_APP_META_STATE, action: AnyAction) =>
+const routeStateReducer = (state: IAppRouteState = INITIAL_APP_META_STATE, action: AnyAction) =>
   produce(state, draft => {
     const { type, payload } = action;
     switch (type) {
@@ -20,5 +20,5 @@ const metaStateReducer = (state: IAppMetaState = INITIAL_APP_META_STATE, action:
   });
 
 export default combineReducers({
-  metaState: metaStateReducer,
+  routeState: routeStateReducer,
 }) as Reducer<IAppState>;

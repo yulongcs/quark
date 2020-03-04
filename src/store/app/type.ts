@@ -1,7 +1,7 @@
-export interface IAppMetaState {
-  route: string;
+export interface IAppRouteState {
+  path: string;
 }
 
 export interface IAppState {
-  metaState: IAppMetaState;
+  routeState: IAppRouteState;
 }
