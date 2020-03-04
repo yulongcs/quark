@@ -2,10 +2,7 @@ import { AnyAction, combineReducers, Reducer } from 'redux';
 import { produce } from 'immer';
 import { SectionStateEnum } from '@vdfor/util';
 import { IAppRouteState, IAppState } from './type';
-import { SET_APP_ROUTE_STATE, ID } from './constant';
-import { getQuxUIStateReducer } from '../base';
-
-const uiStateReducer = getQuxUIStateReducer(ID);
+import { SET_APP_ROUTE_STATE } from './constant';
 
 const routeStateReducer = (
   state: IAppRouteState = {
@@ -26,6 +23,5 @@ const routeStateReducer = (
   });
 
 export default combineReducers({
-  uiState: uiStateReducer,
   routeState: routeStateReducer,
 }) as Reducer<IAppState>;

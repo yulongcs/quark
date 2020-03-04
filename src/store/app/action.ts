@@ -1,8 +1,5 @@
 import { IAppRouteState } from './type';
-import { SET_APP_ROUTE_STATE, ID } from './constant';
-import { getQuxUIStateSetStatusAction } from '../base';
-
-export const setUIState = getQuxUIStateSetStatusAction(ID);
+import { SET_APP_ROUTE_STATE } from './constant';
 
 export const setAppRouteState = (state: Partial<IAppRouteState>) => ({
   type: SET_APP_ROUTE_STATE,

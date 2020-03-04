@@ -1,5 +1,4 @@
 import { SectionStateEnum } from '@vdfor/util';
-import { IQuxUIState } from '../base';
 
 export interface IAppRouteState {
   path: string;
@@ -7,6 +6,5 @@ export interface IAppRouteState {
 }
 
 export interface IAppState {
-  uiState: IQuxUIState;
   routeState: IAppRouteState;
 }
