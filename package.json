@@ -18,7 +18,7 @@
     "build:ssr": "cross-env REACT_APP_SSR=1 umi build",
     "start:server": "nodemon server.js",
     "test": "umi test",
-    "prettier": "prettier --write {config,src}/**/*.{js,ts,tsx,css,scss}"
+    "prettier": "prettier --write {config,src}/**/*.{js,ts,tsx,less}"
   },
   "dependencies": {
     "@umijs/server": "^3.0.1",
@@ -66,14 +66,23 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "husky": "^3.1.0",
     "less-var-parse": "^1.1.0",
+    "lint-staged": "^10.0.8",
     "nodemon": "^2.0.2",
     "postcss-px-to-viewport": "^1.1.1",
-    "pretty-quick": "^2.0.1"
+    "yorkie": "^2.0.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,less,md,json}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write",
+      "git add"
+    ]
   },
   "babelMacros": {
     "styledComponents": {
