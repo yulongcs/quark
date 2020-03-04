@@ -18,8 +18,8 @@ const routes: IRoute[] = [
   },
   {
     path: '/list-demo',
-    component: '@/page/ListDemo',
     title: '列表',
+    component: '@/page/ListDemo',
   },
 ];
 

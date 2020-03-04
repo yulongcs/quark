@@ -24,7 +24,7 @@ const getReactAppEnvs = () => {
   const envs = {};
   Object.keys(initEnvs).forEach(key => {
     if (/^REACT_APP_/.test(key)) {
-      envs[key] = JSON.stringify(initEnvs[key]);
+      envs[`process.env.${key}`] = initEnvs[key];
     }
   });
   return envs;

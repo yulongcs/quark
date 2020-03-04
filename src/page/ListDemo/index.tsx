@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { createSelector } from 'reselect';
 import { Tabs, ListView, PullToRefresh } from 'antd-mobile';
 import { LoadActionEnum } from '@vdfor/util';
 import { Spin } from '@vdfor/react-component';
-import { IRootReducer, listDemoAction, LIST_DEMO_CONSTANT, IListDemoListDataItem } from '@/store';
+import {
+  IRootReducer,
+  listDemoAction,
+  LIST_DEMO_CONSTANT,
+  IListDemoListDataItem,
+  APP_CONSTANT,
+} from '@/store';
 import { MobileWrapper, ListWrapper } from '@/component';
 import { requestAbort, pxTransform } from '@/util';
 import styles from './index.less';
@@ -37,16 +44,22 @@ const renderListFooter = () => (
   </div>
 );
 
+const selectDisplay = createSelector(
+  (state: IRootReducer) => state[APP_CONSTANT.ID].routeState,
+  (state: IRootReducer) => state[LIST_DEMO_CONSTANT.ID],
+  ({ uiStatus }, { listState }) => ({ listState, uiStatus }),
+);
+
 export default () => {
   const [currentTab, setCurrentTab] = useState('0');
-
   const {
-    uiState: { status: uiStatus },
+    uiStatus,
     listState: { data, hasMore, status: listStatus, loadMoreLoading, refreshLoading },
-  } = useSelector((state: IRootReducer) => state[LIST_DEMO_CONSTANT.ID]);
+  } = useSelector(selectDisplay);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log('process.env.REACT_APP_API_BASE_URL', process.env.REACT_APP_API_BASE_URL);
     dispatch(listDemoAction.init());
   }, [dispatch]);
 

@@ -1,7 +1,7 @@
-import { IAppState } from './app';
+import { IAppState, APP_CONSTANT } from './app';
 import { IListDemoState, LIST_DEMO_CONSTANT } from './list-demo';
 
 export interface IRootReducer {
-  app: IAppState;
+  [APP_CONSTANT.ID]: IAppState;
   [LIST_DEMO_CONSTANT.ID]: IListDemoState;
 }

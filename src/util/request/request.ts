@@ -5,9 +5,10 @@ import {
   setRequestTaskToGlobalData,
   removeRequestTaskFromGlobalData,
   handleRequestError,
-} from '../request';
+} from '..';
 
 interface IRequestParams extends RequestConfig {
+  skipErrorHandler?: boolean; // 本应为RequestConfig内置
   showErrorNotification?: boolean;
   requestTaskName?: string;
 }
@@ -37,7 +38,8 @@ export default (url: string, options: IRequestParams) =>
     const controller = new AbortController();
     const { signal } = controller;
     setRequestTaskToGlobalData(taskName, controller);
-    const newOptions = {
+    const newOptions: IRequestParams = {
+      skipErrorHandler: true,
       timeout: 10000,
       signal,
       ...options,

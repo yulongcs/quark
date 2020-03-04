@@ -25,6 +25,7 @@
     "@vdfor/react-component": "^0.8.0",
     "@vdfor/util": "^0.3.0",
     "abort-controller": "^3.0.0",
+    "antd": "^4.0.1",
     "antd-mobile": "^2.3.1",
     "compression": "^1.7.4",
     "express": "^4.17.1",
@@ -38,6 +39,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "regenerator-runtime": "^0.13.3",
+    "reselect": "^4.0.0",
     "styled-components": "^4.4.1",
     "umi": "^3.0.3",
     "vconsole": "^3.3.4"

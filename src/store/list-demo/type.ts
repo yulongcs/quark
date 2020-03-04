@@ -1,4 +1,4 @@
-import { IQuxUIState, IListBasicState } from '../base';
+import { IListBasicState } from '../base';
 
 export interface IListDataItem {
   id: string;
@@ -14,6 +14,5 @@ export interface IListState extends IListBasicState {
 }
 
 export interface IPageState {
-  uiState: IQuxUIState;
   listState: IListState;
 }
