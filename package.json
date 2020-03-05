@@ -13,7 +13,7 @@
   "homepage": "https://github.com/vdfor/quark#readme",
   "private": true,
   "scripts": {
-    "start": "cross-env PORT=8280 REACT_APP_SSR=0 umi dev",
+    "start": "cross-env REACT_APP_SSR=0 umi dev",
     "build": "cross-env REACT_APP_SSR=0 umi build",
     "build:ssr": "cross-env REACT_APP_SSR=1 umi build",
     "start:server": "nodemon server.js",

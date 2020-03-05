@@ -82,7 +82,6 @@ export default defineConfig({
       exclude: [/![\\/]node_modules[\\/].*antd-mobile[\\/]/],
     }),
   ],
-  favicon: './favicon.ico',
   hash: nodeEnv === 'production',
   history: {
     type: 'browser',
