@@ -1,4 +1,6 @@
 import { notification } from 'antd';
+import { Toast } from 'antd-mobile';
+import { isMobileDevice } from '..';
 
 /**
  * 错误处理
@@ -16,6 +18,10 @@ const errorHandler = ({
   const { status, url, message } = error;
   console.error(`request error - statue:${status}, message:${message}, url:${url}`);
   if (showErrorNotification) {
+    if (isMobileDevice()) {
+      Toast.info(message);
+      return;
+    }
     notification.error({
       message: `请求错误 ${status}: ${url}`,
       description: message,

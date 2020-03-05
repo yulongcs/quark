@@ -42,6 +42,7 @@ export default (url: string, options: IRequestParams) =>
       skipErrorHandler: true,
       timeout: 10000,
       signal,
+      showErrorNotification: true,
       ...options,
       headers: {
         // Authorization: `Bearer ${token || ''}`,
@@ -54,10 +55,15 @@ export default (url: string, options: IRequestParams) =>
         removeRequestTaskFromGlobalData(taskName);
         resolve(data);
       })
-      .catch(err => {
+      .catch(initError => {
+        const err = initError;
         removeRequestTaskFromGlobalData(taskName);
         const isCancelError = err.name === 'AbortError';
-        const showErrorNotification = !!options.showErrorNotification && !isCancelError;
+        const showErrorNotification = newOptions.showErrorNotification && !isCancelError;
+        // 避免err.response为null（如 err.name 为 'AbortError' 时）等情形
+        if (!err.response) {
+          err.response = {};
+        }
         const {
           response: { status = isCancelError ? cancelHttpCode : '', statusText = '' } = {},
           message = '未知错误',
