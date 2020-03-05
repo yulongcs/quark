@@ -10,6 +10,9 @@ interface ILoadListApiData {
 export const loadListApi = (params: ILoadListApiData, requestTaskName: string): Promise<any> =>
   request(`${API_BASE_URL}/quark-mobile/list`, {
     method: 'GET',
-    params,
+    params: {
+      ...params,
+      delay: 5000,
+    },
     requestTaskName,
   });

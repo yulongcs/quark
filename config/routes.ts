@@ -10,16 +10,25 @@ const routes: IRoute[] = [
     path: '/welcome',
     component: '@/page/Welcome',
     title: '欢迎',
+    meta: {
+      id: 'welcome',
+    },
   },
   {
     path: '/home',
     component: '@/page/Home',
     title: '主页',
+    meta: {
+      id: 'home',
+    },
   },
   {
     path: '/list-demo',
     title: '列表',
     component: '@/page/ListDemo',
+    meta: {
+      id: 'list-demo',
+    },
   },
 ];
 

@@ -1,4 +1,5 @@
 export { default as store } from './store';
+export * from './base';
 export * from './app';
 export * from './type';
 /* business start */

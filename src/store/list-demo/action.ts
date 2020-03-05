@@ -1,9 +1,8 @@
 import { Dispatch } from 'redux';
-import { SectionStateEnum, LoadActionEnum } from '@vdfor/util';
-import { getQuxListAction } from '../base';
-import { appAction } from '../app';
+import { LoadActionEnum } from '@vdfor/util';
 import { loadListApi } from './api';
 import { ID, LOAD_LIST_REQUEST_TASK_KEY } from './constant';
+import { appAction, getQuxListAction, GetStateFunc, APP_CONSTANT } from '..';
 
 const getLoadListAction = (status = '') =>
   getQuxListAction({
@@ -24,12 +23,17 @@ export const loadList = (loadAction: LoadActionEnum, status = '') => async (
   await dispatch(selfLoadListAction(loadAction));
 };
 
-export const init = () => async (dispatch: Dispatch<any>) => {
-  dispatch(appAction.setAppRouteState({ uiStatus: SectionStateEnum.LOADING }));
+export const init = () => async (dispatch: Dispatch<any>, getState: GetStateFunc) => {
+  const {
+    [APP_CONSTANT.ID]: {
+      routeState: { id: routeId },
+    },
+  } = getState();
+  dispatch(appAction.showLoading(routeId));
   try {
     await dispatch(loadList(LoadActionEnum.RESET));
-    dispatch(appAction.setAppRouteState({ uiStatus: SectionStateEnum.CONTENT }));
+    dispatch(appAction.showContent(routeId));
   } catch (error) {
-    dispatch(appAction.setAppRouteState({ uiStatus: SectionStateEnum.ERROR }));
+    dispatch(appAction.showError(routeId));
   }
 };

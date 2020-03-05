@@ -59,7 +59,6 @@ export default () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('process.env.REACT_APP_API_BASE_URL', process.env.REACT_APP_API_BASE_URL);
     dispatch(listDemoAction.init());
   }, [dispatch]);
 
