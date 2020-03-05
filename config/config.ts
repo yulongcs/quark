@@ -8,7 +8,7 @@ import routes from './routes';
 
 const nodeEnv = process.env.NODE_ENV || 'production';
 
-// get antd and antd-mobile theme from src/assets/style/theme.scss
+// get antd and antd-mobile theme from src/assets/style/theme.less
 const getTheme = () => {
   const initTheme = lessParse(
     fs.readFileSync(path.join(__dirname, '../src/asset/style/theme.less'), 'utf8'),
@@ -24,14 +24,14 @@ const getTheme = () => {
 // const isSSR = process.env.REACT_APP_SSR === '1';
 
 export default defineConfig({
-  chainWebpack(memo) {
-    // 以 -icon.svg 结尾的处理成 react component
-    memo.module
-      .rule('svg')
-      .test(/-icon\.svg(\?v=\d+\.\d+\.\d+)?$/)
-      .use('babel-loader')
-      .loader(require.resolve('@svgr/webpack'));
-  },
+  // chainWebpack(memo) {
+  //   // 以 -icon.svg 结尾的处理成 react component
+  //   memo.module
+  //     .rule('svg')
+  //     .test(/-icon\.svg(\?v=\d+\.\d+\.\d+)?$/)
+  //     .use('babel-loader')
+  //     .loader(require.resolve('@svgr/webpack'));
+  // },
   define: { ...getReactAppEnvs() },
   dva: false,
   dynamicImport: { loading: '@/component/PageLoading' },
@@ -92,7 +92,7 @@ export default defineConfig({
   manifest: {
     basePath: '/',
   },
-  publicPath: './',
+  publicPath: nodeEnv === 'production' ? './' : '/',
   routes,
   singular: true, // 单数模式
   // ssr: isSSR,

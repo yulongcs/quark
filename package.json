@@ -41,7 +41,7 @@
     "regenerator-runtime": "^0.13.3",
     "reselect": "^4.0.0",
     "styled-components": "^4.4.1",
-    "umi": "^3.0.3",
+    "umi": "^3.0.4",
     "vconsole": "^3.3.4"
   },
   "devDependencies": {
