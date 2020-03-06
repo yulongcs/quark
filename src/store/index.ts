@@ -3,4 +3,4 @@ export * from './base';
 export * from './app';
 export * from './type';
 /* business start */
-export { listDemoAction, LIST_DEMO_CONSTANT, IDemoListListDataItem } from './list-demo';
+export { listDemoAction, LIST_DEMO_CONSTANT, IListDemoListDataItem } from './list-demo';

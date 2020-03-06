@@ -8,7 +8,7 @@ import {
   IRootReducer,
   listDemoAction,
   LIST_DEMO_CONSTANT,
-  IDemoListListDataItem,
+  IListDemoListDataItem,
   APP_CONSTANT,
 } from '@/store';
 import { MobileWrapper, ListWrapper } from '@/component';
@@ -26,7 +26,7 @@ const dataSource = new ListView.DataSource({
   rowHasChanged: (row1: any, row2: any) => row1.id !== row2.id,
 });
 
-const renderListRow = (item: IDemoListListDataItem) => (
+const renderListRow = (item: IListDemoListDataItem) => (
   <div key={item.id} className={styles.listItem}>
     <div className={`v-styled-center ${styles.listItemImgWrap}`}>
       <img alt="avatar" className={styles.listItemImg} src={item.imgUrl} />
