@@ -6,10 +6,7 @@ import React from 'react';
 import { store, appAction } from '@/store';
 import Index from './index';
 
-export const onRouteChange = ({
-  location: { pathname = '/' } = {},
-  matchedRoutes: [{ route: { meta: { id = undefined } = {} } = {} } = {}],
-}) => {
+export const onRouteChange = ({ location: { pathname = '/' } = {}, matchedRoutes: [{ route: { meta: { id = undefined } = {} } = {} } = {}] }) => {
   store.dispatch(appAction.setAppRouteState({ path: pathname, id })); // 当前路由信息同步到store
 };
 

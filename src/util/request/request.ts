@@ -1,11 +1,7 @@
 import { request, RequestConfig } from 'umi';
 import AbortController from 'abort-controller';
 import { cancelHttpCode } from '@/constant';
-import {
-  setRequestTaskToGlobalData,
-  removeRequestTaskFromGlobalData,
-  handleRequestError,
-} from '..';
+import { setRequestTaskToGlobalData, removeRequestTaskFromGlobalData, handleRequestError } from '..';
 
 interface IRequestParams extends RequestConfig {
   skipErrorHandler?: boolean; // 本应为RequestConfig内置
@@ -64,10 +60,7 @@ export default (url: string, options: IRequestParams) =>
         if (!err.response) {
           err.response = {};
         }
-        const {
-          response: { status = isCancelError ? cancelHttpCode : '', statusText = '' } = {},
-          message = '未知错误',
-        } = err;
+        const { response: { status = isCancelError ? cancelHttpCode : '', statusText = '' } = {}, message = '未知错误' } = err;
         const errorText = (codeMessage as any)[status] || statusText || message;
         const error = new Error(errorText);
         (error as any).status = status;

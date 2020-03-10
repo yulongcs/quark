@@ -16,9 +16,7 @@ const getLoadListAction = (status = '') =>
     },
   });
 
-export const loadList = (loadAction: LoadActionEnum, status = '') => async (
-  dispatch: Dispatch<any>,
-) => {
+export const loadList = (loadAction: LoadActionEnum, status = '') => async (dispatch: Dispatch<any>) => {
   const selfLoadListAction = getLoadListAction(status);
   await dispatch(selfLoadListAction(loadAction));
 };

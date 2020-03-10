@@ -40,8 +40,7 @@ export default (pageName: string) => (state: IQuxListState = INITIAL_STATE, acti
         const hasMore = isPagination ? payload.length >= pageSize : false;
         Object.assign(draft, {
           data: newData,
-          status:
-            !hasMore && newData.length === 0 ? SectionStateEnum.EMPTY : SectionStateEnum.CONTENT,
+          status: !hasMore && newData.length === 0 ? SectionStateEnum.EMPTY : SectionStateEnum.CONTENT,
           hasMore,
           pageNum: pageNum + 1,
         });
@@ -85,8 +84,7 @@ export default (pageName: string) => (state: IQuxListState = INITIAL_STATE, acti
         const hasMore = isPagination ? payload.length >= pageSize : false;
         Object.assign(draft, {
           data: newData,
-          status:
-            !hasMore && newData.length === 0 ? SectionStateEnum.EMPTY : SectionStateEnum.CONTENT,
+          status: !hasMore && newData.length === 0 ? SectionStateEnum.EMPTY : SectionStateEnum.CONTENT,
           hasMore,
           pageNum: pageNum + 1,
           refreshLoading: false,

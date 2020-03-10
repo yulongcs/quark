@@ -8,13 +8,7 @@ import { isMobileDevice } from '..';
  * @params error ResponseError
  * @params showErrorNotification boolean 是否弹出错误通知
  */
-const errorHandler = ({
-  error,
-  showErrorNotification = true,
-}: {
-  error: any;
-  showErrorNotification?: boolean;
-}) => {
+const errorHandler = ({ error, showErrorNotification = true }: { error: any; showErrorNotification?: boolean }) => {
   const { status, url, message } = error;
   console.error(`request error - statue:${status}, message:${message}, url:${url}`);
   if (showErrorNotification) {

@@ -45,21 +45,19 @@ const TextView = styled.p`
   margin-top: ${pxTransform(16)};
 `;
 
-export default memo(
-  ({ style = {}, imgUrl = '', text = '', type, onTextClick }: ISectionStateProps) => {
-    const { text: defaultText = '', imgUrl: defaultImgUrl = '' } = defaultValues[type] || {};
-    const selfOnTextClick = () => {
-      if (onTextClick) {
-        onTextClick();
-      }
-    };
-    return (
-      <WrapperView style={style}>
-        <ImgWrapView>
-          <ImageView src={imgUrl || defaultImgUrl} />
-        </ImgWrapView>
-        <TextView onClick={selfOnTextClick}>{text || defaultText}</TextView>
-      </WrapperView>
-    );
-  },
-);
+export default memo(({ style = {}, imgUrl = '', text = '', type, onTextClick }: ISectionStateProps) => {
+  const { text: defaultText = '', imgUrl: defaultImgUrl = '' } = defaultValues[type] || {};
+  const selfOnTextClick = () => {
+    if (onTextClick) {
+      onTextClick();
+    }
+  };
+  return (
+    <WrapperView style={style}>
+      <ImgWrapView>
+        <ImageView src={imgUrl || defaultImgUrl} />
+      </ImgWrapView>
+      <TextView onClick={selfOnTextClick}>{text || defaultText}</TextView>
+    </WrapperView>
+  );
+});

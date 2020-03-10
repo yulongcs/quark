@@ -5,10 +5,7 @@ import { SET_APP_ROUTE_STATE, SET_APP_UI_STATUS, ID } from './constant';
 import { GetStateFunc } from '..';
 
 // 设置全局页面状态
-const setAppUIStatus = ({ status, routeId }: { status: SectionStateEnum; routeId?: string }) => (
-  dispatch: Dispatch<any>,
-  getState: GetStateFunc,
-) => {
+const setAppUIStatus = ({ status, routeId }: { status: SectionStateEnum; routeId?: string }) => (dispatch: Dispatch<any>, getState: GetStateFunc) => {
   const {
     [ID]: {
       routeState: { id: currentRouteId },
@@ -24,14 +21,11 @@ const setAppUIStatus = ({ status, routeId }: { status: SectionStateEnum; routeId
   });
 };
 
-export const showLoading = (routeId?: string) =>
-  setAppUIStatus({ routeId, status: SectionStateEnum.LOADING });
+export const showLoading = (routeId?: string) => setAppUIStatus({ routeId, status: SectionStateEnum.LOADING });
 
-export const showContent = (routeId?: string) =>
-  setAppUIStatus({ routeId, status: SectionStateEnum.CONTENT });
+export const showContent = (routeId?: string) => setAppUIStatus({ routeId, status: SectionStateEnum.CONTENT });
 
-export const showError = (routeId?: string) =>
-  setAppUIStatus({ routeId, status: SectionStateEnum.ERROR });
+export const showError = (routeId?: string) => setAppUIStatus({ routeId, status: SectionStateEnum.ERROR });
 
 export const setAppRouteState = (state: Partial<IAppRouteState>) => ({
   type: SET_APP_ROUTE_STATE,

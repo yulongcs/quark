@@ -33,24 +33,15 @@ interface IActionParams {
   };
 }
 
-export const getQuxListAction = ({
-  pageName,
-  pageReducerName,
-  listAlias = 'list',
-  loadRestDataFunc,
-  isPagination = true,
-}: IParams) => (loadAction: LoadActionEnum) => async (
-  dispatch: Dispatch<IActionParams>,
-  getState: any,
-) => {
+export const getQuxListAction = ({ pageName, pageReducerName, listAlias = 'list', loadRestDataFunc, isPagination = true }: IParams) => (
+  loadAction: LoadActionEnum,
+) => async (dispatch: Dispatch<IActionParams>, getState: any) => {
   const state = getState() as IRootReducer;
   if (!(state[pageReducerName] && state[pageReducerName][listAlias])) {
     return;
   }
 
-  const { status, hasMore, pageNum: initPageNum, loadMoreLoading, refreshLoading } = state[
-    pageReducerName
-  ][listAlias] as IQuxListState;
+  const { status, hasMore, pageNum: initPageNum, loadMoreLoading, refreshLoading } = state[pageReducerName][listAlias] as IQuxListState;
 
   if (!hasMore && loadAction === LoadActionEnum.LOADMORE) {
     return;
@@ -87,9 +78,7 @@ export const getQuxListAction = ({
   }
 
   try {
-    const { pageSize, pageNum } = (getState() as IRootReducer)[pageReducerName][
-      listAlias
-    ] as IQuxListState;
+    const { pageSize, pageNum } = (getState() as IRootReducer)[pageReducerName][listAlias] as IQuxListState;
     const payload = await loadRestDataFunc({ pageSize, pageNum });
     switch (
       loadAction // success

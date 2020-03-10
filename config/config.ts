@@ -10,13 +10,10 @@ const nodeEnv = process.env.NODE_ENV || 'production';
 
 // get antd and antd-mobile theme from src/assets/style/theme.less
 const getTheme = () => {
-  const initTheme = sassParse(
-    fs.readFileSync(path.join(__dirname, '../src/asset/style/theme.scss')).toString(),
-    {
-      camelCase: false,
-      indented: false,
-    },
-  );
+  const initTheme = sassParse(fs.readFileSync(path.join(__dirname, '../src/asset/style/theme.scss')).toString(), {
+    camelCase: false,
+    indented: false,
+  });
   const theme = {};
   Object.keys(initTheme).forEach(key => {
     theme[key] = initTheme[key];
@@ -51,11 +48,7 @@ export default defineConfig({
       '@vdfor/react-component',
     ],
     // @ts-ignore
-    [
-      'import',
-      { libraryName: 'lodash', libraryDirectory: '', camel2DashComponentName: false },
-      'lodash',
-    ],
+    ['import', { libraryName: 'lodash', libraryDirectory: '', camel2DashComponentName: false }, 'lodash'],
     'macros',
   ],
   extraPostCSSPlugins: [

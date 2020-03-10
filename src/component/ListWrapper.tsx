@@ -21,11 +21,7 @@ const SectionStateWrapper = styled(StyledCenter)`
   transform: translate3d(-50%, -50%, 0);
 `;
 
-export default ({
-  uiStatus = SectionStateEnum.LOADING,
-  style = {},
-  children,
-}: IListWrapperProps) => (
+export default ({ uiStatus = SectionStateEnum.LOADING, style = {}, children }: IListWrapperProps) => (
   <WrapperView style={style}>
     {(uiStatus === SectionStateEnum.LOADING && <SkeletonList />) ||
       (uiStatus === SectionStateEnum.CONTENT ? (

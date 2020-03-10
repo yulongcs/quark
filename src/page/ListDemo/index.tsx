@@ -4,13 +4,7 @@ import { createSelector } from 'reselect';
 import { Tabs, ListView, PullToRefresh } from 'antd-mobile';
 import { LoadActionEnum } from '@vdfor/util';
 import { Spin } from '@vdfor/react-component';
-import {
-  IRootReducer,
-  listDemoAction,
-  LIST_DEMO_CONSTANT,
-  IListDemoListDataItem,
-  APP_CONSTANT,
-} from '@/store';
+import { IRootReducer, listDemoAction, LIST_DEMO_CONSTANT, IListDemoListDataItem, APP_CONSTANT } from '@/store';
 import { MobileWrapper, ListWrapper } from '@/component';
 import { requestAbort, pxTransform } from '@/util';
 import styles from './index.scss';
@@ -68,12 +62,7 @@ export default () => {
     }
     requestAbort(LIST_DEMO_CONSTANT.LOAD_LIST_REQUEST_TASK_KEY);
     setCurrentTab(key);
-    dispatch(
-      listDemoAction.loadList(
-        LoadActionEnum.RESET,
-        (key === '2' && 'error') || (key === '3' ? 'empty' : ''),
-      ),
-    );
+    dispatch(listDemoAction.loadList(LoadActionEnum.RESET, (key === '2' && 'error') || (key === '3' ? 'empty' : '')));
   };
 
   const onEndReached = () => {
@@ -97,10 +86,7 @@ export default () => {
           {tabList.map(tab => (
             <div key={tab.key}>
               {currentTab === tab.key && (
-                <ListWrapper
-                  style={{ minHeight: `calc(100vh - ${pxTransform(90)})` }}
-                  uiStatus={listStatus}
-                >
+                <ListWrapper style={{ minHeight: `calc(100vh - ${pxTransform(90)})` }} uiStatus={listStatus}>
                   <ListView
                     useBodyScroll
                     dataSource={dataSource.cloneWithRows(data)}
