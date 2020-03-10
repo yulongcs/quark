@@ -13,7 +13,7 @@ import {
 } from '@/store';
 import { MobileWrapper, ListWrapper } from '@/component';
 import { requestAbort, pxTransform } from '@/util';
-import styles from './index.less';
+import styles from './index.scss';
 
 const tabList = [
   { title: '全部', key: '0' },

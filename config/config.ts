@@ -1,7 +1,7 @@
 import { defineConfig } from 'umi';
 import fs from 'fs';
 import path from 'path';
-import lessParse from 'less-var-parse';
+import { parse as sassParse } from 'sass-variable-parser';
 import pxToViewPort from 'postcss-px-to-viewport';
 import getReactAppEnvs from './env';
 import routes from './routes';
@@ -10,8 +10,12 @@ const nodeEnv = process.env.NODE_ENV || 'production';
 
 // get antd and antd-mobile theme from src/assets/style/theme.less
 const getTheme = () => {
-  const initTheme = lessParse(
-    fs.readFileSync(path.join(__dirname, '../src/asset/style/theme.less'), 'utf8'),
+  const initTheme = sassParse(
+    fs.readFileSync(path.join(__dirname, '../src/asset/style/theme.scss')).toString(),
+    {
+      camelCase: false,
+      indented: false,
+    },
   );
   const theme = {};
   Object.keys(initTheme).forEach(key => {
@@ -35,8 +39,8 @@ export default defineConfig({
   define: { ...getReactAppEnvs() },
   dva: false,
   dynamicImport: { loading: '@/component/PageLoading' },
-  // @ts-ignore
   extraBabelPlugins: [
+    // @ts-ignore
     [
       'import',
       {
@@ -46,6 +50,7 @@ export default defineConfig({
       },
       '@vdfor/react-component',
     ],
+    // @ts-ignore
     [
       'import',
       { libraryName: 'lodash', libraryDirectory: '', camel2DashComponentName: false },
@@ -62,7 +67,7 @@ export default defineConfig({
       viewportUnit: 'vw',
       fontViewportUnit: 'vw',
       selectorBlackList: [],
-      minPixelValue: 1,
+      minPixelValue: 0.5,
       mediaQuery: false,
       replace: true,
       exclude: [/node_modules/],
@@ -76,7 +81,7 @@ export default defineConfig({
       viewportUnit: 'vw',
       fontViewportUnit: 'vw',
       selectorBlackList: [],
-      minPixelValue: 1,
+      minPixelValue: 0.5,
       mediaQuery: false,
       replace: true,
       exclude: [/![\\/]node_modules[\\/].*antd-mobile[\\/]/],

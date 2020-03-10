@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { Button } from 'antd-mobile';
 import { loadUsersApi } from './api';
-import styles from './index.less';
+import styles from './index.scss';
 
 const Home: FC = () => {
   useEffect(() => {
